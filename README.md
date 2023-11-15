@@ -3,13 +3,14 @@
 > **Follow these steps to successfully create and merge pull requests:**
 
 1. Check out to the desired branch: `git checkout [branch name]`
-2. Make your code changes.
-3. Add changes to staging: `git add .`
-4. Commit your changes with a descriptive message: `git commit -m "your message"`
-5. Push your changes to the remote repository: `git push -u origin [branch name]`
-6. On GitHub, navigate to your repository and create a pull request.
-7. Wait for your pull request to be reviewed by your teammates.
-8. Once approved, merge the pull request to the main branch.
+2. Get most recent version in branch: `git fetch origin main`
+3. Make your code changes.
+4. Add changes to staging: `git add .`
+5. Commit your changes with a descriptive message: `git commit -m "your message"`
+6. Push your changes to the remote repository: `git push -u origin [branch name]`
+7. On GitHub, navigate to your repository and create a pull request.
+8. Wait for your pull request to be reviewed by your teammates.
+9. Once approved, merge the pull request to the main branch.
 
 # App Start Up
 
