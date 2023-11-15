@@ -1,23 +1,58 @@
-# project-atelier
-FEC project for Hackreactor
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FEC Project README</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #2a6496;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .steps {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .step {
+            margin-bottom: 5px;
+        }
+        .code {
+            font-family: monospace;
+            background-color: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <h1>Merge/Pull Requests</h1>
+        <p>Follow these steps to successfully create and merge pull requests:</p>
+        <div class="steps">
+            <div class="step">1. Check out to the desired branch: <span class="code">git checkout [branch name]</span></div>
+            <div class="step">2. Make your code changes.</div>
+            <div class="step">3. Add changes to staging: <span class="code">git add .</span></div>
+            <div class="step">4. Commit your changes with a descriptive message: <span class="code">git commit -m "your message"</span></div>
+            <div class="step">5. Push your changes to the remote repository: <span class="code">git push -u origin [branch name]</span></div>
+            <div class="step">6. On GitHub, navigate to your repository and create a pull request.</div>
+            <div class="step">7. Wait for your pull request to be reviewed by your teammates.</div>
+            <div class="step">8. Once approved, merge the pull request to the main branch.</div>
+        </div>
+    </div>
 
-<h1>Merge/Pull Requests</h1>
-
-(to view all branches: git branch -a)
-
-1. git checkout [branch name]
-2. make changes to code
-3. git add changes
-4. git commit with message
-5. git push -u origin [branch name]
-6. go to git hub and review/make pull request
-7. wait for pull request review
-8. once approved, complete merge to main
-
-<h1>App Start Up</h1>
-
-In terminal run the following scripts
-
-1. npm install
-2. npm run build
-3. npm start
+    <div class="section">
+        <h1>App Start Up</h1>
+        <p>To start the application, run the following commands in your terminal:</p>
+        <div class="steps">
+            <div class="step">1. Install dependencies: <span class="code">npm install</span></div>
+            <div class="step">2. Build the project: <span class="code">npm run build</span></div>
+            <div class="step">3. Start the server: <span class="code">npm start</span></div>
+        </div>
+    </div>
+</body>
+</html>
