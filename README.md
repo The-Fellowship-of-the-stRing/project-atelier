@@ -10,7 +10,7 @@
 6. Add changes to staging: `git add .`
 7. Commit your changes with a descriptive message: `git commit -m "your message"`
 8. Push your changes to the remote repository: `git push origin [branch name]:[branch name]`
-9. On GitHub, navigate to your repository and create a pull request. (Assign to a 1st/2nd reviewers)
+9. On GitHub, navigate to your repository and create a pull request. (Assign to a 1st/2nd reviewer)
 10. Wait for your pull request to be reviewed by your teammates.
 11. Once approved, merge the pull request to the main branch.
 
