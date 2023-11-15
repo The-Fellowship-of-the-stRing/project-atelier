@@ -1,34 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>FEC Project README</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            color: #2a6496;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .steps {
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        .step {
-            margin-bottom: 5px;
-        }
-        .code {
-            font-family: monospace;
-            background-color: #eee;
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-    </style>
-</head>
 <body>
     <div class="section">
         <h1>Merge/Pull Requests</h1>
@@ -44,7 +13,6 @@
             <div class="step">8. Once approved, merge the pull request to the main branch.</div>
         </div>
     </div>
-
     <div class="section">
         <h1>App Start Up</h1>
         <p>To start the application, run the following commands in your terminal:</p>
@@ -55,4 +23,3 @@
         </div>
     </div>
 </body>
-</html>
