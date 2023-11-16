@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx webpack-dev-server --watch",
     "build": "npx webpack",
-    "test": "jest --env=jsdom"
+    "test": "jest --env=jsdom",
+    "coverage" : "jest --env=jsdom --coverage"
   },
   "repository": {
     "type": "git",
