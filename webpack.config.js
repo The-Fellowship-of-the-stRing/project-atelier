@@ -1,75 +1,49 @@
 const path = require("path");
+const webpack = require('webpack');
+require('dotenv').config();
 
-module.exports={
-    /** "mode"
-     * the environment - development, production, none. tells webpack
-     * to use its built-in optimizations accordingly. default is production
-     */
+module.exports = {
     mode: "development",
-    /** "entry"
-     * the entry point
-     */
     entry: "./client/index.js",
     output: {
-        /** "path"
-         * the folder path of the output file
-         */
         path: path.resolve(__dirname, "public"),
-        /** "filename"
-         * the name of the output file
-         */
         filename: "bundle.js"
     },
-    /** "target"
-     * setting "node" as target app (server side), and setting it as "web" is
-     * for browser (client side). Default is "web"
-     */
     target: "web",
     devServer: {
-        /** "port"
-         * port of dev server
-        */
         port: "3000",
-        /** "static"
-         * This property tells Webpack what static file it should serve
-        */
         static: ["./public"],
-        /** "open"
-         * opens the browser after server is successfully started
-        */
         open: true,
-        /** "hot"
-         * enabling and disabling HMR. takes "true", "false" and "only".
-         * "only" is used if enable Hot Module Replacement without page
-         * refresh as a fallback in case of build failures
-         */
-        hot: true ,
-        /** "liveReload"
-         * disable live reload on the browser. "hot" must be set to false for this to work
-        */
+        hot: true,
         liveReload: true
     },
     resolve: {
-        /** "extensions"
-         * If multiple files share the same name but have different extensions, webpack will
-         * resolve the one with the extension listed first in the array and skip the rest.
-         * This is what enables users to leave off the extension when importing
-         */
-        extensions: ['.js','.jsx','.json']
+        extensions: ['.js','.jsx','.json'],
+        fallback: {
+            "path": require.resolve("path-browserify"),
+            "os": require.resolve("os-browserify/browser"),
+            "crypto": require.resolve("crypto-browserify"),
+            "stream": require.resolve("stream-browserify"),
+            "buffer": require.resolve("buffer/")
+        }
     },
-    module:{
-        /** "rules"
-         * This says - "Hey webpack compiler, when you come across a path that resolves to a '.js or .jsx'
-         * file inside of a require()/import statement, use the babel-loader to transform it before you
-         * add it to the bundle. And in this process, kindly make sure to exclude node_modules folder from
-         * being searched"
-         */
+    module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,    //kind of file extension this rule should look for and apply in test
-                exclude: /node_modules/, //folder to be excluded
-                use:  'babel-loader' //loader which we are going to use
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: 'babel-loader'
+            },
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
             }
         ]
-    }
-}
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.GIT_TOKEN': JSON.stringify(process.env.GIT_TOKEN),
+            'process.env.GIT_API_URL': JSON.stringify(process.env.GIT_API_URL)
+        })
+    ]
+};
