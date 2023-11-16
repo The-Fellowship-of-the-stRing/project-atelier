@@ -5,13 +5,13 @@ import ReviewTile from '../components/ratings_review/ReviewTile.jsx'
 
 import '../stylesheets/ratings_review/ratingsReview.css'
 
-const RatingsReviews = ({currentItem}) => {
+const RatingsReviews = ({item}) => {
 
   return (
     <div className="ratings-review-main-container">
-      {/* <NumberReviews item={currentItem}/>
-      <SortDropDown item={currentItem}/>
-      <ReviewTile item={currentItem}/> */}
+      <NumberReviews item={item}/>
+      <SortDropDown item={item}/>
+      <ReviewTile item={item}/>
     </div>
   )
 }
