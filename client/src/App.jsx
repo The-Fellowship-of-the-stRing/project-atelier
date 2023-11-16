@@ -25,7 +25,7 @@ const App = () =>{
               <p>Loading Item...</p>
           ) : (
             <>
-              <RatingsReviews currentItem={currentItem}/>
+              <RatingsReviews item={currentItem}/>
             </>
           )}
       </h1>
