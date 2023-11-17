@@ -6,3 +6,12 @@
   align-items: center;
   border: 1px solid green;
 }
+
+.k-questions-answers-search {
+  display: flex;
+  height: 100px;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid purple;
+}

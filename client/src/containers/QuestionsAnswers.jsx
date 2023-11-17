@@ -1,11 +1,13 @@
 import React from 'react';
-import '../stylesheets/questions_answers/questionsAnswers.css'
+import '../stylesheets/questions_answers/questionsAnswers.css';
+import Search from '../components/questions_answers/Search.jsx';
+import QuestionsList from '../components/questions_answers/QuestionsList.jsx';
 
 const QuestionsAnswers = ( {item} ) => {
 
   return (
-    <div className="questions-answers-main-container">
-      Question and Answers components here
+    <div className="k-questions-answers-main-container">
+      <Search/>
     </div>
   )
 }
