@@ -1,11 +1,9 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 
-
-const Related = (  ) => {
+const Related = ( {itemId} ) => {
   return (
     <div className="c related-container">
-
     </div>
   )
 }

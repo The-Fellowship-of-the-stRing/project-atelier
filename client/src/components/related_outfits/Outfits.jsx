@@ -1,11 +1,9 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 
-
-const Outfits = (  ) => {
+const Outfits = ( {itemId} ) => {
   return (
     <div className="c outfits-container">
-
     </div>
   )
 }
