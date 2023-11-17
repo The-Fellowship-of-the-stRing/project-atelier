@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import RatingsReviews from './containers/RatingsReviews';
 import getFirstItem from './utils/getFirstItem.js';
 import Stars from './components/stars/Stars.jsx'
+import QuestionsAnswers from './containers/QuestionsAnswers';
 
 const App = () =>{
   const [currentItemId, setCurrentItemId] = useState(null);
@@ -27,7 +28,8 @@ const App = () =>{
           ) : (
             <>
               <Stars itemId={currentItemId} />
-              <RatingsReviews item={currentItemId}/>
+              <RatingsReviews itemId={currentItemId}/>
+              <QuestionsAnswers itemId={currentItemId}/>
             </>
           )}
       </h1>
