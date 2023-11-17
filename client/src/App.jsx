@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import RatingsReviews from './containers/RatingsReviews';
 import getFirstItem from './utils/getFirstItem.js';
+import QuestionsAnswers from './containers/QuestionsAnswers';
 
 const App = () =>{
   const [currentItem, setCurrentItem] = useState(null);
@@ -26,6 +27,7 @@ const App = () =>{
           ) : (
             <>
               <RatingsReviews item={currentItem}/>
+              <QuestionsAnswers item={currentItem}/>
             </>
           )}
       </h1>
