@@ -13,9 +13,9 @@ const getFirstItem = async () => {
     // await keyword must be used for promises
     const response = await axios.get(`${url}/products`, headers)
     // once this executes, result will be returned as a promise that has been RESOLVED
-    return response.data[0]
+    return response.data[0];
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 };
 
