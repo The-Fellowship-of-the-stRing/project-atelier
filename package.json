@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx webpack-dev-server --watch",
-    "build": "npx webpack",
+    "build": "npx webpack --watch",
     "test": "jest --env=jsdom --watch",
     "coverage": "jest --env=jsdom --coverage"
   },

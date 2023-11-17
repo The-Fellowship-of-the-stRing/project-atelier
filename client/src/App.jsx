@@ -3,6 +3,7 @@ import RatingsReviews from './containers/RatingsReviews';
 import getFirstItem from './utils/getFirstItem.js';
 import Stars from './components/stars/Stars.jsx'
 import QuestionsAnswers from './containers/QuestionsAnswers';
+import RelatedOutfits from './containers/RelatedOutfits';
 
 const App = () =>{
   const [currentItemId, setCurrentItemId] = useState(null);
@@ -30,6 +31,7 @@ const App = () =>{
               <Stars itemId={currentItemId} />
               <RatingsReviews itemId={currentItemId}/>
               <QuestionsAnswers itemId={currentItemId}/>
+              <RelatedOutfits itemId={currentItemId} />
             </>
           )}
       </h1>

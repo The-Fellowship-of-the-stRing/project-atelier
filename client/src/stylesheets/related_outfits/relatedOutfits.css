@@ -1,0 +1,8 @@
+.related-outfits-main-container {
+  display: flex;
+  height: 400px;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid blue;
+}
