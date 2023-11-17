@@ -4,7 +4,6 @@ import getRelatedItems from '../../utils/getRelatedItems.js';
 
 const Related = ( {itemId} ) => {
   const [relatedIds, setRelatedIds] = useState([]);
-
   useEffect(() => {
     const fetchRelatedIds = async () => {
       try {
@@ -14,9 +13,9 @@ const Related = ( {itemId} ) => {
         console.error('Error getting item details: ', err);
       }
     }
-    fetchRelatedIds();
-  }, [itemId]);
 
+    fetchRelatedIds();
+  }, [itemId])
 
   return (
     <div className="c related-container">
