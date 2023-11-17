@@ -1,16 +1,18 @@
 import React, {useState, useEffect} from "react";
 import RatingsReviews from './containers/RatingsReviews';
 import getFirstItem from './utils/getFirstItem.js';
+import Stars from './components/stars/Stars.jsx'
 import QuestionsAnswers from './containers/QuestionsAnswers';
+import RelatedOutfits from './containers/RelatedOutfits';
 
 const App = () =>{
-  const [currentItem, setCurrentItem] = useState(null);
+  const [currentItemId, setCurrentItemId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const item = await getFirstItem();
-        setCurrentItem(item);
+        setCurrentItemId(item.id);
       } catch (error) {
         console.error('Error fetching item:', error);
       }
@@ -22,12 +24,14 @@ const App = () =>{
   return (
       <h1>
           Welcome to React App thats build using Webpack and Babel separately! Great Job team!
-          {!currentItem ? (
+          {!currentItemId ? (
               <p>Loading Item...</p>
           ) : (
             <>
-              <RatingsReviews item={currentItem}/>
-              <QuestionsAnswers item={currentItem}/>
+              <Stars itemId={currentItemId} />
+              <RatingsReviews itemId={currentItemId}/>
+              <QuestionsAnswers itemId={currentItemId}/>
+              <RelatedOutfits itemId={currentItemId} />
             </>
           )}
       </h1>
