@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-const SortDropDown = ({item}) => {
+const SortDropDown = ({sort, handleSort}) => {
   return (
-    <div>
-      SortDropDown
-    </div>
+    <select value={sort} onChange={handleSort}>
+      <option value="relevant">relevant</option>
+      <option value="newest">newest</option>
+      <option value="helpful">helpful</option>
+    </select>
   )
 }
 

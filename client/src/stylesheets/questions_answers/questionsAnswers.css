@@ -1,8 +1,26 @@
-.questions-answers-main-container {
+.k-questions-answers-main-container {
   display: flex;
   height: 200px;
   width: 100vw;
   justify-content: center;
   align-items: center;
   border: 1px solid green;
+}
+
+.k-questions-list {
+  display: flex;
+  height: 100px;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid orange;
+}
+
+.k-questions-answers-search {
+  display: flex;
+  height: 100px;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid purple;
 }
