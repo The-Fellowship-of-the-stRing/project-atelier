@@ -1,19 +1,28 @@
 #stars-main-container {
   display: flex;
   position: relative;
-  width: 134px;
+  width: 5em;
+  height: 50px;
   overflow-x: hidden;
   justify-content: center;
   align-items: center;
 }
 
 #stars-outline-container{
-  display: inline-block;
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  left: 0;
 }
 
 #stars-filled-container{
+  display: flex;
   position: absolute;
   z-index: 2;
   left: 0;
   overflow-x: hidden;
+}
+
+#star-outline, #star-fill {
+  width: 1em;
 }
