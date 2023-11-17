@@ -1,10 +1,11 @@
 import axios from 'axios';
+require('dotenv').config();
 
 const getFirstItem = async () => {
   try {
     const headers = {
       headers: {
-        "Authorization" : process.env.GIT_TOKEN
+        Authorization : process.env.GIT_TOKEN
       }
     };
     const url = process.env.GIT_API_URL;
