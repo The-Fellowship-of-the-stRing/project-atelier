@@ -22,6 +22,7 @@ const Card = ( {itemId, className} ) => {
     fetchData();
   }, []);
 
+
   let priceString;
   if(cardData && cardData.hasOwnProperty('sale_price')) {
     priceString = (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>);
@@ -30,7 +31,6 @@ const Card = ( {itemId, className} ) => {
   }
   /* REFACTOR ABOVE LATER: */
   // let priceString = (cardData && cardData.hasOwnProperty('sale_price')) ? (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>) : (<p className="c-card-price">${cardData.original_price}</p>);
-
 
   return cardData ? (
     <div className={className}>
