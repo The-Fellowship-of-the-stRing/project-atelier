@@ -1,7 +1,7 @@
 .l-star-bar-main {
   display: flex;
   height: auto;
-  width: 100%;
+  width: 90%;
   justify-content: flex-start;
   align-content: center;
 }
@@ -9,15 +9,16 @@
 .l-star-bar-text {
   text-decoration: underline;
   cursor: pointer;
+  width: 60px;
 }
 
 .l-star-bar-container {
   display: flex;
   position: relative;
-  width: 70%;
+  width: 100%;
   height: 100%;
   align-items: center;
-  margin-left: 30px;
+  margin-left: 20px;
 }
 
 .l-star-bar-total {

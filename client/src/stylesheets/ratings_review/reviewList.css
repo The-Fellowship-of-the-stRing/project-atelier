@@ -1,7 +1,7 @@
 .l-review-list-main {
   display: flex;
   flex-direction: column;
-  width: 55%;
+  width: 40%;
   height: 80%;
   justify-content: space-between;
   align-items: center;
