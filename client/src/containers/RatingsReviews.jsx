@@ -5,12 +5,12 @@ import ReviewList from '../components/ratings_review/ReviewList.jsx'
 
 import '../stylesheets/ratings_review/ratingsReview.css'
 
-const RatingsReviews = ({item}) => {
+const RatingsReviews = ({itemId}) => {
 
   return (
     <div className="ratings-review-main-container">
-      <NumberReviews item={item}/>
-      <ReviewList item={item}/>
+      <NumberReviews itemId={itemId}/>
+      <ReviewList itemId={itemId}/>
     </div>
   )
 }

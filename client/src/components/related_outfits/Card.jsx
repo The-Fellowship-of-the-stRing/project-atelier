@@ -4,7 +4,6 @@ import getCardData from '../../utils/getCardData.js';
 
 const Card = ( {itemId} ) => {
   const [cardData, setCardData] = useState(getCardData(itemId));
-  console.log(cardData);
 
   return (
     <div className="c card-container">
