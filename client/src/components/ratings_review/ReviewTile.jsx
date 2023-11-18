@@ -60,7 +60,7 @@ const ReviewTile = ({review, handleHelpful, handleReport}) => {
           <FaCheck /> I recommend this product
         </div>
       )}
-      {review.response && (
+      {!review.response && (
         <div className="l-review-tile-response">
           <b>Response: </b>
           <p style={{height: 'fit-content', margin: '0px', marginTop: "10px"}}>{review.response}</p>

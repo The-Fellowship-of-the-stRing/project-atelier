@@ -1,13 +1,16 @@
 .l-review-tile-single {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: flex-start;
   width: 100%;
   min-height: 100%;
+  height: fit-content;
   border-bottom: 2px solid #0000004b;
   cursor: default;
+  margin-top: 20px;
 }
+
 
 .l-review-tile-header {
   display: flex;
@@ -32,11 +35,14 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  height: fit-content;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .l-review-tile-helpfulness {
   font-size: 14px;
-  color: #686868
+  color: #686868;
 }
 
 .l-review-tile-yes {

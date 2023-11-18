@@ -25,7 +25,6 @@ const App = () =>{
 
   return (
       <div>
-          Welcome to React App thats build using Webpack and Babel separately! Great Job team!
           {!currentItemId ? (
               <span className="main-loader"></span>
           ) : (
