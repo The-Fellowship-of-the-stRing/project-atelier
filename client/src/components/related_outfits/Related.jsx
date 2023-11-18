@@ -3,7 +3,7 @@ import Card from './Card.jsx';
 import getRelatedItems from '../../utils/getRelatedItems.js';
 
 const Related = ( {itemId} ) => {
-  const [relatedIds, setRelatedIds] = useState([]);
+  const [relatedIds, setRelatedIds] = useState(null);
 
   useEffect(() => {
     const fetchRelatedIds = async () => {
@@ -17,13 +17,15 @@ const Related = ( {itemId} ) => {
     fetchRelatedIds();
   }, [itemId]);
 
-
-  return (
+  console.log(relatedIds)
+  return relatedIds ? (
     <div className="c related-container">
-      {/* {relatedIds.map(id => (<Card itemId={id} key={id} />))} */}
+      {relatedIds.map(id => (<Card itemId={id} key={id} />))}
       {/* FOR TESTING */}
-      <Card itemId={relatedIds[0]} key={relatedIds[0]} />
+      {/* <Card itemId={relatedIds[0]} key={relatedIds[0]} /> */}
     </div>
+  ) : (
+    <div>No Related Items</div>
   )
 }
 
