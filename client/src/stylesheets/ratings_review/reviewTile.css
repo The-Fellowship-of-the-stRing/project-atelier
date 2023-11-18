@@ -44,3 +44,10 @@
   border-bottom: 1px solid #686868;
   cursor: pointer;
 }
+
+.l-review-tile-show-more {
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 5px;
+  text-decoration: underline;
+}

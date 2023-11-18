@@ -5,26 +5,32 @@ import '../../stylesheets/ratings_review/reviewTile.css'
 
 const ReviewTile = ({review}) => {
   const [body, setBody] = useState(review.body)
+  const [showMore, setShowMore] = useState(false)
   const date = new Date(review.date)
 
   const formatContent = () => {
-    let formatBody = review.body
-    if (formatBody > 250) {
-      formatBody = review.body.slice(0, 250);
+    if (body.length > 250) {
+      let formatBody = review.body.slice(0, 250);
       formatBody = formatBody + '...';
+      setShowMore(true)
+      setBody(formatBody)
     }
-    setBody(formatBody)
   }
 
   const formattedDate = date.toLocaleDateString("en-US", {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
-});
+  });
 
-useEffect(() => {
-  formatContent()
-},[])
+  const handleShowMore = () => {
+    setShowMore(false)
+    setBody(review.body)
+  }
+
+  useEffect(() => {
+    formatContent()
+  },[])
 
   return (
     <div className="l-review-tile-single">
@@ -38,7 +44,7 @@ useEffect(() => {
         {review.summary}
       </div>
       <div className="l-review-tile-body">
-        {body}
+        {body} <span className="l-review-tile-show-more" onClick={() => handleShowMore()} hidden={!showMore}>Show More</span>
       </div>
       <div className="l-review-tile-helpfulness">
         Helpful? <span className="l-review-tile-yes">Yes</span> ({review.helpfulness})
