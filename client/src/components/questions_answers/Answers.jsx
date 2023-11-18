@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../../stylesheets/questions_answers/questionsAnswers.css'
+import '../../stylesheets/questions_answers/answers.css'
 
 const Answers = ( { questionId } ) => {
 
@@ -54,17 +54,17 @@ const Answers = ( { questionId } ) => {
           <div className="k-answer-details-block">
             <div className="k-answer-user">
               {answer.answerer_name === 'seller' ?
-              <strong>{answer.answerer_name}</strong>
-              : answer.answerer_name}
+              <strong>{answer.answerer_name},</strong>
+              : answer.answerer_name},
             </div>
 
-            <div className="k-answer-date">{formatDate(answer.date)}</div>
+            <div className="k-answer-date">{formatDate(answer.date)} | </div>
 
             <div className="k-answer-helpful">
-              Helpful? <a href="#" className="k-answer-yes-click">Yes</a> ({answer.helpfulness})
+              Helpful? <span className="k-answer-yes-click">Yes</span> |  ({answer.helpfulness})
             </div>
             <div className="k-answer-report">
-              <a href="#" className="k-answer-report-click">Report</a>
+              <span className="k-answer-report-click">Report</span>
             </div>
           </div>
 

@@ -1,0 +1,36 @@
+.k-questions-list {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+}
+
+.k-question-block {
+ display: flex;
+ justify-content: space-between;
+ width: 100%;
+ align-items: flex-start;
+ margin-bottom: 10px;
+}
+
+.k-question-helpful {
+  font-size: 14px;
+  color: #686868
+}
+
+.k-question-yes-click {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.k-load-more-answers {
+  font-size: 14px;
+  color: #686868;
+  cursor: pointer;
+}
+
+.k-add-answer {
+  font-size: 14px;
+  color: #686868;
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -48,7 +48,7 @@ const QuestionsAnswers = ( {itemId} ) => {
       <button className="k-more-answered-questions" onClick={() => handleClick()}>
         More Answered Questions
       </button>
-      <button className="k-add-a-question">Add a Question</button>
+      <button className="k-add-a-question">Add a Question +</button>
     </div>
   ) : (
     <div>Loading...</div>

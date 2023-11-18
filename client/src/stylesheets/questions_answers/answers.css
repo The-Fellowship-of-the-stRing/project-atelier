@@ -1,0 +1,38 @@
+.k-answer-main-block {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+}
+
+.k-answer-details-block {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #686868
+}
+
+.k-answer-user {
+  margin-right: 5px;
+}
+
+.k-answer-date {
+  margin-right: 5px;
+}
+
+.k-answer-helpful {
+  margin-right: 5px;
+}
+
+.k-answer-yes-click {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.k-answer-report {
+  margin-right: 5px;
+  text-decoration: underline;
+  cursor: pointer;
+}
