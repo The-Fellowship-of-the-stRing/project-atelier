@@ -10,9 +10,25 @@ const ReviewList = ({itemId}) => {
   const [sort, setSort] = useState('relevant')
   const [results, setResults] = useState([]);
   const [currentCount, setCurrentCount] = useState(10);
+  const [resultsToShow, setResultsToShow] = useState([]);
+  const [currentView, setCurrentView] = useState(2);
 
   const handleSort = async (e) => {
     setSort(e.target.value);
+  }
+
+  const handleViewMore = async () => {
+    const newView = currentView + 2;
+    if (newView === currentCount) {
+      try {
+        const response = await getReviews(itemId, sort, (currentCount + 10))
+        setCurrentCount(currentCount + 10);
+        setResults(response.results);
+      } catch (err) {
+        console.error('An error occured when getting more reviews: ', err);
+      }
+    }
+    setCurrentView(newView)
   }
 
   useEffect(() => {
@@ -28,17 +44,17 @@ const ReviewList = ({itemId}) => {
   },[sort])
 
   useEffect(() => {
-
-  }, [results])
+    setResultsToShow(results.slice(0, currentView))
+  }, [results, currentView])
 
   return (
     <div className="l-review-list-main">
       <div>{results.length > 0 ? results.length : "0"} reviews, sorted by <SortDropDown handleSort={handleSort} sort={sort}/></div>
-      {results.length < 1 ? (
+      {resultsToShow.length < 1 ? (
         <div>Please add a review</div>
       ):(
         <div className="l-review-list-container">
-          {results.map((review) => {
+          {resultsToShow.map((review) => {
             return (
               <div key={review.review_id} className="l-review-list-tile-main">
                 <ReviewTile review={review} />
@@ -47,6 +63,7 @@ const ReviewList = ({itemId}) => {
           })}
         </div>
       )}
+      <button type="button" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length ? true : false}>View More</button>
     </div>
   )
 }
