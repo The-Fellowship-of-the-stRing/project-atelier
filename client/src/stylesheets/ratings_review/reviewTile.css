@@ -1,11 +1,43 @@
-.l-review-tile-summary{
-
+.l-review-tile-single {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 100%;
+  height: fit-content;
+  min-height: 200px;
+  border-bottom: 2px solid #0000004b;
+  cursor: default;
 }
 
-.l-review-tile-recommend {
-
+.l-review-tile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
 }
 
-.l-review-tile-body{
+.l-review-tile-reviewer-name-date {
+  display: flex;
+  color: #a3a3a3;
+  height: fit-content;
+}
 
+.l-review-tile-summary {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.l-review-tile-body {
+}
+
+.l-review-tile-helpfulness {
+  font-size: 14px;
+  color: #686868
+}
+
+.l-review-tile-yes {
+  border-bottom: 1px solid #686868;
+  cursor: pointer;
 }

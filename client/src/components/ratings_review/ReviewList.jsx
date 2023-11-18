@@ -7,7 +7,7 @@ import getReviews from '../../utils/getReviews.js'
 import '../../stylesheets/ratings_review/reviewList.css'
 
 const ReviewList = ({itemId}) => {
-  const [sort, setSort] = useState('relevant')
+  const [sort, setSort] = useState('relevance')
   const [results, setResults] = useState([]);
   const [currentCount, setCurrentCount] = useState(10);
   const [resultsToShow, setResultsToShow] = useState([]);
@@ -49,7 +49,9 @@ const ReviewList = ({itemId}) => {
 
   return (
     <div className="l-review-list-main">
-      <div>{results.length > 0 ? results.length : "0"} reviews, sorted by <SortDropDown handleSort={handleSort} sort={sort}/></div>
+      <div className="l-review-list-header">
+        {results.length > 0 ? results.length : "0"} reviews, sorted by <SortDropDown handleSort={handleSort} sort={sort}/>
+      </div>
       {resultsToShow.length < 1 ? (
         <div>Please add a review</div>
       ):(
@@ -63,7 +65,7 @@ const ReviewList = ({itemId}) => {
           })}
         </div>
       )}
-      <button type="button" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length ? true : false}>View More</button>
+      <button type="button" className="l-review-list-more-btn" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length ? true : false}>MORE REVIEWS</button>
     </div>
   )
 }
