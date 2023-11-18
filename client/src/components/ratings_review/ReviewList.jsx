@@ -3,68 +3,21 @@ import axios from 'axios';
 import SortDropDown from './SortDropDown.jsx';
 import ReviewTile from './ReviewTile.jsx'
 
-import getReviews from '../../utils/getReviews.js'
-import markHelpful from '../../utils/markHelpful.js'
-import reportReview from '../../utils/reportReview.js'
+
 
 import '../../stylesheets/ratings_review/reviewList.css'
 
-const ReviewList = ({itemId}) => {
-  const [sort, setSort] = useState('relevance')
-  const [results, setResults] = useState([]);
-  const [currentCount, setCurrentCount] = useState(10);
+const ReviewList = ({
+  sort,
+  results,
+  handleSort,
+  handleHelpful,
+  handleReport,
+  currentView,
+  currentCount,
+  handleViewMore,
+  currentFilter}) => {
   const [resultsToShow, setResultsToShow] = useState([]);
-  const [currentView, setCurrentView] = useState(2);
-
-  const handleSort = async (e) => {
-    setSort(e.target.value);
-  }
-
-  const handleViewMore = async () => {
-    const newView = currentView + 2;
-    if (newView === currentCount) {
-      try {
-        const response = await getReviews(itemId, sort, (currentCount + 10))
-        setCurrentCount(currentCount + 10);
-        setResults(response.results);
-      } catch (err) {
-        console.error('An error occured when getting more reviews: ', err);
-      }
-    }
-    setCurrentView(newView)
-  }
-
-  const handleHelpful = async (id) => {
-    try {
-      const update = await markHelpful(id);
-      const getUpdates = await getReviews(itemId, sort, currentCount)
-      setResults(getUpdates.results)
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
-  const handleReport = async (id) => {
-    try {
-      const update = await reportReview(id);
-      const getUpdates = await getReviews(itemId, sort, currentCount)
-      setResults(getUpdates.results)
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getReviews(itemId, sort, currentCount)
-        setResults(response.results);
-      } catch (err) {
-        console.error(err)
-      }
-    }
-    fetchData()
-  },[sort])
 
   useEffect(() => {
     setResultsToShow(results.slice(0, currentView))
@@ -80,11 +33,13 @@ const ReviewList = ({itemId}) => {
       ):(
         <div className="l-review-list-container">
           {resultsToShow.map((review) => {
-            return (
-              <div key={review.review_id} className="l-review-list-tile-main">
+            if (currentFilter.indexOf(review.rating + "") !== -1 || currentFilter.length < 1) {
+              return (
+                <div key={review.review_id} className="l-review-list-tile-main">
                 <ReviewTile review={review} handleHelpful={handleHelpful} handleReport={handleReport}/>
               </div>
             )
+          }
           })}
         </div>
       )}

@@ -25,12 +25,10 @@ const App = () =>{
 
   return (
       <div>
-          Welcome to React App thats build using Webpack and Babel separately! Great Job team!
           {!currentItemId ? (
               <span className="main-loader"></span>
           ) : (
             <>
-              <Stars itemId={currentItemId} />
               <RatingsReviews itemId={currentItemId}/>
               <QuestionsAnswers itemId={currentItemId}/>
               {/* <RelatedOutfits itemId={currentItemId} /> */}
