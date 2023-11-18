@@ -30,6 +30,9 @@
 }
 
 .l-review-tile-body {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .l-review-tile-helpfulness {
