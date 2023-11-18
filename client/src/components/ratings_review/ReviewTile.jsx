@@ -3,9 +3,10 @@ import Stars from './Stars.jsx'
 
 import '../../stylesheets/ratings_review/reviewTile.css'
 
-const ReviewTile = ({review}) => {
+const ReviewTile = ({review, handleHelpful}) => {
   const [body, setBody] = useState(review.body)
   const [showMore, setShowMore] = useState(false)
+  const [markedHelp, setMarkedHelp] = useState(false)
   const date = new Date(review.date)
 
   const formatContent = () => {
@@ -28,6 +29,13 @@ const ReviewTile = ({review}) => {
     setBody(review.body)
   }
 
+  const handleMark = () => {
+    if (!markedHelp) {
+      setMarkedHelp(true)
+      handleHelpful(review.review_id, (review.helpfulness + 1))
+    }
+  }
+
   useEffect(() => {
     formatContent()
   },[])
@@ -47,7 +55,7 @@ const ReviewTile = ({review}) => {
         {body} <span className="l-review-tile-show-more" onClick={() => handleShowMore()} hidden={!showMore}>Show More</span>
       </div>
       <div className="l-review-tile-helpfulness">
-        Helpful? <span className="l-review-tile-yes">Yes</span> ({review.helpfulness})
+        Helpful? <span className="l-review-tile-yes" style={{cursor: !markedHelp ? "pointer" : "default"}} onClick={() => handleMark()}>Yes</span> ({review.helpfulness})
       </div>
     </div>
   )
