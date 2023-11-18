@@ -9,6 +9,7 @@ import '../../stylesheets/ratings_review/reviewList.css'
 const ReviewList = ({itemId}) => {
   const [sort, setSort] = useState('relevant')
   const [results, setResults] = useState([]);
+  const [currentCount, setCurrentCount] = useState(10);
 
   const handleSort = async (e) => {
     setSort(e.target.value);
@@ -17,7 +18,7 @@ const ReviewList = ({itemId}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getReviews(itemId, sort)
+        const response = await getReviews(itemId, sort, currentCount)
         setResults(response.results);
       } catch (err) {
         console.error(err)
@@ -25,6 +26,10 @@ const ReviewList = ({itemId}) => {
     }
     fetchData()
   },[sort])
+
+  useEffect(() => {
+
+  }, [results])
 
   return (
     <div className="l-review-list-main">
