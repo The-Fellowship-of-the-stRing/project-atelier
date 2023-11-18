@@ -41,8 +41,6 @@ const QuestionsAnswers = ( {itemId} ) => {
     setCurrentCount(currentCount+2)
   }
 
-
-
   return resultsToShow.length > 0 ? (
     <div className="k-questions-answers-main-container">
       <Search />

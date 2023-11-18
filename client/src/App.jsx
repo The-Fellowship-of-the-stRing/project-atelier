@@ -22,7 +22,7 @@ const App = () =>{
   }, []);
 
   return (
-      <h1>
+      <div>
           Welcome to React App thats build using Webpack and Babel separately! Great Job team!
           {!currentItemId ? (
               <p>Loading Item...</p>
@@ -34,7 +34,7 @@ const App = () =>{
               <RelatedOutfits itemId={currentItemId} />
             </>
           )}
-      </h1>
+      </div>
   )
 }
 
