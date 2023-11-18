@@ -40,7 +40,7 @@
 }
 
 .l-review-tile-yes {
-  border-bottom: 1px solid #686868;
+  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -59,4 +59,9 @@
   width: 100%;
   background-color: rgba(104, 104, 104, 0.194);
   padding: 15px;
+}
+
+.l-review-tile-report {
+  text-decoration: underline;
+  cursor: pointer;
 }

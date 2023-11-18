@@ -4,7 +4,7 @@ import { FaCheck } from "react-icons/fa6";
 
 import '../../stylesheets/ratings_review/reviewTile.css'
 
-const ReviewTile = ({review, handleHelpful}) => {
+const ReviewTile = ({review, handleHelpful, handleReport}) => {
   const [body, setBody] = useState(review.body)
   const [showMore, setShowMore] = useState(false)
   const [markedHelp, setMarkedHelp] = useState(false)
@@ -33,7 +33,7 @@ const ReviewTile = ({review, handleHelpful}) => {
   const handleMark = () => {
     if (!markedHelp) {
       setMarkedHelp(true)
-      handleHelpful(review.review_id, (review.helpfulness + 1))
+      handleHelpful(review.review_id)
     }
   }
 
@@ -67,7 +67,7 @@ const ReviewTile = ({review, handleHelpful}) => {
         </div>
       )}
       <div className="l-review-tile-helpfulness">
-        Helpful? <span className="l-review-tile-yes" style={{cursor: !markedHelp ? "pointer" : "default"}} onClick={() => handleMark()}>Yes</span> ({review.helpfulness})
+        Helpful? <span className="l-review-tile-yes" style={{cursor: !markedHelp ? "pointer" : "default"}} onClick={() => handleMark()}>Yes</span> ({review.helpfulness})  |  <span className="l-review-tile-report" onClick={() => handleReport(review.review_id)}>Report</span>
       </div>
     </div>
   )
