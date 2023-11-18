@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Stars from './Stars.jsx'
+import { FaCheck } from "react-icons/fa6";
 
 import '../../stylesheets/ratings_review/reviewTile.css'
 
@@ -54,6 +55,11 @@ const ReviewTile = ({review, handleHelpful}) => {
       <div className="l-review-tile-body">
         {body} <span className="l-review-tile-show-more" onClick={() => handleShowMore()} hidden={!showMore}>Show More</span>
       </div>
+      {review.recommend && (
+        <div>
+          <FaCheck /> I recommend this product
+        </div>
+      )}
       <div className="l-review-tile-helpfulness">
         Helpful? <span className="l-review-tile-yes" style={{cursor: !markedHelp ? "pointer" : "default"}} onClick={() => handleMark()}>Yes</span> ({review.helpfulness})
       </div>
