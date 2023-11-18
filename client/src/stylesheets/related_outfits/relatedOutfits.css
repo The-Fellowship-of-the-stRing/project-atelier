@@ -10,15 +10,38 @@
 .related-container {
   display: flex;
   flex-direction: row;
-
   border: 1px solid blue;
+  display: grid;
+  grid-template-areas: "card card card";
 }
 
 .card-container {
-  display: flex;
+  display: inline-block;
+  grid-area: card;
   height: 400px;
   width: 100vw;
   justify-content: left;
   align-items: center;
   border: 1px solid blue;
+  /* grid-template-areas:
+  "img"
+  "cat"
+  "name"
+  "price"
+  "star"; */
+}
+.card-name {
+  grid-area: name;
+}
+.card-cat {
+  grid-area: cat;
+}
+.card-price {
+  grid-area: price;
+}
+.card-img {
+  grid-area: img;
+}
+.card-star {
+  grid-area: star;
 }
