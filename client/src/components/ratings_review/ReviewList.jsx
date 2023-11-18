@@ -4,6 +4,8 @@ import SortDropDown from './SortDropDown.jsx';
 import ReviewTile from './ReviewTile.jsx'
 import getReviews from '../../utils/getReviews.js'
 
+import '../../stylesheets/ratings_review/reviewList.css'
+
 const ReviewList = ({itemId}) => {
   const [sort, setSort] = useState('relevant')
   const [results, setResults] = useState([]);
@@ -25,18 +27,20 @@ const ReviewList = ({itemId}) => {
   },[sort])
 
   return (
-    <div>
-      <SortDropDown handleSort={handleSort} sort={sort}/>
+    <div className="l-review-list-main">
+      <div>{results.length > 0 ? results.length : "0"} reviews, sorted by <SortDropDown handleSort={handleSort} sort={sort}/></div>
       {results.length < 1 ? (
         <div>Please add a review</div>
       ):(
-        <>
+        <div className="l-review-list-container">
           {results.map((review) => {
-            <div key={review.id}>
-              <ReviewTile review={review} />
-            </div>
+            return (
+              <div key={review.review_id} className="l-review-list-tile-main">
+                <ReviewTile review={review} />
+              </div>
+            )
           })}
-        </>
+        </div>
       )}
     </div>
   )
