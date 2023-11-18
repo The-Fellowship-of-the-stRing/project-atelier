@@ -8,7 +8,9 @@
 }
 
 .related-container {
-  flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+
   border: 1px solid blue;
 }
 

@@ -22,9 +22,9 @@ const Card = ( {itemId} ) => {
   return cardData ? (
     <div className="c card-container">
       <p>{itemId}</p>
-      <p>{cardData.name}</p>
-      <p>{cardData.category}</p>
-      <p>{cardData.originalPrice}</p>
+      <br/><p>{cardData.name}</p>
+      <br/><p>{cardData.category}</p>
+      <br/><p>{cardData.originalPrice}</p>
       <br/><img src={cardData.photos[0].thumbnail_url} />
     </div>
   ) : (
