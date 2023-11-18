@@ -30,7 +30,6 @@ const App = () =>{
               <span className="main-loader"></span>
           ) : (
             <>
-              <Stars itemId={currentItemId} />
               <RatingsReviews itemId={currentItemId}/>
               <QuestionsAnswers itemId={currentItemId}/>
               {/* <RelatedOutfits itemId={currentItemId} /> */}

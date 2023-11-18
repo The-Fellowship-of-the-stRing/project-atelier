@@ -1,0 +1,33 @@
+.l-rating-bd-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 30%;
+  height: 100%;
+  margin-right: 20px;
+}
+
+.l-rating-bd-title {
+  margin: 0px;
+  color: #383838;
+}
+
+.l-rating-bd-score {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 15px;
+}
+
+.l-rating-bd-number {
+  display: flex;
+  font-size: 3em;
+  font-weight: bold;
+  height: fit-content;
+  margin: 0px;
+  margin-top: -10px;
+  margin-right: 10px;
+}
