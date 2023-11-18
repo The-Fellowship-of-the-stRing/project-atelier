@@ -34,13 +34,3 @@ const QuestionsList = ( {resultsToShow, currentCount} ) => {
 }
 
 export default QuestionsList
-
-//format date
-// const formattedDate = date.toLocaleDateString("en-US", {
-//   year: 'numeric',
-//   month: 'long',
-//   day: 'numeric'
-// });
-
-//hide/show button
-{/* <button type="button" className="l-review-list-more-btn" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length ? true : false}>MORE REVIEWS</button> */}
