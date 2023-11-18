@@ -4,12 +4,12 @@ import getCardData from '../../utils/getCardData.js';
 
 const Card = ( {itemId, className} ) => {
   const [cardData, setCardData] = useState(null);
-  console.log(itemId);
+  // console.log(itemId);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getCardData(itemId);
-        console.log("CARD STATE", data);
+        // console.log("CARD STATE", data);
         return setCardData(data);
       } catch (err) {
         console.error('Error getting item details: ', err);
