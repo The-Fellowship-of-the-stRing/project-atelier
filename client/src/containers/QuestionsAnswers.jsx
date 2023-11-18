@@ -21,7 +21,7 @@ const QuestionsAnswers = ( {itemId} ) => {
         setQuestionData(response.data.results)
         return response.data
       } catch (err) {
-        console.log(console.error(err))
+        console.error(err)
       }
     };
 
