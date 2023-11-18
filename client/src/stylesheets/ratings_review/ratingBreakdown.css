@@ -3,9 +3,9 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 30%;
+  width: 15%;
   height: 100%;
-  margin-right: 20px;
+  margin-right: 40px;
 }
 
 .l-rating-bd-title {
@@ -30,4 +30,17 @@
   margin: 0px;
   margin-top: -10px;
   margin-right: 10px;
+}
+
+.l-rating-percent {
+  height: 40px;
+  margin-top: 10px;
+}
+
+.l-rating-bars-main {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  justify-content: space-between;
+  width: 100%;
 }

@@ -1,20 +1,26 @@
 import React, {useState, useEffect} from 'react';
 
 import Stars from '../stars/Stars.jsx'
+import StarBar from '../ratings_review/StarBar.jsx'
 
 import getItemDetails from '../../utils/getItemDetails.js';
+import getReviews from '../../utils/getReviews.js'
 
 import '../../stylesheets/ratings_review/ratingBreakdown.css';
 
-const RatingBreakdown = ({itemId}) => {
+const RatingBreakdown = ({itemId, results, totals}) => {
   const [avgRating, setAvgRating] = useState('');
+  const [percentGood, setPercentGood] = useState(0)
+  const [totalReviews, setTotalReviews] = useState(null)
+
+  console.log("totals", totals)
 
   const roundRating = (value) => {
     const prevDec = (value % 1) * 100;
     const newDec = Math.floor((prevDec + 12.5)/25) * .25;
     const prevWholeNum = Math.floor(value);
     return prevWholeNum + newDec;
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,9 +31,25 @@ const RatingBreakdown = ({itemId}) => {
       } catch (err) {
         console.error(err);
       }
-    }
+    };
     fetchData();
   },[itemId]);
+
+  useEffect(() => {
+    if (totals) {
+      const yesNum = Number.parseInt(totals.recommended.true)
+      const noNum = Number.parseInt(totals.recommended.false)
+      const calcYes = Math.floor(yesNum / (noNum + yesNum) * 100)
+      setPercentGood(calcYes)
+
+      const ratings = totals.ratings
+      let counter = 0
+      for (let key in ratings) {
+        counter = counter + Number.parseInt(ratings[key])
+      }
+      setTotalReviews(counter)
+    }
+  },[totals])
 
   return (
     <div className="l-rating-bd-main">
@@ -36,6 +58,20 @@ const RatingBreakdown = ({itemId}) => {
         <div className="l-rating-bd-number">{avgRating}</div>
         <Stars itemId={itemId} style={{height: '100%'}}/>
       </div>
+      {totals && (
+        <>
+        <div className="l-rating-percent">
+        {percentGood}% of reviews recommended this product
+        </div>
+        <div className="l-rating-bars-main">
+          <StarBar value={totals.ratings["5"]} total={totalReviews} current="5"/>
+          <StarBar value={totals.ratings["4"]} total={totalReviews} current="4"/>
+          <StarBar value={totals.ratings["3"]} total={totalReviews} current="3"/>
+          <StarBar value={totals.ratings["2"]} total={totalReviews} current="2"/>
+          <StarBar value={totals.ratings["1"]} total={totalReviews} current="1"/>
+        </div>
+        </>
+        )}
     </div>
   )
 }
