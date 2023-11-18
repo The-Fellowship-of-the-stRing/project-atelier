@@ -60,6 +60,12 @@ const ReviewTile = ({review, handleHelpful}) => {
           <FaCheck /> I recommend this product
         </div>
       )}
+      {review.response && (
+        <div className="l-review-tile-response">
+          <b>Response: </b>
+          <p style={{height: 'fit-content', margin: '0px', marginTop: "10px"}}>{review.response}</p>
+        </div>
+      )}
       <div className="l-review-tile-helpfulness">
         Helpful? <span className="l-review-tile-yes" style={{cursor: !markedHelp ? "pointer" : "default"}} onClick={() => handleMark()}>Yes</span> ({review.helpfulness})
       </div>
