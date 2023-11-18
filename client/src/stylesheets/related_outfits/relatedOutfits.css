@@ -1,4 +1,4 @@
-.related-outfits-main-container {
+.c-related-outfits-main-container {
   display: flex;
   height: 400px;
   width: 100vw;
@@ -7,16 +7,41 @@
   border: 1px solid blue;
 }
 
-.related-container {
-  flex-wrap: wrap;
+.c-related-container {
+  display: flex;
+  flex-direction: row;
   border: 1px solid blue;
+  display: grid;
+  grid-template-areas: "card card card";
 }
 
-.card-container {
-  display: flex;
+.c-card-container {
+  display: inline-block;
+  grid-area: card;
   height: 400px;
   width: 100vw;
   justify-content: left;
   align-items: center;
   border: 1px solid blue;
+  /* grid-template-areas:
+  "img"
+  "cat"
+  "name"
+  "price"
+  "star"; */
+}
+.c-card-name {
+  grid-area: name;
+}
+.c-card-cat {
+  grid-area: cat;
+}
+.c-card-price {
+  grid-area: price;
+}
+.c-card-img {
+  grid-area: img;
+}
+.c-card-star {
+  grid-area: star;
 }
