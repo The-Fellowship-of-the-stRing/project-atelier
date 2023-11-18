@@ -1,4 +1,4 @@
-.related-outfits-main-container {
+.c-related-outfits-main-container {
   display: flex;
   height: 400px;
   width: 100vw;
@@ -7,7 +7,7 @@
   border: 1px solid blue;
 }
 
-.related-container {
+.c-related-container {
   display: flex;
   flex-direction: row;
   border: 1px solid blue;
@@ -15,7 +15,7 @@
   grid-template-areas: "card card card";
 }
 
-.card-container {
+.c-card-container {
   display: inline-block;
   grid-area: card;
   height: 400px;
@@ -30,18 +30,18 @@
   "price"
   "star"; */
 }
-.card-name {
+.c-card-name {
   grid-area: name;
 }
-.card-cat {
+.c-card-cat {
   grid-area: cat;
 }
-.card-price {
+.c-card-price {
   grid-area: price;
 }
-.card-img {
+.c-card-img {
   grid-area: img;
 }
-.card-star {
+.c-card-star {
   grid-area: star;
 }

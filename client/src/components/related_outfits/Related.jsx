@@ -18,8 +18,8 @@ const Related = ( {itemId} ) => {
   }, []);
 
   return relatedIds ? (
-    <div className="c related-container">
-      {relatedIds.map((id,index) => (<Card className={`card-container card-${index}`} itemId={id} key={id} />))}
+    <div className="c-related-container">
+      {relatedIds.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} />))}
       {/* {<Card itemId={relatedIds[1]} key={relatedIds[0]} />} */}
     </div>
   ) : (

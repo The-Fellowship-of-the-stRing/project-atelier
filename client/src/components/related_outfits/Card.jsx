@@ -21,14 +21,14 @@ const Card = ( {itemId, className} ) => {
 
   return cardData ? (
     <div className={className}>
-      <img className="card-img" src={cardData.photos ? cardData.photos[0].thumbnail_url : ""} />
-      <p className="card-cat">{cardData.category}</p>
-      <p className="card-name">{cardData.name}</p>
-      <p className="card-price">{`${cardData.sales_price ||'Not on sale'} - $${cardData.original_price}`}</p>
-      <p className="card-star">STAR RATING</p>
+      <img className="c-card-img" src={cardData.photos ? cardData.photos[0].thumbnail_url : ""} />
+      <p className="c-card-cat">{cardData.category}</p>
+      <p className="c-card-name">{cardData.name}</p>
+      <p className="c-card-price">{`${cardData.sales_price ||'Not on sale'} - $${cardData.original_price}`}</p>
+      <p className="c-card-star">STAR RATING</p>
     </div>
   ) : (
-  <div className="c card-container">
+  <div className="c-card-container">
     No Data
   </div>
   );
