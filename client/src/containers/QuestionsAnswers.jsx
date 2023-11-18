@@ -6,7 +6,9 @@ import axios from 'axios';
 
 const QuestionsAnswers = ( {itemId} ) => {
   //holds state for all questions/answer data. use useEffect for API call to get all question/answer data to hand down to Search and QuestionsList
-  const [questionData, setQuestionData] = useState('');
+  const [questionData, setQuestionData] = useState([]);
+  const [resultsToShow, setResultsToShow] = useState([])
+  const [currentCount, setCurrentCount] = useState(2);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +20,9 @@ const QuestionsAnswers = ( {itemId} ) => {
         };
         const url = process.env.GIT_API_URL;
         const response = await axios.get(`${url}/qa/questions/?product_id=${itemId}`, headers)
-        setQuestionData(response.data.results)
+        const notReported = response.data.results.filter((value) => value.reported === false)
+        const sortedResults = notReported.sort((a, b) => b.question_helpfulness - a.question_helpfulness)
+        setQuestionData(sortedResults)
         return response.data
       } catch (err) {
         console.error(err)
@@ -28,13 +32,26 @@ const QuestionsAnswers = ( {itemId} ) => {
     fetchData()
   }, [itemId])
 
-  return (
+  useEffect(() => {
+    setResultsToShow(questionData.slice(0, currentCount))
+  }, [questionData])
+
+
+  const handleClick = () => {
+    setCurrentCount(currentCount+2)
+  }
+
+  return resultsToShow.length > 0 ? (
     <div className="k-questions-answers-main-container">
       <Search />
-      <QuestionsList questionData={questionData}/>
-      <button className="k-more-answered-questions">More Answered Questions</button>
+      <QuestionsList resultsToShow={resultsToShow} currentCount={currentCount}/>
+      <button className="k-more-answered-questions" onClick={() => handleClick()}>
+        More Answered Questions
+      </button>
       <button className="k-add-a-question">Add a Question</button>
     </div>
+  ) : (
+    <div>Loading...</div>
   )
 }
 
