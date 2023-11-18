@@ -26,7 +26,6 @@ const getCardData = async (itemId) => {
     response.photos = defaultStyle.photos;
     response.original_price = defaultStyle.original_price;
 
-    console.log('Final response: ', response);
     return response;
   } catch (err) {
     console.error(err)
