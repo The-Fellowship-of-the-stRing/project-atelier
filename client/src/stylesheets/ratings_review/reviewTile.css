@@ -4,8 +4,7 @@
   justify-content: space-around;
   align-items: flex-start;
   width: 100%;
-  height: fit-content;
-  min-height: 200px;
+  min-height: 100%;
   border-bottom: 2px solid #0000004b;
   cursor: default;
 }
@@ -30,6 +29,9 @@
 }
 
 .l-review-tile-body {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .l-review-tile-helpfulness {
@@ -38,6 +40,28 @@
 }
 
 .l-review-tile-yes {
-  border-bottom: 1px solid #686868;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.l-review-tile-show-more {
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 5px;
+  text-decoration: underline;
+}
+
+.l-review-tile-response {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  background-color: rgba(104, 104, 104, 0.194);
+  padding: 15px;
+}
+
+.l-review-tile-report {
+  text-decoration: underline;
   cursor: pointer;
 }

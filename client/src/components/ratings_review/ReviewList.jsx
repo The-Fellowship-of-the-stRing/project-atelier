@@ -2,7 +2,10 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import SortDropDown from './SortDropDown.jsx';
 import ReviewTile from './ReviewTile.jsx'
+
 import getReviews from '../../utils/getReviews.js'
+import markHelpful from '../../utils/markHelpful.js'
+import reportReview from '../../utils/reportReview.js'
 
 import '../../stylesheets/ratings_review/reviewList.css'
 
@@ -29,6 +32,26 @@ const ReviewList = ({itemId}) => {
       }
     }
     setCurrentView(newView)
+  }
+
+  const handleHelpful = async (id) => {
+    try {
+      const update = await markHelpful(id);
+      const getUpdates = await getReviews(itemId, sort, currentCount)
+      setResults(getUpdates.results)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  const handleReport = async (id) => {
+    try {
+      const update = await reportReview(id);
+      const getUpdates = await getReviews(itemId, sort, currentCount)
+      setResults(getUpdates.results)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   useEffect(() => {
@@ -59,7 +82,7 @@ const ReviewList = ({itemId}) => {
           {resultsToShow.map((review) => {
             return (
               <div key={review.review_id} className="l-review-list-tile-main">
-                <ReviewTile review={review} />
+                <ReviewTile review={review} handleHelpful={handleHelpful} handleReport={handleReport}/>
               </div>
             )
           })}
