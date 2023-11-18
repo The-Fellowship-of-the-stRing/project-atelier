@@ -9,7 +9,7 @@ const getCardData = async (itemId) => {
     };
     const url = process.env.GIT_API_URL;
     let response = {}
-    const idResponse = await axios.get(`${url}/products/${itemId}`, headers);
+    const idResponse = await axios.get(`${url}/products/?product_id=${itemId}`, headers);
     response.category = idResponse.data.category;
     response.features = idResponse.data.features;
 
@@ -25,7 +25,6 @@ const getCardData = async (itemId) => {
     response.name = defaultStyle.name;
     response.photos = defaultStyle.photos;
     response.original_price = defaultStyle.original_price;
-
     return response;
   } catch (err) {
     console.error(err)

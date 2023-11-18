@@ -1,13 +1,28 @@
-import React, {useState} from 'react'
-import SortDropDown from './SortDropDown.jsx'
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import SortDropDown from './SortDropDown.jsx';
+import ReviewTile from './ReviewTile.jsx'
+import getReviews from '../../utils/getReviews.js'
 
-const ReviewList = ({item}) => {
+const ReviewList = ({itemId}) => {
   const [sort, setSort] = useState('relevant')
   const [results, setResults] = useState([]);
 
-  const handleSort = (e) => {
+  const handleSort = async (e) => {
     setSort(e.target.value);
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getReviews(itemId, sort)
+        setResults(response.results);
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    fetchData()
+  },[sort])
 
   return (
     <div>

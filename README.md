@@ -14,6 +14,25 @@
 10. Wait for your pull request to be reviewed by your teammates.
 11. Once approved, merge the pull request to the main branch.
 
+# Running into an octopus
+
+> **Follow these steps if you have a merge conflict or a file that needs to be ignored that was prevously tracked**
+
+1. `git status`
+2. `git rm -r --cached .`
+3. Add the file to your .gitignore
+4. Validate the File has been removed from github
+5. `git add .`
+6. `git commit -m "message here"`
+7. `git status`
+8. `git pull origin main`
+9. resolve any conflicts/use `git merge pull.ff --only` or what ever the first command tip is
+10. resolve conflicts
+11. `git status`
+12. validate no changes and working tree is clean
+13. `git push origin [branchname]:[branchname]`
+14. submit pull request on github
+
 # App Start Up
 
 > **To start the application, run the following commands in your terminal:**
