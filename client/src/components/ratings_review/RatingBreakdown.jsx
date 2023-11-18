@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import Stars from '../stars/Stars.jsx'
 import StarBar from '../ratings_review/StarBar.jsx'
+import RatingFactors from '../ratings_review/RatingFactors.jsx'
 
 import getItemDetails from '../../utils/getItemDetails.js';
 import getReviews from '../../utils/getReviews.js'
@@ -80,6 +81,7 @@ const RatingBreakdown = ({itemId, results, totals, updateFilter, currentFilter})
               </>
             )}
         </div>
+        <RatingFactors totals={totals} />
         </>
         )}
     </div>
