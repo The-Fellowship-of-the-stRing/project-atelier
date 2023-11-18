@@ -12,7 +12,7 @@ const getRelatedItems = async (itemId) => {
 
     return response.data
   } catch (err) {
-    console.log(console.error(err))
+    console.error(err)
   }
 };
 
