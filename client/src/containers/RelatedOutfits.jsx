@@ -10,10 +10,8 @@ const RelatedOutfits = ( {itemId} ) => {
 
   return (
     <div className="c related-outfits-main-container">
-      CONTAINER Related and Outfits
       <Related itemId={itemId}/>
       <Outfits itemId={itemId}/>
-      <Card itemId={itemId}/>
     </div>
   )
 }

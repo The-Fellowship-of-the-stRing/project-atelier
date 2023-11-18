@@ -3,18 +3,34 @@ import React,{useState, useEffect} from 'react';
 import getCardData from '../../utils/getCardData.js';
 
 const Card = ( {itemId} ) => {
-  const [cardData, setCardData] = useState(getCardData(itemId));
+  const [cardData, setCardData] = useState(null);
 
-  return (
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getCardData(itemId);
+        setCardData(data);
+      } catch (err) {
+        console.error('Error getting item details: ', err);
+      }
+    }
+    fetchData();
+  }, []);
+
+  console.log("CARD STATE", cardData);
+
+  return cardData ? (
     <div className="c card-container">
-      <div>{itemId}</div>
-      <div>{cardData.name}</div>
-      <div>{cardData.features}</div>
-      <div>{cardData.category}</div>
-      <div>{cardData.originalPrice}</div>
-      <div>{cardData.originalPrice}</div>
-      <div>{cardData.photos}</div>
+      <p>{itemId}</p>
+      <p>{cardData.name}</p>
+      <p>{cardData.category}</p>
+      <p>{cardData.originalPrice}</p>
+      <br/><img src={cardData.photos[0].thumbnail_url} />
     </div>
-  )
+  ) : (
+  <div className="c card-container">
+    No Data
+  </div>
+  );
 }
 export default Card
