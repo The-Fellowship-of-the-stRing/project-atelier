@@ -8,7 +8,7 @@ import '../stylesheets/ratings_review/ratingsReview.css'
 const RatingsReviews = ({itemId}) => {
 
   return (
-    <div className="ratings-review-main-container">
+    <div className="l-ratings-review-main-container">
       <NumberReviews itemId={itemId}/>
       <ReviewList itemId={itemId}/>
     </div>
