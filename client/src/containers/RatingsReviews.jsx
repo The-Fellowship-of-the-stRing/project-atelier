@@ -15,7 +15,8 @@ const RatingsReviews = ({itemId}) => {
   const [results, setResults] = useState([]);
   const [currentCount, setCurrentCount] = useState(10);
   const [currentView, setCurrentView] = useState(2);
-  const [totals, setTotals] = useState(null)
+  const [totals, setTotals] = useState(null);
+  const [currentFilter, setCurrentFilter] = useState([]);
 
   const handleSort = async (e) => {
     setSort(e.target.value);
@@ -55,6 +56,19 @@ const RatingsReviews = ({itemId}) => {
     setCurrentView(newView)
   }
 
+  const updateFilter = (value) => {
+    if (Array.isArray(value)) {
+      setCurrentFilter([]);
+      return;
+    }
+    if (currentFilter.indexOf(value) === -1) {
+      setCurrentFilter([...currentFilter, value])
+    } else {
+      const newFilters = currentFilter.filter((index) => index !== value)
+      setCurrentFilter(newFilters)
+    }
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -81,7 +95,7 @@ const RatingsReviews = ({itemId}) => {
 
   return (
     <div className="ratings-review-main-container">
-      <RatingBreakdown itemId={itemId} results={results} totals={totals}/>
+      <RatingBreakdown itemId={itemId} results={results} totals={totals} updateFilter={updateFilter} currentFilter={currentFilter}/>
       <ReviewList
       results={results}
       sort={sort}
@@ -90,7 +104,8 @@ const RatingsReviews = ({itemId}) => {
       handleReport={handleReport}
       handleViewMore={handleViewMore}
       currentView={currentView}
-      currentCount={currentCount}/>
+      currentCount={currentCount}
+      currentFilter={currentFilter}/>
     </div>
   )
 }

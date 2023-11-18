@@ -8,12 +8,10 @@ import getReviews from '../../utils/getReviews.js'
 
 import '../../stylesheets/ratings_review/ratingBreakdown.css';
 
-const RatingBreakdown = ({itemId, results, totals}) => {
+const RatingBreakdown = ({itemId, results, totals, updateFilter, currentFilter}) => {
   const [avgRating, setAvgRating] = useState('');
   const [percentGood, setPercentGood] = useState(0)
   const [totalReviews, setTotalReviews] = useState(null)
-
-  console.log("totals", totals)
 
   const roundRating = (value) => {
     const prevDec = (value % 1) * 100;
@@ -64,11 +62,23 @@ const RatingBreakdown = ({itemId, results, totals}) => {
         {percentGood}% of reviews recommended this product
         </div>
         <div className="l-rating-bars-main">
-          <StarBar value={totals.ratings["5"]} total={totalReviews} current="5"/>
-          <StarBar value={totals.ratings["4"]} total={totalReviews} current="4"/>
-          <StarBar value={totals.ratings["3"]} total={totalReviews} current="3"/>
-          <StarBar value={totals.ratings["2"]} total={totalReviews} current="2"/>
-          <StarBar value={totals.ratings["1"]} total={totalReviews} current="1"/>
+          <StarBar value={totals.ratings["5"]} total={totalReviews} current="5" updateFilter={updateFilter}/>
+          <StarBar value={totals.ratings["4"]} total={totalReviews} current="4" updateFilter={updateFilter}/>
+          <StarBar value={totals.ratings["3"]} total={totalReviews} current="3" updateFilter={updateFilter}/>
+          <StarBar value={totals.ratings["2"]} total={totalReviews} current="2" updateFilter={updateFilter}/>
+          <StarBar value={totals.ratings["1"]} total={totalReviews} current="1" updateFilter={updateFilter}/>
+        </div>
+        <div>
+          {currentFilter.length > 0 && (
+            <>
+              Stars {currentFilter.map((value, index) => {
+                return index === currentFilter.length -1 ? `${value}` : `${value}, `
+              })}
+              <div onClick={() => updateFilter([])}>
+                Remove Filters
+              </div>
+              </>
+            )}
         </div>
         </>
         )}

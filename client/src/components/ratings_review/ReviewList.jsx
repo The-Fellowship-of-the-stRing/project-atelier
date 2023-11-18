@@ -15,7 +15,8 @@ const ReviewList = ({
   handleReport,
   currentView,
   currentCount,
-  handleViewMore}) => {
+  handleViewMore,
+  currentFilter}) => {
   const [resultsToShow, setResultsToShow] = useState([]);
 
   useEffect(() => {
@@ -32,11 +33,13 @@ const ReviewList = ({
       ):(
         <div className="l-review-list-container">
           {resultsToShow.map((review) => {
-            return (
-              <div key={review.review_id} className="l-review-list-tile-main">
+            if (currentFilter.indexOf(review.rating + "") !== -1 || currentFilter.length < 1) {
+              return (
+                <div key={review.review_id} className="l-review-list-tile-main">
                 <ReviewTile review={review} handleHelpful={handleHelpful} handleReport={handleReport}/>
               </div>
             )
+          }
           })}
         </div>
       )}
