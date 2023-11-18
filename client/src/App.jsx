@@ -31,7 +31,7 @@ const App = () =>{
             <>
               <RatingsReviews itemId={currentItemId}/>
               <QuestionsAnswers itemId={currentItemId}/>
-              {/* <RelatedOutfits itemId={currentItemId} /> */}
+              <RelatedOutfits itemId={currentItemId} />
             </>
           )}
       </div>
