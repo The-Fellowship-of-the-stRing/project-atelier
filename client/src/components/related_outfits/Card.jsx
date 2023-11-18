@@ -3,11 +3,18 @@ import React,{useState, useEffect} from 'react';
 import getCardData from '../../utils/getCardData.js';
 
 const Card = ( {itemId} ) => {
-  // console.log("Card ID:", itemId)
-  getCardData(itemId);
+  const [cardData, setCardData] = useState(getCardData(itemId));
+  console.log(cardData);
+
   return (
     <div className="c card-container">
-      {itemId}
+      <div>{itemId}</div>
+      <div>{cardData.name}</div>
+      <div>{cardData.features}</div>
+      <div>{cardData.category}</div>
+      <div>{cardData.originalPrice}</div>
+      <div>{cardData.originalPrice}</div>
+      <div>{cardData.photos}</div>
     </div>
   )
 }
