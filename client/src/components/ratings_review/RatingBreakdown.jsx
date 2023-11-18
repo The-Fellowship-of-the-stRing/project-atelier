@@ -68,13 +68,13 @@ const RatingBreakdown = ({itemId, results, totals, updateFilter, currentFilter})
           <StarBar value={totals.ratings["2"]} total={totalReviews} current="2" updateFilter={updateFilter}/>
           <StarBar value={totals.ratings["1"]} total={totalReviews} current="1" updateFilter={updateFilter}/>
         </div>
-        <div>
+        <div className="l-rating-bars-filters">
           {currentFilter.length > 0 && (
             <>
-              Stars {currentFilter.map((value, index) => {
+              Total Stars {currentFilter.map((value, index) => {
                 return index === currentFilter.length -1 ? `${value}` : `${value}, `
               })}
-              <div onClick={() => updateFilter([])}>
+              <div className="l-rating-bars-remove" onClick={() => updateFilter([])}>
                 Remove Filters
               </div>
               </>

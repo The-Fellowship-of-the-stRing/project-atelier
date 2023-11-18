@@ -44,3 +44,14 @@
   justify-content: space-between;
   width: 100%;
 }
+.l-rating-bars-filters {
+  color: #3838388a;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.l-rating-bars-remove {
+  font-style: normal;
+  margin-top: 10px;
+  cursor: pointer;
+}
