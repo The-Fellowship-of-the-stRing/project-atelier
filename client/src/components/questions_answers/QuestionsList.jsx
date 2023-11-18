@@ -7,12 +7,22 @@ const QuestionsList = ( {resultsToShow, currentCount} ) => {
 
   return resultsToShow ? (
     <div className="k-questions-list">
-      QuestionsList Component
       {resultsToShow.map((question, i) => {
         return (
-          <div>
-            <span>Q: {question.question_body}</span>
-            <Answers questionId={question.question_id}/>
+          <div className="k-question-answer-container" key={i}>
+
+            <div className="question-block">
+              <div className="k-question-body">
+                Q: {question.question_body}
+              </div>
+              <div className="k-question-helpful">
+                Helpful? <a href="#" className="k-question-yes-click">Yes</a> ({question.question_helpfulness})
+              </div>
+              <div>
+                add answer-link to form
+              </div>
+            </div>
+              <Answers questionId={question.question_id}/>
           </div>
         )
       })}
@@ -24,13 +34,3 @@ const QuestionsList = ( {resultsToShow, currentCount} ) => {
 }
 
 export default QuestionsList
-
-//format date
-// const formattedDate = date.toLocaleDateString("en-US", {
-//   year: 'numeric',
-//   month: 'long',
-//   day: 'numeric'
-// });
-
-//hide/show button
-{/* <button type="button" className="l-review-list-more-btn" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length ? true : false}>MORE REVIEWS</button> */}
