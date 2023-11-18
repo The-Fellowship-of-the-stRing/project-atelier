@@ -8,23 +8,25 @@ const getCardData = async (itemId) => {
       }
     };
     const url = process.env.GIT_API_URL;
-    let response = {}
-    const idResponse = await axios.get(`${url}/products/?product_id=${itemId}`, headers);
-    response.category = idResponse.data.category;
-    response.features = idResponse.data.features;
+    let response;
+
+    const idResponse = await axios.get(`${url}/products/${itemId}`, headers);
+    response = {
+        name: idResponse.data.name,
+        category:idResponse.data.category,
+        features:idResponse.data.features
+    };
 
     const stylesResponse = await axios.get(`${url}/products/${itemId}/styles`, headers);
-
     /* FIND DEFAULT STYLE */
-    let defaultStyle;
     for (let style of stylesResponse.data.results) {
       if(style["default?"]) {
-        defaultStyle = style;
+        response.photos = style.photos;
+        response.original_price = style.original_price;
+        response.sale_price = style.sale_price;
       }
     }
-    response.name = defaultStyle.name;
-    response.photos = defaultStyle.photos;
-    response.original_price = defaultStyle.original_price;
+
     return response;
   } catch (err) {
     console.error(err)
