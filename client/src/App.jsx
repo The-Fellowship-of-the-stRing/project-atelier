@@ -4,6 +4,7 @@ import getFirstItem from './utils/getFirstItem.js';
 import Stars from './components/stars/Stars.jsx'
 import QuestionsAnswers from './containers/QuestionsAnswers';
 import RelatedOutfits from './containers/RelatedOutfits';
+import ProductDetails from './containers/ProductDetails.jsx';
 
 import './styles.css'
 
@@ -29,6 +30,8 @@ const App = () =>{
               <span className="main-loader"></span>
           ) : (
             <>
+              <Stars itemId={currentItemId} />
+              <ProductDetails itemId={currentItemId}/>
               <RatingsReviews itemId={currentItemId}/>
               <QuestionsAnswers itemId={currentItemId}/>
               <RelatedOutfits itemId={currentItemId} />
