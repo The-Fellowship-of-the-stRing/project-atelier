@@ -6,10 +6,14 @@ import AddFormStars from './AddFormStars.jsx'
 import "../../stylesheets/ratings_review/addReview.css"
 
 const AddReview = ({handleModal, itemName, totals}) => {
-  const [overall, setOverall] = useState(0)
-  const [ratingDef, setRatingDef] = useState("")
-  const [recommend, setRecommend] = useState("Yes")
-  const [charCount, setCharCount] = useState(50)
+  const [overall, setOverall] = useState(0);
+  const [ratingDef, setRatingDef] = useState("");
+  const [recommend, setRecommend] = useState("Yes");
+  const [charCount, setCharCount] = useState(50);
+  const [summary, setSummary] = useState('');
+  const [formBody, setFormBody] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState('');
   const [factorRating, setFactorRating] = useState({
     "Size": {value: 0, text: "none selected"},
     "Width": {value: 0, text: "none selected"},
@@ -44,6 +48,22 @@ const AddReview = ({handleModal, itemName, totals}) => {
   const onFactorChange = (e, factor, text) => {
     const value = e.target.value
     setFactorRating({...factorRating, [factor]: {value: value, text: text}})
+  }
+
+  const handleSummary = (e) => {
+    setSummary(e.target.value)
+  }
+  const handleBody = (e) => {
+      const currentLength = e.target.value.length
+      const difference = 50 - currentLength
+      setCharCount(difference)
+      setFormBody(e.target.value)
+  }
+  const handleNickname = (e) => {
+    setNickname(e.target.value)
+  }
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
   }
 
   return (
@@ -113,20 +133,20 @@ const AddReview = ({handleModal, itemName, totals}) => {
           })
           }
           <label>Review Summary (optional)</label>
-          <input type="text" placeholder="Example: Best purchase ever!" onChange={(e) => handleSummary(e)} />
+          <input type="text" value={summary} placeholder="Example: Best purchase ever!" onChange={(e) => handleSummary(e)} />
 
           <label>Review Body</label>
-          <input type="text" placeholder="Why did you like the product or not?" onChange={(e) => handleBody(e)} />
-          <div className="l-add-review-body-count">Minimum required characters left: {charCount}</div>
+          <input type="text" value={formBody} placeholder="Why did you like the product or not?" onChange={(e) => handleBody(e)} />
+          <div className="l-add-review-body-count">{charCount <= 0 ? "Minimum reached" : `Minimum required characters left: ${charCount}`}</div>
 
           <label>Upload your photos (optional)</label>
           <div className="l-add-review-upload-photo"/>
 
           <label>What is your nickname?</label>
-          <input type="text" placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} />
+          <input type="text" value={nickname} placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} />
 
           <label>Your email</label>
-          <input type="email" placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} />
+          <input type="email" value={email} placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} />
 
           <button type="submit">SUBMIT</button>
         </div>
