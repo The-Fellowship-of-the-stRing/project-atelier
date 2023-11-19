@@ -23,6 +23,25 @@
   height: 80%;
   background-color: #ffffff;
   box-shadow: 1px 1px 5px #00000065;
+  overflow-y: scroll;
+}
+
+.l-add-review-modal::-webkit-scrollbar {
+  display: none;
+}
+
+.l-add-review-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+}
+
+.l-add-review-header h1, .l-add-review-header h3 {
+  margin: 0px;
 }
 
 .l-add-review-close {
@@ -61,4 +80,55 @@
 
 #l-add-review-yes, #l-add-review-no {
 cursor: pointer;
+}
+
+.l-add-review-factor-options {
+  display: flex;
+  width: 100%;
+  font-size: 12px;
+}
+
+
+
+.l-add-review-single-factor {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 60px;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.l-add-review-factor-name-decription {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+
+}
+
+.l-add-review-section-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.l-add-review-selections {
+  display: flex;
+  flex-direction: column;
+}
+
+.l-add-review-factor-category {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.l-add-review-factor-description {
+  font-size: 16px;
+  margin-top: 5px;
+  font-style: italic;
+  margin-left: 5px;
+}
+.l-add-review-factor-options {
+  display: flex;
+  margin-top: 5px;
 }

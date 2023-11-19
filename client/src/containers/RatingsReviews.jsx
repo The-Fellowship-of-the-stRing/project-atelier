@@ -11,7 +11,7 @@ import getReviewMeta from '../utils/getReviewMeta.js'
 
 import '../stylesheets/ratings_review/ratingsReview.css'
 
-const RatingsReviews = ({itemId}) => {
+const RatingsReviews = ({itemId, itemName}) => {
   const [sort, setSort] = useState('relevance')
   const [results, setResults] = useState([]);
   const [currentCount, setCurrentCount] = useState(10);
@@ -102,7 +102,7 @@ const RatingsReviews = ({itemId}) => {
   return (
     <div className="ratings-review-main-container">
       {showModal && (
-        <AddReview handleModal={handleModal} />
+        <AddReview handleModal={handleModal} itemName={itemName} totals={totals}/>
       )}
       <RatingBreakdown itemId={itemId} results={results} totals={totals} updateFilter={updateFilter} currentFilter={currentFilter}/>
       <ReviewList
