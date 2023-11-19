@@ -20,10 +20,9 @@ const AddReview = ({handleModal}) => {
     <div className="l-add-review-overlay">
       <div className="l-add-review-modal" >
       <AiOutlineClose className="l-add-review-close" onClick={() => handleModal()} />
-      <div>
         <form className="l-add-review-form" onSubmit={(e) => handleAddReview(e)}>
           <label>Overall Rating</label>
-          <div className="l-add-review-stars"><AddFormStars rating={overall} updateRating={updateRating} /><span style={{marginLeft: "10px"}}>{ratingDef}</span></div>
+          <div className="l-add-review-stars"><AddFormStars rating={overall} updateRating={updateRating}/><span style={{marginLeft: "10px"}}>{ratingDef}</span></div>
           <label>Do you recommend?</label>
           <label>Characteristics</label>
           <label>Review Summary</label>
@@ -33,7 +32,6 @@ const AddReview = ({handleModal}) => {
           <label>Your email</label>
           <button type="submit">SUBMIT</button>
         </form>
-      </div>
       </div>
     </div>
   )
