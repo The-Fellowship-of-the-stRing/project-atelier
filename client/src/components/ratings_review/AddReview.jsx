@@ -92,6 +92,14 @@ const AddReview = ({handleModal, itemName, totals}) => {
     setEmail(e.target.value)
   }
 
+  const handleSubmit = () => {
+    if (overall === 0 || selectOption || formBody.length < 50 || nickname.length < 1 || !validEmail) {
+      setShowError(true)
+    } else {
+      setShowError(false)
+    }
+  }
+
   useEffect(() => {
     checkIfSelected()
   }, [factorRating])
@@ -181,22 +189,31 @@ const AddReview = ({handleModal, itemName, totals}) => {
           <input type="email" value={email} placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} />
           <label>For authentication reasons, you will not be emailed</label>
 
-          {!showError && (
+          {showError && (
             <div className="l-add-review-errors">
               You must enter the following:
+              <ul>
+
               {overall === 0 && (
-                <div>Select an overall rating</div>
-              )}
+                <li>Select an overall rating</li>
+                )}
               {selectOption && (
-                <div>Please rate the product's characteristics</div>
+                <li>Please rate the product's characteristics</li>
+                )}
+              {formBody.length < 50 && (
+                <li>Review body must be at least 50 characters</li>
+              )}
+              {nickname.length < 1 && (
+                <li>Please add your nickname. Example: jackson11!</li>
               )}
               {!validEmail && (
-                <div>Please use valid email. Example: email@example.com</div>
-              )}
+                <li>Please use valid email. Example: jackson11@email.com</li>
+                )}
+                </ul>
             </div>
           )}
 
-          <button type="button">SUBMIT</button>
+          <button type="button" className="l-add-review-btn" onClick={() => handleSubmit()}>SUBMIT</button>
         </div>
       </div>
     </div>
