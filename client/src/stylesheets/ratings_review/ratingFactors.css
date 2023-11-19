@@ -31,6 +31,7 @@
   width: 32%;
   height: 100%;
   background-color: #ececec;
+  position: relative;
 }
 
 .l-rating-marker {
@@ -44,4 +45,33 @@
   width: 90%;
   justify-content: space-between;
   font-size: 13px;
+}
+.l-rating-sub-text span {
+  text-align: center;
+}
+
+.l-rating-sub-right {
+  position: absolute;
+  margin-top: 10px;
+  font-size: 12px;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.l-rating-sub-mid {
+  position: absolute;
+  margin-top: 10px;
+  font-size: 12px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.l-rating-sub-left {
+  position: absolute;
+  margin-top: 10px;
+  font-size: 12px;
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
 }
