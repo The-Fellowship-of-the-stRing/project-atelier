@@ -51,7 +51,9 @@ const AddReview = ({handleModal, itemName, totals}) => {
   }
 
   const handleSummary = (e) => {
-    setSummary(e.target.value)
+    if (summary.length <= 60 || e.target.value.length < summary.length) {
+      setSummary(e.target.value)
+    }
   }
   const handleBody = (e) => {
       const currentLength = e.target.value.length
@@ -132,23 +134,23 @@ const AddReview = ({handleModal, itemName, totals}) => {
             )
           })
           }
-          <label>Review Summary (optional)</label>
+          <label className="l-add-review-section-title">Review Summary (optional)</label>
           <input type="text" value={summary} placeholder="Example: Best purchase ever!" onChange={(e) => handleSummary(e)} />
 
-          <label>Review Body</label>
+          <label className="l-add-review-section-title">Review Body</label>
           <input type="text" value={formBody} placeholder="Why did you like the product or not?" onChange={(e) => handleBody(e)} />
           <div className="l-add-review-body-count">{charCount <= 0 ? "Minimum reached" : `Minimum required characters left: ${charCount}`}</div>
 
-          <label>Upload your photos (optional)</label>
+          <label className="l-add-review-section-title">Upload your photos (optional)</label>
           <div className="l-add-review-upload-photo"/>
 
-          <label>What is your nickname?</label>
+          <label className="l-add-review-section-title">What is your nickname?</label>
           <input type="text" value={nickname} placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} />
 
-          <label>Your email</label>
+          <label className="l-add-review-section-title">Your email</label>
           <input type="email" value={email} placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} />
 
-          <button type="submit">SUBMIT</button>
+          <button type="button">SUBMIT</button>
         </div>
       </div>
     </div>
