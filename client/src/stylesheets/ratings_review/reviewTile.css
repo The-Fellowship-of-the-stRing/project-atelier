@@ -24,6 +24,7 @@
   display: flex;
   color: #a3a3a3;
   height: fit-content;
+  font-size: 13px;
 }
 
 .l-review-tile-summary {
@@ -36,13 +37,15 @@
   flex-wrap: wrap;
   width: 100%;
   height: fit-content;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .l-review-tile-helpfulness {
   font-size: 14px;
   color: #686868;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .l-review-tile-yes {
