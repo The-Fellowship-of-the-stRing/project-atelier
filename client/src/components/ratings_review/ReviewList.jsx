@@ -21,6 +21,8 @@ const ReviewList = ({
   handleModal}) => {
   const [resultsToShow, setResultsToShow] = useState([]);
 
+  console.log(results)
+
   useEffect(() => {
     setResultsToShow(results.slice(0, currentView))
   }, [results, currentView])
