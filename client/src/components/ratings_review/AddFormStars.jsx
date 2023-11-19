@@ -12,7 +12,7 @@ const AddFormStars = ({rating, updateRating}) => {
   }
 
   return (
-    <div id="stars-main-container" style={{scale: "1.5", marginLeft:"15px", marginRight:"20px"}}>
+    <div id="stars-main-container" style={{scale: "1.5", marginLeft:"20px", marginRight:"20px"}}>
       <div id="stars-outline-container" >
        {
         starLength.map((star, index) => {
