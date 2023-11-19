@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import SortDropDown from '../components/ratings_review/SortDropDown.jsx'
 import ReviewList from '../components/ratings_review/ReviewList.jsx'
 import RatingBreakdown from '../components/ratings_review/RatingBreakdown.jsx'
+import AddReview from '../components/ratings_review/AddReview.jsx'
 
 import getReviews from '../utils/getReviews.js'
 import markHelpful from '../utils/markHelpful.js'
@@ -17,6 +18,7 @@ const RatingsReviews = ({itemId}) => {
   const [currentView, setCurrentView] = useState(2);
   const [totals, setTotals] = useState(null);
   const [currentFilter, setCurrentFilter] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const handleSort = async (e) => {
     setSort(e.target.value);
@@ -69,6 +71,10 @@ const RatingsReviews = ({itemId}) => {
     }
   }
 
+  const handleModal = () => {
+    setShowModal(!showModal)
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -95,6 +101,9 @@ const RatingsReviews = ({itemId}) => {
 
   return (
     <div className="ratings-review-main-container">
+      {showModal && (
+        <AddReview handleModal={handleModal} />
+      )}
       <RatingBreakdown itemId={itemId} results={results} totals={totals} updateFilter={updateFilter} currentFilter={currentFilter}/>
       <ReviewList
       results={results}
@@ -105,7 +114,8 @@ const RatingsReviews = ({itemId}) => {
       handleViewMore={handleViewMore}
       currentView={currentView}
       currentCount={currentCount}
-      currentFilter={currentFilter}/>
+      currentFilter={currentFilter}
+      handleModal={handleModal}/>
     </div>
   )
 }

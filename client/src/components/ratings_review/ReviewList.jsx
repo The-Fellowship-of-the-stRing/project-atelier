@@ -17,7 +17,8 @@ const ReviewList = ({
   currentView,
   currentCount,
   handleViewMore,
-  currentFilter}) => {
+  currentFilter,
+  handleModal}) => {
   const [resultsToShow, setResultsToShow] = useState([]);
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const ReviewList = ({
       )}
       <div className="l-review-list-btn-placement">
         <button type="button" className="l-review-list-more-btn" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length ? true : false}>MORE REVIEWS</button>
-        <button type="button" className="l-review-list-more-btn" onClick={() => handleAddReview()}>ADD A REVIEW <FaPlus className="l-review-list-btn-icon"/></button>
+        <button type="button" className="l-review-list-more-btn" onClick={() => handleModal()}>ADD A REVIEW <FaPlus className="l-review-list-btn-icon"/></button>
       </div>
     </div>
   )
