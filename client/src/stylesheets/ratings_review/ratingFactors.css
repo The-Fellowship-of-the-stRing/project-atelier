@@ -1,0 +1,35 @@
+.l-rating-factors-main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
+}
+
+.l-rating-factors-cat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+}
+
+.l-rating-back-container {
+  display: flex;
+  width: 100%;
+  height: 10px;
+  justify-content: space-between;
+  position: relative;
+}
+
+.l-rating-back-bar {
+  width: 32%;
+  height: 100%;
+  background-color: #ececec;
+}
+
+.l-rating-marker {
+  position: absolute;
+  scale: 2.1;
+  top: -2px;
+}
