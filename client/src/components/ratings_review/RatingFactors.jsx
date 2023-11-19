@@ -22,11 +22,10 @@ const RatingFactors = ({totals}) => {
     <div className="l-rating-factors-main">
       {categories.map((factor) => {
         const data = totals.characteristics[factor]
-        const catRating = Number.parseInt(data.value);
+        const catRating = data.value;
         const markerLocation = (catRating / 5) * 100
-        console.log(catRating)
         return (
-          <div key={data.id}>
+          <div key={data.id} className="l-rating-factors-single">
             <div className="l-rating-factors-cat">
             {factor}
             </div>
@@ -35,6 +34,9 @@ const RatingFactors = ({totals}) => {
               <div className="l-rating-back-bar" />
               <div className="l-rating-back-bar" />
             <GoTriangleDown className="l-rating-marker" style={{left: `${markerLocation}%`}}/>
+            </div>
+            <div className="l-rating-sub-text">
+              <span>test</span><span>test</span><span>test</span>
             </div>
           </div>
         )
