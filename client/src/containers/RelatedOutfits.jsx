@@ -9,7 +9,7 @@ import '../utils/getFirstItem.js';
 const RelatedOutfits = ( {itemId} ) => {
 
   return (
-    <div className="c related-outfits-main-container">
+    <div className="c-related-outfits-main-container">
       <Related itemId={itemId}/>
       <Outfits itemId={itemId}/>
     </div>

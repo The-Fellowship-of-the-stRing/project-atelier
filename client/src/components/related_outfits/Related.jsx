@@ -19,6 +19,7 @@ const Related = ( {itemId} ) => {
 
   return relatedIds ? (
     <div className="c-related-container">
+      <h3>Related Products</h3>
       {relatedIds.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} />))}
       {/* {<Card itemId={relatedIds[1]} key={relatedIds[0]} />} */}
     </div>
