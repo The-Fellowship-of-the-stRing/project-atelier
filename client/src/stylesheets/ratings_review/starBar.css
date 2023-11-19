@@ -1,0 +1,35 @@
+.l-star-bar-main {
+  display: flex;
+  height: auto;
+  width: 90%;
+  justify-content: flex-start;
+  align-content: center;
+}
+
+.l-star-bar-text {
+  text-decoration: underline;
+  cursor: pointer;
+  width: 60px;
+}
+
+.l-star-bar-container {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.l-star-bar-total {
+  background-color: #ececec;
+  width: 100%;
+  height: 10px;
+}
+
+.l-star-bar-value {
+  position: absolute;
+  left: 0;
+  background-color: #333333;
+  height: 10px;
+}

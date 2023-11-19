@@ -1,8 +1,8 @@
 .ratings-review-main-container {
   display: flex;
-  height: 400px;
+  height: 80vh;
   width: 100vw;
   justify-content: center;
-  align-items: center;
-  border: 1px solid red;
+  align-items: flex-start;
+  margin-top: 50px;
 }
