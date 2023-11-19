@@ -10,6 +10,8 @@ const ReviewTile = ({review, handleHelpful, handleReport}) => {
   const [markedHelp, setMarkedHelp] = useState(false)
   const date = new Date(review.date)
 
+  console.log(review)
+
   const formatContent = () => {
     if (body.length > 250) {
       let formatBody = review.body.slice(0, 250);
@@ -64,6 +66,15 @@ const ReviewTile = ({review, handleHelpful, handleReport}) => {
         <div className="l-review-tile-response">
           <b>Response: </b>
           <p style={{height: 'fit-content', margin: '0px', marginTop: "10px"}}>{review.response}</p>
+        </div>
+      )}
+      {review.photos.length > 0 && (
+        <div className="l-review-tile-photos">
+          {review.photos.map((img) => {
+            <>
+              <div className="l-review-tile-thumb" style={{url: img.url}}/>
+            </>
+          })}
         </div>
       )}
       <div className="l-review-tile-helpfulness">
