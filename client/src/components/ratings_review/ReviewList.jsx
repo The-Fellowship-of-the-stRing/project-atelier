@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import SortDropDown from './SortDropDown.jsx';
 import ReviewTile from './ReviewTile.jsx'
+import { FaPlus } from "react-icons/fa6";
 
 
 
@@ -16,7 +17,8 @@ const ReviewList = ({
   currentView,
   currentCount,
   handleViewMore,
-  currentFilter}) => {
+  currentFilter,
+  handleModal}) => {
   const [resultsToShow, setResultsToShow] = useState([]);
 
   useEffect(() => {
@@ -43,7 +45,10 @@ const ReviewList = ({
           })}
         </div>
       )}
-      <button type="button" className="l-review-list-more-btn" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length ? true : false}>MORE REVIEWS</button>
+      <div className="l-review-list-btn-placement">
+        <button type="button" className="l-review-list-more-btn" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length ? true : false}>MORE REVIEWS</button>
+        <button type="button" className="l-review-list-more-btn" onClick={() => handleModal()}>ADD A REVIEW <FaPlus className="l-review-list-btn-icon"/></button>
+      </div>
     </div>
   )
 }

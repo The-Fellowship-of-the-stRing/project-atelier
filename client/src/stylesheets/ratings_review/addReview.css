@@ -1,0 +1,21 @@
+.l-add-review-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00000054;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+}
+
+.l-add-review-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 80%;
+  background-color: #ffffff;
+}
