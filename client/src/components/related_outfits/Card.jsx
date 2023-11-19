@@ -1,9 +1,10 @@
 import React,{useState, useEffect} from 'react';
-// import getItemDetails from '../../utils/getItemDetails.js';
 import getCardData from '../../utils/getCardData.js';
+import Stars from './Stars.jsx';
 
 const Card = ( {itemId, className} ) => {
   const [cardData, setCardData] = useState(null);
+
   // console.log(itemId);
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +41,7 @@ const Card = ( {itemId, className} ) => {
       <p className="c-card-name">{cardData.name}</p>
       {priceString}
       <p className="c-card-star">STAR RATING</p>
+      {/* <Stars rating={review.rating} /> */}
     </div>
   ) : (
   <div className="c-card-container">

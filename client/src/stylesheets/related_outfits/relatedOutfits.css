@@ -1,12 +1,23 @@
 .c-related-outfits-main-container {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
   justify-content: center;
   align-items: center;
   border: 1px solid blue;
+  grid-template-areas:
+  "name"
+  "outfits";
 }
 
 .c-related-container {
+  grid-area: name;
+  display: flex;
+  /* flex-direction: row; */
+  align-items: flex-start;
+  grid-template-areas: "card card card";
+}
+
+.c-outfits-container {
+  grid-area: outfits;
   display: flex;
   /* flex-direction: row; */
   align-items: flex-start;
@@ -14,6 +25,7 @@
 }
 
 .c-card-container {
+  grid-area: name;
   display: grid;
   height: 300px;
   width: 200px;
