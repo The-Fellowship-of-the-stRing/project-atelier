@@ -172,10 +172,10 @@ const AddReview = ({handleModal, itemName, totals}) => {
           })
           }
           <label className="l-add-review-section-title">Review Summary (optional)</label>
-          <input type="text" value={summary} placeholder="Example: Best purchase ever!" onChange={(e) => handleSummary(e)} />
+          <input type="text" className="l-add-review-summary" value={summary} placeholder="Example: Best purchase ever!" onChange={(e) => handleSummary(e)} />
 
           <label className="l-add-review-section-title">Review Body</label>
-          <textarea type="text" value={formBody} placeholder="Why did you like the product or not?" onChange={(e) => handleBody(e)} />
+          <textarea type="text" className="l-add-review-body" value={formBody} placeholder="Why did you like the product or not?" onChange={(e) => handleBody(e)} />
           <div className="l-add-review-body-count">{charCount <= 0 ? "Minimum reached" : `Minimum required characters left: ${charCount}`}</div>
 
           <label className="l-add-review-section-title">Upload your photos (optional)</label>
@@ -183,11 +183,11 @@ const AddReview = ({handleModal, itemName, totals}) => {
 
           <label className="l-add-review-section-title">What is your nickname?</label>
           <input type="text" value={nickname} placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} />
-          <label>For privacy reasons, do not use your full name or email address</label>
+          <label className="l-add-review-input-footer">For privacy reasons, do not use your full name or email address</label>
 
           <label className="l-add-review-section-title">Your email</label>
           <input type="email" value={email} placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} />
-          <label>For authentication reasons, you will not be emailed</label>
+          <label className="l-add-review-input-footer">For authentication reasons, you will not be emailed</label>
 
           {showError && (
             <div className="l-add-review-errors">
