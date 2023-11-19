@@ -9,11 +9,16 @@ import '../stylesheets/product_details/productDetails.css';
 const ProductDetails = ({itemId}) => {
   return(
     <div className= "g-product-details-main-container">
-        {/* <StyleList/>
+      <div className = "g-product-details-column1">
         <ImageGallery/>
+      </div>
+      <div className="g-product-details-column2">
         <Reviews/>
+        Information
+        <StyleList/>
         <Cart/>
-        <SocialMedia/> */}
+        <SocialMedia/>
+      </div>
     </div>
   )
 }
