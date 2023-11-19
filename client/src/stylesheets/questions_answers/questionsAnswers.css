@@ -1,19 +1,11 @@
 .k-questions-answers-main-container {
   display: flex;
+  flex-direction: column;
   height: 200px;
   width: 100vw;
   justify-content: center;
   align-items: center;
   border: 1px solid green;
-}
-
-.k-questions-list {
-  display: flex;
-  height: 100px;
-  width: 100vw;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid orange;
 }
 
 .k-questions-answers-search {
@@ -23,4 +15,22 @@
   justify-content: center;
   align-items: center;
   border: 1px solid purple;
+}
+
+.k-more-answered-questions {
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #383838;
+  cursor: pointer;
+  font-weight: bold;
+  color: #383838;
+}
+
+.k-add-a-question {
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #383838;
+  cursor: pointer;
+  font-weight: bold;
+  color: #383838;
 }
