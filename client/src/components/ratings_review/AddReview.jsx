@@ -56,10 +56,12 @@ const AddReview = ({handleModal, itemName, totals}) => {
     }
   }
   const handleBody = (e) => {
+    if (formBody.length <= 1000 || e.target.value.length < formBody.length) {
       const currentLength = e.target.value.length
       const difference = 50 - currentLength
       setCharCount(difference)
       setFormBody(e.target.value)
+    }
   }
   const handleNickname = (e) => {
     setNickname(e.target.value)
@@ -138,7 +140,7 @@ const AddReview = ({handleModal, itemName, totals}) => {
           <input type="text" value={summary} placeholder="Example: Best purchase ever!" onChange={(e) => handleSummary(e)} />
 
           <label className="l-add-review-section-title">Review Body</label>
-          <input type="text" value={formBody} placeholder="Why did you like the product or not?" onChange={(e) => handleBody(e)} />
+          <textarea type="text" value={formBody} placeholder="Why did you like the product or not?" onChange={(e) => handleBody(e)} />
           <div className="l-add-review-body-count">{charCount <= 0 ? "Minimum reached" : `Minimum required characters left: ${charCount}`}</div>
 
           <label className="l-add-review-section-title">Upload your photos (optional)</label>
