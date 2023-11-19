@@ -40,9 +40,9 @@ const AddReview = ({handleModal, itemName, totals}) => {
     setRecommend(e.target.value)
   }
 
-  const onFactorChange = (e, name, text) => {
+  const onFactorChange = (e, factor, text) => {
     const value = e.target.value
-    setFactorRating({...factorRating, [name]: {value: value, text: text}})
+    setFactorRating({...factorRating, [factor]: {value: value, text: text}})
   }
 
   return (
@@ -91,14 +91,15 @@ const AddReview = ({handleModal, itemName, totals}) => {
                 </div>
                 <div className="l-add-review-factor-options">
                   {characteristics[factor].map((option, index) => {
+                    const check = factor + option
                     return (
                       <div key={option + index} className="l-add-review-selections">
                         <input
                         type="radio"
-                        name={option}
+                        name={factor + option}
                         value={index + 1}
                         id="l-add-review-no"
-                        checked={factorRating[factor].text === option}
+                        checked={(factor + factorRating[factor].text)  === check}
                         onChange={(e) => onFactorChange(e, factor, option)}
                         />
                       </div>
