@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { AiOutlineClose } from "react-icons/ai";
 
 import AddFormStars from './AddFormStars.jsx'
@@ -14,6 +14,9 @@ const AddReview = ({handleModal, itemName, totals}) => {
   const [formBody, setFormBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [validEmail, setValidEmail] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [selectOption, setSelectOption] = useState(false);
   const [factorRating, setFactorRating] = useState({
     "Size": {value: 0, text: "none selected"},
     "Width": {value: 0, text: "none selected"},
@@ -45,6 +48,17 @@ const AddReview = ({handleModal, itemName, totals}) => {
     setRecommend(e.target.value)
   }
 
+  const checkIfSelected = () => {
+    for (let i = 0; i < factorOptions.length; i++){
+      if (factorRating[factorOptions[i]].value === 0) {
+        setSelectOption(true)
+        break;
+      } else {
+        setSelectOption(false)
+      }
+    }
+  }
+
   const onFactorChange = (e, factor, text) => {
     const value = e.target.value
     setFactorRating({...factorRating, [factor]: {value: value, text: text}})
@@ -64,11 +78,24 @@ const AddReview = ({handleModal, itemName, totals}) => {
     }
   }
   const handleNickname = (e) => {
-    setNickname(e.target.value)
+    if (nickname.length <= 60 || e.target.value.length < nickname.length) {
+      setNickname(e.target.value)
+    }
   }
+  const validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailRegex.test(email);
+}
   const handleEmail = (e) => {
+    const input = e.target.value;
+    setValidEmail(validateEmail(input))
     setEmail(e.target.value)
   }
+
+  useEffect(() => {
+    checkIfSelected()
+  }, [factorRating])
+
 
   return (
     <div className="l-add-review-overlay">
@@ -148,9 +175,26 @@ const AddReview = ({handleModal, itemName, totals}) => {
 
           <label className="l-add-review-section-title">What is your nickname?</label>
           <input type="text" value={nickname} placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} />
+          <label>For privacy reasons, do not use your full name or email address</label>
 
           <label className="l-add-review-section-title">Your email</label>
           <input type="email" value={email} placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} />
+          <label>For authentication reasons, you will not be emailed</label>
+
+          {!showError && (
+            <div className="l-add-review-errors">
+              You must enter the following:
+              {overall === 0 && (
+                <div>Select an overall rating</div>
+              )}
+              {selectOption && (
+                <div>Please rate the product's characteristics</div>
+              )}
+              {!validEmail && (
+                <div>Please use valid email. Example: email@example.com</div>
+              )}
+            </div>
+          )}
 
           <button type="button">SUBMIT</button>
         </div>

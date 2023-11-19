@@ -20,7 +20,7 @@
   align-items: center;
   min-width: 500px;
   width: 30%;
-  height: 80%;
+  height: 90%;
   background-color: #ffffff;
   box-shadow: 1px 1px 5px #00000065;
   overflow-y: scroll;
@@ -132,4 +132,9 @@ cursor: pointer;
 .l-add-review-factor-options {
   display: flex;
   margin-top: 5px;
+}
+
+.l-add-review-errors {
+  font-size: 14px;
+  color: red;
 }
