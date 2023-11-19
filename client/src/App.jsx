@@ -5,6 +5,8 @@ import Stars from './components/stars/Stars.jsx'
 import QuestionsAnswers from './containers/QuestionsAnswers';
 import RelatedOutfits from './containers/RelatedOutfits';
 
+import './styles.css'
+
 const App = () =>{
   const [currentItemId, setCurrentItemId] = useState(null);
 
@@ -23,15 +25,13 @@ const App = () =>{
 
   return (
       <div>
-          Welcome to React App thats build using Webpack and Babel separately! Great Job team!
           {!currentItemId ? (
-              <p>Loading Item...</p>
+              <span className="main-loader"></span>
           ) : (
             <>
-              <Stars itemId={currentItemId} />
               <RatingsReviews itemId={currentItemId}/>
               <QuestionsAnswers itemId={currentItemId}/>
-              <RelatedOutfits itemId={currentItemId} />
+              {/* <RelatedOutfits itemId={currentItemId} /> */}
             </>
           )}
       </div>
