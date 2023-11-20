@@ -5,7 +5,6 @@ import Stars from './Stars.jsx';
 const Card = ( {itemId, className} ) => {
   const [cardData, setCardData] = useState(null);
 
-  // console.log(itemId);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,8 +30,14 @@ const Card = ( {itemId, className} ) => {
   // let priceString = (cardData && cardData.hasOwnProperty('sale_price')) ? (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>) : (<p className="c-card-price">${cardData.original_price}</p>);
   // console.log(cardData);
 
+  const cardClickHandler = () => {
+    /* GET FROM GORDON */
+    console.log('Will route to product details page id: ', itemId);
+  }
+
+
   return cardData ? (
-    <div className={className}>
+    <div className={className} onClick={() => cardClickHandler()}>
       <img className="c-card-img" src={cardData.hasOwnProperty("photos") && cardData.photos[0].thumbnail_url !== null? cardData.photos[0].thumbnail_url : "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg"} />
       <p className="c-card-cat">{cardData.category}</p>
       <p className="c-card-name">{cardData.name}</p>
