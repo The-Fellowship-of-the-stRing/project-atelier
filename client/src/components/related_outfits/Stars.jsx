@@ -3,7 +3,8 @@ import getItemDetails from '../../utils/getItemDetails.js'
 
 import "../../stylesheets/stars/stars.css"
 
-const Stars = ({rating}) => {
+// const Stars = ({rating}) => {
+  const Stars = ({}) => {
 
   const starLength = Array.from(Array(5))
 

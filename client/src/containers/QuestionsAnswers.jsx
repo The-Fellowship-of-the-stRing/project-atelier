@@ -5,10 +5,29 @@ import QuestionsList from '../components/questions_answers/QuestionsList.jsx';
 import axios from 'axios';
 
 const QuestionsAnswers = ( {itemId} ) => {
-  //holds state for all questions/answer data. use useEffect for API call to get all question/answer data to hand down to Search and QuestionsList
+
   const [questionData, setQuestionData] = useState([]);
   const [resultsToShow, setResultsToShow] = useState([])
   const [currentCount, setCurrentCount] = useState(2);
+
+  const handleHelpful = (questionId) => {
+    console.log('questionId:::: ', questionId)
+    const headers = {
+      headers: {
+        "Authorization" : process.env.GIT_TOKEN
+      }
+    };
+    const url = process.env.GIT_API_URL;
+    axios.put(`${url}/qa/questions/${questionId}/helpful`, null, headers)
+    .then(() => {
+      axios.get(`${url}/qa/questions/?product_id=${itemId}`, headers)
+      .then((result) => {
+        setResultsToShow(result.data.results)
+      })
+      .catch((err) => console.error(err))
+    })
+    .catch((err) => console.error(err))
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +63,7 @@ const QuestionsAnswers = ( {itemId} ) => {
   return resultsToShow.length > 0 ? (
     <div className="k-questions-answers-main-container">
       <Search />
-      <QuestionsList resultsToShow={resultsToShow} currentCount={currentCount}/>
+      <QuestionsList handleHelpful={handleHelpful} resultsToShow={resultsToShow} currentCount={currentCount}/>
       <button className="k-more-answered-questions" onClick={() => handleClick()}>
         More Answered Questions
       </button>
