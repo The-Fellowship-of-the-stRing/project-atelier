@@ -5,7 +5,7 @@ import AddFormStars from './AddFormStars.jsx'
 
 import "../../stylesheets/ratings_review/addReview.css"
 
-const AddReview = ({handleModal, itemName, totals}) => {
+const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
   const [overall, setOverall] = useState(0);
   const [ratingDef, setRatingDef] = useState("");
   const [recommend, setRecommend] = useState("Yes");
@@ -97,7 +97,26 @@ const AddReview = ({handleModal, itemName, totals}) => {
       setShowError(true)
     } else {
       setShowError(false)
-    }
+      const obj = {}
+      for (let i = 0; i < factorOptions.length; i++) {
+        const currentFactor = factorOptions[i]
+        const factorId = totals.characteristics[currentFactor].id
+        obj[factorId] = Number.parseInt(factorRating[currentFactor].value)
+      }
+      const recommended = recommend === "Yes" ? true : false;
+      const data = {
+        "product_id": Number.parseInt(totals.product_id),
+        "rating": overall,
+        "summary": summary,
+        "body": formBody,
+        "recommend": recommended,
+        "name": nickname,
+        "email": email,
+        "photos": [],
+        "characteristics": obj
+      }
+      updateItemReviews(data)
+   }
   }
 
   useEffect(() => {
@@ -193,23 +212,22 @@ const AddReview = ({handleModal, itemName, totals}) => {
             <div className="l-add-review-errors">
               You must enter the following:
               <ul>
-
-              {overall === 0 && (
-                <li>Select an overall rating</li>
+                {overall === 0 && (
+                  <li>Select an overall rating</li>
                 )}
-              {selectOption && (
-                <li>Please rate the product's characteristics</li>
+                {selectOption && (
+                  <li>Please rate the product's characteristics</li>
                 )}
-              {formBody.length < 50 && (
-                <li>Review body must be at least 50 characters</li>
-              )}
-              {nickname.length < 1 && (
-                <li>Please add your nickname. Example: jackson11!</li>
-              )}
-              {!validEmail && (
-                <li>Please use valid email. Example: jackson11@email.com</li>
+                {formBody.length <= 50 && (
+                  <li>Review body must be longer than 50 characters</li>
                 )}
-                </ul>
+                {nickname.length < 1 && (
+                  <li>Please add your nickname. Example: jackson11!</li>
+                )}
+                {!validEmail && (
+                  <li>Please use valid email. Example: jackson11@email.com</li>
+                )}
+              </ul>
             </div>
           )}
 
