@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ImageUploading from 'react-images-uploading';
 import { AiOutlineClose } from "react-icons/ai";
 
 import AddFormStars from './AddFormStars.jsx'
@@ -6,6 +7,7 @@ import AddFormStars from './AddFormStars.jsx'
 import "../../stylesheets/ratings_review/addReview.css"
 
 const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
+  const [images, setImages] = useState([]);
   const [overall, setOverall] = useState(0);
   const [ratingDef, setRatingDef] = useState("");
   const [recommend, setRecommend] = useState("Yes");
@@ -37,6 +39,10 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
     "Quality": ["Poor", "Below average", "What I expected", "Pretty great", "Perfect"],
     "Length": ["Runs Short", "Runs slightly short", "Perfect", "Runs slightly long", "Runs long"],
     "Fit": ["Runs tight", "Runs slightly tight", "Perfect", "Runs slightly long", "Runs long"]
+  }
+
+  const handleAddImage = (imageList) => {
+    setImages(imageList)
   }
 
   const updateRating = (value) => {
@@ -116,6 +122,7 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
         "characteristics": obj
       }
       updateItemReviews(data)
+      handleModal(false)
    }
   }
 
@@ -198,7 +205,6 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
           <div className="l-add-review-body-count">{charCount <= 0 ? "Minimum reached" : `Minimum required characters left: ${charCount}`}</div>
 
           <label className="l-add-review-section-title">Upload your photos (optional)</label>
-          <div className="l-add-review-upload-photo"/>
 
           <label className="l-add-review-section-title">What is your nickname?</label>
           <input type="text" value={nickname} placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} />
