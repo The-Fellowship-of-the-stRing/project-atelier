@@ -2,13 +2,7 @@ import axios from 'axios';
 
 const getItemDetails = async (itemId) => {
   try {
-    const headers = {
-      headers: {
-        "Authorization" : process.env.GIT_TOKEN
-      }
-    };
-    const url = process.env.GIT_API_URL;
-    const response = await axios.get(`${url}/reviews/?product_id=${itemId}`, headers)
+    const response = await axios.get(`/reviews/?product_id=${itemId}`)
     let result = 0;
     for (let i = 0; i < response.data.results.length; i++) {
       const currentReview = response.data.results[i]
