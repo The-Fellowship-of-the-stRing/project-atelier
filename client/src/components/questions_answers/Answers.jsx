@@ -5,7 +5,6 @@ import '../../stylesheets/questions_answers/answers.css'
 const Answers = ( { questionId } ) => {
 
   const [answerData, setAnswerData] = useState([]);
-  // console.log('answereData::: ', answerData)
   const [marked, setMarked] = useState({});
 
   const checkMarked = (id) => {
@@ -18,14 +17,7 @@ const Answers = ( { questionId } ) => {
 
   const fetchData = async () => {
     try {
-      const headers = {
-        headers: {
-          "Authorization" : process.env.GIT_TOKEN
-        }
-      };
-      const url = process.env.GIT_API_URL;
-      const response = await axios.get(`${url}/qa/questions/${questionId}/answers?question_id=${questionId}`, headers);
-
+      const response = await axios.get(`/qa/questions/${questionId}/answers?question_id=${questionId}`);
       const sortedResults = response.data.results.sort((a, b) => b.helpfulness - a.helpfulness)
       setAnswerData(sortedResults)
       return response.data
@@ -35,13 +27,8 @@ const Answers = ( { questionId } ) => {
   };
 
   const handleHelpful = (answerId) => {
-    const headers = {
-      headers: {
-        "Authorization" : process.env.GIT_TOKEN
-      }
-    };
-    const url = process.env.GIT_API_URL;
-    axios.put(`${url}/qa/answers/${answerId}/helpful`, null, headers)
+
+    axios.put(`/qa/answers/${answerId}/helpful`)
     .then((result) => {
       fetchData()
     })
