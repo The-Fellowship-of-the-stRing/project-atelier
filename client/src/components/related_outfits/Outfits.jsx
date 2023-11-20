@@ -4,33 +4,48 @@ import getRelatedItems from '../../utils/getRelatedItems.js';
 
 const Outfits = ( {itemId} ) => {
   const [outfitIds, setOutfitIds] = useState([]);
+  const [isAdded, setIsAdded] = useState(false);
+  // useEffect(() => {
+  // }, [outfitIds]);
 
-  useEffect(() => {
-    const fetchOutfitIds = async () => {
-      try {
-        const fetchedIds = await getRelatedItems(itemId);
-        setOutfitIds(fetchedIds);
-      } catch (err) {
-        console.error('Error getting item details: ', err);
-      }
-    }
-    fetchOutfitIds();
-  }, []);
+  const nextClickHandler = () => {
+    console.log('Next clicked');
 
-  return outfitIds ? (
+  };
+
+  const actionClickHander = () => {
+    /* ADD DATA TO CLIENT AND ENSURE DATA PERSISTS */
+    console.log(`Add id: ${itemId} to outfits`)
+    let updatedOutfitIds =  [itemId, ...outfitIds];
+    setOutfitIds(updatedOutfitIds);
+    setIsAdded(true);
+  }
+
+  console.log(outfitIds);
+
+  return !isAdded ? (
     <div className="c-outfits-container">
       <h3>My Outfit</h3>
-      {outfitIds.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} />))}
+      <div className="c-card-container" >
+      <button className="c-card-action-add" onClick={() => actionClickHander()}>+</button>
+    </div>
+      {/* <AddToOutfit itemId={itemId} actionClickHander={actionClickHander}/> */}
+      {outfitIds.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} action="outfits"/>))}
       {/* {<Card itemId={relatedIds[1]} key={relatedIds[0]} />} */}
+      <button onClick={nextClickHandler}>></button>
     </div>
   ) : (
-    <div>No Outfits Items</div>
+    <div className="c-outfits-container">
+    <h3>My Outfit</h3>
+    {outfitIds.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} action="outfits"/>))}
+    {/* {<Card itemId={relatedIds[1]} key={relatedIds[0]} />} */}
+    <button onClick={nextClickHandler}>></button>
+  </div>
   )
 
-  return (
-    <div className="c-outfits-container">
-    </div>
-  )
 }
+/* How to persist data on client side */
+// local storage keyword to
+// fs system - create new text files which stores in system files
 
 export default Outfits
