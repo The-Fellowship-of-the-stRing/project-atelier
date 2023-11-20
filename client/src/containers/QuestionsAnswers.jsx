@@ -11,7 +11,7 @@ const QuestionsAnswers = ( {itemId} ) => {
   const [currentCount, setCurrentCount] = useState(2);
 
   const handleHelpful = (questionId) => {
-    console.log('questionId:::: ', questionId)
+    // console.log('questionId:::: ', questionId)
     const headers = {
       headers: {
         "Authorization" : process.env.GIT_TOKEN

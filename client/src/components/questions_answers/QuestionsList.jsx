@@ -10,7 +10,7 @@ const QuestionsList = ( { resultsToShow, currentCount, handleHelpful } ) => {
 
   const checkMarked = (id) => {
     if (!marked[id]) {
-      setMarked({...marked, id: true});
+      setMarked({...marked, [id]: true});
       handleHelpful(id)
     }
   }
