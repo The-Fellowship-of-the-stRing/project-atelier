@@ -2,22 +2,16 @@ import axios from 'axios';
 
 const getCardData = async (itemId) => {
   try {
-    const headers = {
-      headers: {
-        "Authorization" : process.env.GIT_TOKEN
-      }
-    };
-    const url = process.env.GIT_API_URL;
     let response;
-
-    const idResponse = await axios.get(`${url}/products/${itemId}`, headers);
+    const idResponse = await axios.get(`/products/${itemId}`);
     response = {
         name: idResponse.data.name,
         category:idResponse.data.category,
         features:idResponse.data.features
     };
 
-    const stylesResponse = await axios.get(`${url}/products/${itemId}/styles`, headers);
+    const stylesResponse = await axios.get(`/products/${itemId}/styles`);
+
     /* FIND DEFAULT STYLE */
     for (let style of stylesResponse.data.results) {
       if(style["default?"]) {
