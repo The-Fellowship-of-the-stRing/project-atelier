@@ -9,7 +9,7 @@
     "server": "nodemon server.js --watch",
     "test": "jest --env=jsdom --watch",
     "coverage": "jest --env=jsdom --coverage",
-    "dev-server": "npx webpack serve --hot --open"
+    "dev-server": "npm run server & npx webpack serve --hot --open"
   },
   "repository": {
     "type": "git",
