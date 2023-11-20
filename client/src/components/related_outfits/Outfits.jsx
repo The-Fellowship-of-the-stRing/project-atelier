@@ -44,5 +44,8 @@ const Outfits = ( {itemId} ) => {
   )
 
 }
+/* How to persist data on client side */
+// local storage keyword to
+// fs system - create new text files which stores in system files
 
 export default Outfits
