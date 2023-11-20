@@ -16,12 +16,17 @@ const Outfits = ( {itemId} ) => {
     }
     fetchOutfitIds();
   }, []);
+  const nextClickHandler = () => {
+    console.log('clicked');
+  };
 
   return outfitIds ? (
     <div className="c-outfits-container">
       <h3>My Outfit</h3>
       {outfitIds.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} />))}
       {/* {<Card itemId={relatedIds[1]} key={relatedIds[0]} />} */}
+      <button onClick={nextClickHandler}>></button>
+
     </div>
   ) : (
     <div>No Outfits Items</div>

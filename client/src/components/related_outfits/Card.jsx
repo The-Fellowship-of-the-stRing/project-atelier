@@ -10,11 +10,8 @@ const Card = ( {itemId, className} ) => {
     const fetchData = async () => {
       try {
         const data = await getCardData(itemId);
-
         /* TESTING */
-        data.sale_price = 10;
-        /* TESTING */
-
+        // data.sale_price = 10;
         return setCardData(data);
       } catch (err) {
         console.error('Error getting item details: ', err);

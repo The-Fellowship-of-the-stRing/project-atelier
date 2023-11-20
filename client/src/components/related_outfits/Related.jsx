@@ -16,11 +16,15 @@ const Related = ( {itemId} ) => {
     }
     fetchRelatedIds();
   }, []);
+  const nextClickHandler = () => {
+    console.log('clicked');
+  };
 
   return relatedIds ? (
     <div className="c-related-container">
       <h3>Related Products</h3>
       {relatedIds.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} />))}
+      <button onClick={nextClickHandler}>></button>
       {/* {<Card itemId={relatedIds[1]} key={relatedIds[0]} />} */}
     </div>
   ) : (
