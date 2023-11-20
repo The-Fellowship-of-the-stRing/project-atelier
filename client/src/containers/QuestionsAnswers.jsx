@@ -10,15 +10,6 @@ const QuestionsAnswers = ( {itemId} ) => {
   const [resultsToShow, setResultsToShow] = useState([])
   const [currentCount, setCurrentCount] = useState(2);
 
-  // const ifClickedYes = (questionId, updatedResults) => {
-  //   for (let i = 0; i < updatedResults.length; i++) {
-  //     if (updatedResults[i].question_id === questionId) {
-  //       updatedResults[i].hasClickedYes = true;
-  //     }
-  //   }
-  //   return updatedResults;
-  // }
-
   const handleHelpful = (questionId) => {
     console.log('questionId:::: ', questionId)
     const headers = {
