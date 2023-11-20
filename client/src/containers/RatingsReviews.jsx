@@ -8,6 +8,7 @@ import getReviews from '../utils/getReviews.js'
 import markHelpful from '../utils/markHelpful.js'
 import reportReview from '../utils/reportReview.js'
 import getReviewMeta from '../utils/getReviewMeta.js'
+import addReview from '../utils/addReview.js'
 
 import '../stylesheets/ratings_review/ratingsReview.css'
 
@@ -75,6 +76,16 @@ const RatingsReviews = ({itemId, itemName}) => {
     setShowModal(!showModal)
   }
 
+  const updateItemReviews = async (data) => {
+    try {
+      await addReview(data);
+      const response = await getReviews(itemId, sort, currentCount)
+      setResults(response.results);
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -102,7 +113,7 @@ const RatingsReviews = ({itemId, itemName}) => {
   return (
     <div className="ratings-review-main-container">
       {showModal && (
-        <AddReview handleModal={handleModal} itemName={itemName} totals={totals}/>
+        <AddReview handleModal={handleModal} itemName={itemName} totals={totals} updateItemReviews={updateItemReviews}/>
       )}
       <RatingBreakdown itemId={itemId} results={results} totals={totals} updateFilter={updateFilter} currentFilter={currentFilter}/>
       <ReviewList

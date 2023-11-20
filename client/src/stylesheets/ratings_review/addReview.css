@@ -20,7 +20,7 @@
   align-items: center;
   min-width: 500px;
   width: 30%;
-  height: 80%;
+  height: 95%;
   background-color: #ffffff;
   box-shadow: 1px 1px 5px #00000065;
   overflow-y: scroll;
@@ -55,10 +55,11 @@
 .l-add-review-form {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 300px;
+  height: 90%;
+  width: 90%;
   justify-content: flex-start;
   padding-top: 30px;
+  padding-bottom: 30px
 }
 
 .l-add-review-stars {
@@ -75,11 +76,12 @@
   align-items: center;
   margin-bottom: 20px;
   margin-top: 20px;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 #l-add-review-yes, #l-add-review-no {
 cursor: pointer;
+margin-left: 20px;
 }
 
 .l-add-review-factor-options {
@@ -87,8 +89,6 @@ cursor: pointer;
   width: 100%;
   font-size: 12px;
 }
-
-
 
 .l-add-review-single-factor {
   display: flex;
@@ -117,6 +117,22 @@ cursor: pointer;
   flex-direction: column;
 }
 
+.l-add-review-body {
+  min-height: 50px;
+  max-width: 98.5%;
+  min-width: 98.5%;
+}
+
+.l-add-review-body-count {
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.l-add-review-input-footer {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
 .l-add-review-factor-category {
   font-size: 16px;
   font-weight: bold;
@@ -131,4 +147,32 @@ cursor: pointer;
 .l-add-review-factor-options {
   display: flex;
   margin-top: 5px;
+}
+
+.l-add-review-errors {
+  font-size: 14px;
+  color: red;
+  margin-top: 10px
+}
+
+.l-add-review-summary {
+  margin-bottom: 10px;
+}
+
+.l-add-review-btn {
+  display: flex;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #383838;
+  cursor: pointer;
+  font-weight: bold;
+  color: #383838;
+  align-items: center;
+  height: auto;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.l-add-review-btn:hover {
+  background-color: #fafafa;
 }
