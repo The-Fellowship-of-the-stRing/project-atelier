@@ -63,7 +63,7 @@ const Card = ( {itemId, className, action} ) => {
       <p className="c-card-name" onClick={() => cardClickHandler()}>{cardData.name}</p>
       {priceString}
       <p className="c-card-star">STAR RATING</p>
-      {/* <Stars rating={review.rating} /> */}
+      <Stars itemId={itemId} />
     </div>
   ) : (
   <div className="c-card-container">
