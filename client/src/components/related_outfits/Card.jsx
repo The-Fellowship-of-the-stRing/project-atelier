@@ -36,14 +36,18 @@ const Card = ( {itemId, className, action} ) => {
     console.log('Will route to product details page id: ', itemId);
   }
 
-  const actionClickHander = () => {
-    console.log('ACTION BUTTON CLICKED');
+  const relatedActionClickHander = () => {
+    console.log('RELATED -> COMPARE MODULE');
   }
 
+  const outfitsActionClickHander = () => {
+    console.log('TO REMOVE FROM OUTFITS');
+  }
+
+
   let actionButtons = {
-    related: (<p className="c-card-action-related" onClick={() => actionClickHander()}>⭐</p>),
-    outfits: (<p className="c-card-action-outfits" onClick={() => actionClickHander()}>☒</p>),
-    add: (<p className="c-card-action-add" onClick={() => actionClickHander()}>+</p>)
+    related: (<p className="c-card-action-related" onClick={() => relatedActionClickHander()}>⭐</p>),
+    outfits: (<p className="c-card-action-outfits" onClick={() => outfitsActionClickHander()}>☒</p>)
   }
 
 

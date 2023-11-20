@@ -27,7 +27,7 @@
 .c-card-container {
   grid-area: name;
   display: grid;
-  height: 300px;
+  height: 350px;
   width: 200px;
   border: 1px solid black;
   justify-content: left;
