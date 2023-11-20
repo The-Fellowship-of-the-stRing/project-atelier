@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
-import getCardData from '../../utils/getCardData.js';
+import getProductDataById from '../../utils/getProductDataById.js';
+import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
 
 const Card = ( {itemId, className, action} ) => {
@@ -8,17 +9,30 @@ const Card = ( {itemId, className, action} ) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getCardData(itemId);
+        const productData = await getProductDataById(itemId);
+        const styleData = await getStyleDataById(itemId);
+        let response = {
+          name: productData.name,
+          category: productData.category,
+          features: productData.features
+        };
+        /* FIND DEFAULT STYLE */
+        for (let style of styleData) {
+          if(style["default?"]) {
+            response.photos = style.photos;
+            response.original_price = style.original_price;
+            response.sale_price = style.sale_price;
+          }
+        }
         /* TESTING */
-        data.sale_price = 10;
-        return setCardData(data);
+        response.sale_price = 10;
+        return setCardData(response);
       } catch (err) {
         console.error('Error getting item details: ', err);
       }
     }
     fetchData();
   }, []);
-
 
   let priceString;
   if(cardData && cardData.hasOwnProperty('sale_price')) {
@@ -63,7 +77,7 @@ const Card = ( {itemId, className, action} ) => {
       <p className="c-card-name" onClick={() => cardClickHandler()}>{cardData.name}</p>
       {priceString}
       <p className="c-card-star">STAR RATING</p>
-      {/* <Stars rating={review.rating} /> */}
+      <Stars itemId={itemId} />
     </div>
   ) : (
   <div className="c-card-container">
