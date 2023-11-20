@@ -18,9 +18,9 @@ const QuestionsAnswers = ( {itemId} ) => {
       }
     };
     const url = process.env.GIT_API_URL;
-    axios.put(`${url}/qa/questions/${questionId}/helpful`, null, headers)
+    axios.put(`/qa/questions/${questionId}/helpful`)
     .then(() => {
-      axios.get(`${url}/qa/questions/?product_id=${itemId}`, headers)
+      axios.get(`/qa/questions/?product_id=${itemId}`)
       .then((result) => {
         setResultsToShow(result.data.results)
       })
@@ -38,7 +38,7 @@ const QuestionsAnswers = ( {itemId} ) => {
           }
         };
         const url = process.env.GIT_API_URL;
-        const response = await axios.get(`${url}/qa/questions/?product_id=${itemId}`, headers)
+        const response = await axios.get(`/qa/questions/?product_id=${itemId}`)
         const notReported = response.data.results.filter((value) => value.reported === false)
         const sortedResults = notReported.sort((a, b) => b.question_helpfulness - a.question_helpfulness)
         setQuestionData(sortedResults)
