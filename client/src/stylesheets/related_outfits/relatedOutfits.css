@@ -41,6 +41,7 @@
   "star";
 }
 .c-card-action-related, .c-card-action-outfits, .c-card-action-add  {
+  justify-self: end;
   grid-area: action;
   height: 25px;
   width: auto;
@@ -75,4 +76,9 @@
   height: 25px;
   width: auto;
   margin: 0px;
+}
+
+.c-card-action-add {
+  align-self: center;
+  justify-self: center;
 }

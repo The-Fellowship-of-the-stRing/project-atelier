@@ -43,9 +43,8 @@ const Card = ( {itemId, className, action} ) => {
   let actionButtons = {
     related: (<p className="c-card-action-related" onClick={() => actionClickHander()}>⭐</p>),
     outfits: (<p className="c-card-action-outfits" onClick={() => actionClickHander()}>☒</p>),
-    add: (<p className="c-card-action-add" onClick={() => actionClickHander()}>⭐</p>)
+    add: (<p className="c-card-action-add" onClick={() => actionClickHander()}>+</p>)
   }
-
 
 
   return cardData ? (

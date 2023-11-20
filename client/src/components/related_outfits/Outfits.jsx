@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import Card from './Card.jsx';
 import getRelatedItems from '../../utils/getRelatedItems.js';
+import AddToOutfit from './AddToOutfit.jsx';
 
 const Outfits = ( {itemId} ) => {
   const [outfitIds, setOutfitIds] = useState([]);
@@ -23,6 +24,7 @@ const Outfits = ( {itemId} ) => {
   return outfitIds ? (
     <div className="c-outfits-container">
       <h3>My Outfit</h3>
+      <AddToOutfit itemId={itemId}/>
       {outfitIds.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} action="outfits"/>))}
       {/* {<Card itemId={relatedIds[1]} key={relatedIds[0]} />} */}
       <button onClick={nextClickHandler}>></button>
