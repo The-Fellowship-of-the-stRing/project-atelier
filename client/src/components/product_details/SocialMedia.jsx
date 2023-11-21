@@ -1,6 +1,6 @@
 const SocialMedia = () => {
   return(
-    <div class="g-socials">
+    <div className="g-socials">
       SocialMedia
     </div>
   )
