@@ -2,7 +2,7 @@ import React, {useState, useEffect}  from 'react';
 import Card from './Card.jsx';
 import getRelatedItems from '../../utils/getRelatedItems.js';
 
-const Related = ( {itemId} ) => {
+const Related = ( {itemId, fetchData} ) => {
   const [relatedIds, setRelatedIds] = useState(null);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Related = ( {itemId} ) => {
 
   return relatedIds ? (
     <div className="c-related-container">
-      {relatedIds.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} action="related"/>))}
+      {relatedIds.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} action="related" fetchData={fetchData}/>))}
       <button onClick={nextClickHandler}>></button>
       {/* {<Card itemId={relatedIds[1]} key={relatedIds[0]} />} */}
     </div>
