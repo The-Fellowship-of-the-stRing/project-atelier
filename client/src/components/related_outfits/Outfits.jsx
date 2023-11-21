@@ -8,26 +8,38 @@ const Outfits = ( {itemId} ) => {
   // localStorage.clear();
 
   let parsedData = JSON.parse(localStorage.getItem(document.cookie));
-  console.log("1. ", outfitsByUser);
   console.log("State ", outfitsByUser, isAdded);
 
   useEffect(() => {
     parsedData ? setOutfitsByUser(parsedData) : (localStorage.setItem(document.cookie, '[]') && setOutfitsByUser([]));
-    parsedData && parsedData.includes(itemId) ? setIsAdded(parsedData.includes(itemId)) : setIsAdded(false) ;
+    /* TESTING */
+    // setOutfitsByUser([40345, 40346, 40351, 40350]);
+    parsedData && parsedData.includes(itemId) ? setIsAdded(parsedData.includes(itemId)) : setIsAdded(false);
   }, []);
 
 
   const addProduct = () => {
     let parsedData = JSON.parse(localStorage.getItem(document.cookie));
+    parsedData ? parsedData.push(itemId) : [];
     parsedData.push(itemId);
     localStorage.setItem(document.cookie, JSON.stringify(parsedData));
     setOutfitsByUser(parsedData);
     setIsAdded(true);
   }
 
-  const deleteProduct = () => {
-      setIsAdded();
+  const deleteProduct = (product_id) => {
+    let parsedData = JSON.parse(localStorage.getItem(document.cookie));
+    let updatedState = [];
+    for (let id of parsedData) {
+      console.log(id);
+      if(id !== product_id) {
+        updatedState.push(id);
+      }
     }
+    localStorage.removeItem(document.cookie);
+    setIsAdded(updatedState.includes(itemId));
+    updatedState[0] ? setOutfitsByUser(updatedState) : setOutfitsByUser([]);
+  }
 
   const nextClickHandler = () => {
     console.log('Next clicked');
@@ -39,13 +51,13 @@ const Outfits = ( {itemId} ) => {
       <div className="c-card-container" >
       <button className="c-card-action-add" onClick={() => addProduct()}>+</button>
       </div>
-      {outfitsByUser ? outfitsByUser.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} action="outfits"/>)) : null}
+      {outfitsByUser ? outfitsByUser.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} deleteProduct={deleteProduct} action="outfits"/>)) : null}
       <button onClick={nextClickHandler}>></button>
     </div>
   ) : (
     <div className="c-outfits-container">
       <h3>My Outfit</h3>
-      {outfitsByUser ? outfitsByUser.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} action="outfits"/>)) : null}
+      {outfitsByUser ? outfitsByUser.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} deleteProduct={deleteProduct} action="outfits"/>)) : null}
       <button onClick={nextClickHandler}>></button>
     </div>
   )

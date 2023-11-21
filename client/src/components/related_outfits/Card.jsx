@@ -3,7 +3,7 @@ import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
 
-const Card = ( {itemId, className, action, addProduct} ) => {
+const Card = ( {itemId, className, action, addProduct, deleteProduct} ) => {
   const [cardData, setCardData] = useState(null);
 
   useEffect(() => {
@@ -57,13 +57,9 @@ const Card = ( {itemId, className, action, addProduct} ) => {
     console.log('RELATED -> COMPARE MODULE');
   }
 
-  const outfitsActionClickHander = () => {
-    console.log('TO REMOVE FROM OUTFITS');
-  }
-
   let actionButtons = {
     related: (<p className="c-card-action-related" onClick={() => relatedActionClickHander()}>⭐</p>),
-    outfits: (<p className="c-card-action-outfits" onClick={() => outfitsActionClickHander()}>☒</p>)
+    outfits: (<p className="c-card-action-outfits" onClick={() => deleteProduct(itemId)}>☒</p>)
   }
 
   return cardData ? (
@@ -77,7 +73,6 @@ const Card = ( {itemId, className, action, addProduct} ) => {
       <p className="c-card-cat">{cardData.category}</p>
       <p className="c-card-name" onClick={() => cardClickHandler()}>{cardData.name}</p>
       {priceString}
-      <p className="c-card-star">STAR RATING</p>
       <Stars itemId={itemId} />
     </div>
   ) : (
