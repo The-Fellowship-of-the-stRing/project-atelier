@@ -3,7 +3,7 @@ import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
 
-const Card = ( {itemId, className, action} ) => {
+const Card = ( {itemId, className, action, addProduct} ) => {
   const [cardData, setCardData] = useState(null);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Card = ( {itemId, className, action} ) => {
           }
         }
         /* TESTING */
-        response.sale_price = 10;
+        // response.sale_price = 10;
         return setCardData(response);
       } catch (err) {
         console.error('Error getting item details: ', err);
@@ -35,10 +35,13 @@ const Card = ( {itemId, className, action} ) => {
   }, []);
 
   let priceString;
-  if(cardData && cardData.hasOwnProperty('sale_price')) {
+  // if(cardData && cardData.hasOwnProperty('sale_price')) {
+    if(cardData && cardData.sale_price && cardData.original_price) {
     priceString = (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>);
-  } else if ( cardData && cardData.hasOwnProperty('original_price')) {
-    priceString = (<p className="c-card-price">${cardData.original_price}</p>);
+  } else if (cardData && cardData.original_price) {
+    priceString = <p className="c-card-price">${cardData.original_price} </p>;
+  } else {
+    priceString = <p className="c-card-price">NO PRICE :(</p>
   }
   /* REFACTOR ABOVE LATER: */
   // let priceString = (cardData && cardData.hasOwnProperty('sale_price')) ? (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>) : (<p className="c-card-price">${cardData.original_price}</p>);
@@ -58,12 +61,10 @@ const Card = ( {itemId, className, action} ) => {
     console.log('TO REMOVE FROM OUTFITS');
   }
 
-
   let actionButtons = {
     related: (<p className="c-card-action-related" onClick={() => relatedActionClickHander()}>⭐</p>),
     outfits: (<p className="c-card-action-outfits" onClick={() => outfitsActionClickHander()}>☒</p>)
   }
-
 
   return cardData ? (
     <div className={className} >
