@@ -15,7 +15,7 @@ const Related = ( {itemId, fetchData} ) => {
       }
     }
     fetchRelatedIds();
-  }, []);
+  }, [itemId]);
   const nextClickHandler = () => {
     console.log('Next button clicked');
   };
