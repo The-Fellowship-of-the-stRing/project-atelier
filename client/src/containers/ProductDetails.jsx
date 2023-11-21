@@ -19,10 +19,7 @@ const ProductDetails = ({itemId}) => {
       try {
         const productData = await getProductDataById(itemId);
         const styleData = await getStyleDataById(itemId);
-<<<<<<< HEAD
         //Leaving console.logs in comments for when I need to reference it
-=======
->>>>>>> main
         // console.log(productData);
         // console.log(styleData);
         const values = {};
