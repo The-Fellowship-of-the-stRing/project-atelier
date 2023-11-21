@@ -13,11 +13,11 @@ const ProductDetails = ({itemId}) => {
         <ImageGallery/>
       </div>
       <div className="g-product-details-column2">
-        <Reviews/>
+        <Reviews itemId = {itemId}/>
         Information
-        <StyleList/>
-        <Cart/>
-        <SocialMedia/>
+        <StyleList itemId = {itemId}/>
+        <Cart itemId = {itemId}/>
+        <SocialMedia itemId = {itemId}/>
       </div>
     </div>
   )
