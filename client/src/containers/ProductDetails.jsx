@@ -9,7 +9,7 @@ import StyleList from '../components/product_details/StyleList.jsx';
 import ImageGallery from '../components/product_details/ImageGallery.jsx';
 import '../stylesheets/product_details/productDetails.css';
 const ProductDetails = ({itemId}) => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
   const [styles, setStyles] = useState([]);
   const [price, setPrice] = useState(null);
   const [isSale, setIsSale] = useState(false);
@@ -26,6 +26,7 @@ const ProductDetails = ({itemId}) => {
         values.slogan = productData.slogan;
         values.description = productData.description;
         values.category= productData.category;
+        console.log("Style name:", styleData[0].name);
         setData(values);
         setStyles(styleData);
       } catch (err) {
@@ -34,8 +35,10 @@ const ProductDetails = ({itemId}) => {
     }
     fetchData();
   }, [itemId]);
+  const handlePrice = () => {
 
-  return(
+  }
+  return data&&styles? (
     <div className= "g-product-details-main-container">
       <div className = "g-product-details-column1">
         <ImageGallery/>
@@ -47,11 +50,16 @@ const ProductDetails = ({itemId}) => {
           <div>{data.name}</div>
           <div>{data.slogan}</div>
         </div>
-        <StyleList itemId = {itemId}/>
+        <StyleList itemId = {itemId} styles= {styles}/>
         <Cart itemId = {itemId}/>
         <SocialMedia itemId = {itemId}/>
         {data.description}
       </div>
+    </div>
+  )
+  : (
+    <div>
+      Loading...
     </div>
   )
 }
