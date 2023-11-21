@@ -5,8 +5,10 @@ import getRelatedItems from '../../utils/getRelatedItems.js';
 const Outfits = ( {itemId} ) => {
   const [outfitIds, setOutfitIds] = useState([]);
   const [isAdded, setIsAdded] = useState(false);
-  // useEffect(() => {
-  // }, [outfitIds]);
+  const [userId, setUserId] = useState(null);
+  useEffect(() => {
+    setUserId(document.cookie);
+  }, [userId, outfitIds]);
 
   const nextClickHandler = () => {
     console.log('Next clicked');
@@ -15,13 +17,12 @@ const Outfits = ( {itemId} ) => {
 
   const actionClickHander = () => {
     /* ADD DATA TO CLIENT AND ENSURE DATA PERSISTS */
-    console.log(`Add id: ${itemId} to outfits`)
+    console.log(`Add product id: ${itemId} to outfits with user id: ${userId}`)
     let updatedOutfitIds =  [itemId, ...outfitIds];
     setOutfitIds(updatedOutfitIds);
     setIsAdded(true);
-  }
 
-  console.log(outfitIds);
+  }
 
   return !isAdded ? (
     <div className="c-outfits-container">
