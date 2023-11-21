@@ -11,6 +11,7 @@ import '../stylesheets/product_details/productDetails.css';
 const ProductDetails = ({itemId}) => {
   const [data, setData] = useState(null);
   const [styles, setStyles] = useState([]);
+  const [style, setStyle] = useState(styles[0]);
   const [price, setPrice] = useState(null);
   const [isSale, setIsSale] = useState(false);
   const [sku, setSku] = useState(null);
@@ -38,6 +39,10 @@ const ProductDetails = ({itemId}) => {
   const handlePrice = () => {
 
   }
+  const handleStyle = (value) => {
+    console.log('clicked: ', value);
+    setStyle(value);
+  }
   return data&&styles? (
     <div className= "g-product-details-main-container">
       <div className = "g-product-details-column1">
@@ -50,7 +55,7 @@ const ProductDetails = ({itemId}) => {
           <div>{data.name}</div>
           <div>{data.slogan}</div>
         </div>
-        <StyleList itemId = {itemId} styles= {styles}/>
+        <StyleList itemId = {itemId} styles= {styles} style ={style} handleStyle ={handleStyle}/>
         <Cart itemId = {itemId}/>
         <SocialMedia itemId = {itemId}/>
         {data.description}
