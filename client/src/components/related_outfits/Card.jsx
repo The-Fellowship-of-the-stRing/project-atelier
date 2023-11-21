@@ -34,22 +34,13 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct} ) => {
     fetchData();
   }, []);
 
-  let priceString;
-  // if(cardData && cardData.hasOwnProperty('sale_price')) {
-    if(cardData && cardData.sale_price && cardData.original_price) {
-    priceString = (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>);
-  } else if (cardData && cardData.original_price) {
-    priceString = <p className="c-card-price">${cardData.original_price} </p>;
-  } else {
-    priceString = <p className="c-card-price">NO PRICE :(</p>
-  }
-  /* REFACTOR ABOVE LATER: */
-  // let priceString = (cardData && cardData.hasOwnProperty('sale_price')) ? (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>) : (<p className="c-card-price">${cardData.original_price}</p>);
-  // console.log(cardData);
+  let priceString =
+    (cardData && cardData.sale_price && cardData.original_price) ? (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>)
+    : (cardData && cardData.original_price) ? (<p className="c-card-price">${cardData.original_price} </p>)
+    : (<p className="c-card-price">NO PRICE :(</p>);
 
   const cardClickHandler = () => {
     /* GET FROM GORDON */
-    // Click on image and product title
     console.log('Will route to product details page id: ', itemId);
   }
 
@@ -78,9 +69,7 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct} ) => {
       </div>
     </div>
   ) : (
-  <div className="c-card-container">
-    No Data
-  </div>
+  <div className="c-card-container"></div>
   );
 }
 export default Card
