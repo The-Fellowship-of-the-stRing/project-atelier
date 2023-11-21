@@ -1,32 +1,35 @@
 import React,{useState, useEffect} from 'react';
 import Card from './Card.jsx';
 import getRelatedItems from '../../utils/getRelatedItems.js';
+/* How to persist data on client side */
+// local storage keyword to
+// fs system - create new text files which stores in system files
 
 const Outfits = ( {itemId} ) => {
-  const [outfitsByUser, setOutfitsByUser] = useState(null);
-  const [isAdded, setIsAdded] = useState(null);
   // localStorage.clear();
+  let parsedData = JSON.parse(localStorage.getItem(document.cookie)) || [];
 
-  let parsedData = JSON.parse(localStorage.getItem(document.cookie));
+  const [outfitsByUser, setOutfitsByUser] = useState(parsedData);
+  const [isAdded, setIsAdded] = useState(parsedData && parsedData.includes(itemId));
+
   console.log("State ", outfitsByUser, isAdded);
 
-  useEffect(() => {
-    parsedData ? setOutfitsByUser(parsedData) : (localStorage.setItem(document.cookie, '[]') && setOutfitsByUser([]));
-    /* TESTING */
-    // setOutfitsByUser([40345, 40346, 40351, 40350]);
-    parsedData && parsedData.includes(itemId) ? setIsAdded(parsedData.includes(itemId)) : setIsAdded(false);
-  }, []);
-
+  // useEffect(() => {
+  //   parsedData ? setOutfitsByUser(parsedData) : (localStorage.setItem(document.cookie, '[]') && setOutfitsByUser([]));
+  //   /* TESTING */
+  //   // setOutfitsByUser([40345, 40346, 40351, 40350]);
+  //   parsedData && parsedData.includes(itemId) ? setIsAdded(parsedData.includes(itemId)) : setIsAdded(false);
+  // }, []);
 
   const addProduct = () => {
     let parsedData = JSON.parse(localStorage.getItem(document.cookie));
-    parsedData ? parsedData.push(itemId) : [];
-    parsedData.push(itemId);
+    console.log("parsedData", parsedData)
+    parsedData ? parsedData.push(itemId) : parsedData = [itemId];
     localStorage.setItem(document.cookie, JSON.stringify(parsedData));
     setOutfitsByUser(parsedData);
     setIsAdded(true);
   }
-
+  // add -> delete -> add
   const deleteProduct = (product_id) => {
     let parsedData = JSON.parse(localStorage.getItem(document.cookie));
     let updatedState = [];
@@ -38,7 +41,8 @@ const Outfits = ( {itemId} ) => {
     }
     localStorage.removeItem(document.cookie);
     setIsAdded(updatedState.includes(itemId));
-    updatedState[0] ? setOutfitsByUser(updatedState) : setOutfitsByUser([]);
+    console.log("DEL:", localStorage);
+    setOutfitsByUser(updatedState);
   }
 
   const nextClickHandler = () => {
@@ -62,8 +66,5 @@ const Outfits = ( {itemId} ) => {
     </div>
   )
 }
-/* How to persist data on client side */
-// local storage keyword to
-// fs system - create new text files which stores in system files
 
 export default Outfits
