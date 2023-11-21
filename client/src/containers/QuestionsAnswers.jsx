@@ -11,8 +11,6 @@ const QuestionsAnswers = ( {itemId} ) => {
   const [currentCount, setCurrentCount] = useState(2);
   const [numOfQuestionToGet] = useState(400);
 
-  console.log('resultsToShow.length', resultsToShow.length)
-
   const handleHelpful = (questionId) => {
     axios.put(`/qa/questions/${questionId}/helpful`)
     .then(() => {
