@@ -43,13 +43,10 @@ const QuestionsAnswers = ( {itemId} ) => {
 
   useEffect(() => {
     setResultsToShow(questionData.slice(0, currentCount))
-    console.log('quesitonData', questionData)
   }, [questionData, currentCount])
 
 
   const handleLoadMoreQuestions = () => {
-    console.log('in load more answers::::', currentCount)
-    console.log('resultsToShow: ', resultsToShow)
     setCurrentCount(currentCount+2)
   }
 
