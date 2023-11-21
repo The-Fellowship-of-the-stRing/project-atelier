@@ -7,6 +7,8 @@ const QuestionsList = ( { resultsToShow, currentCount, handleHelpful } ) => {
 
   const [marked, setMarked] = useState({});
 
+  const [numOfAnswersToGet, setNumOfAnswersToGet] = useState(400);
+
 
   const checkMarked = (id) => {
     if (!marked[id]) {
@@ -17,7 +19,7 @@ const QuestionsList = ( { resultsToShow, currentCount, handleHelpful } ) => {
 
   return resultsToShow ? (
     <div className="k-questions-list">
-      {resultsToShow.map((question, i) => {
+      {resultsToShow.map((question, index) => {
         const id = question.question_id;
         return (
           <div className="k-question-answer-container" key={id}>
@@ -34,7 +36,7 @@ const QuestionsList = ( { resultsToShow, currentCount, handleHelpful } ) => {
           </div>
         )
       })}
-      <span className="k-load-more-answers"><strong>LOAD MORE ANSWERS</strong></span>
+      <span className="k-load-more-answers"><strong>LOAD MORE ANSWERS / SEE MORE ANSWERS</strong></span>
     </div>
   ) : (
     <div>Loading...</div>

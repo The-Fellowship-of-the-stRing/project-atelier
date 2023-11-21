@@ -7,15 +7,16 @@ import axios from 'axios';
 const QuestionsAnswers = ( {itemId} ) => {
 
   const [questionData, setQuestionData] = useState([]);
-  const [resultsToShow, setResultsToShow] = useState([])
+  const [resultsToShow, setResultsToShow] = useState([]);
   const [currentCount, setCurrentCount] = useState(2);
-  const [numOfQuestionToGet] = useState(400);
+  const [numOfQuestionsToGet, setNumOfAnswersToGet] = useState(400);
 
   const handleHelpful = (questionId) => {
     axios.put(`/qa/questions/${questionId}/helpful`)
     .then(() => {
       axios.get(`/qa/questions/?product_id=${itemId}`)
       .then((result) => {
+        console.log('inside handleHelpul: ', result.data.results)
         setResultsToShow(result.data.results)
       })
       .catch((err) => console.error(err))
@@ -24,9 +25,9 @@ const QuestionsAnswers = ( {itemId} ) => {
   }
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchQuestionData = async () => {
       try {
-        const response = await axios.get(`/qa/questions/?product_id=${itemId}&count=${numOfQuestionToGet}`)
+        const response = await axios.get(`/qa/questions/?product_id=${itemId}&count=${numOfQuestionsToGet}`)
         const notReported = response.data.results.filter((value) => value.reported === false)
         const sortedResults = notReported.sort((a, b) => b.question_helpfulness - a.question_helpfulness)
         setQuestionData(sortedResults)
@@ -36,7 +37,7 @@ const QuestionsAnswers = ( {itemId} ) => {
       }
     };
 
-    fetchData()
+    fetchQuestionData()
   }, [itemId])
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const QuestionsAnswers = ( {itemId} ) => {
   }, [questionData, currentCount])
 
 
-  const handleLoadMoreQuestions = () => {
+  const handleMoreAnsweredQuestions = () => {
     setCurrentCount(currentCount+2)
   }
 
@@ -52,10 +53,10 @@ const QuestionsAnswers = ( {itemId} ) => {
     <div className="k-questions-answers-main-container">
       <Search />
       <QuestionsList handleHelpful={handleHelpful} resultsToShow={resultsToShow} currentCount={currentCount}/>
-      {resultsToShow.length >= 2 && (
+      {(resultsToShow.length >= 2) && (resultsToShow.length <= 20) && (
         <button
         className="k-more-answered-questions"
-        onClick={() => handleLoadMoreQuestions()}
+        onClick={() => handleMoreAnsweredQuestions()}
         >
           More Answered Questions
         </button>

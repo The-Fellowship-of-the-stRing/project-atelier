@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npx webpack-dev-server --watch",
     "build": "npx webpack --watch",
-    "server": "nodemon server.js --watch",
+    "server": "npm run build & nodemon server.js --watch ./client --ext js,json,jsx",
     "test": "jest --env=jsdom --watchAll",
     "coverage": "jest --env=jsdom --coverage",
     "dev-server": "npm run server & npx webpack serve --hot --open"
