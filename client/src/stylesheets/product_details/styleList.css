@@ -1,4 +1,7 @@
 .g-style_image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   width:40px;
   height:40px;
 }
