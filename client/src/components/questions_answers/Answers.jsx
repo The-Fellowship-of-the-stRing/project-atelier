@@ -65,7 +65,6 @@ const Answers = ( { questionId } ) => {
     fetchAnswerData()
   }, [questionId])
 
-  // answerData ? console.log('answerData is here!', answerData) : console.log('not here yet..., ', answerData)
 
   return answerData ? (
     <>
