@@ -9,10 +9,8 @@ const StyleList = ({itemId,styles}) => {
       )
   }
   const StyleGallery = (props) => {
-    console.log(props)
     return(
       props.styles.map((value) => {
-        console.log(value)
         return <Style key ={value.style_id} thumbnail={value.photos[0].thumbnail_url} />
       })
     )

@@ -19,14 +19,14 @@ const ProductDetails = ({itemId}) => {
       try {
         const productData = await getProductDataById(itemId);
         const styleData = await getStyleDataById(itemId);
-        console.log(productData);
-        console.log(styleData);
+        //Leaving console.logs in comments for when I need to reference it
+        // console.log(productData);
+        // console.log(styleData);
         const values = {};
         values.name = productData.name;
         values.slogan = productData.slogan;
         values.description = productData.description;
         values.category= productData.category;
-        console.log("Style name:", styleData[0].name);
         setData(values);
         setStyles(styleData);
       } catch (err) {
