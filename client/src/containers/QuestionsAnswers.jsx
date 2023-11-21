@@ -9,6 +9,9 @@ const QuestionsAnswers = ( {itemId} ) => {
   const [questionData, setQuestionData] = useState([]);
   const [resultsToShow, setResultsToShow] = useState([])
   const [currentCount, setCurrentCount] = useState(2);
+  const [numOfQuestionToGet] = useState(400);
+
+  console.log('resultsToShow.length', resultsToShow.length)
 
   const handleHelpful = (questionId) => {
     axios.put(`/qa/questions/${questionId}/helpful`)
@@ -25,7 +28,7 @@ const QuestionsAnswers = ( {itemId} ) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/qa/questions/?product_id=${itemId}`)
+        const response = await axios.get(`/qa/questions/?product_id=${itemId}&count=${numOfQuestionToGet}`)
         const notReported = response.data.results.filter((value) => value.reported === false)
         const sortedResults = notReported.sort((a, b) => b.question_helpfulness - a.question_helpfulness)
         setQuestionData(sortedResults)
@@ -40,10 +43,13 @@ const QuestionsAnswers = ( {itemId} ) => {
 
   useEffect(() => {
     setResultsToShow(questionData.slice(0, currentCount))
-  }, [questionData])
+    console.log('quesitonData', questionData)
+  }, [questionData, currentCount])
 
 
-  const handleClick = () => {
+  const handleLoadMoreQuestions = () => {
+    console.log('in load more answers::::', currentCount)
+    console.log('resultsToShow: ', resultsToShow)
     setCurrentCount(currentCount+2)
   }
 
@@ -51,9 +57,14 @@ const QuestionsAnswers = ( {itemId} ) => {
     <div className="k-questions-answers-main-container">
       <Search />
       <QuestionsList handleHelpful={handleHelpful} resultsToShow={resultsToShow} currentCount={currentCount}/>
-      <button className="k-more-answered-questions" onClick={() => handleClick()}>
-        More Answered Questions
-      </button>
+      {resultsToShow.length >= 2 && (
+        <button
+        className="k-more-answered-questions"
+        onClick={() => handleLoadMoreQuestions()}
+        >
+          More Answered Questions
+        </button>
+      )}
       <button className="k-add-a-question">Add a Question +</button>
     </div>
   ) : (
