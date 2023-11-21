@@ -6,6 +6,22 @@ const Answers = ( { questionId } ) => {
 
   const [answerData, setAnswerData] = useState([]);
   const [marked, setMarked] = useState({});
+  const [reported, setReported] = useState({});
+
+  const checkReported = (id) => {
+    if (!reported[id]) {
+      setReported({...reported, [id]: true})
+      handleReported(id)
+    }
+  }
+
+  const handleReported = (answerId) => {
+    axios.put(`/qa/answers/${answerId}/report`)
+    .then((result) => {
+      fetchData()
+    })
+    .catch((err) => console.log(err))
+  }
 
   const checkMarked = (id) => {
     console.log('id to mark:: ', id)
@@ -27,7 +43,6 @@ const Answers = ( { questionId } ) => {
   };
 
   const handleHelpful = (answerId) => {
-
     axios.put(`/qa/answers/${answerId}/helpful`)
     .then((result) => {
       fetchData()
@@ -73,10 +88,10 @@ const Answers = ( { questionId } ) => {
             <div className="k-answer-date">{formatDate(answer.date)} | </div>
 
             <div className="k-answer-helpful">
-              Helpful? <span className="k-answer-yes-click" onClick={() => checkMarked(id)}>Yes</span> |  ({answer.helpfulness})
+              Helpful? <span className="k-answer-yes-click" style={{cursor: marked[id] ? "default" : "pointer"}} onClick={() => checkMarked(id)}>Yes</span> |  ({answer.helpfulness})
             </div>
             <div className="k-answer-report">
-              <span className="k-answer-report-click">Report</span>
+              <span className="k-answer-report-click" onClick={() => checkReported(id)} style={{cursor: reported[id] ? "default" : "pointer"}} >{reported[id] ? "Reported" : "Report"}</span>
             </div>
           </div>
 
