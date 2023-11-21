@@ -12,7 +12,7 @@ const ProductDetails = ({itemId}) => {
   const [data, setData] = useState({});
   const [styles, setStyles] = useState([]);
   const [price, setPrice] = useState(null);
-  const [sale, setSale] = useState(false);
+  const [isSale, setIsSale] = useState(false);
   const [sku, setSku] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
