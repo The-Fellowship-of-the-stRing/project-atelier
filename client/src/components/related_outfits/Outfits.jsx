@@ -44,18 +44,13 @@ const Outfits = ( {itemId} ) => {
     console.log('Next clicked');
   };
 
-  return !isAdded ? (
+  return (
     <div className="c-outfits-container">
-      <h3>My Outfit</h3>
-      <div className="c-card-container" >
-      <button className="c-card-action-add" onClick={() => addProduct()}>+</button>
-      </div>
-      {outfitsByUser ? outfitsByUser.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} deleteProduct={deleteProduct} action="outfits"/>)) : null}
-      <button onClick={nextClickHandler}>></button>
-    </div>
-  ) : (
-    <div className="c-outfits-container">
-      <h3>My Outfit</h3>
+      {!isAdded ? (
+        <div className="c-card-container">
+          <button className="c-card-action-add" onClick={() => addProduct()}>+</button>
+        </div>
+      ) : null}
       {outfitsByUser ? outfitsByUser.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} deleteProduct={deleteProduct} action="outfits"/>)) : null}
       <button onClick={nextClickHandler}>></button>
     </div>

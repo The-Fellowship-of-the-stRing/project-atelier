@@ -70,10 +70,12 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct} ) => {
         src={cardData.hasOwnProperty("photos") && cardData.photos[0].thumbnail_url !== null
         ? cardData.photos[0].thumbnail_url
         : "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg"} />
-      <p className="c-card-cat">{cardData.category}</p>
-      <p className="c-card-name" onClick={() => cardClickHandler()}>{cardData.name}</p>
-      {priceString}
-      <Stars itemId={itemId} />
+      <div className="c-card-text-container">
+        <div className="c-card-cat">{cardData.category}</div>
+        <div className="c-card-name" onClick={() => cardClickHandler()}>{cardData.name}</div>
+        <div className="c-card-price">{priceString}</div>
+        <Stars itemId={itemId} />
+      </div>
     </div>
   ) : (
   <div className="c-card-container">
