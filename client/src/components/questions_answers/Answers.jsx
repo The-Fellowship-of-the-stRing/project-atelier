@@ -8,7 +8,7 @@ const Answers = ( { questionId } ) => {
   const [marked, setMarked] = useState({});
   const [reported, setReported] = useState({});
 
-  const checkReprted = (id) => {
+  const checkReported = (id) => {
     if (!reported[id]) {
       setReported({...reported, [id]: true})
       handleReported(id)
@@ -91,7 +91,7 @@ const Answers = ( { questionId } ) => {
               Helpful? <span className="k-answer-yes-click" style={{cursor: marked[id] ? "default" : "pointer"}} onClick={() => checkMarked(id)}>Yes</span> |  ({answer.helpfulness})
             </div>
             <div className="k-answer-report">
-              <span className="k-answer-report-click" onClick={() => checkReprted(id)} style={{cursor: reported[id] ? "defualt" : "pointer"}} >{reported[id] ? "Reported" : "Report"}</span>
+              <span className="k-answer-report-click" onClick={() => checkReported(id)} style={{cursor: reported[id] ? "default" : "pointer"}} >{reported[id] ? "Reported" : "Report"}</span>
             </div>
           </div>
 
