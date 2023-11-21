@@ -10,7 +10,9 @@ const RelatedOutfits = ( {itemId} ) => {
 
   return (
     <div className="c-related-outfits-main-container">
+      <h3 className="c-related-title">Related Products</h3>
       <Related itemId={itemId}/>
+      <h3 className="c-outfit-title">My Outfit</h3>
       <Outfits itemId={itemId}/>
     </div>
   )

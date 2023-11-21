@@ -2,7 +2,7 @@ import ExpandedView from './ExpandedView.jsx';
 import '../../stylesheets/product_details/imageGallery.css';
 const ImageGallery = () => {
   return(
-    <div class="g-images">
+    <div className="g-images">
       ImageGallery
     </div>
   )
