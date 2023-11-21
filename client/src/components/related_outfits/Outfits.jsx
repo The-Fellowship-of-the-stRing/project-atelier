@@ -21,7 +21,7 @@ const Outfits = ( {itemId} ) => {
     setIsAdded(true);
   }
 
-  console.log(outfitIds);
+  // console.log(outfitIds);
 
   return !isAdded ? (
     <div className="c-outfits-container">
