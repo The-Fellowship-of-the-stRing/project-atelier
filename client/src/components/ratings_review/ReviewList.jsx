@@ -37,7 +37,7 @@ const ReviewList = ({
           {resultsToShow.map((review) => {
             if (currentFilter.indexOf(review.rating + "") !== -1 || currentFilter.length < 1) {
               return (
-                <div key={review.review_id} className="l-review-list-tile-main">
+                <div data-testid="review-item" key={review.review_id} className="l-review-list-tile-main">
                 <ReviewTile review={review} handleHelpful={handleHelpful} handleReport={handleReport}/>
               </div>
             )
@@ -47,7 +47,7 @@ const ReviewList = ({
       )}
       <div className="l-review-list-btn-placement">
         <button type="button" className="l-review-list-more-btn" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length ? true : false}>MORE REVIEWS</button>
-        <button type="button" className="l-review-list-more-btn" onClick={() => handleModal()}>ADD A REVIEW <FaPlus className="l-review-list-btn-icon"/></button>
+        <button data-testid="add-review-btn" type="button" className="l-review-list-more-btn" onClick={() => handleModal()}>ADD A REVIEW <FaPlus className="l-review-list-btn-icon"/></button>
       </div>
     </div>
   )
