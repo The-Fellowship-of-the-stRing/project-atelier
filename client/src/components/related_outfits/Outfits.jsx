@@ -38,6 +38,7 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
       }
     }
     localStorage.removeItem(document.cookie);
+    localStorage.setItem(document.cookie, JSON.stringify(updatedState));
     setIsAdded(updatedState.includes(itemId));
     setOutfitsByUser(updatedState);
   }

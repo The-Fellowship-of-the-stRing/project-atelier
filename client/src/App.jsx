@@ -15,7 +15,6 @@ const App = () =>{
   const updateMainProduct = async (itemId) => {
     try {
       const item = await getProductDataById(itemId);
-      console.log(itemId);
       setCurrentItem(item);
     } catch (error) {
       console.error('Error fetching item:', error);
