@@ -29,7 +29,7 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatur
           return setCardData(response);
         }
 
-        return setCardData(response);
+
       } catch (err) {
         console.error('Error getting item details: ', err);
       }
@@ -56,10 +56,6 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatur
       {actionButtons[action]}
       <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
         src={cardData.photos} />
-      {/* <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
-        src={cardData.hasOwnProperty("photos") && cardData.photos[0].thumbnail_url !== null
-        ? cardData.photos[0].thumbnail_url
-        : "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg"} /> */}
       <div className="c-card-text-container">
         <div className="c-card-cat">{cardData.category}</div>
         <div className="c-card-name" onClick={() => updateMainProduct(itemId)}>{cardData.name}</div>

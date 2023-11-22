@@ -11,14 +11,19 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
   const [outfitsByUser, setOutfitsByUser] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
 
-  let parsedData = JSON.parse(localStorage.getItem(document.cookie)) || [];
+  // let parsedData = JSON.parse(localStorage.getItem(document.cookie)) || [];
+  const getOutfits = () => {
+    return JSON.parse(localStorage.getItem(document.cookie)) || [];
+  }
   useEffect(() => {
+    let parsedData = getOutfits();
     setOutfitsByUser(parsedData);
     // parsedData ? setOutfitsByUser(JSON.parse(localStorage.getItem(document.cookie))) : (localStorage.setItem(document.cookie, '[]') && setOutfitsByUser([]));
     (parsedData && parsedData.includes(itemId)) ? setIsAdded(parsedData.includes(itemId)) : setIsAdded(false);
   }, [itemId]);
 
   const addProduct = () => {
+    let parsedData = getOutfits();
     parsedData = [itemId, ...parsedData];
     localStorage.setItem(document.cookie, JSON.stringify(parsedData));
     setOutfitsByUser(parsedData);
@@ -26,6 +31,7 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
   }
 
   const deleteProduct = (product_id) => {
+    let parsedData = getOutfits();
     let updatedState = [];
     console.log(parsedData);
     for (let id of parsedData) {
