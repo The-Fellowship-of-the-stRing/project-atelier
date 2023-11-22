@@ -9,7 +9,8 @@
 .l-star-bar-text {
   text-decoration: underline;
   cursor: pointer;
-  width: 60px;
+  width: 90px;
+  font-size: 15px;
 }
 
 .l-star-bar-container {
@@ -22,7 +23,7 @@
 }
 
 .l-star-bar-total {
-  background-color: #ececec;
+  background-color: #eceef5;
   width: 100%;
   height: 10px;
 }
@@ -30,6 +31,6 @@
 .l-star-bar-value {
   position: absolute;
   left: 0;
-  background-color: #15BD6C;
+  background-color: #3DDC97;
   height: 10px;
 }
