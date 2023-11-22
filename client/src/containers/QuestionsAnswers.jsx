@@ -2,40 +2,48 @@ import React, { useEffect, useState } from 'react';
 import '../stylesheets/questions_answers/questionsAnswers.css';
 import Search from '../components/questions_answers/Search.jsx';
 import QuestionsList from '../components/questions_answers/QuestionsList.jsx';
+import AddAnswer from '../components/questions_answers/AddAnswer.jsx'
 import axios from 'axios';
 
-const QuestionsAnswers = ( { itemId } ) => {
+const QuestionsAnswers = ( { itemId, itemName } ) => {
 
   const [questionData, setQuestionData] = useState([]);
   const [resultsToShow, setResultsToShow] = useState([]);
   const [currentCount, setCurrentCount] = useState(2);
   const [numOfQuestionsToGet, setNumOfAnswersToGet] = useState(400);
+  const [questionBody, setQuesitonBody] = useState({});
+  const [addAnswerModal, setAddAnswerModal] = useState(false);
+  //questionBody
+  //addAnswerModel
+  //addQuestionModal
+
+  const handleAnswerModal = (value, body={}) => {
+    //use for opening of closing add answer modal
+    setQuesitonBody(body);
+    setAddAnswerModal(value);
+  }
 
   const handleHelpful = (questionId) => {
     axios.put(`/qa/questions/${questionId}/helpful`)
     .then(() => {
-      axios.get(`/qa/questions/?product_id=${itemId}`)
-      .then((result) => {
-        setResultsToShow(result.data.results)
-      })
-      .catch((err) => console.error(err))
+      fetchQuestionData()
     })
     .catch((err) => console.error(err))
   }
 
-  useEffect(() => {
-    const fetchQuestionData = async () => {
-      try {
-        const response = await axios.get(`/qa/questions/?product_id=${itemId}&count=${numOfQuestionsToGet}`)
-        const notReported = response.data.results.filter((value) => value.reported === false)
-        const sortedResults = notReported.sort((a, b) => b.question_helpfulness - a.question_helpfulness)
-        setQuestionData(sortedResults)
-        return response.data
-      } catch (err) {
-        console.error(err)
-      }
-    };
+  const fetchQuestionData = async () => {
+    try {
+      const response = await axios.get(`/qa/questions/?product_id=${itemId}&count=${numOfQuestionsToGet}`)
+      const notReported = response.data.results.filter((value) => value.reported === false)
+      const sortedResults = notReported.sort((a, b) => b.question_helpfulness - a.question_helpfulness)
+      setQuestionData(sortedResults)
+      return response.data
+    } catch (err) {
+      console.error(err)
+    }
+  };
 
+  useEffect(() => {
     fetchQuestionData()
   }, [itemId])
 
@@ -51,12 +59,23 @@ const QuestionsAnswers = ( { itemId } ) => {
 
   return resultsToShow.length > 0 ? (
     <div className="k-questions-answers-main-container">
+      {addAnswerModal && (
+                  <div>
+                    <AddAnswer
+                    questionBody={questionBody}
+                    itemId={itemId}
+                    handleAnswerModal={handleAnswerModal}
+                    itemName={itemName}
+                    />
+                  </div>
+                )}
       <Search />
       <QuestionsList
       handleHelpful={handleHelpful}
       resultsToShow={resultsToShow}
       currentCount={currentCount}
       itemId={itemId}
+      handleAnswerModal={handleAnswerModal}
       />
       {(resultsToShow.length >= 2) && (resultsToShow.length <= 20) && (
         <button
@@ -66,7 +85,6 @@ const QuestionsAnswers = ( { itemId } ) => {
           More Answered Questions
         </button>
       )}
-      <div data-testid="current-count">{currentCount}</div>
       <button className="k-add-a-question">Add a Question +</button>
 
     </div>
