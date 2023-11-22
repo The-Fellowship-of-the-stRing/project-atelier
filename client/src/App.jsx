@@ -12,29 +12,21 @@ import './styles.css'
 const App = () =>{
   const [currentItem, setCurrentItem] = useState(null);
 
+  const fetchData = async (itemId) => {
+    try {
+      /* LAST VERSION - WILL REMOVE ONCE APPROVED */
+      // const item = await getFirstItem();
+      // setCurrentItem(item);
+
+      const item = await getProductDataById(itemId);
+      setCurrentItem(item);
+    } catch (error) {
+      console.error('Error fetching item:', error);
+    }
+  };
+
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const item = await getFirstItem();
-    //     setCurrentItem(item);
-    //   } catch (error) {
-    //     console.error('Error fetching item:', error);
-    //   }
-    // };
-
-    const fetchData = async (itemId) => {
-      try {
-        /* LAST VERSION - WILL REMOVE ONCE APPROVED */
-        // const item = await getFirstItem();
-        // setCurrentItem(item);
-
-        const item = await getProductDataById(itemId);
-        setCurrentItem(item);
-      } catch (error) {
-        console.error('Error fetching item:', error);
-      }
-    };
-
+    /* NOTE: Hardcoding initial item and using product/:id endpoint as it is needed in Outfits Components */
     fetchData(40351);
   }, []);
 
@@ -48,7 +40,7 @@ const App = () =>{
               <ProductDetails itemId={currentItem.id}/>
               <RatingsReviews itemId={currentItem.id} itemName={currentItem.name}/>
               <QuestionsAnswers itemId={currentItem.id}/>
-              <RelatedOutfits itemId={currentItem.id} />
+              <RelatedOutfits itemId={currentItem.id} itemFeatures={currentItem.features} fetchData={fetchData}/>
             </>
           )}
       </div>
