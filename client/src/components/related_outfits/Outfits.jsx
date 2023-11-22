@@ -11,14 +11,12 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
   const [outfitsByUser, setOutfitsByUser] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
 
-  // let parsedData = JSON.parse(localStorage.getItem(document.cookie)) || [];
   const getOutfits = () => {
     return JSON.parse(localStorage.getItem(document.cookie)) || [];
   }
   useEffect(() => {
     let parsedData = getOutfits();
     setOutfitsByUser(parsedData);
-    // parsedData ? setOutfitsByUser(JSON.parse(localStorage.getItem(document.cookie))) : (localStorage.setItem(document.cookie, '[]') && setOutfitsByUser([]));
     (parsedData && parsedData.includes(itemId)) ? setIsAdded(parsedData.includes(itemId)) : setIsAdded(false);
   }, [itemId]);
 
@@ -31,9 +29,9 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
   }
 
   const deleteProduct = (product_id) => {
+    /* Deletes all products after 2nd consecutive delete */
     let parsedData = getOutfits();
     let updatedState = [];
-    console.log(parsedData);
     for (let id of parsedData) {
       if(id !== product_id) {
         updatedState.push(id);

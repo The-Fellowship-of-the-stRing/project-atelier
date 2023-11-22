@@ -17,19 +17,17 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatur
             category: productData.category || "NO CAT",
             features: productData.features || []
           };
-          /* FIND DEFAULT STYLE */
+          /* USE DEFAULT STYLE || FIRST STYLE */
           for (let i = 0; i < styleData.length; i++) {
             let style = styleData[i];
             if (i === 0 || style["default?"]) {
               response.photos = style.photos[0].thumbnail_url || "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg";
-              response.original_price = style.original_price; // Handling price transformation below
+              response.original_price = style.original_price;
               response.sale_price = style.sale_price;
             }
           }
           return setCardData(response);
         }
-
-
       } catch (err) {
         console.error('Error getting item details: ', err);
       }

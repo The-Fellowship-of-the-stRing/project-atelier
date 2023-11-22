@@ -25,7 +25,6 @@ const Related = ( {itemId, itemFeatures, updateMainProduct} ) => {
     <div className="c-related-container">
       {relatedIds.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} itemFeatures={itemFeatures} key={id} action="related" updateMainProduct={updateMainProduct}/>))}
       <button onClick={nextClickHandler}>></button>
-      {/* {<Card itemId={relatedIds[1]} key={relatedIds[0]} />} */}
     </div>
   ) : (
     <div>No Related Items</div>
