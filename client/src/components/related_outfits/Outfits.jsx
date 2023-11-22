@@ -5,7 +5,7 @@ import getRelatedItems from '../../utils/getRelatedItems.js';
 // local storage keyword to
 // fs system - create new text files which stores in system files
 
-const Outfits = ( {itemId, fetchData} ) => {
+const Outfits = ( {itemId, updateMainProduct} ) => {
   // localStorage.clear();
 
   let parsedData = JSON.parse(localStorage.getItem(document.cookie)) || [];
@@ -55,7 +55,7 @@ const Outfits = ( {itemId, fetchData} ) => {
           <button className="c-card-action-add" onClick={() => addProduct()}>+</button>
         </div>
       ) : null}
-      {outfitsByUser ? outfitsByUser.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} deleteProduct={deleteProduct} action="outfits" fetchData={fetchData}/>)) : null}
+      {outfitsByUser ? outfitsByUser.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct}/>)) : null}
       <button onClick={nextClickHandler}>></button>
     </div>
   )

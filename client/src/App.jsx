@@ -12,7 +12,7 @@ import './styles.css'
 const App = () =>{
   const [currentItem, setCurrentItem] = useState(null);
 
-  const fetchData = async (itemId) => {
+  const updateMainProduct = async (itemId) => {
     try {
       /* LAST VERSION - WILL REMOVE ONCE APPROVED */
       // const item = await getFirstItem();
@@ -27,7 +27,7 @@ const App = () =>{
 
   useEffect(() => {
     /* NOTE: Hardcoding initial item and using product/:id endpoint as it is needed in Outfits Components */
-    fetchData(40351);
+    updateMainProduct(40351);
   }, []);
 
   return (
@@ -40,7 +40,7 @@ const App = () =>{
               <ProductDetails itemId={currentItem.id}/>
               <RatingsReviews itemId={currentItem.id} itemName={currentItem.name}/>
               <QuestionsAnswers itemId={currentItem.id} itemName={currentItem.name}/>
-              <RelatedOutfits itemId={currentItem.id} itemFeatures={currentItem.features} fetchData={fetchData}/>
+              <RelatedOutfits itemId={currentItem.id} itemFeatures={currentItem.features} updateMainProduct={updateMainProduct}/>
             </>
           )}
       </div>

@@ -3,7 +3,7 @@ import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
 
-const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatures, fetchData} ) => {
+const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
   const [cardData, setCardData] = useState(null);
 
   useEffect(() => {
@@ -24,8 +24,6 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatur
             response.sale_price = style.sale_price;
           }
         }
-        /* TESTING */
-        // response.sale_price = 10;
         return setCardData(response);
       } catch (err) {
         console.error('Error getting item details: ', err);
@@ -52,13 +50,13 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatur
     <div className={className} >
       {/* <button className="c-card-action">⭐</button> */}
       {actionButtons[action]}
-      <img className="c-card-img" onClick={() => fetchData(itemId)}
+      <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
         src={cardData.hasOwnProperty("photos") && cardData.photos[0].thumbnail_url !== null
         ? cardData.photos[0].thumbnail_url
         : "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg"} />
       <div className="c-card-text-container">
         <div className="c-card-cat">{cardData.category}</div>
-        <div className="c-card-name" onClick={() => fetchData(itemId)}>{cardData.name}</div>
+        <div className="c-card-name" onClick={() => updateMainProduct(itemId)}>{cardData.name}</div>
         <div className="c-card-price">{priceString}</div>
         <Stars itemId={itemId} />
       </div>
