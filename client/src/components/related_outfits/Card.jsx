@@ -3,7 +3,7 @@ import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
 
-const Card = ( {itemId, className, action} ) => {
+const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatures, fetchData} ) => {
   const [cardData, setCardData] = useState(null);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Card = ( {itemId, className, action} ) => {
           }
         }
         /* TESTING */
-        response.sale_price = 10;
+        // response.sale_price = 10;
         return setCardData(response);
       } catch (err) {
         console.error('Error getting item details: ', err);
@@ -34,55 +34,37 @@ const Card = ( {itemId, className, action} ) => {
     fetchData();
   }, []);
 
-  let priceString;
-  if(cardData && cardData.hasOwnProperty('sale_price')) {
-    priceString = (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>);
-  } else if ( cardData && cardData.hasOwnProperty('original_price')) {
-    priceString = (<p className="c-card-price">${cardData.original_price}</p>);
-  }
-  /* REFACTOR ABOVE LATER: */
-  // let priceString = (cardData && cardData.hasOwnProperty('sale_price')) ? (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>) : (<p className="c-card-price">${cardData.original_price}</p>);
-  // console.log(cardData);
-
-  const cardClickHandler = () => {
-    /* GET FROM GORDON */
-    // Click on image and product title
-    console.log('Will route to product details page id: ', itemId);
-  }
+  let priceString =
+    (cardData && cardData.sale_price && cardData.original_price) ? (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>)
+    : (cardData && cardData.original_price) ? (<p className="c-card-price">${cardData.original_price} </p>)
+    : (<p className="c-card-price">NO PRICE :(</p>);
 
   const relatedActionClickHander = () => {
     console.log('RELATED -> COMPARE MODULE');
   }
 
-  const outfitsActionClickHander = () => {
-    console.log('TO REMOVE FROM OUTFITS');
-  }
-
-
   let actionButtons = {
     related: (<p className="c-card-action-related" onClick={() => relatedActionClickHander()}>⭐</p>),
-    outfits: (<p className="c-card-action-outfits" onClick={() => outfitsActionClickHander()}>☒</p>)
+    outfits: (<p className="c-card-action-outfits" onClick={() => deleteProduct(itemId)}>☒</p>)
   }
-
 
   return cardData ? (
     <div className={className} >
       {/* <button className="c-card-action">⭐</button> */}
       {actionButtons[action]}
-      <img className="c-card-img" onClick={() => cardClickHandler()}
+      <img className="c-card-img" onClick={() => fetchData(itemId)}
         src={cardData.hasOwnProperty("photos") && cardData.photos[0].thumbnail_url !== null
         ? cardData.photos[0].thumbnail_url
         : "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg"} />
-      <p className="c-card-cat">{cardData.category}</p>
-      <p className="c-card-name" onClick={() => cardClickHandler()}>{cardData.name}</p>
-      {priceString}
-      <p className="c-card-star">STAR RATING</p>
-      <Stars itemId={itemId} />
+      <div className="c-card-text-container">
+        <div className="c-card-cat">{cardData.category}</div>
+        <div className="c-card-name" onClick={() => fetchData(itemId)}>{cardData.name}</div>
+        <div className="c-card-price">{priceString}</div>
+        <Stars itemId={itemId} />
+      </div>
     </div>
   ) : (
-  <div className="c-card-container">
-    No Data
-  </div>
+  <div className="c-card-container"></div>
   );
 }
 export default Card

@@ -5,6 +5,11 @@ import '../../stylesheets/ratings_review/ratingFactors.css'
 
 
 const RatingFactors = ({totals}) => {
+  /*
+  NOTES FOR LUKE:
+  - Please consider cases where not all data is provided.
+  - REPO: In related section, click on the white "YEazy 350" (itemId: 40351)
+  */
   const [categories, setCategories] = useState([])
 
   const options = {
@@ -30,12 +35,13 @@ const RatingFactors = ({totals}) => {
   return totals && (
     <div className="l-rating-factors-main">
       {categories.map((factor) => {
-        const data = totals.characteristics[factor]
-        const catRating = data.value;
-        const markerLocation = (catRating / 5) * 100
-        const subText = options[factor]
-        return (
-          <div key={data.id} className="l-rating-factors-single">
+        if (totals.characteristics[factor]) {
+          const data = totals.characteristics[factor]
+          const catRating = data.value;
+          const markerLocation = (catRating / 5) * 100
+          const subText = options[factor]
+          return (
+            <div key={data.id} className="l-rating-factors-single">
             <div className="l-rating-factors-cat">
             {factor}
             </div>
@@ -47,6 +53,7 @@ const RatingFactors = ({totals}) => {
             </div>
           </div>
         )
+      }
       })}
     </div>
   )

@@ -1,6 +1,8 @@
-const Reviews = () => {
+import Stars from '../stars/Stars.jsx'
+const Reviews = ({itemId}) => {
   return(
-    <div class="g-reviews">
+    <div className="g-reviews">
+      <Stars itemId ={itemId}/>
       Reviews
     </div>
   )

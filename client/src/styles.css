@@ -25,4 +25,6 @@
     margin: 0px;
     user-select: none;
     overflow-x: hidden;
+    background-color: #F6F8FF;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
   }

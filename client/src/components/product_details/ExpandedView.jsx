@@ -1,6 +1,6 @@
 const ExpandedView = () => {
   return(
-    <div class="g-viewer">
+    <div className="g-viewer">
       ExpandedView
     </div>
   )

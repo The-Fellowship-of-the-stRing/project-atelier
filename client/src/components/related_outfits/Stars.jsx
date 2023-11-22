@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import getItemDetails from '../../utils/getItemDetails.js'
-
+import '../../stylesheets/related_outfits/relatedOutfits.css';
 import "../../stylesheets/stars/stars.css"
 
 const Stars = ({itemId}) => {
@@ -33,7 +33,7 @@ const Stars = ({itemId}) => {
   }, [itemId])
 
   return (
-    <div id="stars-main-container">
+    <div id="stars-main-container" className="c-card-star">
       <div id="stars-outline-container">
        {
         starLength.map((star, index) => {
