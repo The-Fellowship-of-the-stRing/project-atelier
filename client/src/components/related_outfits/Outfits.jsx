@@ -27,6 +27,7 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
 
   const deleteProduct = (product_id) => {
     let updatedState = [];
+    console.log(parsedData);
     for (let id of parsedData) {
       if(id !== product_id) {
         updatedState.push(id);

@@ -18,10 +18,11 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatur
             features: productData.features || []
           };
           /* FIND DEFAULT STYLE */
-          for (let style of styleData) {
-            if(style["default?"]) {
-              response.photos = style.photos;
-              response.original_price = style.original_price;
+          for (let i = 0; i < styleData.length; i++) {
+            let style = styleData[i];
+            if (i === 0 || style["default?"]) {
+              response.photos = style.photos[0].thumbnail_url || "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg";
+              response.original_price = style.original_price; // Handling price transformation below
               response.sale_price = style.sale_price;
             }
           }
@@ -52,12 +53,13 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatur
 
   return cardData ? (
     <div className={className} >
-      {/* <button className="c-card-action">⭐</button> */}
       {actionButtons[action]}
       <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
+        src={cardData.photos} />
+      {/* <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
         src={cardData.hasOwnProperty("photos") && cardData.photos[0].thumbnail_url !== null
         ? cardData.photos[0].thumbnail_url
-        : "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg"} />
+        : "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg"} /> */}
       <div className="c-card-text-container">
         <div className="c-card-cat">{cardData.category}</div>
         <div className="c-card-name" onClick={() => updateMainProduct(itemId)}>{cardData.name}</div>
