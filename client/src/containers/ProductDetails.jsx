@@ -48,7 +48,7 @@ const ProductDetails = ({itemId}) => {
   return data&&styles? (
     <div className= "g-product-details-main-container">
       <div className = "g-product-details-column1">
-        <ImageGallery/>
+        <ImageGallery itemId = {itemId} style={style}/>
       </div>
       <div className="g-product-details-column2">
         <Reviews itemId = {itemId}/>
