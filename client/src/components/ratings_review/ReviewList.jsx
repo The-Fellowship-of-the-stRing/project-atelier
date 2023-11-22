@@ -46,7 +46,7 @@ const ReviewList = ({
         </div>
       )}
       <div className="l-review-list-btn-placement">
-        <button type="button" className="l-review-list-more-btn" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length ? true : false}>MORE REVIEWS</button>
+        <button type="button" className="l-review-list-more-btn" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length ? true : false}>MORE REVIEWS<div className="l-review-button-effect"></div></button>
         <button data-testid="add-review-btn" type="button" className="l-review-list-more-btn" onClick={() => handleModal()}>ADD A REVIEW <FaPlus className="l-review-list-btn-icon"/></button>
       </div>
     </div>
