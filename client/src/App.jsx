@@ -24,7 +24,6 @@ const App = () =>{
       console.error('Error fetching item:', error);
     }
   };
-  console.log(currentItem);
 
   useEffect(() => {
     /* NOTE: Hardcoding initial item and using product/:id endpoint as it is needed in Outfits Components */
