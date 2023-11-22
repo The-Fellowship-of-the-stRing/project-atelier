@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../stylesheets/questions_answers/AddAnswerModal.css'
 
-const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName } ) => {
+const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName, questionId, fetchQuestionData } ) => {
 
   const [product, setProduct] = useState({});
   const [yourAnswer, setYourAnswer] = useState('');
@@ -10,14 +10,20 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName } ) => {
   const [yourEmail, setYourEmail] = useState('');
   const [yourPhotos, setYourPhotos] = useState([]);
 
-
-  useEffect(() => {
-    axios.get(`products/?product_id=${itemId}`)
-    .then((response) => {
-      setProduct(response.data)
+  const sendAnswerData = (e) => {
+    e.preventDefault();
+    axios.post(`/qa/questions/${questionId}/answers`, {
+      body: yourAnswer,
+      name: yourNickName,
+      email: yourEmail,
+      photos: yourPhotos
     })
-    .catch((err) => console.error(err))
-  }, [itemId])
+    .then((response) => {
+      fetchQuestionData()
+  })
+    .catch((err) => console.error('error inside AddAnswer PUT: ', err))
+  }
+
 
 
   return (
@@ -26,7 +32,7 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName } ) => {
           <div className="modal-content">
             <h1>Submit Your Answer</h1>
             <h2>{itemName} : {questionBody}</h2>
-            <form >
+            <div>
               <label>
                 Your Answer:
                 <input
@@ -55,13 +61,20 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName } ) => {
                 </input>
               </label>
               <button
+              type="button"
               className="k-add-answer-submit"
-              onClick={() => handleAnswerModal(false)}
+              // onClick={() => handleAnswerModal(false)}
+              onClick={e => sendAnswerData(e)}
 
               >
+                Submit
               </button>
-            </form>
-            <button className="close-modal" onClick={() => handleAnswerModal(false)}>
+            </div>
+
+            <button
+            className="close-modal"
+            onClick={() => handleAnswerModal(false)}
+            >
               CLOSE
             </button>
           </div>

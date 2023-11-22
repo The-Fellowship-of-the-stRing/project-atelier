@@ -6,6 +6,7 @@ import '../../stylesheets/questions_answers/answers.css'
 const Answers = ( { questionId, answerData, setAnswerData } ) => {
 
   const [marked, setMarked] = useState({});
+  const [reported, setReported] = useState({});
 
 
   const checkMarked = (id) => {
@@ -15,9 +16,24 @@ const Answers = ( { questionId, answerData, setAnswerData } ) => {
     }
   }
 
+  const checkReported = (id) => {
+    if (!reported[id]) {
+      setReported({...reported, [id]: true})
+      handleReported(id)
+    }
+  }
+
+  const handleReported = (answerId) => {
+    axios.put(`/qa/answers/${answerId}/report`)
+    .then((result) => {
+      fetchData()
+    })
+    .catch((err) => console.error(err))
+  }
+
   const fetchData = async () => {
     try {
-      const response = await axios.get(`/qa/questions/${questionId}/answers`);
+      const response = await axios.get(`/qa/questions/${questionId}/answers?question_id=${questionId}`);
       const sortedResults = response.data.results.sort((a, b) => b.helpfulness - a.helpfulness)
       setAnswerData(sortedResults)
       return response.data
@@ -72,10 +88,10 @@ const Answers = ( { questionId, answerData, setAnswerData } ) => {
             <div className="k-answer-date">{formatDate(answer.date)} | </div>
 
             <div className="k-answer-helpful">
-              Helpful? <span className="k-answer-yes-click" onClick={() => checkMarked(id)}>Yes</span> |  ({answer.helpfulness})
+            Helpful? <span className="k-answer-yes-click" style={{cursor: marked[id] ? "default" : "pointer"}} onClick={() => checkMarked(id)}>Yes</span> ({answer.helpfulness}) |
             </div>
             <div className="k-answer-report">
-              <span className="k-answer-report-click">Report</span>
+            <span className="k-answer-report-click" onClick={() => checkReported(id)} style={{cursor: reported[id] ? "default" : "pointer"}} >{reported[id] ? "Reported" : "Report"}</span>
             </div>
           </div>
         </div>

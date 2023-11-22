@@ -13,12 +13,11 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   const [numOfQuestionsToGet, setNumOfAnswersToGet] = useState(400);
   const [questionBody, setQuesitonBody] = useState({});
   const [addAnswerModal, setAddAnswerModal] = useState(false);
-  //questionBody
-  //addAnswerModel
+  const [questionId, setQuestionId] = useState({})
   //addQuestionModal
 
-  const handleAnswerModal = (value, body={}) => {
-    //use for opening of closing add answer modal
+  const handleAnswerModal = (value, body={}, questionId) => {
+    setQuestionId(questionId);
     setQuesitonBody(body);
     setAddAnswerModal(value);
   }
@@ -62,10 +61,12 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
       {addAnswerModal && (
                   <div>
                     <AddAnswer
+                    fetchQuestionData={fetchQuestionData}
                     questionBody={questionBody}
                     itemId={itemId}
                     handleAnswerModal={handleAnswerModal}
                     itemName={itemName}
+                    questionId={questionId}
                     />
                   </div>
                 )}
