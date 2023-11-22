@@ -3,35 +3,36 @@ import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
 
-const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatures, fetchData} ) => {
+const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
   const [cardData, setCardData] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCardData = async () => {
       try {
         const productData = await getProductDataById(itemId);
         const styleData = await getStyleDataById(itemId);
-        let response = {
-          name: productData.name,
-          category: productData.category,
-          features: productData.features
-        };
-        /* FIND DEFAULT STYLE */
-        for (let style of styleData) {
-          if(style["default?"]) {
-            response.photos = style.photos;
-            response.original_price = style.original_price;
-            response.sale_price = style.sale_price;
+        if(productData&&styleData) {
+          let response = {
+            name: productData.name || "NO NAME",
+            category: productData.category || "NO CAT",
+            features: productData.features || []
+          };
+          /* USE DEFAULT STYLE || FIRST STYLE */
+          for (let i = 0; i < styleData.length; i++) {
+            let style = styleData[i];
+            if (i === 0 || style["default?"]) {
+              response.photos = style.photos[0].thumbnail_url || "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg";
+              response.original_price = style.original_price;
+              response.sale_price = style.sale_price;
+            }
           }
+          return setCardData(response);
         }
-        /* TESTING */
-        // response.sale_price = 10;
-        return setCardData(response);
       } catch (err) {
         console.error('Error getting item details: ', err);
       }
     }
-    fetchData();
+    fetchCardData();
   }, []);
 
   let priceString =
@@ -50,15 +51,12 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatur
 
   return cardData ? (
     <div className={className} >
-      {/* <button className="c-card-action">⭐</button> */}
       {actionButtons[action]}
-      <img className="c-card-img" onClick={() => fetchData(itemId)}
-        src={cardData.hasOwnProperty("photos") && cardData.photos[0].thumbnail_url !== null
-        ? cardData.photos[0].thumbnail_url
-        : "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg"} />
+      <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
+        src={cardData.photos} />
       <div className="c-card-text-container">
         <div className="c-card-cat">{cardData.category}</div>
-        <div className="c-card-name" onClick={() => fetchData(itemId)}>{cardData.name}</div>
+        <div className="c-card-name" onClick={() => updateMainProduct(itemId)}>{cardData.name}</div>
         <div className="c-card-price">{priceString}</div>
         <Stars itemId={itemId} />
       </div>

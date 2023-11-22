@@ -12,12 +12,8 @@ import './styles.css'
 const App = () =>{
   const [currentItem, setCurrentItem] = useState(null);
 
-  const fetchData = async (itemId) => {
+  const updateMainProduct = async (itemId) => {
     try {
-      /* LAST VERSION - WILL REMOVE ONCE APPROVED */
-      // const item = await getFirstItem();
-      // setCurrentItem(item);
-
       const item = await getProductDataById(itemId);
       setCurrentItem(item);
     } catch (error) {
@@ -26,8 +22,13 @@ const App = () =>{
   };
 
   useEffect(() => {
-    /* NOTE: Hardcoding initial item and using product/:id endpoint as it is needed in Outfits Components */
-    fetchData(40351);
+    /* NOTE: Hardcoding first item */
+    /* TEST CASES
+    40349 - [Related] Getting duplicate keys for cards
+    40345 - Has default style, but no images
+    40352 - No default style
+    */
+    updateMainProduct(40345);
   }, []);
 
   return (
@@ -40,7 +41,7 @@ const App = () =>{
               <ProductDetails itemId={currentItem.id}/>
               <RatingsReviews itemId={currentItem.id} itemName={currentItem.name}/>
               <QuestionsAnswers itemId={currentItem.id} itemName={currentItem.name}/>
-              <RelatedOutfits itemId={currentItem.id} itemFeatures={currentItem.features} fetchData={fetchData}/>
+              <RelatedOutfits itemId={currentItem.id} itemFeatures={currentItem.features} updateMainProduct={updateMainProduct}/>
             </>
           )}
       </div>
