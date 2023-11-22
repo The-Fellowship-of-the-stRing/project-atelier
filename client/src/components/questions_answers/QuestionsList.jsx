@@ -35,7 +35,8 @@ const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId, ha
                 Q: {question.question_body}
               </div>
               <div className="k-question-helpful">
-                Helpful? <span onClick={() => checkMarked(id)} className="k-question-yes-click" style={{cursor: marked[id] ? "default" : "pointer"}}>Yes</span>({question.question_helpfulness})  |  <span className="k-add-answer" onClick={() => handleAnswerModal(true, question.question_body)}>Add answer</span>
+                Helpful? <span onClick={() => checkMarked(id)} className="k-question-yes-click"
+                style={{cursor: marked[id] ? "default" : "pointer"}}>Yes</span>({question.question_helpfulness})  |  <span className="k-add-answer" onClick={() => handleAnswerModal(true, question.question_body)}>Add answer</span>
               </div>
             </div>
               <Answers

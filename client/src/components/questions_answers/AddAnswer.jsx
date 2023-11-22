@@ -19,8 +19,6 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName } ) => {
     .catch((err) => console.error(err))
   }, [itemId])
 
-  //un subnmit, post, get (from fetch passed down as props), close the modal
-
 
   return (
         <div className="modal">
