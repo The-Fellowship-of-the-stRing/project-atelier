@@ -12,7 +12,6 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName, question
 
   const sendAnswerData = (e) => {
     e.preventDefault();
-    console.log('inside sendAnswerData')
     axios.post(`/qa/questions/${questionId}/answers`, {
       body: yourAnswer,
       name: yourNickName,
@@ -20,13 +19,11 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName, question
       photos: yourPhotos
     })
     .then((response) => {
-      console.log('response inside AddAnswer PUT', response)
       fetchQuestionData()
   })
-    .catch((err) => console.log('error inside AddAnswer PUT: ', err))
+    .catch((err) => console.error('error inside AddAnswer PUT: ', err))
   }
 
-  // console.log('questionId in AddAnswer: ', questionId)
 
 
   return (

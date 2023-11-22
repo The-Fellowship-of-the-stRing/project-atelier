@@ -17,9 +17,6 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   //addQuestionModal
 
   const handleAnswerModal = (value, body={}, questionId) => {
-    //use for opening of closing add answer modal
-    // console.log('question data from QuestionsList Line 40 handleAnswerModal: ', body)
-    // console.log('questonId: ', questionId)
     setQuestionId(questionId);
     setQuesitonBody(body);
     setAddAnswerModal(value);

@@ -10,7 +10,6 @@ const Answers = ( { questionId, answerData, setAnswerData } ) => {
 
 
   const checkMarked = (id) => {
-    console.log('inside check marked')
     if (!marked[id]) {
       setMarked({...marked, [id]: true})
       handleHelpful(id)
@@ -29,7 +28,7 @@ const Answers = ( { questionId, answerData, setAnswerData } ) => {
     .then((result) => {
       fetchData()
     })
-    .catch((err) => console.log(err))
+    .catch((err) => console.error(err))
   }
 
   const fetchData = async () => {
