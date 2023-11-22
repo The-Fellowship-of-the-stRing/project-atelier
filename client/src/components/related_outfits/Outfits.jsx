@@ -11,9 +11,6 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
   const [outfitsByUser, setOutfitsByUser] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
 
-  // const getCurrentOutfits = () => {
-  //   return JSON.parse(localStorage.getItem(document.cookie)) || [];
-  // }
   let parsedData = JSON.parse(localStorage.getItem(document.cookie)) || [];
   useEffect(() => {
     setOutfitsByUser(parsedData);

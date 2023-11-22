@@ -11,19 +11,23 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatur
       try {
         const productData = await getProductDataById(itemId);
         const styleData = await getStyleDataById(itemId);
-        let response = {
-          name: productData.name,
-          category: productData.category,
-          features: productData.features
-        };
-        /* FIND DEFAULT STYLE */
-        for (let style of styleData) {
-          if(style["default?"]) {
-            response.photos = style.photos;
-            response.original_price = style.original_price;
-            response.sale_price = style.sale_price;
+        if(productData&&styleData) {
+          let response = {
+            name: productData.name || "NO NAME",
+            category: productData.category || "NO CAT",
+            features: productData.features || []
+          };
+          /* FIND DEFAULT STYLE */
+          for (let style of styleData) {
+            if(style["default?"]) {
+              response.photos = style.photos;
+              response.original_price = style.original_price;
+              response.sale_price = style.sale_price;
+            }
           }
+          return setCardData(response);
         }
+
         return setCardData(response);
       } catch (err) {
         console.error('Error getting item details: ', err);
