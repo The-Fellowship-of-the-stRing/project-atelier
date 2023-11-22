@@ -5,6 +5,11 @@ import '../../stylesheets/ratings_review/ratingFactors.css'
 
 
 const RatingFactors = ({totals}) => {
+  /*
+  NOTES FOR LUKE:
+  - Please consider cases where not all data is provided.
+  - REPO: In related section, click on the white "YEazy 350" (itemId: 40351)
+  */
   const [categories, setCategories] = useState([])
 
   const options = {
