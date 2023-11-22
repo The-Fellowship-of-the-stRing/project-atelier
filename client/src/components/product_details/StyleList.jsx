@@ -1,5 +1,4 @@
-import React from 'react';
-import {useState,useEffect} from 'react';
+import React,{useState,useEffect} from 'react';
 import '../../stylesheets/product_details/styleList.css';
 const StyleList = ({itemId,styles,style, handleStyle}) => {
 
@@ -11,7 +10,7 @@ const StyleList = ({itemId,styles,style, handleStyle}) => {
   const StyleGallery = (props) => {
     return(
       props.styles.map((value, index) => {
-        return <Style key ={value.style_id} thumbnail={value.photos[0].thumbnail_url} onClick ={(e)=>handleStyle(e)} />
+        return <Style key ={value.style_id} thumbnail={value.photos[0].thumbnail_url} handleStyle= {handleStyle}/>
       })
     )
   }
