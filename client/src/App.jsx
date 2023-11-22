@@ -24,10 +24,11 @@ const App = () =>{
       console.error('Error fetching item:', error);
     }
   };
+  console.log(currentItem);
 
   useEffect(() => {
     /* NOTE: Hardcoding initial item and using product/:id endpoint as it is needed in Outfits Components */
-    fetchData(40344);
+    fetchData(40351);
   }, []);
 
   return (
@@ -40,7 +41,7 @@ const App = () =>{
               <ProductDetails itemId={currentItem.id}/>
               <RatingsReviews itemId={currentItem.id} itemName={currentItem.name}/>
               <QuestionsAnswers itemId={currentItem.id}/>
-              <RelatedOutfits itemId={currentItem.id} fetchData={fetchData}/>
+              <RelatedOutfits itemId={currentItem.id} itemFeatures={currentItem.features} fetchData={fetchData}/>
             </>
           )}
       </div>

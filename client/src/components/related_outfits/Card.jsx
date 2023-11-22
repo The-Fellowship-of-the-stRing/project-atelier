@@ -3,9 +3,8 @@ import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
 
-const Card = ( {itemId, className, action, addProduct, deleteProduct, fetchData} ) => {
+const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatures, fetchData} ) => {
   const [cardData, setCardData] = useState(null);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -38,11 +37,6 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct, fetchData}
     (cardData && cardData.sale_price && cardData.original_price) ? (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>)
     : (cardData && cardData.original_price) ? (<p className="c-card-price">${cardData.original_price} </p>)
     : (<p className="c-card-price">NO PRICE :(</p>);
-
-  const cardClickHandler = () => {
-    /* GET FROM GORDON */
-    console.log('Will route to product details page id: ', itemId);
-  }
 
   const relatedActionClickHander = () => {
     console.log('RELATED -> COMPARE MODULE');
