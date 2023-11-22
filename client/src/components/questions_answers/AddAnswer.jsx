@@ -19,14 +19,12 @@ const AddAnswer = (questionBody, itemId ) => {
   useEffect(() => {
     axios.get(`products/?product_id=${itemId}`)
     .then((response) => {
-      console.log('response.data: ', response.data)
       setProduct(response.data)
     })
-    .catch((err) => console.log('error in AddAnswer:', err))
+    .catch((err) => console.error(err))
   }, [itemId])
 
 
-  console.log(yourAnswer)
   return (
     <>
       <button onClick={toggleModal} className="btn-modal">
