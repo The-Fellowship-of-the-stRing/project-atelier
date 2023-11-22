@@ -5,6 +5,7 @@ import Stars from './Stars.jsx';
 
 const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatures, fetchData} ) => {
   const [cardData, setCardData] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
