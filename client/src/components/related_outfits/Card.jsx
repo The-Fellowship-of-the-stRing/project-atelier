@@ -3,7 +3,7 @@ import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
 
-const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
+const Card = ( {itemId, itemName, className, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
   const [cardData, setCardData] = useState(null);
 
   useEffect(() => {
@@ -41,7 +41,19 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatur
     : (<p className="c-card-price">NO PRICE :(</p>);
 
   const relatedActionClickHander = () => {
-    console.log('RELATED -> COMPARE MODULE');
+    let currentName = itemName;
+    let comparedName = cardData.name;
+    console.log(currentName, comparedName)
+    let compareData = {};
+    for (let i = 0; i < itemFeatures.length; i++) {
+      let currentFeature = itemFeatures[i];
+      compareData[currentFeature.feature] = {current:currentFeature.value};
+    }
+    for (let i = 0; i < cardData.features.length; i++) {
+      let currentFeature = cardData.features[i];
+      compareData[currentFeature.feature].compared = currentFeature.value;
+    }
+
   }
 
   let actionButtons = {

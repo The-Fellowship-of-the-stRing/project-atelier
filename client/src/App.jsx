@@ -28,7 +28,7 @@ const App = () =>{
     40345 - Has default style, but no images
     40352 - No default style
     */
-    updateMainProduct(40345);
+    updateMainProduct(40349);
   }, []);
 
   return (
@@ -41,7 +41,7 @@ const App = () =>{
               <ProductDetails itemId={currentItem.id}/>
               <RatingsReviews itemId={currentItem.id} itemName={currentItem.name}/>
               <QuestionsAnswers itemId={currentItem.id} itemName={currentItem.name}/>
-              <RelatedOutfits itemId={currentItem.id} itemFeatures={currentItem.features} updateMainProduct={updateMainProduct}/>
+              <RelatedOutfits itemId={currentItem.id} itemName={currentItem.name} itemFeatures={currentItem.features} updateMainProduct={updateMainProduct}/>
             </>
           )}
       </div>
