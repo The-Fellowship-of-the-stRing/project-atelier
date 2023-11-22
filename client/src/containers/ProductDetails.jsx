@@ -29,19 +29,21 @@ const ProductDetails = ({itemId}) => {
         values.description = productData.description;
         values.category= productData.category;
         setData(values);
-        setStyles(styleData);
+        await setStyles(styleData);
       } catch (err) {
         console.error('Error getting item details: ', err);
       }
     }
     fetchData();
   }, [itemId]);
+  useEffect(()=> {
+    setStyle(styles[0]);
+  },[styles])
   const handlePrice = () => {
 
   }
   const handleStyle = (value) => {
-    console.log('clicked: ', value);
-    setStyle(value);
+    setStyle(styles[value]);
   }
   return data&&styles? (
     <div className= "g-product-details-main-container">
