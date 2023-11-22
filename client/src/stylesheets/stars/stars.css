@@ -1,7 +1,7 @@
 #stars-main-container {
   display: flex;
   position: relative;
-  width: 5em;
+  width: 5.5em;
   height: 1.3em;
   overflow-x: hidden;
   justify-content: center;
@@ -14,6 +14,8 @@
   z-index: 1;
   left: 0;
   align-items: center;
+  color: #256EFF;
+  overflow-y: hidden;
 }
 
 #stars-filled-container{
@@ -21,8 +23,9 @@
   position: absolute;
   z-index: 2;
   left: 0;
-  overflow-x: hidden;
+  overflow: hidden;
   align-items: center;
+  color: #256EFF;
 }
 
 #star-outline, #star-fill {

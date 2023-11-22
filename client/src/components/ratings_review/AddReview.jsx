@@ -121,6 +121,7 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
         "photos": [],
         "characteristics": obj
       }
+      console.log(data)
       updateItemReviews(data)
       handleModal(false)
    }
