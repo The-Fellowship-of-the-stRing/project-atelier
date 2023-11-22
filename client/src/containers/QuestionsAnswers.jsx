@@ -66,6 +66,7 @@ const QuestionsAnswers = ( { itemId } ) => {
           More Answered Questions
         </button>
       )}
+      <div data-testid="current-count">{currentCount}</div>
       <button className="k-add-a-question">Add a Question +</button>
 
     </div>
