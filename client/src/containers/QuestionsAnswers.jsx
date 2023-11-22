@@ -64,6 +64,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
       {addAnswerModal && (
                   <div>
                     <AddAnswer
+                    fetchQuestionData={fetchQuestionData}
                     questionBody={questionBody}
                     itemId={itemId}
                     handleAnswerModal={handleAnswerModal}

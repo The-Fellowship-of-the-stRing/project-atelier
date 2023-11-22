@@ -9,6 +9,7 @@ const Answers = ( { questionId, answerData, setAnswerData } ) => {
 
 
   const checkMarked = (id) => {
+    console.log('inside check marked')
     if (!marked[id]) {
       setMarked({...marked, [id]: true})
       handleHelpful(id)
