@@ -8,31 +8,27 @@ import getRelatedItems from '../../utils/getRelatedItems.js';
 const Outfits = ( {itemId, updateMainProduct} ) => {
   // localStorage.clear();
 
-  let parsedData = JSON.parse(localStorage.getItem(document.cookie)) || [];
   const [outfitsByUser, setOutfitsByUser] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
 
+  // const getCurrentOutfits = () => {
+  //   return JSON.parse(localStorage.getItem(document.cookie)) || [];
+  // }
+  let parsedData = JSON.parse(localStorage.getItem(document.cookie)) || [];
   useEffect(() => {
-    parsedData ? setOutfitsByUser(JSON.parse(localStorage.getItem(document.cookie))) : (localStorage.setItem(document.cookie, '[]') && setOutfitsByUser([]));
-    /* TESTING */
-    // setOutfitsByUser([40345, 40346, 40351, 40350]);
-    parsedData && parsedData.includes(itemId) ? setIsAdded(parsedData.includes(itemId)) : setIsAdded(false);
+    setOutfitsByUser(parsedData);
+    // parsedData ? setOutfitsByUser(JSON.parse(localStorage.getItem(document.cookie))) : (localStorage.setItem(document.cookie, '[]') && setOutfitsByUser([]));
+    (parsedData && parsedData.includes(itemId)) ? setIsAdded(parsedData.includes(itemId)) : setIsAdded(false);
   }, [itemId]);
 
-  // let parsedData = JSON.parse(localStorage.getItem(document.cookie)) || [];
-  // const [outfitsByUser, setOutfitsByUser] = useState(parsedData);
-  // const [isAdded, setIsAdded] = useState(parsedData && parsedData.includes(itemId));
-
   const addProduct = () => {
-    let parsedData = JSON.parse(localStorage.getItem(document.cookie));
-    parsedData ? parsedData.push(itemId) : parsedData = [itemId];
+    parsedData = [itemId, ...parsedData];
     localStorage.setItem(document.cookie, JSON.stringify(parsedData));
     setOutfitsByUser(parsedData);
     setIsAdded(true);
   }
-  // add -> delete -> add
+
   const deleteProduct = (product_id) => {
-    let parsedData = JSON.parse(localStorage.getItem(document.cookie));
     let updatedState = [];
     for (let id of parsedData) {
       if(id !== product_id) {
