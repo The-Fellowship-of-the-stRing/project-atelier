@@ -4,19 +4,20 @@ import Search from '../components/questions_answers/Search.jsx';
 import QuestionsList from '../components/questions_answers/QuestionsList.jsx';
 import axios from 'axios';
 
-const QuestionsAnswers = ( {itemId} ) => {
+const QuestionsAnswers = ( { itemId } ) => {
 
   const [questionData, setQuestionData] = useState([]);
   const [resultsToShow, setResultsToShow] = useState([]);
   const [currentCount, setCurrentCount] = useState(2);
   const [numOfQuestionsToGet, setNumOfAnswersToGet] = useState(400);
 
+  console.log(itemId)
+
   const handleHelpful = (questionId) => {
     axios.put(`/qa/questions/${questionId}/helpful`)
     .then(() => {
       axios.get(`/qa/questions/?product_id=${itemId}`)
       .then((result) => {
-        console.log('inside handleHelpul: ', result.data.results)
         setResultsToShow(result.data.results)
       })
       .catch((err) => console.error(err))
@@ -49,10 +50,16 @@ const QuestionsAnswers = ( {itemId} ) => {
     setCurrentCount(currentCount+2)
   }
 
+
   return resultsToShow.length > 0 ? (
     <div className="k-questions-answers-main-container">
       <Search />
-      <QuestionsList handleHelpful={handleHelpful} resultsToShow={resultsToShow} currentCount={currentCount}/>
+      <QuestionsList
+      handleHelpful={handleHelpful}
+      resultsToShow={resultsToShow}
+      currentCount={currentCount}
+      itemId={itemId}
+      />
       {(resultsToShow.length >= 2) && (resultsToShow.length <= 20) && (
         <button
         className="k-more-answered-questions"
@@ -62,6 +69,7 @@ const QuestionsAnswers = ( {itemId} ) => {
         </button>
       )}
       <button className="k-add-a-question">Add a Question +</button>
+
     </div>
   ) : (
     <div>Loading...</div>
