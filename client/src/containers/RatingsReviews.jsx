@@ -110,7 +110,7 @@ const RatingsReviews = ({itemId, itemName}) => {
     fetchData()
   },[itemId])
 
-  return (
+  return totals ? (
     <div className="ratings-review-main-container">
       {showModal && (
         <AddReview handleModal={handleModal} itemName={itemName} totals={totals} updateItemReviews={updateItemReviews}/>
@@ -127,6 +127,10 @@ const RatingsReviews = ({itemId, itemName}) => {
       currentCount={currentCount}
       currentFilter={currentFilter}
       handleModal={handleModal}/>
+    </div>
+  ) : (
+    <div>
+      Loading data...
     </div>
   )
 }

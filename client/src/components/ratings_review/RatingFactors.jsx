@@ -35,12 +35,13 @@ const RatingFactors = ({totals}) => {
   return totals && (
     <div className="l-rating-factors-main">
       {categories.map((factor) => {
-        const data = totals.characteristics[factor]
-        const catRating = data.value;
-        const markerLocation = (catRating / 5) * 100
-        const subText = options[factor]
-        return (
-          <div key={data.id} className="l-rating-factors-single">
+        if (totals.characteristics[factor]) {
+          const data = totals.characteristics[factor]
+          const catRating = data.value;
+          const markerLocation = (catRating / 5) * 100
+          const subText = options[factor]
+          return (
+            <div key={data.id} className="l-rating-factors-single">
             <div className="l-rating-factors-cat">
             {factor}
             </div>
@@ -52,6 +53,7 @@ const RatingFactors = ({totals}) => {
             </div>
           </div>
         )
+      }
       })}
     </div>
   )
