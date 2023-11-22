@@ -7,7 +7,7 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatur
   const [cardData, setCardData] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCardData = async () => {
       try {
         const productData = await getProductDataById(itemId);
         const styleData = await getStyleDataById(itemId);
@@ -31,7 +31,7 @@ const Card = ( {itemId, className, action, addProduct, deleteProduct, itemFeatur
         console.error('Error getting item details: ', err);
       }
     }
-    fetchData();
+    fetchCardData();
   }, []);
 
   let priceString =
