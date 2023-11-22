@@ -39,7 +39,7 @@ const App = () =>{
               <Stars itemId={currentItem.id} />
               <ProductDetails itemId={currentItem.id}/>
               <RatingsReviews itemId={currentItem.id} itemName={currentItem.name}/>
-              <QuestionsAnswers itemId={currentItem.id}/>
+              <QuestionsAnswers itemId={currentItem.id} itemName={currentItem.name}/>
               <RelatedOutfits itemId={currentItem.id} itemFeatures={currentItem.features} fetchData={fetchData}/>
             </>
           )}
