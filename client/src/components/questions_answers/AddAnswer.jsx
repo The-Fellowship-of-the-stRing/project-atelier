@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../stylesheets/questions_answers/AddAnswerModal.css'
 
-const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName } ) => {
+const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName, questionId } ) => {
 
   const [product, setProduct] = useState({});
   const [yourAnswer, setYourAnswer] = useState('');
@@ -10,14 +10,11 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName } ) => {
   const [yourEmail, setYourEmail] = useState('');
   const [yourPhotos, setYourPhotos] = useState([]);
 
+  // const sendAnswerData = () => {
+  //   axios.put(`/qa/questions/:question_id/answers`)
+  // }
 
-  useEffect(() => {
-    axios.get(`products/?product_id=${itemId}`)
-    .then((response) => {
-      setProduct(response.data)
-    })
-    .catch((err) => console.error(err))
-  }, [itemId])
+  console.log('questionId in AddAnswer: ', questionId)
 
 
   return (
@@ -59,6 +56,7 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName } ) => {
               onClick={() => handleAnswerModal(false)}
 
               >
+                Submit
               </button>
             </form>
             <button className="close-modal" onClick={() => handleAnswerModal(false)}>

@@ -13,12 +13,14 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   const [numOfQuestionsToGet, setNumOfAnswersToGet] = useState(400);
   const [questionBody, setQuesitonBody] = useState({});
   const [addAnswerModal, setAddAnswerModal] = useState(false);
-  //questionBody
-  //addAnswerModel
+  const [questionId, setQuestionId] = useState({})
   //addQuestionModal
 
-  const handleAnswerModal = (value, body={}) => {
+  const handleAnswerModal = (value, body={}, questionId) => {
     //use for opening of closing add answer modal
+    // console.log('question data from QuestionsList Line 40 handleAnswerModal: ', body)
+    // console.log('questonId: ', questionId)
+    setQuestionId(questionId);
     setQuesitonBody(body);
     setAddAnswerModal(value);
   }
@@ -66,6 +68,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
                     itemId={itemId}
                     handleAnswerModal={handleAnswerModal}
                     itemName={itemName}
+                    questionId={questionId}
                     />
                   </div>
                 )}
