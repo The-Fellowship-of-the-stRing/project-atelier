@@ -14,10 +14,10 @@ const App = () =>{
 
   const fetchData = async (itemId) => {
     try {
-      /* LAST VERSION */
+      /* LAST VERSION - WILL REMOVE ONCE APPROVED */
       // const item = await getFirstItem();
       // setCurrentItem(item);
-      console.log(itemId);
+
       const item = await getProductDataById(itemId);
       setCurrentItem(item);
     } catch (error) {
@@ -26,7 +26,7 @@ const App = () =>{
   };
 
   useEffect(() => {
-    /* NOTE: Hardcoding initial item and using product/:id endpoint as it is needed in Outfits List */
+    /* NOTE: Hardcoding initial item and using product/:id endpoint as it is needed in Outfits Components */
     fetchData(40344);
   }, []);
 
