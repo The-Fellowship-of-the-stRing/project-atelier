@@ -11,7 +11,7 @@ import '../stylesheets/product_details/productDetails.css';
 const ProductDetails = ({itemId}) => {
   const [data, setData] = useState(null);
   const [styles, setStyles] = useState([]);
-  const [style, setStyle] = useState(styles[0]);
+  const [style, setStyle] = useState(null);
   const [price, setPrice] = useState(null);
   const [isSale, setIsSale] = useState(false);
   const [sku, setSku] = useState(null);
@@ -37,7 +37,18 @@ const ProductDetails = ({itemId}) => {
     fetchData();
   }, [itemId]);
   useEffect(()=> {
-    setStyle(styles[0]);
+    var def = false;
+    for(let x of styles)
+    {
+      if(x["default?"]=== true) {
+        setStyle(x);
+        def = true;
+      }
+    }
+    if(def===false)
+    {
+      setStyle(styles[0]);
+    }
   },[styles])
   const handlePrice = () => {
 

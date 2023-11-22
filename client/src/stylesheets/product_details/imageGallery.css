@@ -1,6 +1,21 @@
-.g-images {
+.g-images-container {
   display:flex;
-  flex-direction:column;
+  flex-direction:row;
   width:100%;
   height:100%;
 }
+.g-images-select {
+  display:flex;
+  width: 20%;
+  height:auto;
+  border: 1px solid red;
+
+}
+.g-images-main {
+  border:1px solid blue;
+  width:80%;
+  height: auto;
+}
+/* .g-images-main-container{
+  width:100%;
+} */
