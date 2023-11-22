@@ -1,30 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import AddAnswer from './AddAnswer.jsx';
 import '../../stylesheets/questions_answers/answers.css'
 
-const Answers = ( { questionId } ) => {
+const Answers = ( { questionId, answerData, setAnswerData } ) => {
 
-  const [answerData, setAnswerData] = useState([]);
   const [marked, setMarked] = useState({});
-  const [reported, setReported] = useState({});
 
-  const checkReported = (id) => {
-    if (!reported[id]) {
-      setReported({...reported, [id]: true})
-      handleReported(id)
-    }
-  }
-
-  const handleReported = (answerId) => {
-    axios.put(`/qa/answers/${answerId}/report`)
-    .then((result) => {
-      fetchData()
-    })
-    .catch((err) => console.log(err))
-  }
 
   const checkMarked = (id) => {
-    console.log('id to mark:: ', id)
     if (!marked[id]) {
       setMarked({...marked, [id]: true})
       handleHelpful(id)
@@ -33,7 +17,7 @@ const Answers = ( { questionId } ) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`/qa/questions/${questionId}/answers?question_id=${questionId}`);
+      const response = await axios.get(`/qa/questions/${questionId}/answers`);
       const sortedResults = response.data.results.sort((a, b) => b.helpfulness - a.helpfulness)
       setAnswerData(sortedResults)
       return response.data
@@ -43,11 +27,12 @@ const Answers = ( { questionId } ) => {
   };
 
   const handleHelpful = (answerId) => {
+
     axios.put(`/qa/answers/${answerId}/helpful`)
     .then((result) => {
       fetchData()
     })
-    .catch((err) => console.log(err))
+    .catch((err) => console.error(err))
   }
 
   const formatDate = (dateToFormat) => {
@@ -65,7 +50,6 @@ const Answers = ( { questionId } ) => {
     fetchData()
   }, [questionId])
 
-  // answerData ? console.log('answerData is here!', answerData) : console.log('not here yet..., ', answerData)
 
   return answerData ? (
     <>
@@ -88,13 +72,12 @@ const Answers = ( { questionId } ) => {
             <div className="k-answer-date">{formatDate(answer.date)} | </div>
 
             <div className="k-answer-helpful">
-              Helpful? <span className="k-answer-yes-click" style={{cursor: marked[id] ? "default" : "pointer"}} onClick={() => checkMarked(id)}>Yes</span> |  ({answer.helpfulness})
+              Helpful? <span className="k-answer-yes-click" onClick={() => checkMarked(id)}>Yes</span> |  ({answer.helpfulness})
             </div>
             <div className="k-answer-report">
-              <span className="k-answer-report-click" onClick={() => checkReported(id)} style={{cursor: reported[id] ? "default" : "pointer"}} >{reported[id] ? "Reported" : "Report"}</span>
+              <span className="k-answer-report-click">Report</span>
             </div>
           </div>
-
         </div>
       )
     })}
