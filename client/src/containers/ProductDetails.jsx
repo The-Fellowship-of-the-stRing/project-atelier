@@ -11,6 +11,7 @@ import '../stylesheets/product_details/productDetails.css';
 const ProductDetails = ({itemId}) => {
   const [data, setData] = useState(null);
   const [styles, setStyles] = useState([]);
+  const [style, setStyle] = useState(styles[0]);
   const [price, setPrice] = useState(null);
   const [isSale, setIsSale] = useState(false);
   const [sku, setSku] = useState(null);
@@ -28,15 +29,21 @@ const ProductDetails = ({itemId}) => {
         values.description = productData.description;
         values.category= productData.category;
         setData(values);
-        setStyles(styleData);
+        await setStyles(styleData);
       } catch (err) {
         console.error('Error getting item details: ', err);
       }
     }
     fetchData();
   }, [itemId]);
+  useEffect(()=> {
+    setStyle(styles[0]);
+  },[styles])
   const handlePrice = () => {
 
+  }
+  const handleStyle = (value) => {
+    setStyle(styles[value]);
   }
   return data&&styles? (
     <div className= "g-product-details-main-container">
@@ -50,7 +57,7 @@ const ProductDetails = ({itemId}) => {
           <div>{data.name}</div>
           <div>{data.slogan}</div>
         </div>
-        <StyleList itemId = {itemId} styles= {styles}/>
+        <StyleList itemId = {itemId} styles= {styles} style ={style} handleStyle ={handleStyle}/>
         <Cart itemId = {itemId}/>
         <SocialMedia itemId = {itemId}/>
         {data.description}
