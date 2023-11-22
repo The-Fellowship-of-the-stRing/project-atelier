@@ -1,9 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import Card from './Card.jsx';
 import getRelatedItems from '../../utils/getRelatedItems.js';
-/* How to persist data on client side */
-// local storage keyword to
-// fs system - create new text files which stores in system files
 
 const Outfits = ( {itemId, updateMainProduct} ) => {
   // localStorage.clear();
@@ -29,7 +26,6 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
   }
 
   const deleteProduct = (product_id) => {
-    /* Deletes all products after 2nd consecutive delete */
     let parsedData = getOutfits();
     let updatedState = [];
     for (let id of parsedData) {
