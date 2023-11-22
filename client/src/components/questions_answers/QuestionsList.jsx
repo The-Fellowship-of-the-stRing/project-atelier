@@ -5,7 +5,7 @@ import AddAnswer from './AddAnswer.jsx';
 import '../../stylesheets/questions_answers/questionsAnswers.css'
 import '../../stylesheets/questions_answers/questionsList.css'
 
-const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId } ) => {
+const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId, handleAnswerModal } ) => {
 
   const [marked, setMarked] = useState({});
   const [answerData, setAnswerData] = useState([]);
@@ -35,15 +35,8 @@ const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId } )
                 Q: {question.question_body}
               </div>
               <div className="k-question-helpful">
-                Helpful? <span onClick={() => checkMarked(id)} className="k-question-yes-click" style={{cursor: marked[id] ? "default" : "pointer"}}>Yes</span>({question.question_helpfulness})  |  <span className="k-add-answer" onClick={() => handleAddAnswer()}>Add answer</span>
-                {showModal && (
-                  <div>
-                    <AddAnswer
-                    questionBody={question.question_body}
-                    itemId={itemId}
-                    />
-                  </div>
-                )}
+                Helpful? <span onClick={() => checkMarked(id)} className="k-question-yes-click"
+                style={{cursor: marked[id] ? "default" : "pointer"}}>Yes</span>({question.question_helpfulness})  |  <span className="k-add-answer" onClick={() => handleAnswerModal(true, question.question_body)}>Add answer</span>
               </div>
             </div>
               <Answers
