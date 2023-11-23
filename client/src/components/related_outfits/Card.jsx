@@ -4,7 +4,7 @@ import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
 import Compare from './Compare.jsx';
 
-const Card = ( {itemId, itemName, className, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
+const Card = ( {itemId, itemName, cardKey, className, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
   const [cardData, setCardData] = useState(null);
   const [isCompareShown, setIsCompareShown] = useState(false);
 
@@ -53,7 +53,7 @@ const Card = ( {itemId, itemName, className, action, addProduct, deleteProduct, 
 
   return cardData ? (
     <div className={className} >
-      {isCompareShown ? <Compare itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} /> : null}
+      {isCompareShown ? <Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} /> : null}
       {actionButtons[action]}
       <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
         src={cardData.photos} />

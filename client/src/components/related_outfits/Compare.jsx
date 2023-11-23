@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import '../../stylesheets/related_outfits/CompareModal.css'
 
-const CompareModal = ( {itemName, compareName, itemFeatures, cardData, compareClickHandler} ) => {
+const CompareModal = ( {itemId, cardKey, itemName, compareName, itemFeatures, cardData, compareClickHandler} ) => {
 
   let compareData = {};
   for (let i = 0; i < itemFeatures.length; i++) {
@@ -9,7 +9,6 @@ const CompareModal = ( {itemName, compareName, itemFeatures, cardData, compareCl
     let featureValue = currentFeature.value ? currentFeature.value : '';
     compareData[currentFeature.feature] = {current:featureValue};
   }
-
   for (let i = 0; i < cardData.features.length; i++) {
     let currentFeature = cardData.features[i];
     let featureValue = currentFeature.value ? currentFeature.value : '';
@@ -17,19 +16,18 @@ const CompareModal = ( {itemName, compareName, itemFeatures, cardData, compareCl
       ? compareData[currentFeature.feature].compared = featureValue
       : compareData[currentFeature.feature] = {compared:featureValue};
   }
-  console.log(compareData);
+
   let featureList = [];
   if(compareData){
     let index = 0;
     for (let key in compareData) {
       featureList.push(
-        <>
+        <div key={cardKey+index}>
           <div className="c-feature-value">{key}</div>
           <div className="c-current-value">{compareData[key].current ? compareData[key].current : ""}</div>
           <div className="c-compared-value">{compareData[key].compared ? compareData[key].compared : ""}</div>
-        </>
+        </div>
       )
-      // <div className="c-compare-feature-container" key={index}></div>
       index++;
     }
   }
