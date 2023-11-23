@@ -7,8 +7,9 @@ import '../../stylesheets/questions_answers/questionsList.css'
 
 const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId, handleAnswerModal } ) => {
 
+  // console.log('resultsToShow: ', resultsToShow)
   const [marked, setMarked] = useState({});
-  const [answerData, setAnswerData] = useState([]);
+  // const [answerData, setAnswerData] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const checkMarked = (id) => {
@@ -22,11 +23,12 @@ const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId, ha
     setShowModal(true);
   }
 
-
   return resultsToShow ? (
     <div className="k-questions-list">
       {resultsToShow.map((question, index) => {
         const id = question.question_id;
+        // console.log('id in resultsToShowMap QuestionsList: ', id) //questionIds are unique in console, while question bodies are the same, appears in widget as if they are same quesiton, but I don't think they are
+        console.log('question.question_id: ',question.question_id)
         return (
           <div className="k-question-answer-container" key={id}>
 
@@ -41,8 +43,7 @@ const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId, ha
             </div>
               <Answers
               questionId={id}
-              answerData={answerData}
-              setAnswerData={setAnswerData}
+
               itemId={itemId}
               />
               <span className="k-load-more-answers"

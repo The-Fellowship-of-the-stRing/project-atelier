@@ -3,10 +3,11 @@ import axios from 'axios';
 import AddAnswer from './AddAnswer.jsx';
 import '../../stylesheets/questions_answers/answers.css'
 
-const Answers = ( { questionId, answerData, setAnswerData } ) => {
+const Answers = ( { questionId } ) => {
 
   const [marked, setMarked] = useState({});
   const [reported, setReported] = useState({});
+  const [answerData, setAnswerData] = useState([]);
 
 
   const checkMarked = (id) => {
@@ -80,8 +81,8 @@ const Answers = ( { questionId, answerData, setAnswerData } ) => {
 
           <div className="k-answer-details-block">
             <div className="k-answer-user">
-              {answer.answerer_name === 'seller' ?
-              <strong>{answer.answerer_name},</strong>
+              {answer.answerer_name === 'Seller' ?
+              <strong>{answer.answerer_name.toUpperCase()}</strong>
               : answer.answerer_name},
             </div>
 
