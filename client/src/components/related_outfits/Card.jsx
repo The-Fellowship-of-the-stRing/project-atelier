@@ -6,7 +6,7 @@ import Compare from './Compare.jsx';
 
 const Card = ( {itemId, itemName, className, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
   const [cardData, setCardData] = useState(null);
-  const [featureData, setFeatureData] = useState(null);
+  const [isCompareShown, setIsCompareShown] = useState(false);
 
   useEffect(() => {
     const fetchCardData = async () => {
@@ -43,20 +43,7 @@ const Card = ( {itemId, itemName, className, action, addProduct, deleteProduct, 
     : (<p className="c-card-price">NO PRICE :(</p>);
 
   const relatedActionClickHander = () => {
-    let currentName = itemName;
-    let comparedName = cardData.name;
-    console.log(currentName, comparedName);
-
-    let compareData = {};
-    for (let i = 0; i < itemFeatures.length; i++) {
-      let currentFeature = itemFeatures[i];
-      compareData[currentFeature.feature] = {current:currentFeature.value};
-    }
-    for (let i = 0; i < cardData.features.length; i++) {
-      let currentFeature = cardData.features[i];
-      compareData[currentFeature.feature].compared = currentFeature.value;
-    }
-    setFeatureData(compareData);
+    setIsCompareShown(true)
   }
 
   let actionButtons = {
@@ -74,7 +61,7 @@ const Card = ( {itemId, itemName, className, action, addProduct, deleteProduct, 
         <div className="c-card-name" onClick={() => updateMainProduct(itemId)}>{cardData.name}</div>
         <div className="c-card-price">{priceString}</div>
         <Stars itemId={itemId} />
-        <Compare featureData={featureData} itemName={itemName} compareName={cardData.name} />
+        {isCompareShown ? <Compare itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} /> : null}
       </div>
     </div>
   ) : (<div className="c-card-container"></div>);
