@@ -2,9 +2,11 @@ import React,{useState, useEffect} from 'react';
 import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
+import Compare from './Compare.jsx';
 
 const Card = ( {itemId, itemName, className, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
   const [cardData, setCardData] = useState(null);
+  const [featureData, setFeatureData] = useState(null);
 
   useEffect(() => {
     const fetchCardData = async () => {
@@ -43,7 +45,8 @@ const Card = ( {itemId, itemName, className, action, addProduct, deleteProduct, 
   const relatedActionClickHander = () => {
     let currentName = itemName;
     let comparedName = cardData.name;
-    console.log(currentName, comparedName)
+    console.log(currentName, comparedName);
+
     let compareData = {};
     for (let i = 0; i < itemFeatures.length; i++) {
       let currentFeature = itemFeatures[i];
@@ -53,12 +56,12 @@ const Card = ( {itemId, itemName, className, action, addProduct, deleteProduct, 
       let currentFeature = cardData.features[i];
       compareData[currentFeature.feature].compared = currentFeature.value;
     }
-
+    setFeatureData(compareData);
   }
 
   let actionButtons = {
-    related: (<p className="c-card-action-related" onClick={() => relatedActionClickHander()}>⭐</p>),
-    outfits: (<p className="c-card-action-outfits" onClick={() => deleteProduct(itemId)}>☒</p>)
+    related: (<p className="c-card-compare" onClick={() => relatedActionClickHander()}>⭐</p>),
+    outfits: (<p className="c-card-delete" onClick={() => deleteProduct(itemId)}>☒</p>)
   }
 
   return cardData ? (
@@ -71,10 +74,9 @@ const Card = ( {itemId, itemName, className, action, addProduct, deleteProduct, 
         <div className="c-card-name" onClick={() => updateMainProduct(itemId)}>{cardData.name}</div>
         <div className="c-card-price">{priceString}</div>
         <Stars itemId={itemId} />
+        <Compare featureData={featureData} itemName={itemName} compareName={cardData.name} />
       </div>
     </div>
-  ) : (
-  <div className="c-card-container"></div>
-  );
+  ) : (<div className="c-card-container"></div>);
 }
 export default Card
