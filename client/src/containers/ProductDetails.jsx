@@ -49,6 +49,7 @@ const ProductDetails = ({itemId}) => {
     {
       setStyle(styles[0]);
     }
+
   },[styles])
   const handlePrice = () => {
 
