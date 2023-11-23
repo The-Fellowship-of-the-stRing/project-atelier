@@ -1,10 +1,21 @@
+import React, { useEffect, useState } from 'react';
 import ExpandedView from './ExpandedView.jsx';
 import '../../stylesheets/product_details/imageGallery.css';
-const ImageGallery = () => {
-  return(
-    <div className="g-images">
-      ImageGallery
+import ImageSelect from './ImageSelect.jsx';
+const ImageGallery = ({itemId, style}) => {
+  return style?(
+    <div className="g-images-container">
+      <div className= "g-images-select">
+        <ImageSelect style = {style}/>
+      </div>
+
+      <div className= "g-images-main-container">
+      <img  className="g-images-main" src={style.photos[0].url}/>
+      </div>
     </div>
-  )
+  ):
+  <div>
+    Loading gallery images
+  </div>
 }
 export default ImageGallery
