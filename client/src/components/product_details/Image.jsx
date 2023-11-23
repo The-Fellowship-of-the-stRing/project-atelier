@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
-const Style = ({thumbnail,handleImage,index}) => {
+const Style = ({thumbnail,handleIndex,index}) => {
   return(
-     <img className="g-image_select" src = {thumbnail} onClick ={()=> handleImage(index)}/>
+     <img className="g-image_select" src = {thumbnail} onClick ={()=> handleIndex(index)}/>
     )
 }
 export default Style
