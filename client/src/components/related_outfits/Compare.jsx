@@ -12,18 +12,19 @@ const CompareModal = ( {itemName, compareName, itemFeatures, cardData, compareCl
     let currentFeature = cardData.features[i];
     compareData[currentFeature.feature].compared = currentFeature.value;
   }
-
+  console.log(compareData);
   let featureList = [];
   if(compareData){
     let index = 0;
     for (let key in compareData) {
       featureList.push(
-      <div className="c-compare-feature" key={index}>
-        <div className="c-current-value">{compareData[key].current ? compareData[key].current : ""}</div>
+      <>
         <div className="c-feature-value">{key}</div>
+        <div className="c-current-value">{compareData[key].current ? compareData[key].current : ""}</div>
         <div className="c-compared-value">{compareData[key].compared ? compareData[key].compared : ""}</div>
-      </div>
+      </>
       )
+      // <div className="c-compare-feature-container" key={index}></div>
       index++;
     }
   }
@@ -32,11 +33,9 @@ const CompareModal = ( {itemName, compareName, itemFeatures, cardData, compareCl
     <div className="c-compare-modal" onClick={() => compareClickHandler()}>
       <div className="c-overlay"></div>
       <div className="c-compare-model-content">
-        <div className="c-compare-header">
-          <div className="c-current">{itemName}</div>
-          <div className="c-feature">Feature List</div>
-          <div className="c-compared">{compareName}</div>
-        </div>
+        <div className="c-feature">Feature</div>
+        <div className="c-current">{itemName}</div>
+        <div className="c-compared">{compareName}</div>
         {featureList}
       </div>
     </div>
