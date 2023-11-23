@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
+import '../../stylesheets/related_outfits/CompareModal.css'
 
-const CompareModal = ( {itemName, compareName, itemFeatures, cardData} ) => {
+const CompareModal = ( {itemName, compareName, itemFeatures, cardData, compareClickHandler} ) => {
 
   let compareData = {};
   for (let i = 0; i < itemFeatures.length; i++) {
@@ -28,13 +29,16 @@ const CompareModal = ( {itemName, compareName, itemFeatures, cardData} ) => {
   }
 
   return (
-    <div>
-      <div className="c-compare-header">
-        <div className="c-current">{itemName}</div>
-        <div className="c-feature">Feature List</div>
-        <div className="c-compared">{compareName}</div>
+    <div className="c-compare-modal" onClick={() => compareClickHandler()}>
+      <div className="c-overlay"></div>
+      <div className="c-compare-model-content">
+        <div className="c-compare-header">
+          <div className="c-current">{itemName}</div>
+          <div className="c-feature">Feature List</div>
+          <div className="c-compared">{compareName}</div>
+        </div>
+        {featureList}
       </div>
-      {featureList}
     </div>
     )
 }

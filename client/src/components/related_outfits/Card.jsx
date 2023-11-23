@@ -42,17 +42,18 @@ const Card = ( {itemId, itemName, className, action, addProduct, deleteProduct, 
     : (cardData && cardData.original_price) ? (<p className="c-card-price">${cardData.original_price} </p>)
     : (<p className="c-card-price">NO PRICE :(</p>);
 
-  const relatedActionClickHander = () => {
+  const compareClickHandler = () => {
     setIsCompareShown(!isCompareShown);
   }
 
   let actionButtons = {
-    related: (<p className="c-card-compare" onClick={() => relatedActionClickHander()}>⭐</p>),
+    related: (<p className="c-card-compare" onClick={() => compareClickHandler()}>⭐</p>),
     outfits: (<p className="c-card-delete" onClick={() => deleteProduct(itemId)}>☒</p>)
   }
 
   return cardData ? (
     <div className={className} >
+      {isCompareShown ? <Compare itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} /> : null}
       {actionButtons[action]}
       <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
         src={cardData.photos} />
@@ -61,7 +62,6 @@ const Card = ( {itemId, itemName, className, action, addProduct, deleteProduct, 
         <div className="c-card-name" onClick={() => updateMainProduct(itemId)}>{cardData.name}</div>
         <div className="c-card-price">{priceString}</div>
         <Stars itemId={itemId} />
-        {isCompareShown ? <Compare itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} /> : null}
       </div>
     </div>
   ) : (<div className="c-card-container"></div>);
