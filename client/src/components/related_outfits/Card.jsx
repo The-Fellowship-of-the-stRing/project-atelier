@@ -38,8 +38,10 @@ const Card = ( {itemId, itemName, cardKey, className, action, addProduct, delete
   }, []);
 
   let priceString =
-    (cardData && cardData.sale_price && cardData.original_price) ? (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>)
-    : (cardData && cardData.original_price) ? (<p className="c-card-price">${cardData.original_price} </p>)
+    (cardData && cardData.sale_price && cardData.original_price)
+      ? (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>)
+    : (cardData && cardData.original_price)
+      ? (<p className="c-card-price">${cardData.original_price} </p>)
     : (<p className="c-card-price">NO PRICE :(</p>);
 
   const compareClickHandler = () => {
@@ -48,22 +50,24 @@ const Card = ( {itemId, itemName, cardKey, className, action, addProduct, delete
 
   let actionButtons = {
     related: (<p className="c-card-compare" onClick={() => compareClickHandler()}>⭐</p>),
-    outfits: (<p className="c-card-delete" onClick={() => deleteProduct(itemId)}>☒</p>)
+    outfits: (<p className="c-card-delete" onClick={() => deleteProduct(itemId)}>ⓧ</p>)
   }
 
-  return cardData ? (
-    <div className={className} >
-      {isCompareShown ? <Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} /> : null}
-      {actionButtons[action]}
-      <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
-        src={cardData.photos} />
-      <div className="c-card-text-container">
-        <div className="c-card-cat">{cardData.category}</div>
-        <div className="c-card-name" onClick={() => updateMainProduct(itemId)}>{cardData.name}</div>
-        <div className="c-card-price">{priceString}</div>
-        <Stars itemId={itemId} />
+  return cardData ?
+    (
+      <div className={className} >
+        {isCompareShown ? <Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} /> : null}
+        {actionButtons[action]}
+        <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
+          src={cardData.photos} />
+        <div className="c-card-text-container">
+          <div className="c-card-cat">{cardData.category}</div>
+          <div className="c-card-name" onClick={() => updateMainProduct(itemId)}>{cardData.name}</div>
+          <div className="c-card-price">{priceString}</div>
+          <Stars itemId={itemId} />
+        </div>
       </div>
-    </div>
-  ) : (<div className="c-card-container"></div>);
+    ) : (
+      <div className="c-card-container"></div>);
 }
 export default Card
