@@ -11,6 +11,7 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
   const getOutfits = () => {
     return JSON.parse(localStorage.getItem(document.cookie)) || [];
   }
+
   useEffect(() => {
     let parsedData = getOutfits();
     setOutfitsByUser(parsedData);

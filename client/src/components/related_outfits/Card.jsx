@@ -43,7 +43,7 @@ const Card = ( {itemId, itemName, className, action, addProduct, deleteProduct, 
     : (<p className="c-card-price">NO PRICE :(</p>);
 
   const relatedActionClickHander = () => {
-    setIsCompareShown(true)
+    setIsCompareShown(!isCompareShown);
   }
 
   let actionButtons = {
