@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import '../../stylesheets/questions_answers/questionsAnswers.css'
+import '../../stylesheets/questions_answers/Search.css'
 
-const Search = ( {searchTerm, setSearchTerm } ) => {
+const Search = ( { resultsToShow, searchTerm, setSearchTerm } ) => {
 
-  const clearSearch = () => {
+  const clearSearch = (e) => {
+    e.preventDefault();
     setSearchTerm('');
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     clearSearch()
-
   }
 
   return (
@@ -21,8 +21,8 @@ const Search = ( {searchTerm, setSearchTerm } ) => {
         value={searchTerm}
         onChange={e => setSearchTerm(e.target.value)}
         />
-        <button className="k-clear-search"
-        onClick={() => clearSearch()}
+        <button className="k-clear-search-btn"
+        onClick={(e) => clearSearch(e)}
         >
           Clear Search
         </button>
