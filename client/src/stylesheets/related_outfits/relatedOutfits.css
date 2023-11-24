@@ -55,12 +55,18 @@
   "img"
   "text-container";
 }
-.c-card-action-related, .c-card-action-outfits, .c-card-action-add  {
+.c-card-action-compare, .c-card-action-delete {
   justify-self: end;
   grid-area: action;
   height: 25px;
   margin: 0;
   width: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.c-card-img-container{
+  position: relative;
 }
 .c-card-img {
   grid-area: img;
