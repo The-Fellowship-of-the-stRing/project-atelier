@@ -40,7 +40,6 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
       const sortedResults = notReported.sort((a, b) => b.question_helpfulness - a.question_helpfulness)
       if (searchTerm.length >= 3) {
         const filteredBySearchText = sortedResults.filter((question) => {
-          // question.question_body = question.question_body.toLowerCase()
           return question.question_body.toLowerCase().includes(searchTerm.toLowerCase())
         });
         setResultsToShow(filteredBySearchText)
@@ -65,13 +64,6 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   const handleMoreAnsweredQuestions = () => {
     setCurrentCount(currentCount+2)
   }
-
-  // useEffect(() => {
-  //   if (resultsToShow.length > 0 && searchTerm.length >= 3) {
-  //     const filteredBySearchText = resultsToShow.filter((question) => question.question_body.includes(searchTerm));
-  //     setResultsToShow(filteredBySearchText)
-  //   }
-  // })
 
   console.log('resultsToShow: ', resultsToShow)
 
