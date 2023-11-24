@@ -14,7 +14,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   const [questionBody, setQuesitonBody] = useState({});
   const [addAnswerModal, setAddAnswerModal] = useState(false);
   const [questionId, setQuestionId] = useState({});
-  // const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   //addQuestionModal
 
 
@@ -73,7 +73,10 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
                     />
                   </div>
                 )}
-      <Search />
+      <Search
+      searchTerm={searchTerm}
+      setSearchTerm={setSearchTerm}
+      />
       <QuestionsList
       handleHelpful={handleHelpful}
       resultsToShow={resultsToShow}
