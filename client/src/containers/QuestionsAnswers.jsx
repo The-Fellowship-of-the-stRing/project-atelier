@@ -14,6 +14,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   const [questionBody, setQuesitonBody] = useState({});
   const [addAnswerModal, setAddAnswerModal] = useState(false);
   const [questionId, setQuestionId] = useState({});
+  // const [searchTerm, setSearchTerm] = useState('');
   //addQuestionModal
 
 
@@ -58,7 +59,6 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   }
 
 
-  // console.log('resultsToShow: ', resultsToShow)
   return resultsToShow.length > 0 ? (
     <div className="k-questions-answers-main-container">
       {addAnswerModal && (

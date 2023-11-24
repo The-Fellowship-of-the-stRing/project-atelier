@@ -66,7 +66,6 @@ const Answers = ( { questionId } ) => {
   }, [questionId])
 
 
-  // console.log('answerData: ', answerData)
   return answerData ? (
     <>
     {answerData.map((answer, i) => {

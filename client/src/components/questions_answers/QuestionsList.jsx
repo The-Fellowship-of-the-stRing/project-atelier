@@ -27,7 +27,6 @@ const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId, ha
     <div className="k-questions-list">
       {resultsToShow.map((question, index) => {
         const id = question.question_id;
-        // console.log('id in resultsToShowMap QuestionsList: ', id) //questionIds are unique in console, while question bodies are the same, appears in widget as if they are same quesiton, but I don't think they are
         return (
           <div className="k-question-answer-container" key={id}>
 
