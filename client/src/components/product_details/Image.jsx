@@ -4,9 +4,6 @@ const Image = ({thumbnail,handleIndex,index, currentIndex}) => {
     <div>
       {currentIndex!== index && <img className="g-image_select" src = {thumbnail} onClick ={()=> handleIndex(index)}/>}
       {currentIndex=== index && <img className="g-image_selected" src = {thumbnail} onClick ={()=> handleIndex(index)}/>}
-      {/* {currentIndex=== index && <div className="g-image_selected-container">
-        <img className="g-image_selected" src = {thumbnail} onClick ={()=> handleIndex(index)}/>
-        </div>} */}
     </div>
     )
     // :

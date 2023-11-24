@@ -30,6 +30,7 @@ const ImageGallery = ({itemId, style}) => {
   return style?(
     <div className="g-images-container">
       <div className= "g-images-select">
+        <div className= "g-top-spacer"></div>
         {lowIndex>0&&<button onClick={()=> handlePageIndexLower}>PageDown</button>}
         <ImageSelect
         style = {style}
