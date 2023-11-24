@@ -20,10 +20,9 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName, question
     })
     .then((response) => {
       fetchQuestionData()
-  })
+    })
     .catch((err) => console.error('error inside AddAnswer PUT: ', err))
   }
-
 
 
   return (
