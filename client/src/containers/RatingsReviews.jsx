@@ -111,7 +111,7 @@ const RatingsReviews = ({itemId, itemName}) => {
   },[itemId])
 
   return totals ? (
-    <div className="ratings-review-main-container">
+    <div id= "ratings-review-main-container" className="ratings-review-main-container">
       {showModal && (
         <AddReview handleModal={handleModal} itemName={itemName} totals={totals} updateItemReviews={updateItemReviews}/>
       )}

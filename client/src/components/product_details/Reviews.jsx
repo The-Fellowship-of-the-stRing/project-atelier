@@ -1,10 +1,28 @@
 import Stars from '../stars/Stars.jsx'
+import React,{useState,useEffect} from 'react';
+import getReviewMeta from '../../utils/getReviewMeta.js';
+import '../../stylesheets/product_details/reviews.css';
 const Reviews = ({itemId}) => {
-  return(
+  const [reviewCount, setReviewCount] = useState(null);
+  useEffect(()=> {
+    const fetchCount = async () => {
+      const data = await getReviewMeta(itemId);
+      let count = 0;
+      for(var x in data.ratings) {
+        count = count + parseInt(data.ratings[x]);
+      }
+      console.log(count);
+      setReviewCount(count);
+    }
+   fetchCount();
+  },[])
+  return reviewCount>0 (
     <div className="g-reviews">
       <Stars itemId ={itemId}/>
-      Reviews
+      <a id="g-review-scroll" href="#ratings-review-main-container ">{reviewCount} reviews</a>
     </div>
-  )
+  ):
+  <div>
+  </div>
 }
 export default Reviews
