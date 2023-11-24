@@ -9,7 +9,6 @@ const Answers = ( { questionId } ) => {
   const [reported, setReported] = useState({});
   const [answerData, setAnswerData] = useState([]);
 
-
   const checkMarked = (id) => {
     if (!marked[id]) {
       setMarked({...marked, [id]: true})
@@ -44,7 +43,6 @@ const Answers = ( { questionId } ) => {
   };
 
   const handleHelpful = (answerId) => {
-
     axios.put(`/qa/answers/${answerId}/helpful`)
     .then((result) => {
       fetchData()
@@ -68,6 +66,7 @@ const Answers = ( { questionId } ) => {
   }, [questionId])
 
 
+  // console.log('answerData: ', answerData)
   return answerData ? (
     <>
     {answerData.map((answer, i) => {

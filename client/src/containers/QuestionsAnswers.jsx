@@ -13,8 +13,9 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   const [numOfQuestionsToGet, setNumOfAnswersToGet] = useState(400);
   const [questionBody, setQuesitonBody] = useState({});
   const [addAnswerModal, setAddAnswerModal] = useState(false);
-  const [questionId, setQuestionId] = useState({})
+  const [questionId, setQuestionId] = useState({});
   //addQuestionModal
+
 
   const handleAnswerModal = (value, body={}, questionId) => {
     setQuestionId(questionId);
@@ -29,6 +30,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
     })
     .catch((err) => console.error(err))
   }
+
 
   const fetchQuestionData = async () => {
     try {
@@ -56,6 +58,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   }
 
 
+  // console.log('resultsToShow: ', resultsToShow)
   return resultsToShow.length > 0 ? (
     <div className="k-questions-answers-main-container">
       {addAnswerModal && (

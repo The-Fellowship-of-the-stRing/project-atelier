@@ -19,11 +19,11 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName, question
       photos: yourPhotos
     })
     .then((response) => {
+      // console.log('should be fetching...', response)
       fetchQuestionData()
-  })
+    })
     .catch((err) => console.error('error inside AddAnswer PUT: ', err))
   }
-
 
 
   return (
