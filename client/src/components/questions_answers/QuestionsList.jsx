@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom'
 import Answers from './Answers.jsx';
 import AddAnswer from './AddAnswer.jsx';
+import axios from 'axios'
 import '../../stylesheets/questions_answers/questionsAnswers.css'
 import '../../stylesheets/questions_answers/questionsList.css'
 
 const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId, handleAnswerModal } ) => {
 
   const [marked, setMarked] = useState({});
-  const [answerData, setAnswerData] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const checkMarked = (id) => {
@@ -41,8 +41,6 @@ const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId, ha
             </div>
               <Answers
               questionId={id}
-              answerData={answerData}
-              setAnswerData={setAnswerData}
               itemId={itemId}
               />
               <span className="k-load-more-answers"
