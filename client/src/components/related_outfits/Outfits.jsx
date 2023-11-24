@@ -3,7 +3,7 @@ import Card from './Card.jsx';
 import getRelatedItems from '../../utils/getRelatedItems.js';
 
 const Outfits = ( {itemId, updateMainProduct} ) => {
-  localStorage.clear();
+  // localStorage.clear();
 
   const [outfitsByUser, setOutfitsByUser] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
