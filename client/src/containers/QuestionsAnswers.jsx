@@ -38,7 +38,12 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
       const response = await axios.get(`/qa/questions/?product_id=${itemId}&count=${numOfQuestionsToGet}`)
       const notReported = response.data.results.filter((value) => value.reported === false)
       const sortedResults = notReported.sort((a, b) => b.question_helpfulness - a.question_helpfulness)
-      setQuestionData(sortedResults)
+      if (searchTerm.length >= 3) {
+        const filteredBySearchText = sortedResults.filter((question) => question.question_body.includes(searchTerm));
+        setResultsToShow(filteredBySearchText)
+      } else {
+        setQuestionData(sortedResults)
+      }
       return response.data
     } catch (err) {
       console.error(err)
@@ -47,7 +52,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
 
   useEffect(() => {
     fetchQuestionData()
-  }, [itemId])
+  }, [itemId, searchTerm])
 
   useEffect(() => {
     setResultsToShow(questionData.slice(0, currentCount))
@@ -57,7 +62,6 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   const handleMoreAnsweredQuestions = () => {
     setCurrentCount(currentCount+2)
   }
-
 
   return resultsToShow.length > 0 ? (
     <div className="k-questions-answers-main-container">
@@ -78,6 +82,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
       setSearchTerm={setSearchTerm}
       />
       <QuestionsList
+      searchTerm={searchTerm}
       handleHelpful={handleHelpful}
       resultsToShow={resultsToShow}
       currentCount={currentCount}
