@@ -176,3 +176,50 @@ margin-left: 20px;
 .l-add-review-btn:hover {
   background-color: #fafafa;
 }
+
+.l-add-review-thumbnails {
+  display: flex;
+}
+
+.l-add-review-add-image {
+  height: 100px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F6F8FF;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.l-add-review-image-btn {
+  background-color: #F6F8FF;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.l-add-review-image-btn-all {
+  background-color: #F6F8FF;
+  cursor: pointer;
+  height: 30px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-item__btn-wrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.l-add-review-single-thumbnail {
+  box-shadow: 1px 1px 2px #1F2041;
+  margin-left: 10px;
+}
