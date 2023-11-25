@@ -12,7 +12,10 @@ import data from './test.data.js'
 const mockTotals = {
   recommended: { true: 100, false: 50 },
   ratings: { '5': 50, '4': 30, '3': 15, '2': 5, '1': 0 },
-  characteristics: {}
+  characteristics: {
+    "Size": {value: 0, text: "none selected"},
+    "Width": {value: 0, text: "none selected"}
+  }
 };
 
 jest.mock('../client/src/utils/getItemDetails', () => ({
@@ -66,5 +69,17 @@ describe('checks Add Review module', () => {
       render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
     });
     expect(screen.getByText("Write Your Review")).toBeTruthy();
+  });
+  it('should have "Size" characteristic displayed', async () => {
+    await act(async () => {
+      render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+    });
+    expect(screen.findByText("Size")).toBeTruthy();
+  });
+  it('should have "textarea" tag in body field', async () => {
+    await act(async () => {
+      render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+    });
+    expect(screen.findByRole("textarea")).toBeTruthy();
   });
 })
