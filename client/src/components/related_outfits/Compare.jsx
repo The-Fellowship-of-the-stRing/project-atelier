@@ -6,26 +6,24 @@ const CompareModal = ( {itemId, cardKey, itemName, compareName, itemFeatures, ca
   let compareData = {};
   for (let i = 0; i < itemFeatures.length; i++) {
     let currentFeature = itemFeatures[i];
-    let featureValue = currentFeature.value ? currentFeature.value : '';
-    compareData[currentFeature.feature] = {current:featureValue};
+    compareData[currentFeature.feature] = {current:currentFeature.value};
   }
   for (let i = 0; i < cardData.features.length; i++) {
     let currentFeature = cardData.features[i];
-    let featureValue = currentFeature.value ? currentFeature.value : '';
     compareData[currentFeature.feature]
-      ? compareData[currentFeature.feature].compared = featureValue
-      : compareData[currentFeature.feature] = {compared:featureValue};
+      ? compareData[currentFeature.feature].compared = currentFeature.value
+      : compareData[currentFeature.feature] = {compared:currentFeature.value};
   }
 
   let featureList = [];
   if(compareData){
     let index = 0;
-    for (let key in compareData) {
+    for (let feature in compareData) {
       featureList.push(
         <div key={cardKey+index}>
-          <div className="c-feature-value">{key}</div>
-          <div className="c-current-value">{compareData[key].current ? compareData[key].current : ""}</div>
-          <div className="c-compared-value">{compareData[key].compared ? compareData[key].compared : ""}</div>
+          <div className="c-feature-value">{index + feature}</div>
+          <div className="c-current-value">{compareData[feature].current ? compareData[feature].current : "n/a"}</div>
+          <div className="c-compared-value">{compareData[feature].compared ? compareData[feature].compared : "n/a"}</div>
         </div>
       )
       index++;

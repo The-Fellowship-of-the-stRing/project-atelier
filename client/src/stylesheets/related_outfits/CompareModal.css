@@ -21,6 +21,9 @@ body.active-modal {
   align-self: center;
   margin-bottom: 2px;
 }
+.c-feature-value {
+  font-weight: 800;
+}
 
 .c-overlay {
   background: rgba(49,49,49,0.8);
