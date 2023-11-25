@@ -46,12 +46,14 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
 
   return (
     <div className="c-outfits-container">
-      {!isAdded ? (
-        <div className="c-card-container">
-          <button className="c-card-action-add" onClick={() => addProduct()}>+</button>
-        </div>
-      ) : null}
-      {outfitsByUser ? outfitsByUser.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct}/>)) : null}
+      <div className="c-cards">
+        {!isAdded ? (
+          <div className="c-card-container">
+            <button className="c-card-action-add" onClick={() => addProduct()}>+</button>
+          </div>
+        ) : null}
+        {outfitsByUser ? outfitsByUser.map((id,index) => (<Card className={`c-card c-card-${index}`} itemId={id} key={id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct}/>)) : null}
+      </div>
       <button onClick={nextClickHandler}>></button>
     </div>
   )

@@ -23,11 +23,13 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
 
   return relatedIds ? (
     <div className="c-related-container">
-      {relatedIds.map((id,index) => {
-        return id ? (<Card className={`c-card-container c-card-${index}`} itemId={id} cardKey={id+itemId} key={id+itemId} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>) : null;
-        }
+      <div className="c-cards">
+        {relatedIds.map((id,index) => {
+          return id ? (<Card className={`c-card c-card-${index}`} itemId={id} cardKey={id+itemId} key={id+itemId} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>) : null;
+          }
         )}
-      <button onClick={nextClickHandler}>></button>
+      </div>
+      <p className="c-next"onClick={nextClickHandler}>></p>
     </div>
   ) : (
     <div>No Related Items</div>

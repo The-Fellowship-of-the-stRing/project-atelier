@@ -7,6 +7,11 @@ import '../stylesheets/related_outfits/relatedOutfits.css';
 import '../utils/getFirstItem.js';
 
 const RelatedOutfits = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
+
+  /*
+  RENDERING LOGIC UPDATES:
+  - If product is in outfits and is a related product, do not render id Related Products
+  */
   return (
     <div className="c-related-outfits-main-container">
       <h3 className="c-related-title">Related Products</h3>
