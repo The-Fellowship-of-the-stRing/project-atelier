@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../stylesheets/questions_answers/questionsAnswers.css';
 import Search from '../components/questions_answers/Search.jsx';
 import QuestionsList from '../components/questions_answers/QuestionsList.jsx';
-import AddAnswer from '../components/questions_answers/AddAnswer.jsx'
+import AddAnswer from '../components/questions_answers/AddAnswer.jsx';
+import AddQuestion from '../components/questions_answers/AddQuestion.jsx';
 import axios from 'axios';
 
 const QuestionsAnswers = ( { itemId, itemName } ) => {
@@ -13,10 +14,13 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   const [numOfQuestionsToGet, setNumOfAnswersToGet] = useState(400);
   const [questionBody, setQuesitonBody] = useState({});
   const [addAnswerModal, setAddAnswerModal] = useState(false);
+  const [addQuestionModal, setAddQuestionModal] = useState(false);
   const [questionId, setQuestionId] = useState({});
   const [searchTerm, setSearchTerm] = useState('');
-  //addQuestionModal
 
+  const handleQuestionModal = (value) => {
+    setAddQuestionModal(value);
+  }
 
   const handleAnswerModal = (value, body={}, questionId) => {
     setQuestionId(questionId);
@@ -81,6 +85,16 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
                     />
                   </div>
                 )}
+                {addQuestionModal && (
+                  <div>
+                    <AddQuestion
+                    itemId={itemId}
+                    itemName={itemName}
+                    handleQuestionModal={handleQuestionModal}
+                    fetchQuestionData={fetchQuestionData}
+                    />
+                  </div>
+                )}
       <Search
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
@@ -101,7 +115,10 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
           More Answered Questions
         </button>
       )}
-      <button className="k-add-a-question">Add a Question +</button>
+      <button className="k-add-a-question"
+      onClick={() => handleQuestionModal(true)}
+      >Add a Question +
+      </button>
 
     </div>
   ) : (

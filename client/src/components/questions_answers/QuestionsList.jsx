@@ -18,9 +18,9 @@ const QuestionsList = ( { searchTerm, resultsToShow, currentCount, handleHelpful
     }
   }
 
-  const handleAddAnswer = () => {
-    setShowModal(true);
-  }
+  // const handleAddAnswer = () => {
+  //   setShowModal(true);
+  // }
 
 
   return resultsToShow ? (
