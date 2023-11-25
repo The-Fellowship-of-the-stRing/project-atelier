@@ -37,11 +37,10 @@ const App = () =>{
               <span className="main-loader"></span>
           ) : (
             <>
-              <Stars itemId={currentItem.id} />
               <ProductDetails itemId={currentItem.id}/>
-              <RatingsReviews itemId={currentItem.id} itemName={currentItem.name}/>
-              <QuestionsAnswers itemId={currentItem.id} itemName={currentItem.name}/>
               <RelatedOutfits itemId={currentItem.id} itemName={currentItem.name} itemFeatures={currentItem.features} updateMainProduct={updateMainProduct}/>
+              <QuestionsAnswers itemId={currentItem.id} itemName={currentItem.name}/>
+              <RatingsReviews itemId={currentItem.id} itemName={currentItem.name}/>
             </>
           )}
       </div>

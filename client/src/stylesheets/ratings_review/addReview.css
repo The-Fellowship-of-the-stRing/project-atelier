@@ -21,7 +21,7 @@
   min-width: 500px;
   width: 30%;
   height: 95%;
-  background-color: #ffffff;
+  background-color: #F6F8FF;
   box-shadow: 1px 1px 5px #00000065;
   overflow-y: scroll;
 }
@@ -121,6 +121,7 @@ margin-left: 20px;
   min-height: 50px;
   max-width: 98.5%;
   min-width: 98.5%;
+  background-color: #F6F8FF;
 }
 
 .l-add-review-body-count {
@@ -131,22 +132,26 @@ margin-left: 20px;
 .l-add-review-input-footer {
   margin-bottom: 10px;
   font-size: 13px;
+  background-color: #F6F8FF;
 }
 
 .l-add-review-factor-category {
   font-size: 16px;
   font-weight: bold;
   margin-top: 5px;
+  background-color: #F6F8FF;
 }
 .l-add-review-factor-description {
   font-size: 16px;
   margin-top: 5px;
   font-style: italic;
   margin-left: 5px;
+  background-color: #F6F8FF;
 }
 .l-add-review-factor-options {
   display: flex;
   margin-top: 5px;
+  background-color: #F6F8FF;
 }
 
 .l-add-review-errors {
@@ -157,12 +162,14 @@ margin-left: 20px;
 
 .l-add-review-summary {
   margin-bottom: 10px;
+  background-color: #F6F8FF;
+  padding: 5px
 }
 
 .l-add-review-btn {
   display: flex;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #F6F8FF;
   border: 1px solid #383838;
   cursor: pointer;
   font-weight: bold;
@@ -173,6 +180,58 @@ margin-left: 20px;
   margin-top: 10px;
 }
 
+.l-add-review-thumbnails {
+  display: flex;
+}
+
+.l-add-review-add-image {
+  height: 100px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F6F8FF;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.l-add-review-image-btn {
+  background-color: #F6F8FF;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px
+}
+
+.l-add-review-image-btn-all {
+  background-color: #F6F8FF;
+  cursor: pointer;
+  height: 30px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.l-add-review-image-btn-all:hover,
+.l-add-review-image-btn:hover,
+.l-add-review-add-image:hover,
 .l-add-review-btn:hover {
-  background-color: #fafafa;
+  background-color: #eceef5;
+}
+
+.image-item__btn-wrapper {
+  display: flex;
+  width: 100px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.l-add-review-single-thumbnail {
+  box-shadow: 2px 2px 2px #1F2041;
+  margin-left: 10px;
 }
