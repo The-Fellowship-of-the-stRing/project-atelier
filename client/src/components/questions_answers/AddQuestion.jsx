@@ -34,13 +34,10 @@ const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData
         name: yourNickName,
         email: yourEmail,
       })
-      .then((response) => {
+      .then(() => {
         fetchQuestionData()
       })
-      .then(() => {
-        // alert('thank you for submitting!')
-        handleQuestionModal(false)
-      })
+      .then(() => handleQuestionModal(false))
       .catch((err) => console.error(err))
     }
     setTimeout(() => setIsInvalid(false), "5000")
@@ -95,8 +92,8 @@ const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData
               </button>
               {isInvalid &&
                 <ul className="k-question-error-message">
-                  <li>*Fields must not be blank</li>
-                  <li>*Email must be in correct format: name@email.com</li>
+                  <li>Fields must not be blank</li>
+                  <li>Email must be in correct format: name@email.com</li>
                 </ul>
               }
             </div>
