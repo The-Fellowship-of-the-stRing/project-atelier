@@ -64,18 +64,28 @@ describe('checks Ratings and Review elements', () => {
 })
 
 describe('checks Add Review module', () => {
+
   it('should display the text "Write Your Review"', async () => {
     await act(async () => {
       render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
     });
     expect(screen.getByText("Write Your Review")).toBeTruthy();
   });
+
   it('should have "Size" characteristic displayed', async () => {
     await act(async () => {
       render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
     });
     expect(screen.findByText("Size")).toBeTruthy();
   });
+
+  it('should have "Width" characteristic displayed', async () => {
+    await act(async () => {
+      render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+    });
+    expect(screen.findByRole("Width")).toBeTruthy();
+  });
+
   it('should have "textarea" tag in body field', async () => {
     await act(async () => {
       render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
