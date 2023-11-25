@@ -1,19 +1,20 @@
 import React,{useState,useEffect} from 'react';
 const SocialMedia = () => {
-  // const [URL, setURL] = useState("localhost:8080")
+  const [URL, setURL] = useState("localhost:8080")
   return(
-    <div>
-    {/* // <div className="g-socials">
-    //  <a href='https://www.facebook.com/sharer/sharer.php?u=http://${}` 'target="_blank">
-    // <button>Click Me!</button>
-    // </a>
-    // <a href="destination.html" target="_blank">
-    //     <button>Click Me!</button>
-    // </a>
-    // <a href="destination.html" target="_blank">
-    //     <button>Click Me!</button>
-    // </a> */}
+
+    <div className="g-socials">
+     <a id="myLink">
+     <script>
+       console.log("script is firing")
+       const myLink = document.getElementById("myLink");
+       myLink.innerText = "Click me!";
+       myLink.href = "http://google.com";
+      </script>
+      </a>
+
     </div>
+
   )
 }
 export default SocialMedia
