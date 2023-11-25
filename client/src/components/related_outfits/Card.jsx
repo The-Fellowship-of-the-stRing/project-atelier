@@ -49,19 +49,22 @@ const Card = ( {itemId, itemName, cardKey, className, action, addProduct, delete
   }
 
   let actionButtons = {
-    related: (<p className="c-card-compare" onClick={() => compareClickHandler()}>⭐</p>),
-    outfits: (<p className="c-card-delete" onClick={() => deleteProduct(itemId)}>ⓧ</p>)
+    related: (<p className="c-card-action-compare" onClick={() => compareClickHandler()}>⭐</p>),
+    outfits: (<p className="c-card-action-delete" onClick={() => deleteProduct(itemId)}>❌</p>)
   }
 
   return cardData ?
     (
       <div className={className} >
         {isCompareShown ? <Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} /> : null}
-        {actionButtons[action]}
-        <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
+        <div className="c-card-img-container">
+          <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
           src={cardData.photos} />
+          {actionButtons[action]}
+        </div>
+
         <div className="c-card-text-container">
-          <div className="c-card-cat">{cardData.category}</div>
+          <div className="c-card-cat">{cardData.category.toUpperCase()}</div>
           <div className="c-card-name" onClick={() => updateMainProduct(itemId)}>{cardData.name}</div>
           <div className="c-card-price">{priceString}</div>
           <Stars itemId={itemId} />

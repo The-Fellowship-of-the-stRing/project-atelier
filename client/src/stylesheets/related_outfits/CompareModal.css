@@ -3,8 +3,9 @@ body.active-modal {
 }
 
 .c-compare-modal, .c-overlay {
-  width: 120vw;
-  height: 120vh;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: scroll;
   top: 0;
   left: 0;
   right: 0;
