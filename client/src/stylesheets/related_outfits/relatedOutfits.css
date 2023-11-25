@@ -89,6 +89,14 @@
 .c-card-cat {
   font-size: 12px;
 }
+.c-card-name {
+  font-size: 16px;
+  font-weight: 900;
+}
+.c-card-price {
+  font-size: 10px;
+}
+
 .c-card-action-add {
   align-self: center;
   justify-self: center;

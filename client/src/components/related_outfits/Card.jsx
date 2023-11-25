@@ -64,7 +64,7 @@ const Card = ( {itemId, itemName, cardKey, className, action, addProduct, delete
         </div>
 
         <div className="c-card-text-container">
-          <div className="c-card-cat">{cardData.category}</div>
+          <div className="c-card-cat">{cardData.category.toUpperCase()}</div>
           <div className="c-card-name" onClick={() => updateMainProduct(itemId)}>{cardData.name}</div>
           <div className="c-card-price">{priceString}</div>
           <Stars itemId={itemId} />
