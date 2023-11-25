@@ -38,6 +38,12 @@
   cursor: pointer;
 }
 
+.k-collapse-answers {
+  font-size: 14px;
+  color: #686868;
+  cursor: pointer;
+}
+
 .k-add-answer {
   font-size: 14px;
   color: #686868;
