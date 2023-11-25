@@ -193,7 +193,7 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
                   {characteristics[factor].map((option, index) => {
                     const check = factor + option
                     return (
-                      <div key={option + index} className="l-add-review-selections">
+                      <div key={check} className="l-add-review-selections">
                         <input
                         type="radio"
                         name={factor + option}

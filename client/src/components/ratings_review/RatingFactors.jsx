@@ -41,7 +41,7 @@ const RatingFactors = ({totals}) => {
           const markerLocation = (catRating / 5) * 100
           const subText = options[factor]
           return (
-            <div key={data.id} className="l-rating-factors-single">
+            <div key={factor} className="l-rating-factors-single">
             <div className="l-rating-factors-cat">
             {factor}
             </div>
