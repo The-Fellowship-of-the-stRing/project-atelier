@@ -69,10 +69,11 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
     setCurrentCount(currentCount+2)
   }
 
-  console.log('resultsToShow: ', resultsToShow)
 
   return resultsToShow ? (
+
     <div className="k-questions-answers-main-container">
+      {/* <h1>Questions and Answers</h1> */}
       {addAnswerModal && (
                   <div>
                     <AddAnswer
