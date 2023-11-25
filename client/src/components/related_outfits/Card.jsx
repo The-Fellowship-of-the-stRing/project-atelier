@@ -7,6 +7,11 @@ import Compare from './Compare.jsx';
 const Card = ( {itemId, itemName, cardKey, className, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
   const [cardData, setCardData] = useState(null);
   const [isCompareShown, setIsCompareShown] = useState(false);
+  if(isCompareShown) {
+    document.body.classList.add('show-modal')
+  } else {
+    document.body.classList.remove('show-modal')
+  }
 
   useEffect(() => {
     const fetchCardData = async () => {

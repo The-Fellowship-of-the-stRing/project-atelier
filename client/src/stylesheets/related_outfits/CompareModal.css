@@ -1,4 +1,4 @@
-body.active-modal {
+body.show-modal {
   overflow-y: hidden;
 }
 
@@ -17,10 +17,7 @@ body.active-modal {
   font-weight: 500;
   font-size: 1.5em;
 }
-.c-feature-value, .c-current-value, .c-compared-value {
-  align-self: center;
-  margin-bottom: 2px;
-}
+
 .c-feature-value {
   font-weight: 800;
 }
@@ -29,11 +26,8 @@ body.active-modal {
   background: rgba(49,49,49,0.8);
 }
 
-.c-compare-model-content {
-  border: 1px solid black;
-}
 
-.c-compare-model-content {
+.c-compare-modal-table {
   position: absolute;
   top: 40%;
   left: 50%;
@@ -45,7 +39,6 @@ body.active-modal {
   max-width: 1200px;
   min-width: 300px;
 }
-
 
 .close-modal {
   position: absolute;

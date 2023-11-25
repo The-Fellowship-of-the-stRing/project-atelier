@@ -20,8 +20,8 @@ const CompareModal = ( {itemId, cardKey, itemName, compareName, itemFeatures, ca
     let index = 0;
     for (let feature in compareData) {
       featureList.push(
-        <tr key={cardKey+index}>
-          <th scope="row">{feature}</th>
+        <tr key={cardKey+index} className="c-compare-feature-item">
+          <th scope="row">{feature.toUpperCase()}</th>
           <td>{compareData[feature].current ? compareData[feature].current : ""}</td>
           <td>{compareData[feature].compared ? compareData[feature].compared : ""}</td>
         </tr>
@@ -33,7 +33,7 @@ const CompareModal = ( {itemId, cardKey, itemName, compareName, itemFeatures, ca
   return (
     <div className="c-compare-modal" onClick={() => compareClickHandler()}>
       <div className="c-overlay"></div>
-      <table className="c-compare-model-content">
+      <table className="c-compare-modal-table">
         <thead className="c-compare-header">
           <tr>
             <th scope="col">Feature</th>
@@ -41,11 +41,10 @@ const CompareModal = ( {itemId, cardKey, itemName, compareName, itemFeatures, ca
             <th scope="col">{compareName}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="c-compare-body">
           {featureList}
         </tbody>
       </table>
-
     </div>
     )
 }
