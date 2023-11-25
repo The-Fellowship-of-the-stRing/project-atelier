@@ -1,5 +1,4 @@
 import React,{useState, useEffect} from 'react';
-import { createPortal } from 'react-dom';
 import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
@@ -63,7 +62,8 @@ const Card = ( {itemId, itemName, cardKey, className, action, addProduct, delete
   return cardData ?
     (
       <div className={className} >
-        {isCompareShown ? createPortal(<Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} />, document.body) : null}
+        {/* {isCompareShown ? createPortal(<Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} />, document.body) : null} */}
+        {isCompareShown ? <Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} /> : null}
         <div className="c-card-img-container">
           <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
           src={cardData.photos} />
