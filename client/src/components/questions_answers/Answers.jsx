@@ -36,9 +36,8 @@ const Answers = ( { questionId, answersToShow} ) => {
     try {
       const response = await axios.get(`/qa/questions/${questionId}/answers?question_id=${questionId}`);
       const sortedResults = response.data.results.sort((a, b) => b.helpfulness - a.helpfulness)
-      // const sellerToTop = sortedResults.sort((a, b) => b.username === 'seller' - a.username !== 'seller')
-      setAnswerData(sortedResults)
-      // setAnswerData(sellerToTop)
+      const sellerToTop = sortedResults.sort((a, b) => (b.answerer_name === 'Seller') - (a.answerer_name === 'Seller'))
+      setAnswerData(sellerToTop)
       setInitialAnswers(sortedResults.slice(0, answersToShow));
       return response.data
     } catch (err) {
