@@ -10,7 +10,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
 
   const [questionData, setQuestionData] = useState([]);
   const [resultsToShow, setResultsToShow] = useState([]);
-  const [currentCount, setCurrentCount] = useState(2);
+  const [currentCount, setCurrentCount] = useState(4);
   const [numOfQuestionsToGet, setNumOfAnswersToGet] = useState(400);
   const [questionBody, setQuesitonBody] = useState({});
   const [addAnswerModal, setAddAnswerModal] = useState(false);
