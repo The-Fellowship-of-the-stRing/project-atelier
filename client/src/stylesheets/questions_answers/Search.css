@@ -1,0 +1,21 @@
+.k-questions-answers-search {
+  display: flex;
+  height: 100px;
+  width: 65vw;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #383838;
+}
+
+.k-search-input {
+  /* flex: auto; */
+  height: 3vh;
+  width: 55vw;
+  margin: 5px 2px 5px 2px;
+}
+
+.k-clear-search-btn {
+  height: 3.5vh;
+  /* width: 5vw;
+  margin: 5px 5px 10px 2px; */
+}
