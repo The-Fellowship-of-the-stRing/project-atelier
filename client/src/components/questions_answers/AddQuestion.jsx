@@ -15,7 +15,7 @@ const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData
         (yourNickName.length > 60 || yourNickName.length === 0) ||
         (yourEmail.length > 60 || yourEmail.length === 0) ||
         !yourEmail.includes('@')) {
-      setIsInvalid(true)
+      setIsInvalid(true);
       setYourQuestion('');
       setYourNickName('');
       setYourEmail('');
@@ -27,7 +27,7 @@ const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData
   const sendQuestionData = (e) => {
     e.preventDefault();
     checkValidity();
-    if (!isInvalid) {
+    if (isInvalid === false) {
       axios.post(`/qa/questions`, {
         product_id: itemId,
         body: yourQuestion,
@@ -38,11 +38,12 @@ const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData
         fetchQuestionData()
       })
       .then(() => {
-        alert('thank you for submitting!')
+        // alert('thank you for submitting!')
         handleQuestionModal(false)
       })
       .catch((err) => console.error(err))
     }
+    setTimeout(() => setIsInvalid(false), "5000")
   }
 
 
@@ -89,12 +90,14 @@ const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData
               type="button"
               className="k-add-queston-submit"
               onClick={e => sendQuestionData(e)}
-              // onClick={e => sendQuestionData(e)}
               >
                 Submit Your Question
               </button>
               {isInvalid &&
-                <div>***You made an invalid entry***</div>
+                <ul className="k-question-error-message">
+                  <li>*Fields must not be blank</li>
+                  <li>*Email must be in correct format: name@email.com</li>
+                </ul>
               }
             </div>
             <AiOutlineClose className="k-add-question-close" onClick={() => handleQuestionModal(false)}/>
