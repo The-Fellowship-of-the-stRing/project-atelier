@@ -73,7 +73,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   return resultsToShow ? (
 
     <div className="k-questions-answers-main-container">
-      {/* <h1>Questions and Answers</h1> */}
+      <div className="k-q-a-title">Questions and Answers</div>
       {addAnswerModal && (
                   <div>
                     <AddAnswer

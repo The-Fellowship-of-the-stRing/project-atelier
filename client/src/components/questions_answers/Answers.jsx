@@ -36,7 +36,9 @@ const Answers = ( { questionId, answersToShow} ) => {
     try {
       const response = await axios.get(`/qa/questions/${questionId}/answers?question_id=${questionId}`);
       const sortedResults = response.data.results.sort((a, b) => b.helpfulness - a.helpfulness)
+      // const sellerToTop = sortedResults.sort((a, b) => b.username === 'seller' - a.username !== 'seller')
       setAnswerData(sortedResults)
+      // setAnswerData(sellerToTop)
       setInitialAnswers(sortedResults.slice(0, answersToShow));
       return response.data
     } catch (err) {
@@ -81,8 +83,8 @@ const Answers = ( { questionId, answersToShow} ) => {
 
           <div className="k-answer-details-block">
             <div className="k-answer-user">
-              {answer.answerer_name === 'Seller' ?
-              <strong>{answer.answerer_name.toUpperCase()}</strong>
+              by {answer.answerer_name === 'Seller' ?
+              <strong>{answer.answerer_name}</strong>
               : answer.answerer_name},
             </div>
 
