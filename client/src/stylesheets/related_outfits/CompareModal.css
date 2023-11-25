@@ -5,6 +5,7 @@ body.show-modal {
 .c-compare-modal, .c-overlay {
   width: 100vw;
   height: 100vh;
+  z-index: 3;
   overflow-x: scroll;
   top: 0;
   left: 0;
@@ -29,6 +30,7 @@ body.show-modal {
 
 .c-compare-modal-table {
   position: absolute;
+  z-index: 3;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
