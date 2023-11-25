@@ -4,13 +4,18 @@ import SortDropDown from '../client/src/components/ratings_review/SortDropDown'
 import ReviewList from '../client/src/components/ratings_review/ReviewList'
 import RatingsReviews from '../client/src/containers/RatingsReviews.jsx'
 import RatingBreakdown from '../client/src/components/ratings_review/RatingBreakdown.jsx'
+import AddReview from '../client/src/components/ratings_review/AddReview.jsx'
 import StarBar from '../client/src/components/ratings_review/StarBar.jsx'
 
 import data from './test.data.js'
 
 const mockTotals = {
   recommended: { true: 100, false: 50 },
-  ratings: { '5': 50, '4': 30, '3': 15, '2': 5, '1': 0 }
+  ratings: { '5': 50, '4': 30, '3': 15, '2': 5, '1': 0 },
+  characteristics: {
+    "Size": {value: 0, text: "none selected"},
+    "Width": {value: 0, text: "none selected"}
+  }
 };
 
 jest.mock('../client/src/utils/getItemDetails', () => ({
@@ -55,5 +60,36 @@ describe('checks Ratings and Review elements', () => {
     });
     const starBars = screen.getAllByTestId('star-bar');
     expect(starBars.length).toBe(5);
+  });
+})
+
+describe('checks Add Review module', () => {
+
+  it('should display the text "Write Your Review"', async () => {
+    await act(async () => {
+      render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+    });
+    expect(screen.getByText("Write Your Review")).toBeTruthy();
+  });
+
+  it('should have "Size" characteristic displayed', async () => {
+    await act(async () => {
+      render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+    });
+    expect(screen.findByText("Size")).toBeTruthy();
+  });
+
+  it('should have "Width" characteristic displayed', async () => {
+    await act(async () => {
+      render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+    });
+    expect(screen.findByRole("Width")).toBeTruthy();
+  });
+
+  it('should have "textarea" tag in body field', async () => {
+    await act(async () => {
+      render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+    });
+    expect(screen.findByRole("textarea")).toBeTruthy();
   });
 })
