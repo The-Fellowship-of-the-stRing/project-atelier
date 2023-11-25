@@ -69,20 +69,12 @@ const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData
               <button
               type="button"
               className="k-add-queston-submit"
-              // onClick={() => handleQuestionModal(false)}
               onClick={e => sendQuestionData(e, handleQuestionModal(false))}
 
               >
                 Submit Your Question
               </button>
             </div>
-
-            {/* <button
-            className="close-modal"
-            onClick={() => handleQuestionModal(false)}
-            >
-              CLOSE
-            </button> */}
             <AiOutlineClose className="k-add-question-close" onClick={() => handleQuestionModal(false)}/>
           </div>
         </div>
