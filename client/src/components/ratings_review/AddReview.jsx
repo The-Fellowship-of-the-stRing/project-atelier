@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import ImageUploading from 'react-images-uploading';
 import { AiOutlineClose } from "react-icons/ai";
+import { FaPlus } from "react-icons/fa6";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { FiEdit } from "react-icons/fi";
 
 import AddFormStars from './AddFormStars.jsx'
 
@@ -27,6 +30,9 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
     "Length": {value: 0, text: "none selected"},
     "Fit": {value: 0, text: "none selected"},
   })
+  const [showAddImage, setShowAddImage] = useState(true)
+
+  const maxNumber = 5;
 
   const options = ["Poor", "Fair", "Average", "Good", "Great"]
 
@@ -83,6 +89,10 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
       setFormBody(e.target.value)
     }
   }
+
+  const handleImageChange = (imageList, addUpdateIndex) => {
+    setImages(imageList);
+  };
   const handleNickname = (e) => {
     if (nickname.length <= 60 || e.target.value.length < nickname.length) {
       setNickname(e.target.value)
@@ -129,6 +139,10 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
   useEffect(() => {
     checkIfSelected()
   }, [factorRating])
+
+  useEffect(() => {
+    setShowAddImage(images.length < 5)
+  },[images])
 
 
   return (
@@ -205,13 +219,58 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
           <div className="l-add-review-body-count">{charCount <= 0 ? "Minimum reached" : `Minimum required characters left: ${charCount}`}</div>
 
           <label className="l-add-review-section-title">Upload your photos (optional)</label>
+          <ImageUploading
+            multiple
+            value={images}
+            onChange={handleImageChange}
+            maxNumber={maxNumber}
+            dataURLKey="data_url"
+          >
+            {({
+              imageList,
+              onImageUpload,
+              onImageRemoveAll,
+              onImageUpdate,
+              onImageRemove,
+              isDragging,
+              dragProps,
+            }) => (
+              // write your building UI
+              <div className="upload__image-wrapper">
+                {images.length > 0 && (
+                  <button onClick={onImageRemoveAll} className="l-add-review-image-btn-all">Remove all images</button>
+                )}
+                <div className="l-add-review-thumbnails">
+                {showAddImage && (
+                    <button
+                    style={isDragging ? { color: 'red' } : undefined}
+                    onClick={onImageUpload}
+                    {...dragProps}
+                    className="l-add-review-add-image"
+                    >
+                  <FaPlus />
+                </button>
+                )}
+                {imageList.map((image, index) => (
+                  <div key={index} className="image-item">
+                    <img src={image['data_url']} alt="" width="100" className="l-add-review-single-thumbnail"/>
+                    <div className="image-item__btn-wrapper">
+                      <button onClick={() => onImageUpdate(index)} className="l-add-review-image-btn"><FiEdit /></button>
+                      <button onClick={() => onImageRemove(index)} className="l-add-review-image-btn"><FaRegTrashAlt/></button>
+                    </div>
+                  </div>
+                ))}
+                </div>
+              </div>
+            )}
+          </ImageUploading>
 
           <label className="l-add-review-section-title">What is your nickname?</label>
-          <input type="text" value={nickname} placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} />
+          <input type="text" value={nickname} placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} className="l-add-review-summary"/>
           <label className="l-add-review-input-footer">For privacy reasons, do not use your full name or email address</label>
 
           <label className="l-add-review-section-title">Your email</label>
-          <input type="email" value={email} placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} />
+          <input type="email" value={email} placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} className="l-add-review-summary"/>
           <label className="l-add-review-input-footer">For authentication reasons, you will not be emailed</label>
 
           {showError && (
