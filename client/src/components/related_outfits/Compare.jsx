@@ -21,7 +21,7 @@ const CompareModal = ( {itemId, cardKey, itemName, compareName, itemFeatures, ca
     for (let feature in compareData) {
       featureList.push(
         <tr key={cardKey+index} className="c-compare-feature-item">
-          <th scope="row">{feature.toUpperCase()}</th>
+          <td>{feature.toUpperCase()}</td>
           <td>{compareData[feature].current ? compareData[feature].current : ""}</td>
           <td>{compareData[feature].compared ? compareData[feature].compared : ""}</td>
         </tr>

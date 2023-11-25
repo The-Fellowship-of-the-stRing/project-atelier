@@ -1,4 +1,5 @@
 import React,{useState, useEffect} from 'react';
+import { createPortal } from 'react-dom';
 import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
@@ -7,11 +8,6 @@ import Compare from './Compare.jsx';
 const Card = ( {itemId, itemName, cardKey, className, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
   const [cardData, setCardData] = useState(null);
   const [isCompareShown, setIsCompareShown] = useState(false);
-  if(isCompareShown) {
-    document.body.classList.add('show-modal')
-  } else {
-    document.body.classList.remove('show-modal')
-  }
 
   useEffect(() => {
     const fetchCardData = async () => {
@@ -53,6 +49,12 @@ const Card = ( {itemId, itemName, cardKey, className, action, addProduct, delete
     setIsCompareShown(!isCompareShown);
   }
 
+  if(isCompareShown) {
+    document.body.classList.add('show-modal');
+  } else {
+    document.body.classList.remove('show-modal')
+  }
+
   let actionButtons = {
     related: (<p className="c-card-action-compare" onClick={() => compareClickHandler()}>⭐</p>),
     outfits: (<p className="c-card-action-delete" onClick={() => deleteProduct(itemId)}>❌</p>)
@@ -61,7 +63,7 @@ const Card = ( {itemId, itemName, cardKey, className, action, addProduct, delete
   return cardData ?
     (
       <div className={className} >
-        {isCompareShown ? <Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} /> : null}
+        {isCompareShown ? createPortal(<Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} />, document.body) : null}
         <div className="c-card-img-container">
           <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
           src={cardData.photos} />
