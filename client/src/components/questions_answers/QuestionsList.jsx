@@ -6,7 +6,7 @@ import axios from 'axios'
 import '../../stylesheets/questions_answers/questionsAnswers.css'
 import '../../stylesheets/questions_answers/questionsList.css'
 
-const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId, handleAnswerModal } ) => {
+const QuestionsList = ( { searchTerm, resultsToShow, currentCount, handleHelpful, itemId, handleAnswerModal } ) => {
 
   const [marked, setMarked] = useState({});
   const [showModal, setShowModal] = useState(false);
