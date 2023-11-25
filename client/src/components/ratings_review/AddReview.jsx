@@ -237,8 +237,6 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
             }) => (
               // write your building UI
               <div className="upload__image-wrapper">
-
-                &nbsp;
                 {images.length > 0 && (
                   <button onClick={onImageRemoveAll} className="l-add-review-image-btn-all">Remove all images</button>
                 )}
@@ -268,11 +266,11 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
           </ImageUploading>
 
           <label className="l-add-review-section-title">What is your nickname?</label>
-          <input type="text" value={nickname} placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} />
+          <input type="text" value={nickname} placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} className="l-add-review-summary"/>
           <label className="l-add-review-input-footer">For privacy reasons, do not use your full name or email address</label>
 
           <label className="l-add-review-section-title">Your email</label>
-          <input type="email" value={email} placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} />
+          <input type="email" value={email} placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} className="l-add-review-summary"/>
           <label className="l-add-review-input-footer">For authentication reasons, you will not be emailed</label>
 
           {showError && (
