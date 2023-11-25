@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../stylesheets/questions_answers/questionsAnswers.css';
 import Search from '../components/questions_answers/Search.jsx';
 import QuestionsList from '../components/questions_answers/QuestionsList.jsx';
-import AddAnswer from '../components/questions_answers/AddAnswer.jsx'
+import AddAnswer from '../components/questions_answers/AddAnswer.jsx';
+import AddQuestion from '../components/questions_answers/AddQuestion.jsx';
 import axios from 'axios';
 
 const QuestionsAnswers = ( { itemId, itemName } ) => {
@@ -13,8 +14,13 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   const [numOfQuestionsToGet, setNumOfAnswersToGet] = useState(400);
   const [questionBody, setQuesitonBody] = useState({});
   const [addAnswerModal, setAddAnswerModal] = useState(false);
-  const [questionId, setQuestionId] = useState({})
-  //addQuestionModal
+  const [addQuestionModal, setAddQuestionModal] = useState(false);
+  const [questionId, setQuestionId] = useState({});
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleQuestionModal = (value) => {
+    setAddQuestionModal(value);
+  }
 
   const handleAnswerModal = (value, body={}, questionId) => {
     setQuestionId(questionId);
@@ -30,12 +36,20 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
     .catch((err) => console.error(err))
   }
 
+
   const fetchQuestionData = async () => {
     try {
       const response = await axios.get(`/qa/questions/?product_id=${itemId}&count=${numOfQuestionsToGet}`)
       const notReported = response.data.results.filter((value) => value.reported === false)
       const sortedResults = notReported.sort((a, b) => b.question_helpfulness - a.question_helpfulness)
-      setQuestionData(sortedResults)
+      if (searchTerm.length >= 3) {
+        const filteredBySearchText = sortedResults.filter((question) => {
+          return question.question_body.toLowerCase().includes(searchTerm.toLowerCase())
+        });
+        setResultsToShow(filteredBySearchText)
+      } else {
+        setQuestionData(sortedResults)
+      }
       return response.data
     } catch (err) {
       console.error(err)
@@ -44,7 +58,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
 
   useEffect(() => {
     fetchQuestionData()
-  }, [itemId])
+  }, [itemId, searchTerm])
 
   useEffect(() => {
     setResultsToShow(questionData.slice(0, currentCount))
@@ -56,8 +70,10 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   }
 
 
-  return resultsToShow.length > 0 ? (
+  return resultsToShow ? (
+
     <div className="k-questions-answers-main-container">
+      {/* <h1>Questions and Answers</h1> */}
       {addAnswerModal && (
                   <div>
                     <AddAnswer
@@ -70,8 +86,22 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
                     />
                   </div>
                 )}
-      <Search />
+                {addQuestionModal && (
+                  <div>
+                    <AddQuestion
+                    itemId={itemId}
+                    itemName={itemName}
+                    handleQuestionModal={handleQuestionModal}
+                    fetchQuestionData={fetchQuestionData}
+                    />
+                  </div>
+                )}
+      <Search
+      searchTerm={searchTerm}
+      setSearchTerm={setSearchTerm}
+      />
       <QuestionsList
+      searchTerm={searchTerm}
       handleHelpful={handleHelpful}
       resultsToShow={resultsToShow}
       currentCount={currentCount}
@@ -86,7 +116,10 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
           More Answered Questions
         </button>
       )}
-      <button className="k-add-a-question">Add a Question +</button>
+      <button className="k-add-a-question"
+      onClick={() => handleQuestionModal(true)}
+      >Add a Question +
+      </button>
 
     </div>
   ) : (

@@ -1,28 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { AiOutlineClose } from "react-icons/ai";
-import '../../stylesheets/questions_answers/AddAnswerModal.css'
+import '../../stylesheets/questions_answers/AddQuestionModal.css'
 
-const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName, questionId, fetchQuestionData } ) => {
+const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData } ) => {
 
-  const [product, setProduct] = useState({});
-  const [yourAnswer, setYourAnswer] = useState('');
+  const [yourQuestion, setYourQuestion] = useState('');
   const [yourNickName, setYourNickname] = useState('');
   const [yourEmail, setYourEmail] = useState('');
-  const [yourPhotos, setYourPhotos] = useState([]);
 
-  const sendAnswerData = (e) => {
+  const sendQuestionData = (e) => {
     e.preventDefault();
-    axios.post(`/qa/questions/${questionId}/answers`, {
-      body: yourAnswer,
+    axios.post(`/qa/questions`, {
+      product_id: itemId,
+      body: yourQuestion,
       name: yourNickName,
       email: yourEmail,
-      photos: yourPhotos
     })
     .then((response) => {
       fetchQuestionData()
     })
-    .catch((err) => console.error('error inside AddAnswer PUT: ', err))
+    .catch((err) => console.error(err))
   }
 
 
@@ -30,20 +28,20 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName, question
         <div className="modal">
           <div className="overlay"></div>
           <div className="modal-content">
-            <h1>Submit Your Answer</h1>
-            <h2>{itemName} : {questionBody}</h2>
+            <h1>Ask Your Question</h1>
+            <h2>About the {itemName}</h2>
             <div>
               <label>
-                Your Answer:
+                Your Question:
                 <input
-                className="k-your-answer"
-                value={yourAnswer}
-                onChange={e => setYourAnswer(e.target.value)}
+                className="k-your-question"
+                value={yourQuestion}
+                onChange={e => setYourQuestion(e.target.value)}
                 >
                 </input>
               </label>
               <label>
-                Your Nickname:
+                What is Your Nickname:
                 <input
                 className="k-your-nickname"
                 value={yourNickName}
@@ -62,21 +60,26 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName, question
               </label>
               <button
               type="button"
-              className="k-add-answer-submit"
-              // onClick={() => handleAnswerModal(false)}
-              onClick={e => sendAnswerData(e)}
+              className="k-add-queston-submit"
+              // onClick={() => handleQuestionModal(false)}
+              onClick={e => sendQuestionData(e)}
 
               >
-                Submit
+                Submit Your Question
               </button>
             </div>
 
-            <AiOutlineClose className="k-add-answer-close" onClick={() => handleAnswerModal(false)}/>
-
+            {/* <button
+            className="close-modal"
+            onClick={() => handleQuestionModal(false)}
+            >
+              CLOSE
+            </button> */}
+            <AiOutlineClose className="k-add-question-close" onClick={() => handleQuestionModal(false)}/>
           </div>
         </div>
 
   )
 }
 
-export default AddAnswer
+export default AddQuestion

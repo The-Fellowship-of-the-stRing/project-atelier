@@ -2,7 +2,7 @@
   display: grid;
   justify-content: center;
   align-items: center;
-  margin: 100px 0px 0px 0px;
+  margin: 0px 0px 150px 0;
   grid-template-areas:
   "related-title"
   "related"
@@ -24,17 +24,21 @@
   align-items: flex-start;
   grid-template-areas: "card card card";
 }
-.c-related-container,.c-outfits-container {
+.c-related-container, .c-outfits-container {
   display: flex;
   align-items: flex-start;
   grid-template-areas: "card card card";
 }
 .c-related-container {
   grid-area: related;
+  overflow-y: scroll;
+  width: 80vw;
 }
 
 .c-outfits-container {
   grid-area: outfits;
+  overflow-y: scroll;
+  width: 80vw;
 }
 
 .c-card-container {
@@ -44,37 +48,56 @@
   width: 200px;
   margin-right: 10px;
   grid-template-columns: 200px;
-  border: 1px solid black;
+  border: 1px solid #383838;
   justify-content: left;
   align-items: flex-start;
   grid-template-areas:
-  "action"
-  "img"
+  "img-container"
   "text-container";
 }
-.c-card-action-related, .c-card-action-outfits, .c-card-action-add  {
+
+.c-card-img-container {
+  grid-area: img-container;
+  display: grid;
+  position: relative;
+  width: 200px;
+  height: 250px;
+  background-color: #ebebeb;
+}
+.c-card-action-compare, .c-card-action-delete {
   justify-self: end;
-  grid-area: action;
-  height: 25px;
   margin: 0;
-  width: auto;
+  position: absolute;
+  margin-right: 4px;
 }
 .c-card-img {
-  grid-area: img;
   max-width: 200px;
-  max-height: 200px;
-  width: auto;
+  max-height: 225px;
   justify-self: center;
+  align-self: center;
 }
 .c-card-text-container {
   grid-area: text-container;
-  max-height: 100px;
+  height: 100px;
   margin-left: 5px;
+  margin-bottom: 30px;
   align-self: end;
 }
+
 .c-card-cat, .c-card-name, .c-card-price, .c-card-star {
   margin: 5px 0 0 0;
 }
+.c-card-cat {
+  font-size: 12px;
+}
+.c-card-name {
+  font-size: 16px;
+  font-weight: 900;
+}
+.c-card-price {
+  font-size: 10px;
+}
+
 .c-card-action-add {
   align-self: center;
   justify-self: center;
