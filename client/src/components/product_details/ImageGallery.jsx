@@ -4,9 +4,9 @@ import '../../stylesheets/product_details/imageGallery.css';
 import ImageSelect from './ImageSelect.jsx';
 const ImageGallery = ({itemId, style}) => {
   const [currentIndex,setCurrentIndex] =  useState(0);
-  const [pageCount, setPageCount] = [1];
-  const [lowIndex,setLowIndex] = [0];
-  const [highIndex, setHighIndex] = [7];
+  const [pageCount, setPageCount] = useState(1);
+  const [lowIndex, setLowIndex] = useState(0);
+  const [highIndex, setHighIndex] = useState(7);
   const handleIndex = async (value) => {
     await setCurrentIndex(value)
   }
@@ -22,7 +22,6 @@ const ImageGallery = ({itemId, style}) => {
     setLowIndex(lowIndex - 7);
     setHighIndex(highIndex - 7);
   }
-
   useEffect(()=> {
     setCurrentIndex(0);
   },[style]);
@@ -30,15 +29,15 @@ const ImageGallery = ({itemId, style}) => {
   return style?(
     <div className="g-images-container">
       <div className= "g-images-select">
-        <div className= "g-top-spacer"></div>
+        {/* <div className= "g-top-spacer"></div> */}
         {lowIndex>0&&<button onClick={()=> handlePageIndexLower}>PageDown</button>}
         <ImageSelect
         style = {style}
         handleIndex= {handleIndex}
         currentIndex={currentIndex}
         handlePage = {handlePage}
-        handlePageIndexLower= {handlePageIndexLower}
-        handlePageIndexRaise />
+        lowIndex = {lowIndex}
+        highIndex = {highIndex} />
         {(highIndex/7) < pageCount && <button onClick={()=> handlePageIndexRaise}>PageDown</button>}
       </div>
       <div className= "g-images-main-container">

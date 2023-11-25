@@ -4,7 +4,18 @@ const ImageSelect = (props) => {
 
   return (
     props.style.photos.map((value, index) => {
-      return <Image key = {index} thumbnail={value.thumbnail_url} handleIndex = {props.handleIndex} index = {index} currentIndex= {props.currentIndex}/>
+      // console.log("no problems at index: " , index);
+      // if(index%7===0) {
+      //   props.handlePage;
+      // }
+      return <Image
+      key = {index}
+      thumbnail={value.thumbnail_url}
+      handleIndex = {props.handleIndex}
+      index = {index}
+      currentIndex= {props.currentIndex}
+      lowIndex = {props.lowIndex}
+      highIndex = {props.highIndex}/>
     })
   )
 }
