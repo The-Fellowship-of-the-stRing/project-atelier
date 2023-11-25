@@ -48,6 +48,12 @@ const Card = ( {itemId, itemName, cardKey, className, action, addProduct, delete
     setIsCompareShown(!isCompareShown);
   }
 
+  if(isCompareShown) {
+    document.body.classList.add('show-modal');
+  } else {
+    document.body.classList.remove('show-modal')
+  }
+
   let actionButtons = {
     related: (<p className="c-card-action-compare" onClick={() => compareClickHandler()}>⭐</p>),
     outfits: (<p className="c-card-action-delete" onClick={() => deleteProduct(itemId)}>❌</p>)
@@ -56,6 +62,7 @@ const Card = ( {itemId, itemName, cardKey, className, action, addProduct, delete
   return cardData ?
     (
       <div className={className} >
+        {/* {isCompareShown ? createPortal(<Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} />, document.body) : null} */}
         {isCompareShown ? <Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} /> : null}
         <div className="c-card-img-container">
           <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
