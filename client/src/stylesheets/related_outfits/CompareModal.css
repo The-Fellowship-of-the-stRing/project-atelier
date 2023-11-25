@@ -13,7 +13,7 @@ body.active-modal {
   position: fixed;
 }
 
-.c-current, .c-feature, .c-compared {
+.c-compare-header {
   font-weight: 500;
   font-size: 1.5em;
 }
@@ -30,11 +30,9 @@ body.active-modal {
 }
 
 .c-compare-model-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   border: 1px solid black;
 }
-/* grid-template-rows: repeat(8 1fr); */
+
 .c-compare-model-content {
   position: absolute;
   top: 40%;
