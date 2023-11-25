@@ -123,7 +123,11 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
 
     </div>
   ) : (
-    <div>Loading...</div>
+    // <div>Loading...</div>
+    <button className="k-add-a-question"
+      onClick={() => handleQuestionModal(true)}
+      >Add a Question +
+      </button>
   )
 }
 
