@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { AiOutlineClose } from "react-icons/ai";
 import '../../stylesheets/questions_answers/AddQuestionModal.css'
 
 const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData } ) => {
@@ -68,12 +69,13 @@ const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData
               </button>
             </div>
 
-            <button
+            {/* <button
             className="close-modal"
             onClick={() => handleQuestionModal(false)}
             >
               CLOSE
-            </button>
+            </button> */}
+            <AiOutlineClose className="k-add-question-close" onClick={() => handleQuestionModal(false)}/>
           </div>
         </div>
 

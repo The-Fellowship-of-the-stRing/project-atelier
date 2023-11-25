@@ -3,11 +3,12 @@ import axios from 'axios';
 import AddAnswer from './AddAnswer.jsx';
 import '../../stylesheets/questions_answers/answers.css'
 
-const Answers = ( { questionId } ) => {
+const Answers = ( { questionId, answersToShow} ) => {
 
   const [marked, setMarked] = useState({});
   const [reported, setReported] = useState({});
   const [answerData, setAnswerData] = useState([]);
+  const [initialAnswers, setInitialAnswers] = useState([]);
 
   const checkMarked = (id) => {
     if (!marked[id]) {
@@ -36,6 +37,7 @@ const Answers = ( { questionId } ) => {
       const response = await axios.get(`/qa/questions/${questionId}/answers?question_id=${questionId}`);
       const sortedResults = response.data.results.sort((a, b) => b.helpfulness - a.helpfulness)
       setAnswerData(sortedResults)
+      setInitialAnswers(sortedResults.slice(0, answersToShow));
       return response.data
     } catch (err) {
       console.error(err)
@@ -63,12 +65,12 @@ const Answers = ( { questionId } ) => {
 
   useEffect(() => {
     fetchData()
-  }, [questionId])
+  }, [questionId, answersToShow])
 
 
-  return answerData ? (
+  return initialAnswers ? (
     <>
-    {answerData.map((answer, i) => {
+    {initialAnswers.map((answer, i) => {
       const id = answer.answer_id;
       return (
         <div className="k-answer-main-block" key={i}>

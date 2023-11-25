@@ -6,10 +6,17 @@ import axios from 'axios'
 import '../../stylesheets/questions_answers/questionsAnswers.css'
 import '../../stylesheets/questions_answers/questionsList.css'
 
+
 const QuestionsList = ( { searchTerm, resultsToShow, currentCount, handleHelpful, itemId, handleAnswerModal } ) => {
 
   const [marked, setMarked] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [answersToShow, setAnswersToShow] = useState(2);
+
+  const handleAnswersToShow = (e) => {
+    e.preventDefault();
+    setAnswersToShow(Infinity);
+  }
 
   const checkMarked = (id) => {
     if (!marked[id]) {
@@ -17,11 +24,6 @@ const QuestionsList = ( { searchTerm, resultsToShow, currentCount, handleHelpful
       handleHelpful(id)
     }
   }
-
-  // const handleAddAnswer = () => {
-  //   setShowModal(true);
-  // }
-
 
   return resultsToShow ? (
     <div className="k-questions-list">
@@ -40,12 +42,16 @@ const QuestionsList = ( { searchTerm, resultsToShow, currentCount, handleHelpful
               </div>
             </div>
               <Answers
+              answersToShow={answersToShow}
               questionId={id}
               itemId={itemId}
               />
-              <span className="k-load-more-answers"
-              ><strong>LOAD MORE ANSWERS/ SEE MORE ANSWERS</strong>
-              </span>
+              {answersToShow <= 2 ?
+                <span className="k-load-more-answers"
+                onClick={(e) => handleAnswersToShow(e)}
+                ><strong>SEE MORE ANSWERS</strong>
+                </span>
+              : null}
           </div>
         )
       })}
