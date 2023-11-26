@@ -58,8 +58,8 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
   }
 
   const getCardCount = (w) => {
-    // Left and right margins of cards list is 20px each
-    // Each card is 200px wide with 10px right-margin
+    // Left and right margins of card list is 20px each
+    // Each card is 200px wide with right-margin of 10px
     return Math.floor((w - 40) / 210);
   }
   const updateCardsBasedOnWidth = () => {
@@ -77,14 +77,12 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
     };
     setTimeout(handleResize, 500);
     fetchRelatedIds();
-
     window.addEventListener('resize', handleResize);
     updateCardsBasedOnWidth();
     return () => {
-
       window.removeEventListener('resize', handleResize);
     }
-  }, [width]);
+  }, [width, itemId]);
 
   const updateVisibleCards = (incrementer) => {
     let updatedIndex = indexOfFirstVisibleCard + incrementer;
