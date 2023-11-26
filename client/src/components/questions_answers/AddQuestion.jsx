@@ -34,13 +34,10 @@ const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData
         name: yourNickName,
         email: yourEmail,
       })
-      .then((response) => {
+      .then(() => {
         fetchQuestionData()
       })
-      .then(() => {
-        // alert('thank you for submitting!')
-        handleQuestionModal(false)
-      })
+      .then(() => handleQuestionModal(false))
       .catch((err) => console.error(err))
     }
     setTimeout(() => setIsInvalid(false), "5000")
@@ -48,14 +45,13 @@ const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData
 
 
   return (
-        <div className="modal">
-          <div className="overlay"></div>
-          <div className="modal-content">
-            <h1>Ask your question about:</h1>
-            <h2>{itemName}</h2>
+        <div className="k-add-question-overlay">
+          <div className="k-add-question-modal">
+            <h1 className="k-question-header">Ask your question about:</h1>
+            <h2 className="k-question-sub-header">{itemName}</h2>
             <div>
               <label className="k-question-container">
-                *Your Question:
+                <div className="k-question-title">*Your Question:</div>
                 <input
                 placeholder="Your question here..."
                 className="k-your-question"
@@ -65,7 +61,7 @@ const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData
                 </input>
               </label>
                 <label className="k-nickname-container">
-                  *What is Your Nickname:
+                  <div className="k-nickname-title">*What is Your Nickname:</div>
                   <input
                   className="k-your-nickname"
                   placeholder="Example: jackson11!"
@@ -76,7 +72,7 @@ const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData
                   <span className="k-nickname-privacy">For privacy reasons, do not use your full name.</span>
                 </label>
               <label className="k-email-container">
-                *Your Email:
+                <div className="k-email-title">*Your Email:</div>
                 <input
                 placeholder="Example: jack@email.com"
                 className="k-your-email"
@@ -95,8 +91,8 @@ const AddQuestion = ( { itemId, itemName, handleQuestionModal, fetchQuestionData
               </button>
               {isInvalid &&
                 <ul className="k-question-error-message">
-                  <li>*Fields must not be blank</li>
-                  <li>*Email must be in correct format: name@email.com</li>
+                  <li>Fields must not be blank</li>
+                  <li>Email must be in correct format: name@email.com</li>
                 </ul>
               }
             </div>
