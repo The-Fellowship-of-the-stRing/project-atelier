@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, forwardRef} from 'react';
 import SortDropDown from '../components/ratings_review/SortDropDown.jsx'
 import ReviewList from '../components/ratings_review/ReviewList.jsx'
 import RatingBreakdown from '../components/ratings_review/RatingBreakdown.jsx'
@@ -12,7 +12,7 @@ import addReview from '../utils/addReview.js'
 
 import '../stylesheets/ratings_review/ratingsReview.css'
 
-const RatingsReviews = ({itemId, itemName}) => {
+const RatingsReviews = forwardRef(({itemId, itemName},ref) => {
   const [sort, setSort] = useState('relevance')
   const [results, setResults] = useState([]);
   const [currentCount, setCurrentCount] = useState(10);
@@ -111,7 +111,7 @@ const RatingsReviews = ({itemId, itemName}) => {
   },[itemId])
 
   return totals ? (
-    <div id= "ratings-review-main-container" className="ratings-review-main-container">
+    <div ref={ref} className="ratings-review-main-container">
       {showModal && (
         <AddReview handleModal={handleModal} itemName={itemName} totals={totals} updateItemReviews={updateItemReviews}/>
       )}
@@ -133,6 +133,6 @@ const RatingsReviews = ({itemId, itemName}) => {
       Loading data...
     </div>
   )
-}
+});
 
 export default RatingsReviews
