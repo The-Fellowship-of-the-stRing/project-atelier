@@ -5,7 +5,7 @@ import fetchCardData from '../../utils/fetchCardData.js';
 import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 
-const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
+const Related = ( {itemId, cardIds, itemFeatures, itemName, updateMainProduct} ) => {
   const ref = useRef(null);
   const [mainProductId, setMainProductId] = useState(null);
   const [width, setWidth] = useState(0);
@@ -79,7 +79,7 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
       window.removeEventListener('resize', handleResize);
     }
 
-  }, [width, itemId]);
+  }, [width, itemId, cardIds]);
 
   const updateVisibleCards = (incrementer) => {
     let updatedIndex = indexOfFirstVisibleCard + incrementer;

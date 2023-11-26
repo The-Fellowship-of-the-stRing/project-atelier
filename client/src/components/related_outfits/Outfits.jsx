@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import Card from './Card.jsx';
+import Carousel from './Carousel.jsx';
 import getRelatedItems from '../../utils/getRelatedItems.js';
 
 const Outfits = ( {itemId, updateMainProduct} ) => {
@@ -43,6 +44,17 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
   const nextClickHandler = () => {
     console.log('Next clicked');
   };
+
+  // return (
+  //   <div className="c-outfits-container">
+  //       {!isAdded ? (
+  //         <div className="c-card-container">
+  //           <button className="c-card-action-add" onClick={() => addProduct()}>+</button>
+  //         </div>
+  //       ) : null}
+  //       {outfitsByUser && (<Carousel className={"c-outfits-carousel"} itemId={itemId} cardIds={outfitsByUser} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct}/>)}
+  //   </div>
+  // )
 
   return (
     <div className="c-outfits-container">

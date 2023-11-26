@@ -6,7 +6,6 @@ const getRelatedItems = async (itemId) => {
     /* Remove main product from related products array */
     let filteredResponse = response.data.filter((id) => itemId !== id);
     let uniqueResponse = Array.from(new Set(filteredResponse));
-    console.log(uniqueResponse);
     return uniqueResponse;
   } catch (err) {
     console.error(err)
