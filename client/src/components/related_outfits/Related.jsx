@@ -13,7 +13,7 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
   const [visibleCards, setVisibleCards] = useState(null);
   const [visibleCardCount, setVisibleCardCount] = useState(null)
   const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(0);
-  const [isNextShown, setIsNextShown] = useState(true);
+  const [isNextShown, setIsNextShown] = useState(false);
   const [isPrevShown, setIsPrevShown] = useState(false);
 
   const fetchCardData = async (id) => {
@@ -53,6 +53,8 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
         setRelatedIds(fetchedIds);
         setAllCards(cardElements);
         setVisibleCards(cardElements.slice(0, getCardCount(ref.current.offsetWidth)));
+        (visibleCardCount >= cardElements.length) ? setIsNextShown(false)
+          : setIsNextShown(true);
       } else if (!allCards) {
         setMainProductId(itemId);
         const fetchedIds = await getRelatedItems(itemId);
@@ -62,6 +64,8 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
         setRelatedIds(fetchedIds);
         setAllCards(cardElements);
         setVisibleCards(cardElements.slice(0, getCardCount(ref.current.offsetWidth)));
+        (visibleCardCount >= cardElements.length) ? setIsNextShown(false)
+          : setIsNextShown(true);
       } else {
         setVisibleCards(allCards.slice(0, getCardCount(ref.current.offsetWidth)));
       }

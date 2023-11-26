@@ -4,7 +4,6 @@ import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
 import Compare from './Compare.jsx';
 
-// const Card = ( {itemId, cardDetails, itemName, cardKey, className, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
 const Card = ( {cardDetails, itemName, className, cardKey, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
   const [cardData, setCardData] = useState(null);
   const [isCompareShown, setIsCompareShown] = useState(false);
