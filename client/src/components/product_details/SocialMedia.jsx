@@ -1,8 +1,8 @@
-const SocialMedia = () => {
-  return(
-    <div className="g-socials">
-      SocialMedia
-    </div>
-  )
-}
-export default SocialMedia
+import React from 'react';
+
+const SocialMedia = () => (
+  <div className="g-socials">
+    SocialMedia
+  </div>
+);
+export default SocialMedia;

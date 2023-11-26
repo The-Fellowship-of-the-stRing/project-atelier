@@ -1,7 +1,8 @@
-import React,{useState,useEffect} from 'react';
-const Style = ({thumbnail,handleImage,index}) => {
-  return(
-     <img className="g-image_select" src = {thumbnail} onClick ={()=> handleImage(index)}/>
-    )
-}
-export default Style
+import React from 'react';
+
+const Image = ({ thumbnail, handleImage, index }) => (
+  <button type="button" onClick={() => handleImage(index)}>
+    <img className="g-image_select" src={thumbnail} alt="item Image" />
+  </button>
+);
+export default Image;

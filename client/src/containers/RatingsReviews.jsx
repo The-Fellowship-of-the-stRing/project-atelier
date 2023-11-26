@@ -1,19 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import SortDropDown from '../components/ratings_review/SortDropDown.jsx'
-import ReviewList from '../components/ratings_review/ReviewList.jsx'
-import RatingBreakdown from '../components/ratings_review/RatingBreakdown.jsx'
-import AddReview from '../components/ratings_review/AddReview.jsx'
+import React, { useState, useEffect } from 'react';
+import ReviewList from '../components/ratings_review/ReviewList.jsx';
+import RatingBreakdown from '../components/ratings_review/RatingBreakdown.jsx';
+import AddReview from '../components/ratings_review/AddReview.jsx';
 
-import getReviews from '../utils/getReviews.js'
-import markHelpful from '../utils/markHelpful.js'
-import reportReview from '../utils/reportReview.js'
-import getReviewMeta from '../utils/getReviewMeta.js'
-import addReview from '../utils/addReview.js'
+import getReviews from '../utils/getReviews.js';
+import markHelpful from '../utils/markHelpful.js';
+import reportReview from '../utils/reportReview.js';
+import getReviewMeta from '../utils/getReviewMeta.js';
+import addReview from '../utils/addReview.js';
 
-import '../stylesheets/ratings_review/ratingsReview.css'
+import '../stylesheets/ratings_review/ratingsReview.css';
 
-const RatingsReviews = ({itemId, itemName}) => {
-  const [sort, setSort] = useState('relevance')
+const RatingsReviews = ({ itemId, itemName }) => {
+  const [sort, setSort] = useState('relevance');
   const [results, setResults] = useState([]);
   const [currentCount, setCurrentCount] = useState(10);
   const [currentView, setCurrentView] = useState(2);
@@ -23,41 +22,41 @@ const RatingsReviews = ({itemId, itemName}) => {
 
   const handleSort = async (e) => {
     setSort(e.target.value);
-  }
+  };
 
   const handleHelpful = async (id) => {
     try {
-      const update = await markHelpful(id);
-      const getUpdates = await getReviews(itemId, sort, currentCount)
-      setResults(getUpdates.results)
+      await markHelpful(id);
+      const getUpdates = await getReviews(itemId, sort, currentCount);
+      setResults(getUpdates.results);
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
-  }
+  };
 
   const handleReport = async (id) => {
     try {
-      const update = await reportReview(id);
-      const getUpdates = await getReviews(itemId, sort, currentCount)
-      setResults(getUpdates.results)
+      await reportReview(id);
+      const getUpdates = await getReviews(itemId, sort, currentCount);
+      setResults(getUpdates.results);
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
-  }
+  };
 
   const handleViewMore = async () => {
     const newView = currentView + 2;
     if (newView === currentCount) {
       try {
-        const response = await getReviews(itemId, sort, (currentCount + 10))
+        const response = await getReviews(itemId, sort, (currentCount + 10));
         setCurrentCount(currentCount + 10);
         setResults(response.results);
       } catch (err) {
         console.error('An error occured when getting more reviews: ', err);
       }
     }
-    setCurrentView(newView)
-  }
+    setCurrentView(newView);
+  };
 
   const updateFilter = (value) => {
     if (Array.isArray(value)) {
@@ -65,74 +64,75 @@ const RatingsReviews = ({itemId, itemName}) => {
       return;
     }
     if (currentFilter.indexOf(value) === -1) {
-      setCurrentFilter([...currentFilter, value])
+      setCurrentFilter([...currentFilter, value]);
     } else {
-      const newFilters = currentFilter.filter((index) => index !== value)
-      setCurrentFilter(newFilters)
+      const newFilters = currentFilter.filter((index) => index !== value);
+      setCurrentFilter(newFilters);
     }
-  }
+  };
 
   const handleModal = () => {
-    setShowModal(!showModal)
-  }
+    setShowModal(!showModal);
+  };
 
   const updateItemReviews = async (data) => {
     try {
       await addReview(data);
-      const response = await getReviews(itemId, sort, currentCount)
+      const response = await getReviews(itemId, sort, currentCount);
       setResults(response.results);
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getReviews(itemId, sort, currentCount)
+        const response = await getReviews(itemId, sort, currentCount);
         setResults(response.results);
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
-    }
-    fetchData()
-  },[sort])
+    };
+    fetchData();
+  }, [sort]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getReviewMeta(itemId)
+        const response = await getReviewMeta(itemId);
         setTotals(response);
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
-    }
-    fetchData()
-  },[itemId])
+    };
+    fetchData();
+  }, [itemId]);
 
   return totals ? (
     <div className="ratings-review-main-container">
       {showModal && (
-        <AddReview handleModal={handleModal} itemName={itemName} totals={totals} updateItemReviews={updateItemReviews}/>
+        <AddReview handleModal={handleModal} itemName={itemName} totals={totals} updateItemReviews={updateItemReviews} />
       )}
-      <RatingBreakdown itemId={itemId} results={results} totals={totals} updateFilter={updateFilter} currentFilter={currentFilter}/>
+      <RatingBreakdown itemId={itemId} results={results} totals={totals} updateFilter={updateFilter} currentFilter={currentFilter} />
       <ReviewList
-      results={results}
-      sort={sort}
-      handleSort={handleSort}
-      handleHelpful={handleHelpful}
-      handleReport={handleReport}
-      handleViewMore={handleViewMore}
-      currentView={currentView}
-      currentCount={currentCount}
-      currentFilter={currentFilter}
-      handleModal={handleModal}/>
+        results={results}
+        sort={sort}
+        handleSort={handleSort}
+        handleHelpful={handleHelpful}
+        handleReport={handleReport}
+        handleViewMore={handleViewMore}
+        currentView={currentView}
+        currentCount={currentCount}
+        currentFilter={currentFilter}
+        handleModal={handleModal}
+      />
     </div>
   ) : (
     <div>
       Loading data...
     </div>
-  )
-}
+  );
+};
 
-export default RatingsReviews
+export default RatingsReviews;

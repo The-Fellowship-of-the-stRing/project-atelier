@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import ExpandedView from './ExpandedView.jsx';
+import React from 'react';
 import '../../stylesheets/product_details/imageGallery.css';
 import ImageSelect from './ImageSelect.jsx';
-const ImageGallery = ({itemId, style}) => {
+const ImageGallery = ({ style}) => {
   return style?(
     <div className="g-images-container">
       <div className= "g-images-select">

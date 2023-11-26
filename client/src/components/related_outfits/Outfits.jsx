@@ -1,19 +1,16 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './Card.jsx';
-import getRelatedItems from '../../utils/getRelatedItems.js';
 
-const Outfits = ( {itemId, updateMainProduct} ) => {
+const Outfits = ({ itemId, updateMainProduct }) => {
   // localStorage.clear();
 
   const [outfitsByUser, setOutfitsByUser] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
 
-  const getOutfits = () => {
-    return JSON.parse(localStorage.getItem(document.cookie)) || [];
-  }
+  const getOutfits = () => JSON.parse(localStorage.getItem(document.cookie)) || [];
 
   useEffect(() => {
-    let parsedData = getOutfits();
+    const parsedData = getOutfits();
     setOutfitsByUser(parsedData);
     (parsedData && parsedData.includes(itemId)) ? setIsAdded(parsedData.includes(itemId)) : setIsAdded(false);
   }, [itemId]);
@@ -24,13 +21,13 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
     localStorage.setItem(document.cookie, JSON.stringify(parsedData));
     setOutfitsByUser(parsedData);
     setIsAdded(true);
-  }
+  };
 
   const deleteProduct = (product_id) => {
-    let parsedData = getOutfits();
-    let updatedState = [];
-    for (let id of parsedData) {
-      if(id !== product_id) {
+    const parsedData = getOutfits();
+    const updatedState = [];
+    for (const id of parsedData) {
+      if (id !== product_id) {
         updatedState.push(id);
       }
     }
@@ -38,7 +35,7 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
     localStorage.setItem(document.cookie, JSON.stringify(updatedState));
     setIsAdded(updatedState.includes(itemId));
     setOutfitsByUser(updatedState);
-  }
+  };
 
   const nextClickHandler = () => {
     console.log('Next clicked');
@@ -51,10 +48,10 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
           <button className="c-card-action-add" onClick={() => addProduct()}>+</button>
         </div>
       ) : null}
-      {outfitsByUser ? outfitsByUser.map((id,index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct}/>)) : null}
-      <button onClick={nextClickHandler}>></button>
+      {outfitsByUser ? outfitsByUser.map((id, index) => (<Card className={`c-card-container c-card-${index}`} itemId={id} key={id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />)) : null}
+      <button onClick={nextClickHandler}>{'>'}</button>
     </div>
-  )
-}
+  );
+};
 
-export default Outfits
+export default Outfits;
