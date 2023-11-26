@@ -11,6 +11,7 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
   const [visibleCardCount, setVisibleCardCount] = useState(null)
   const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(0);
   const [isNextShown, setIsNextShown] = useState(true);
+  const [isPrevShown, setIsPrevShown] = useState(false);
 
   const fetchCardData = async (id) => {
     try {
@@ -59,20 +60,46 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
     fetchRelatedIds();
   }, []);
 
+  const updateVisibleCards = (incrementer) => {
+    let updatedIndex = indexOfFirstVisibleCard + incrementer;
+    setIndexOfFirstVisibleCard(updatedIndex);
+
+    incrementer === 1 ? setVisibleCards([...visibleCards.slice(1), allCards[indexOfFirstVisibleCard+visibleCardCount]])
+      : setVisibleCards([allCards[updatedIndex], ...visibleCards.slice(0,visibleCards.length-1)]);
+
+    updatedIndex === 0 ? setIsPrevShown(false)
+      : setIsPrevShown(true);
+
+    (updatedIndex + visibleCardCount === allCards.length) ? setIsNextShown(false)
+      : setIsNextShown(true);
+  };
+
   const nextClickHandler = () => {
     let updatedIndex = indexOfFirstVisibleCard + 1;
     setVisibleCards([...visibleCards.slice(1), allCards[indexOfFirstVisibleCard+visibleCardCount]]);
     setIndexOfFirstVisibleCard(updatedIndex);
     /* Remove next button if there are no more cards */
     (updatedIndex + visibleCardCount === allCards.length) && setIsNextShown(false);
+    /* Add prev  */
+    (updatedIndex !== 0) && setIsPrevShown(true);
+  };
+  const prevClickHandler = () => {
+    let updatedIndex = indexOfFirstVisibleCard - 1;
+    setVisibleCards([allCards[updatedIndex], ...visibleCards.slice(0,visibleCards.length-1)]);
+    setIndexOfFirstVisibleCard(updatedIndex);
+    /* Remove prev button if on first card*/
+    (updatedIndex === 0) && setIsPrevShown(false);
+    /* Remove next button if there are no more cards */
+    (updatedIndex + visibleCardCount < allCards.length) && setIsNextShown(true);
   };
 
   return visibleCards ? (
     <div className="c-related-container">
+      {isPrevShown && <p className="c-prev"onClick={() => updateVisibleCards(-1)}>{'<'}</p>}
       <div className="c-cards">
         {visibleCards}
       </div>
-      {isNextShown && <p className="c-next"onClick={nextClickHandler}>></p>}
+      {isNextShown && <p className="c-next"onClick={() => updateVisibleCards(1)}>{'>'}</p>}
     </div>
   ) : (
     <div>No Related Items</div>
