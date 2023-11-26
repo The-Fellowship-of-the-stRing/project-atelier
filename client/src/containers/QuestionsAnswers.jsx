@@ -10,7 +10,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
 
   const [questionData, setQuestionData] = useState([]);
   const [resultsToShow, setResultsToShow] = useState([]);
-  const [currentCount, setCurrentCount] = useState(2);
+  const [currentCount, setCurrentCount] = useState(4);
   const [numOfQuestionsToGet, setNumOfAnswersToGet] = useState(400);
   const [questionBody, setQuesitonBody] = useState({});
   const [addAnswerModal, setAddAnswerModal] = useState(false);
@@ -73,7 +73,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   return resultsToShow ? (
 
     <div className="k-questions-answers-main-container">
-      {/* <h1>Questions and Answers</h1> */}
+      <div className="k-q-a-title">Questions and Answers</div>
       {addAnswerModal && (
                   <div>
                     <AddAnswer
@@ -123,7 +123,11 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
 
     </div>
   ) : (
-    <div>Loading...</div>
+    // <div>Loading...</div>
+    <button className="k-add-a-question"
+      onClick={() => handleQuestionModal(true)}
+      >Add a Question +
+      </button>
   )
 }
 

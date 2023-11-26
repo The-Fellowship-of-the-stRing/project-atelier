@@ -18,6 +18,11 @@ const QuestionsList = ( { searchTerm, resultsToShow, currentCount, handleHelpful
     setAnswersToShow(Infinity);
   }
 
+  const handleCollapseAnswers = (e) => {
+    e.preventDefault();
+    setAnswersToShow(2);
+  }
+
   const checkMarked = (id) => {
     if (!marked[id]) {
       setMarked({...marked, [id]: true});
@@ -51,7 +56,11 @@ const QuestionsList = ( { searchTerm, resultsToShow, currentCount, handleHelpful
                 onClick={(e) => handleAnswersToShow(e)}
                 ><strong>SEE MORE ANSWERS</strong>
                 </span>
-              : null}
+              : <span className="k-collapse-answers"
+              onClick={(e) => handleCollapseAnswers(e)}
+              ><strong>COLLAPSE ANSWERS</strong>
+              </span>
+              }
           </div>
         )
       })}
