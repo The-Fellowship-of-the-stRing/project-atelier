@@ -1,0 +1,8 @@
+.g-reviews{
+  display: flex;
+  flex-direction: row;
+}
+.g-reviews{
+  color: #256EFF;
+  text-decoration: underline;
+}

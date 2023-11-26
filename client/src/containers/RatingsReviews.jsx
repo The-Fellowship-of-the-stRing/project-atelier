@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import ReviewList from '../components/ratings_review/ReviewList.jsx';
-import RatingBreakdown from '../components/ratings_review/RatingBreakdown.jsx';
-import AddReview from '../components/ratings_review/AddReview.jsx';
+import React, {useState, useEffect, forwardRef} from 'react';
+import SortDropDown from '../components/ratings_review/SortDropDown.jsx'
+import ReviewList from '../components/ratings_review/ReviewList.jsx'
+import RatingBreakdown from '../components/ratings_review/RatingBreakdown.jsx'
+import AddReview from '../components/ratings_review/AddReview.jsx'
 
 import getReviews from '../utils/getReviews.js';
 import markHelpful from '../utils/markHelpful.js';
@@ -11,8 +12,8 @@ import addReview from '../utils/addReview.js';
 
 import '../stylesheets/ratings_review/ratingsReview.css';
 
-const RatingsReviews = ({ itemId, itemName }) => {
-  const [sort, setSort] = useState('relevance');
+const RatingsReviews = forwardRef(({itemId, itemName},ref) => {
+  const [sort, setSort] = useState('relevance')
   const [results, setResults] = useState([]);
   const [currentCount, setCurrentCount] = useState(10);
   const [currentView, setCurrentView] = useState(2);
@@ -110,7 +111,7 @@ const RatingsReviews = ({ itemId, itemName }) => {
   }, [itemId]);
 
   return totals ? (
-    <div className="ratings-review-main-container">
+    <div ref={ref} className="ratings-review-main-container">
       {showModal && (
         <AddReview handleModal={handleModal} itemName={itemName} totals={totals} updateItemReviews={updateItemReviews} />
       )}
@@ -132,7 +133,7 @@ const RatingsReviews = ({ itemId, itemName }) => {
     <div>
       Loading data...
     </div>
-  );
-};
+  )
+});
 
 export default RatingsReviews;

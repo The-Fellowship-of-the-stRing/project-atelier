@@ -1,9 +1,18 @@
-import React from 'react';
-import Image from './Image.jsx';
+import React,{useState,useEffect} from 'react';
+import Image from "./Image.jsx";
+const ImageSelect = (props) => {
 
-const ImageSelect = ({ style }) => (
-  style.photos.map((value) => (
-    <Image key={value.thumbnail_url} thumbnail={value.thumbnail_url} />
-  ))
-);
-export default ImageSelect;
+  return (
+    props.style.photos.map((value, index) => {
+      return <Image
+      key = {index}
+      thumbnail={value.thumbnail_url}
+      handleIndex = {props.handleIndex}
+      index = {index}
+      currentIndex= {props.currentIndex}
+      lowIndex = {props.lowIndex}
+      highIndex = {props.highIndex}/>
+    })
+  )
+}
+export default ImageSelect

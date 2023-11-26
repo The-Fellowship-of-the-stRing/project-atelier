@@ -1,8 +1,13 @@
-import React from 'react';
-
-const Image = ({ thumbnail, handleImage, index }) => (
-  <button type="button" onClick={() => handleImage(index)}>
-    <img className="g-image_select" src={thumbnail} alt="item Image" />
-  </button>
-);
+import React,{useState,useEffect} from 'react';
+const Image = ({thumbnail,handleIndex,index, currentIndex, lowIndex, highIndex}) => {
+  return (lowIndex<=index && highIndex>index) ? (
+    <div>
+      {currentIndex!== index && <img className="g-image_select" src = {thumbnail} onClick ={()=> handleIndex(index)}/>}
+      {currentIndex=== index && <img className="g-image_selected" src = {thumbnail} onClick ={()=> handleIndex(index)}/>}
+    </div>
+    )
+    :
+    <div>
+    </div>
+}
 export default Image;
