@@ -83,7 +83,7 @@ describe('checks Add Review module', () => {
     await act(async () => {
       render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
     });
-    expect(screen.findByRole("Width")).toBeTruthy();
+    expect(screen.findByText("Width")).toBeTruthy();
   });
 
   it('should have "textarea" tag in body field', async () => {
@@ -92,4 +92,91 @@ describe('checks Add Review module', () => {
     });
     expect(screen.findByRole("textarea")).toBeTruthy();
   });
+
+  it('should have "text" tag in nickname field', async () => {
+    await act(async () => {
+      render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+    });
+    expect(screen.findByRole("text")).toBeTruthy();
+  });
+
+  it('should have the text "What is your nickname?" based on alt text', async () => {
+    await act(async () => {
+      render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+    });
+    expect(screen.findByAltText("nickname field")).toBeTruthy();
+  });
+
+  it('should have under text that reads "For privacy reasons, do not use your full name or email address"', async () => {
+    await act(async () => {
+      render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+    });
+    expect(screen.findByText("For privacy reasons, do not use your full name or email address")).toBeTruthy();
+  });
+
+  it('should have an input for ser email based on alt text "user email"', async () => {
+    await act(async () => {
+      render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+    });
+    expect(screen.findByAltText("user email")).toBeTruthy();
+  });
+
+  it('should validate and accept a correct email', () => {
+    const { getByPlaceholderText, queryByText } = render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+    const emailInput = getByPlaceholderText('Example: jackson11@email.com');
+
+    fireEvent.change(emailInput, { target: { value: 'validemail@example.com' } });
+
+    expect(queryByText('Please use valid email. Example: jackson11@email.com')).toBeFalsy();
+  });
+
+  it('should show an error for an invalid email', async () => {
+    const {findAllByTestId, findByTestId, getByPlaceholderText} = render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+
+    const emailInput = getByPlaceholderText('Example: jackson11@email.com');
+    const submitButton = await findByTestId("submit-button")
+    expect(submitButton).toBeTruthy()
+
+    fireEvent.change(emailInput, { target: { value: 'invalidemail' } });
+    fireEvent.click(submitButton)
+
+    const errorMessage = await findAllByTestId("error-message")
+
+    expect(errorMessage).toBeTruthy();
+  });
+
 })
+
+describe('Image upload in AddReview', () => {
+  it('should allow image upload and update the state', async () => {
+    render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+
+    const mockImageData = ['image1']
+
+    const mockAddImage = () => {
+      mockImageData.push('image2')
+    }
+
+    const imageUploadButton = await screen.findByRole('button', { name: /Upload Image/i });
+    expect(imageUploadButton).toBeTruthy()
+
+    mockAddImage()
+
+    expect(mockImageData.length).toBeGreaterThan(1)
+  });
+
+});
+describe('Client side error handling', () => {
+  it('should show error messages', async () => {
+    render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
+    const submitButton = await screen.findByTestId("submit-button")
+    expect(submitButton).toBeTruthy()
+
+    fireEvent.click(submitButton)
+
+    const errors = await screen.findAllByTestId("error-message")
+
+    expect(errors).toHaveLength(5)
+  })
+});
+

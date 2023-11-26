@@ -243,6 +243,8 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
                 <div className="l-add-review-thumbnails">
                 {showAddImage && (
                     <button
+                    aria-label="Upload Image"
+                    data-testid="image-uploader"
                     style={isDragging ? { color: 'red' } : undefined}
                     onClick={onImageUpload}
                     {...dragProps}
@@ -253,7 +255,7 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
                 )}
                 {imageList.map((image, index) => (
                   <div key={index} className="image-item">
-                    <img src={image['data_url']} alt="" width="100" className="l-add-review-single-thumbnail"/>
+                    <img src={image['data_url']} alt="image-thumbnail" width="100" className="l-add-review-single-thumbnail"/>
                     <div className="image-item__btn-wrapper">
                       <button onClick={() => onImageUpdate(index)} className="l-add-review-image-btn"><FiEdit /></button>
                       <button onClick={() => onImageRemove(index)} className="l-add-review-image-btn"><FaRegTrashAlt/></button>
@@ -266,11 +268,11 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
           </ImageUploading>
 
           <label className="l-add-review-section-title">What is your nickname?</label>
-          <input type="text" value={nickname} placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} className="l-add-review-summary"/>
+          <input type="text" alt="nickname field" value={nickname} placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} className="l-add-review-summary"/>
           <label className="l-add-review-input-footer">For privacy reasons, do not use your full name or email address</label>
 
           <label className="l-add-review-section-title">Your email</label>
-          <input type="email" value={email} placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} className="l-add-review-summary"/>
+          <input type="email" value={email} alt="user email" placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} className="l-add-review-summary"/>
           <label className="l-add-review-input-footer">For authentication reasons, you will not be emailed</label>
 
           {showError && (
@@ -278,25 +280,25 @@ const AddReview = ({handleModal, itemName, totals, updateItemReviews}) => {
               You must enter the following:
               <ul>
                 {overall === 0 && (
-                  <li>Select an overall rating</li>
+                  <li data-testid="error-message">Select an overall rating</li>
                 )}
                 {selectOption && (
-                  <li>Please rate the product's characteristics</li>
+                  <li data-testid="error-message">Please rate the product's characteristics</li>
                 )}
                 {formBody.length <= 50 && (
-                  <li>Review body must be longer than 50 characters</li>
+                  <li data-testid="error-message">Review body must be longer than 50 characters</li>
                 )}
                 {nickname.length < 1 && (
-                  <li>Please add your nickname. Example: jackson11!</li>
+                  <li data-testid="error-message">Please add your nickname. Example: jackson11!</li>
                 )}
                 {!validEmail && (
-                  <li>Please use valid email. Example: jackson11@email.com</li>
+                  <li data-testid="error-message">Please use valid email. Example: jackson11@email.com</li>
                 )}
               </ul>
             </div>
           )}
 
-          <button type="button" className="l-add-review-btn" onClick={() => handleSubmit()}>SUBMIT</button>
+          <button type="button" data-testid="submit-button" className="l-add-review-btn" alt="submit button" onClick={() => handleSubmit()}>SUBMIT</button>
         </div>
       </div>
     </div>
