@@ -3,6 +3,7 @@ import ExpandedView from './ExpandedView.jsx';
 import '../../stylesheets/product_details/imageGallery.css';
 import ImageSelect from './ImageSelect.jsx';
 const ImageGallery = ({itemId, style}) => {
+
   const [currentIndex,setCurrentIndex] =  useState(0);
   const [pageCount, setPageCount] = useState(1);
   const [lowIndex, setLowIndex] = useState(0);
@@ -11,39 +12,50 @@ const ImageGallery = ({itemId, style}) => {
     await setCurrentIndex(value)
   }
   const handlePage = () => {
-    setPageCount(pageCount+1);
+    pageCount+=1;
   }
-
+  const previousImage = () => {
+    setCurrentIndex(currentIndex-1);
+  }
+  const nextImage = () => {
+    setCurrentIndex(currentIndex+1);
+  }
   const handlePageIndexRaise = () => {
+    console.log("Raising button worked");
     setLowIndex(lowIndex + 7);
     setHighIndex(highIndex + 7);
   }
   const handlePageIndexLower = () => {
+    console.log("Lowering button worked");
     setLowIndex(lowIndex - 7);
     setHighIndex(highIndex - 7);
   }
   useEffect(()=> {
     setCurrentIndex(0);
+    if(style) {
+      setPageCount(Math.ceil(style.photos.length/7));
+    }
   },[style]);
 
   return style?(
     <div className="g-images-container">
-      <div className= "g-images-select">
-        {/* <div className= "g-top-spacer"></div> */}
-        {lowIndex>0&&<button onClick={()=> handlePageIndexLower}>PageDown</button>}
+      <div className= "g-left-spacer"/>
+
+      <div className= "g-images-main-container">
+       {currentIndex>0&&<button style={{zIndex:2}} onClick= {previousImage}>Previous Image</button>}
+       <div className= "g-images-select">
+        {lowIndex>0&&<button onClick={handlePageIndexLower}>Previous Page</button>}
         <ImageSelect
         style = {style}
         handleIndex= {handleIndex}
         currentIndex={currentIndex}
         handlePage = {handlePage}
         lowIndex = {lowIndex}
-        highIndex = {highIndex} />
-        {(highIndex/7) < pageCount && <button onClick={()=> handlePageIndexRaise}>PageDown</button>}
+        highIndex = {highIndex}/>
+        {(highIndex/7) < pageCount && <button onClick={handlePageIndexRaise}>Next Page</button>}
       </div>
-      <div className= "g-images-main-container">
-       {currentIndex>0&&<button>PageDown</button>}
       <img  className="g-images-main" src={style.photos[`${currentIndex}`].url}/>
-      <button>PageUp</button>
+      {currentIndex<style.photos.length-1&&<button onClick={nextImage}>Next Image</button>}
       </div>
     </div>
   ):

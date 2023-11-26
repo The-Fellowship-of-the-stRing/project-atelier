@@ -1,4 +1,5 @@
 .g-images-container {
+  margin: 0 auto;
   display:flex;
   flex-direction:row;
   width:100%;
@@ -9,19 +10,28 @@
   flex-direction: column;
   align-items:center;
   z-index: 1;
+  padding-left: 8em;
+  position: absolute;
+  height:500px;
+  overflow-y: hidden;
+
+}
+.g-images-select-expanded{
+  display:flex;
+  flex-direction: column;
+  align-items:center;
   width: 20%;
   height:600px;
   overflow-y: hidden;
   border: 1px solid red;
-
 }
+
 .g-images-main {
-  border: 1px solid blue;
-  position:absolute;
+  margin: 0 auto;
   background-position: center;
   background-repeat: space;
   object-fit: contain;
-  width: 700px;
+  width: 800px;
   height: 600px;
 
 }
@@ -29,23 +39,33 @@
   background-position: center;
   background-repeat: no-repeat;
   object-fit: cover;
-  width:60px;
-  padding: 10px;
-  height:60px;
+  width:50px;
+  padding: 5px;
+  height:50px;
 }
 .g-image_selected{
   background-position: center;
   background-repeat: no-repeat;
   object-fit: cover;
-  padding: 10px;
   filter: brightness(180%);
-  width:60px;
-  height:60px;
+  width:50px;
+  padding: 5px;
+  height:50px;
 }
 .g-images-main-container{
-  width: 850px;
+  padding-left: 5%;
+  width: 915px;
   display: flex;
   align-content: flex-start;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
+}
+.g-left-button{
+  z-index: 2;
+  position:absolute;
+}
+.g-left-spacer {
+  z-index: 1;
+  width: 10%;
+  position: absolute;
 }

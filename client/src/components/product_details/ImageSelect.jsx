@@ -4,10 +4,6 @@ const ImageSelect = (props) => {
 
   return (
     props.style.photos.map((value, index) => {
-      // console.log("no problems at index: " , index);
-      // if(index%7===0) {
-      //   props.handlePage;
-      // }
       return <Image
       key = {index}
       thumbnail={value.thumbnail_url}
