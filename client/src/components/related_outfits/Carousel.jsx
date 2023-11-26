@@ -5,7 +5,7 @@ import fetchCardData from '../../utils/fetchCardData.js';
 import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 
-const Carousel = ( {itemId, cardIds, itemFeatures, itemName, updateMainProduct,    cards, pWidth} ) => {
+const Carousel = ( {itemId, cardIds, itemFeatures, itemName, updateMainProduct, cards, pWidth} ) => {
   const ref = useRef(null);
   const [mainProductId, setMainProductId] = useState(null);
   const [relatedIds, setRelatedIds] = useState(null);
@@ -15,8 +15,7 @@ const Carousel = ( {itemId, cardIds, itemFeatures, itemName, updateMainProduct, 
   const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(0);
   const [isNextShown, setIsNextShown] = useState(false);
   const [isPrevShown, setIsPrevShown] = useState(false);
-
-
+  console.log(cards);
   const getCardCount = (w) => {
     // Left and right margins of card list is 20px each
     // Each card is 200px wide with right-margin of 10px
@@ -52,7 +51,7 @@ const Carousel = ( {itemId, cardIds, itemFeatures, itemName, updateMainProduct, 
     (updatedIndex + visibleCardCount === allCards.length) ? setIsNextShown(false)
       : setIsNextShown(true);
   };
-  console.log(pWidth);
+
   return visibleCards&&visibleCardCount ? (
     <div className="c-related-container" ref={ref}>
       {isPrevShown && <p className="c-prev"onClick={() => updateVisibleCards(-1)}>{'<'}</p>}

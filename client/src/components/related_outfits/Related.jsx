@@ -32,7 +32,6 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
           <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id+itemId} key={card.id+itemId+index} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>);
         setRelatedIds(fetchedIds);
         setAllCards(cardElements);
-
       }
     } catch (err) {
       console.error('Error getting item details: ', err);
