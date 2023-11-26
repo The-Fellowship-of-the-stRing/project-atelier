@@ -6,7 +6,7 @@ const markHelpful = async (id) => {
     console.log('Thanks for letting us know!');
   } catch (err) {
     console.error('An error occured when updating this review: ', err);
-  };
+  }
 };
 
 export default markHelpful;

@@ -1,4 +1,3 @@
-import React from 'react'
 import Stars from '../stars/Stars.jsx'
 import React,{useState,useEffect} from 'react';
 import getReviewMeta from '../../utils/getReviewMeta.js';

@@ -6,7 +6,7 @@ const reportReview = async (id) => {
     console.log('Thanks for sending a report!');
   } catch (err) {
     console.error('An error occured when updating this review: ', err);
-  };
+  }
 };
 
 export default reportReview;
