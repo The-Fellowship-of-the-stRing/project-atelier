@@ -24,32 +24,54 @@
 }
 
 /* RELATED & OUTFITS CONTAINER */
-.c-related-container {
+.c-related-container, .c-outfits-container {
   display: grid;
   position: relative;
 }
+.c-cards{
+  position: relative;
+  /* WIP: ADD GRADIENT TO RIGHT AND LEFT CARDS  */
+  /* background: linear-gradient(90deg, black,#f6f8ff ); */
+}
+/* .c-cards::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 1000px;
+  height: 350px;
+  background: linear-gradient(white, rgba(255, 255, 255, 0.001));
+}
+.c-cards::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 1000px;
+  height: 350px;
+  background: linear-gradient(rgba(255, 255, 255, 0.001), white);
+}
+.c-cards-scroller {
+  overflow-x: scroll;
+  background: white;
+  width: 1000px;
+  height: 350px;
+  padding: 15px 0;
+  line-height: 1.2;
+  text-align: center;
+} */
 .c-next {
   justify-self: end;
   align-self: center;
   margin: 0;
   position: absolute;
-  margin-right: 25px;
+  margin-right: 0;
 }
-.c-cards, .c-outfits-container {
+.c-cards {
   display: flex;
   align-items: flex-start;
   grid-template-areas: "card card card";
-}
-.c-cards {
-  grid-area: related;
   overflow-y: scroll;
   width: 80vw;
-}
-
-.c-cards {
-  grid-area: outfits;
-  overflow-y: scroll;
-  width: 80vw;
+  margin-right: 20px;
 }
 
 .c-card {
