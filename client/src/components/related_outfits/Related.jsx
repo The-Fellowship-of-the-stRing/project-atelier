@@ -39,7 +39,6 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
     }
   }
 
-
   useEffect(() => {
     const handleResize = () => {
       setWidth(ref.current.offsetWidth);
@@ -53,7 +52,6 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
     }
 
   }, [width, itemId]);
-
 
   return allCards ? (
     <div className="c-related-container" ref={ref}>
