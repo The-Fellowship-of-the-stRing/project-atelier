@@ -1,10 +1,12 @@
-import React, {useState, useEffect}  from 'react';
+import React, {useLayoutEffect, useRef, useState, useEffect}  from 'react';
 import Card from './Card.jsx';
 import getRelatedItems from '../../utils/getRelatedItems.js';
 import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 
 const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
+  const ref = useRef(null);
+  const [width, setWidth] = useState(0);
   const [relatedIds, setRelatedIds] = useState(null);
   const [allCards, setAllCards] = useState(null);
   const [visibleCards, setVisibleCards] = useState(null);
@@ -37,28 +39,53 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
       console.error('Error getting item details: ', err);
     }
   }
-
-
-  useEffect(() => {
-    const fetchRelatedIds = async () => {
-      try {
-        const fetchedIds = await getRelatedItems(itemId);
-        let cards = await Promise.all(fetchedIds.map((id,index) => fetchCardData(id)));
-        let cardElements = cards.map((card, index) =>
-          <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id+itemId} key={card.id+itemId} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>);
-        setRelatedIds(fetchedIds);
-        setAllCards(cardElements);
-
-        /* WILL MAKE DYNAMICALLY ADJUST COUNT BASED ON WINDOW WIDTH */
-        let visibleCards = 4;
-        setVisibleCardCount(visibleCards);
-        setVisibleCards(cardElements.slice(0,visibleCards));
-      } catch (err) {
-        console.error('Error getting item details: ', err);
-      }
+  const fetchRelatedIds = async () => {
+    try {
+      const fetchedIds = await getRelatedItems(itemId);
+      let cards = await Promise.all(fetchedIds.map((id,index) => fetchCardData(id)));
+      let cardElements = cards.map((card, index) =>
+        <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id+itemId} key={card.id+itemId} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>);
+      setRelatedIds(fetchedIds);
+      setAllCards(cardElements);
+      /* WILL MAKE DYNAMICALLY ADJUST COUNT BASED ON WINDOW WIDTH */
+      setVisibleCards(cardElements.slice(0, getCardCount(ref.current.offsetWidth)));
+    } catch (err) {
+      console.error('Error getting item details: ', err);
     }
+  }
+  const setCardCount = (w) => {
+    // Left and right margins of cards list is 20px each
+    // Each card is 200px wide with 10px right-margin
+    console.log(w, Math.floor((w - 40) / 210));
+    return setVisibleCardCount(Math.floor((w - 40) / 210));
+  }
+  const getCardCount = (w) => {
+    // Left and right margins of cards list is 20px each
+    // Each card is 200px wide with 10px right-margin
+    return Math.floor((w - 40) / 210);
+  }
+  const updateCardsBasedOnWidth = () => {
+    if(allCards) {
+      setVisibleCards(allCards.slice(indexOfFirstVisibleCard, indexOfFirstVisibleCard + getCardCount(ref.current.offsetWidth)));
+      setCardCount(ref.current.offsetWidth);
+    }
+  }
+
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      setWidth(ref.current.offsetWidth);
+      setCardCount(ref.current.offsetWidth);
+    };
+    handleResize();
     fetchRelatedIds();
-  }, []);
+    window.addEventListener('resize', handleResize);
+
+    updateCardsBasedOnWidth();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  }, [width]);
 
   const updateVisibleCards = (incrementer) => {
     let updatedIndex = indexOfFirstVisibleCard + incrementer;
@@ -71,8 +98,8 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
       : setIsNextShown(true);
   };
 
-  return visibleCards ? (
-    <div className="c-related-container">
+  return visibleCards&&visibleCardCount ? (
+    <div className="c-related-container" ref={ref}>
       {isPrevShown && <p className="c-prev"onClick={() => updateVisibleCards(-1)}>{'<'}</p>}
       <div className="c-cards">
         {visibleCards}
@@ -80,7 +107,7 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
       {isNextShown && <p className="c-next"onClick={() => updateVisibleCards(1)}>{'>'}</p>}
     </div>
   ) : (
-    <div>No Related Items</div>
+    <div ref={ref}>No Related Items</div>
   )
 }
 
