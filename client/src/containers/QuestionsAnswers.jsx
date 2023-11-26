@@ -73,7 +73,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
   return resultsToShow ? (
 
     <div className="k-questions-answers-main-container">
-      <div className="k-q-a-title">Questions and Answers</div>
+      <div className="k-q-a-title">QUESTIONS AND ANSWERS</div>
       {addAnswerModal && (
                   <div>
                     <AddAnswer
@@ -108,7 +108,9 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
       itemId={itemId}
       handleAnswerModal={handleAnswerModal}
       />
+        <div className="k-btns-container">
       {(resultsToShow.length >= 2) && (resultsToShow.length <= 20) && (
+
         <button
         className="k-more-answered-questions"
         onClick={() => handleMoreAnsweredQuestions()}
@@ -120,7 +122,7 @@ const QuestionsAnswers = ( { itemId, itemName } ) => {
       onClick={() => handleQuestionModal(true)}
       >Add a Question +
       </button>
-
+      </div>
     </div>
   ) : (
     // <div>Loading...</div>

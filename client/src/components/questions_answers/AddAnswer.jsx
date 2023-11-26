@@ -47,14 +47,13 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName, question
 
 
   return (
-        <div className="modal">
-          <div className="overlay"></div>
-          <div className="modal-content">
-            <h1>Submit Your Answer</h1>
-            <h2>{itemName} : {questionBody}</h2>
+        <div className="k-add-answer-overlay">
+          <div className="k-add-answer-modal">
+            <h1 className="k-answer-header">Submit Your Answer</h1>
+            <h2 className="k-answer-sub-header">{itemName} : {questionBody}</h2>
             <div>
               <label className="k-answer-container">
-                *Your Answer:
+                <div className="k-answer-title">*Your Answer:</div>
                 <input
                 placeholder="Your answer here..."
                 className="k-your-answer"
@@ -63,19 +62,19 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName, question
                 >
                 </input>
               </label>
-              <label className="k-nickname-container">
-                *Your Nickname:
+              <label className="k-answer-nickname-container">
+                <div className="k-answer-nickname-title">*Your Nickname:</div>
                 <input
-                placeholder="Example: jack543!"
                 className="k-your-nickname"
+                placeholder="Example: jack543!"
                 value={yourNickName}
                 onChange={e => setYourNickName(e.target.value)}
                 >
                 </input>
                 <span className="k-nickname-privacy">For privacy reasons, do not use your full name.</span>
               </label>
-              <label className="k-email-container">
-                *Your Email:
+              <label className="k-answer-email-container">
+                <div className="k-answer-email-title">*Your Email:</div>
                 <input
                 placeholder="Example: jack@email.com"
                 className="k-your-email"
@@ -83,7 +82,7 @@ const AddAnswer = ({ questionBody, itemId, handleAnswerModal, itemName, question
                 onChange={e => setYourEmail(e.target.value)}
                 >
                 </input>
-                <span className="k-email-privacy">For authentication reasons, you will not be emailed.</span>
+                <span className="k-answer-email-privacy">For authentication reasons, you will not be emailed.</span>
               </label>
               <button
               type="button"
