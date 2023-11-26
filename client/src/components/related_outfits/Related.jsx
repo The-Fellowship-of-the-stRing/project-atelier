@@ -49,15 +49,16 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
         const fetchedIds = await getRelatedItems(itemId);
         let cards = await Promise.all(fetchedIds.map((id,index) => fetchCardData(id)));
         let cardElements = cards.map((card, index) =>
-          <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id+itemId} key={card.id+itemId} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>);
+          <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id+itemId} key={card.id+itemId+index} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>);
         setRelatedIds(fetchedIds);
         setAllCards(cardElements);
         setVisibleCards(cardElements.slice(0, getCardCount(ref.current.offsetWidth)));
       } else if (!allCards) {
+        setMainProductId(itemId);
         const fetchedIds = await getRelatedItems(itemId);
         let cards = await Promise.all(fetchedIds.map((id,index) => fetchCardData(id)));
         let cardElements = cards.map((card, index) =>
-          <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id+itemId} key={card.id+itemId} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>);
+          <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id+itemId} key={card.id+itemId+index} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>);
         setRelatedIds(fetchedIds);
         setAllCards(cardElements);
         setVisibleCards(cardElements.slice(0, getCardCount(ref.current.offsetWidth)));
