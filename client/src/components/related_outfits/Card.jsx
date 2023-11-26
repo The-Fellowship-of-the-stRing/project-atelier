@@ -4,40 +4,12 @@ import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
 import Compare from './Compare.jsx';
 
-const Card = ({
-  itemId, itemName, cardKey, className, action, deleteProduct, itemFeatures, updateMainProduct,
-}) => {
+const Card = ( {cardDetails, itemName, className, cardKey, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
   const [cardData, setCardData] = useState(null);
   const [isCompareShown, setIsCompareShown] = useState(false);
-
   useEffect(() => {
-    const fetchCardData = async () => {
-      try {
-        const productData = await getProductDataById(itemId);
-        const styleData = await getStyleDataById(itemId);
-        if (productData && styleData) {
-          const response = {
-            name: productData.name || 'NO NAME',
-            category: productData.category || 'NO CAT',
-            features: productData.features || [],
-          };
-          /* USE DEFAULT STYLE || FIRST STYLE */
-          for (let i = 0; i < styleData.length; i++) {
-            const style = styleData[i];
-            if (i === 0 || style['default?']) {
-              response.photos = style.photos[0].thumbnail_url || 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
-              response.original_price = style.original_price;
-              response.sale_price = style.sale_price;
-            }
-          }
-          return setCardData(response);
-        }
-      } catch (err) {
-        console.error('Error getting item details: ', err);
-      }
-    };
-    fetchCardData();
-  }, []);
+    setCardData(cardDetails);
+  }, [])
 
   const priceString = (cardData && cardData.sale_price && cardData.original_price)
     ? (
@@ -75,26 +47,21 @@ const Card = ({
     outfits: (<p className="c-card-action-delete" onClick={() => deleteProduct(itemId)}>❌</p>),
   };
 
-  return cardData
-    ? (
-      <div className={className}>
-        {/* {isCompareShown ? createPortal(<Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} />, document.body) : null} */}
-        {isCompareShown ? <Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} /> : null}
+  return cardData ?
+    (
+      <div className={className} >
+        {isCompareShown ? <Compare itemId={cardData.id} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} /> : null}
         <div className="c-card-img-container">
-          <img
-            className="c-card-img"
-            onClick={() => updateMainProduct(itemId)}
-            src={cardData.photos}
-            loading="lazy"
-          />
+          <img className="c-card-img" onClick={() => updateMainProduct(cardData.id)}
+          src={cardData.photos} />
           {actionButtons[action]}
         </div>
 
         <div className="c-card-text-container">
           <div className="c-card-cat">{cardData.category.toUpperCase()}</div>
-          <div className="c-card-name" onClick={() => updateMainProduct(itemId)}>{cardData.name}</div>
+          <div className="c-card-name" onClick={() => updateMainProduct(cardData.id)}>{cardData.name}</div>
           <div className="c-card-price">{priceString}</div>
-          <Stars itemId={itemId} />
+          <Stars itemId={cardData.id} />
         </div>
       </div>
     ) : (
