@@ -41,7 +41,19 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
   }
   const fetchRelatedIds = async () => {
     try {
-      if(!allCards || itemId !== mainProductId) {
+      if (itemId !== mainProductId) {
+        setMainProductId(itemId);
+        setIndexOfFirstVisibleCard(0);
+        setIsNextShown(true);
+        setIsPrevShown(false);
+        const fetchedIds = await getRelatedItems(itemId);
+        let cards = await Promise.all(fetchedIds.map((id,index) => fetchCardData(id)));
+        let cardElements = cards.map((card, index) =>
+          <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id+itemId} key={card.id+itemId} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>);
+        setRelatedIds(fetchedIds);
+        setAllCards(cardElements);
+        setVisibleCards(cardElements.slice(0, getCardCount(ref.current.offsetWidth)));
+      } else if (!allCards) {
         const fetchedIds = await getRelatedItems(itemId);
         let cards = await Promise.all(fetchedIds.map((id,index) => fetchCardData(id)));
         let cardElements = cards.map((card, index) =>
@@ -66,12 +78,11 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
     if(allCards) {
       let newCardCount = getCardCount(ref.current.offsetWidth);
       setVisibleCards(allCards.slice(indexOfFirstVisibleCard, indexOfFirstVisibleCard + newCardCount));
-      setVisibleCardCount(newCardCount)
+      setVisibleCardCount(newCardCount);
     }
   }
 
   useEffect(() => {
-
     const handleResize = () => {
       setWidth(ref.current.offsetWidth);
       setVisibleCardCount(getCardCount(ref.current.offsetWidth));
@@ -90,7 +101,7 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
   const updateVisibleCards = (incrementer) => {
     let updatedIndex = indexOfFirstVisibleCard + incrementer;
     setIndexOfFirstVisibleCard(updatedIndex);
-    incrementer === 1 ? setVisibleCards([...visibleCards.slice(1), allCards[indexOfFirstVisibleCard+visibleCardCount]])
+    incrementer === 1 ? setVisibleCards([...visibleCards.slice(1), allCards[indexOfFirstVisibleCard+visibleCards.length]])
       : setVisibleCards([allCards[updatedIndex], ...visibleCards.slice(0,visibleCards.length-1)]);
     updatedIndex === 0 ? setIsPrevShown(false)
       : setIsPrevShown(true);
