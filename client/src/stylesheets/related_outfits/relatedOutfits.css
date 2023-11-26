@@ -33,31 +33,7 @@
   /* WIP: ADD GRADIENT TO RIGHT AND LEFT CARDS  */
   /* background: linear-gradient(90deg, black,#f6f8ff ); */
 }
-/* .c-cards::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  width: 1000px;
-  height: 350px;
-  background: linear-gradient(white, rgba(255, 255, 255, 0.001));
-}
-.c-cards::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  width: 1000px;
-  height: 350px;
-  background: linear-gradient(rgba(255, 255, 255, 0.001), white);
-}
-.c-cards-scroller {
-  overflow-x: scroll;
-  background: white;
-  width: 1000px;
-  height: 350px;
-  padding: 15px 0;
-  line-height: 1.2;
-  text-align: center;
-} */
+
 .c-next {
   justify-self: end;
   align-self: center;

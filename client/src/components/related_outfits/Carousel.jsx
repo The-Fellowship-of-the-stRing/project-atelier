@@ -15,7 +15,7 @@ const Carousel = ( {itemId, cardIds, itemFeatures, itemName, updateMainProduct, 
   const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(0);
   const [isNextShown, setIsNextShown] = useState(false);
   const [isPrevShown, setIsPrevShown] = useState(false);
-  console.log(cards);
+
   const getCardCount = (w) => {
     // Left and right margins of card list is 20px each
     // Each card is 200px wide with right-margin of 10px
