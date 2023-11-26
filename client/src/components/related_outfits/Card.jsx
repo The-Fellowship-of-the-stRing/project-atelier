@@ -66,7 +66,7 @@ const Card = ( {itemId, itemName, cardKey, className, action, addProduct, delete
         {isCompareShown ? <Compare itemId={itemId} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} /> : null}
         <div className="c-card-img-container">
           <img className="c-card-img" onClick={() => updateMainProduct(itemId)}
-          src={cardData.photos} />
+          src={cardData.photos} loading="lazy"/>
           {actionButtons[action]}
         </div>
 

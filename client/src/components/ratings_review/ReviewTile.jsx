@@ -10,6 +10,8 @@ const ReviewTile = ({review, handleHelpful, handleReport}) => {
   const [markedHelp, setMarkedHelp] = useState(false)
   const date = new Date(review.date)
 
+  console.log(review)
+
   const formatContent = () => {
     if (body.length > 250) {
       let formatBody = review.body.slice(0, 250);
@@ -52,8 +54,8 @@ const ReviewTile = ({review, handleHelpful, handleReport}) => {
       <div className="l-review-tile-summary">
         {review.summary}
       </div>
-      <div className="l-review-tile-body">
-        {body} <span className="l-review-tile-show-more" onClick={() => handleShowMore()} hidden={!showMore}>Show More</span>
+      <div className="l-review-tile-body" data-testid="review-body">
+        {body} <span className="l-review-tile-show-more" data-testid="show-more" onClick={() => handleShowMore()} hidden={!showMore}>Show More</span>
       </div>
       {review.recommend && (
         <div>
@@ -69,14 +71,14 @@ const ReviewTile = ({review, handleHelpful, handleReport}) => {
       {review.photos.length > 0 && (
         <div className="l-review-tile-photos">
           {review.photos.map((img) => {
-            <>
-              <div className="l-review-tile-thumb" style={{url: img.url}}/>
-            </>
+            return (
+              <div key={img.id} className="l-review-tile-thumb" style={{backgroundImage: `url(${img.url})`}}/>
+              )
           })}
         </div>
       )}
       <div className="l-review-tile-helpfulness">
-        Helpful? <span className="l-review-tile-yes" style={{cursor: !markedHelp ? "pointer" : "default"}} onClick={() => handleMark()}>Yes</span> ({review.helpfulness})  |  <span className="l-review-tile-report" onClick={() => handleReport(review.review_id)}>Report</span>
+        Helpful? <span className="l-review-tile-yes" data-testid="helpfull-button" style={{cursor: !markedHelp ? "pointer" : "default"}} onClick={() => handleMark()}>Yes</span> ({review.helpfulness})  |  <span className="l-review-tile-report" onClick={() => handleReport(review.review_id)}>Report</span>
       </div>
     </div>
   )

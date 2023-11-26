@@ -6,6 +6,7 @@ import RatingsReviews from '../client/src/containers/RatingsReviews.jsx'
 import RatingBreakdown from '../client/src/components/ratings_review/RatingBreakdown.jsx'
 import AddReview from '../client/src/components/ratings_review/AddReview.jsx'
 import StarBar from '../client/src/components/ratings_review/StarBar.jsx'
+import ReviewTile from '../client/src/components/ratings_review/ReviewTile.jsx'
 
 import data from './test.data.js'
 
@@ -177,6 +178,57 @@ describe('Client side error handling', () => {
     const errors = await screen.findAllByTestId("error-message")
 
     expect(errors).toHaveLength(5)
+  })
+});
+
+describe('Individual review tile', () => {
+  const mockReviewData = {
+    body: "fdagfdagadsfgafgfjfkld;halgjd;fg; jflis; jlkjkl sdjdsf; j; jj l;kjs;jf kgl;jfs l;gfjd; fj; sjfgdjl ;skjfglj ds;lkgjndflskjg lsg hjreoigj l;fdgn l;fdhgjls;dfhgjfkl;ds ngklfjds hgjk;fdh;kfsgj;dfkl hgl;jfd shg;jfkldsgn ;jslkfd hg;jklfdng;klj dfxnfjk; gnk;fjd gnk;jfdsgk;jldgkj;fds",
+    date: "2022-06-04T00:00:00.000Z",
+    helpfulness: 2,
+    photos: [],
+    rating: 5,
+    recommend: true,
+    response: null,
+    review_id: 1275164,
+    reviewer_name: "jioesjfs",
+    summary: "adawdawd"
+  }
+
+  const mockHandleHelpful = ()=> {
+    mockReviewData.helpfulness = mockReviewData.helpfulness + 1
+  }
+
+  it('should increase the helpfulness value', async () => {
+
+    const mockHandleReport = jest.fn()
+    render(<ReviewTile review={mockReviewData} handleHelpful={mockHandleHelpful} handleReport={mockHandleReport}/>);
+
+    const helpfulButton = screen.getByTestId("helpfull-button")
+    expect(helpfulButton).toBeTruthy()
+
+    fireEvent.click(helpfulButton)
+
+    expect(mockReviewData.helpfulness).toBeGreaterThan(2)
+  })
+
+  it('should show the full text of the body on click', async () => {
+    let mockToShow = mockReviewData.body.slice(0, 250)
+
+    const mockHandleShowMore = ()=> {
+      mockToShow = mockReviewData.body
+    }
+    const mockHandleReport = jest.fn()
+    render(<ReviewTile review={mockReviewData} handleHelpful={mockHandleHelpful} handleReport={mockHandleReport}/>);
+
+    const showMoreButton = screen.getByTestId("show-more")
+    expect(showMoreButton).toBeTruthy()
+
+    fireEvent.click(showMoreButton)
+
+    const bodyText = await screen.findByText("fdagfdagadsfgafgfjfkld;halgjd;fg; jflis; jlkjkl sdjdsf; j; jj l;kjs;jf kgl;jfs l;gfjd; fj; sjfgdjl ;skjfglj ds;lkgjndflskjg lsg hjreoigj l;fdgn l;fdhgjls;dfhgjfkl;ds ngklfjds hgjk;fdh;kfsgj;dfkl hgl;jfd shg;jfkldsgn ;jslkfd hg;jklfdng;klj dfxnfjk; gnk;fjd gnk;jfdsgk;jldgkj;fds")
+
+    expect(bodyText).toBeTruthy()
   })
 });
 
