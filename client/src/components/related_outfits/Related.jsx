@@ -41,24 +41,22 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
   }
   const fetchRelatedIds = async () => {
     try {
-      const fetchedIds = await getRelatedItems(itemId);
-      let cards = await Promise.all(fetchedIds.map((id,index) => fetchCardData(id)));
-      let cardElements = cards.map((card, index) =>
-        <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id+itemId} key={card.id+itemId} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>);
-      setRelatedIds(fetchedIds);
-      setAllCards(cardElements);
-      /* WILL MAKE DYNAMICALLY ADJUST COUNT BASED ON WINDOW WIDTH */
-      setVisibleCards(cardElements.slice(0, getCardCount(ref.current.offsetWidth)));
+      if(!allCards) {
+        const fetchedIds = await getRelatedItems(itemId);
+        let cards = await Promise.all(fetchedIds.map((id,index) => fetchCardData(id)));
+        let cardElements = cards.map((card, index) =>
+          <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id+itemId} key={card.id+itemId} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>);
+        setRelatedIds(fetchedIds);
+        setAllCards(cardElements);
+        setVisibleCards(cardElements.slice(0, getCardCount(ref.current.offsetWidth)));
+      } else {
+        setVisibleCards(allCards.slice(0, getCardCount(ref.current.offsetWidth)));
+      }
     } catch (err) {
       console.error('Error getting item details: ', err);
     }
   }
-  const setCardCount = (w) => {
-    // Left and right margins of cards list is 20px each
-    // Each card is 200px wide with 10px right-margin
-    console.log(w, Math.floor((w - 40) / 210));
-    return setVisibleCardCount(Math.floor((w - 40) / 210));
-  }
+
   const getCardCount = (w) => {
     // Left and right margins of cards list is 20px each
     // Each card is 200px wide with 10px right-margin
@@ -66,23 +64,24 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
   }
   const updateCardsBasedOnWidth = () => {
     if(allCards) {
-      setVisibleCards(allCards.slice(indexOfFirstVisibleCard, indexOfFirstVisibleCard + getCardCount(ref.current.offsetWidth)));
-      setCardCount(ref.current.offsetWidth);
+      let newCardCount = getCardCount(ref.current.offsetWidth);
+      setVisibleCards(allCards.slice(indexOfFirstVisibleCard, indexOfFirstVisibleCard + newCardCount));
+      setVisibleCardCount(newCardCount)
     }
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
       setWidth(ref.current.offsetWidth);
-      setCardCount(ref.current.offsetWidth);
+      setVisibleCardCount(getCardCount(ref.current.offsetWidth));
     };
-    handleResize();
+    setTimeout(handleResize, 500);
     fetchRelatedIds();
+
     window.addEventListener('resize', handleResize);
-
     updateCardsBasedOnWidth();
-
     return () => {
+
       window.removeEventListener('resize', handleResize);
     }
   }, [width]);
