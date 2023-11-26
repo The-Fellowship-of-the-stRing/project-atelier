@@ -1,17 +1,12 @@
-body.active-modal {
+body.show-modal {
   overflow-y: hidden;
 }
 
-.btn-modal {
-  padding: 10px 20px;
-  display: block;
-  margin: 100px auto 0;
-  font-size: 18px;
-}
-
-.modal, .overlay {
+.c-compare-modal, .c-overlay {
   width: 100vw;
   height: 100vh;
+  z-index: 3;
+  overflow-x: scroll;
   top: 0;
   left: 0;
   right: 0;
@@ -19,12 +14,23 @@ body.active-modal {
   position: fixed;
 }
 
-.overlay {
+.c-compare-header {
+  font-weight: 500;
+  font-size: 1.5em;
+}
+
+.c-feature-value {
+  font-weight: 800;
+}
+
+.c-overlay {
   background: rgba(49,49,49,0.8);
 }
 
-.modal-content {
+
+.c-compare-modal-table {
   position: absolute;
+  z-index: 3;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -32,14 +38,13 @@ body.active-modal {
   background: #f1f1f1;
   padding: 14px 28px;
   border-radius: 3px;
-  max-width: 600px;
+  max-width: 1200px;
   min-width: 300px;
 }
 
-.k-add-answer-close {
+.close-modal {
   position: absolute;
   top: 10px;
-  left: 10px;
-  cursor: pointer;
-  scale: 1.5;
+  right: 10px;
+  padding: 5px 7px;
 }

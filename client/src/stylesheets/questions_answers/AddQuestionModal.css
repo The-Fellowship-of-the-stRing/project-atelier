@@ -22,7 +22,6 @@ body.active-modal {
 .overlay {
   background: rgba(49,49,49,0.8);
 }
-
 .modal-content {
   position: absolute;
   top: 40%;
@@ -36,7 +35,14 @@ body.active-modal {
   min-width: 300px;
 }
 
-.k-add-answer-close {
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 7px;
+}
+
+.k-add-question-close {
   position: absolute;
   top: 10px;
   left: 10px;

@@ -2,14 +2,26 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom'
 import Answers from './Answers.jsx';
 import AddAnswer from './AddAnswer.jsx';
+import axios from 'axios'
 import '../../stylesheets/questions_answers/questionsAnswers.css'
 import '../../stylesheets/questions_answers/questionsList.css'
 
-const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId, handleAnswerModal } ) => {
+
+const QuestionsList = ( { searchTerm, resultsToShow, currentCount, handleHelpful, itemId, handleAnswerModal } ) => {
 
   const [marked, setMarked] = useState({});
-  const [answerData, setAnswerData] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [answersToShow, setAnswersToShow] = useState(2);
+
+  const handleAnswersToShow = (e) => {
+    e.preventDefault();
+    setAnswersToShow(Infinity);
+  }
+
+  const handleCollapseAnswers = (e) => {
+    e.preventDefault();
+    setAnswersToShow(2);
+  }
 
   const checkMarked = (id) => {
     if (!marked[id]) {
@@ -17,11 +29,6 @@ const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId, ha
       handleHelpful(id)
     }
   }
-
-  const handleAddAnswer = () => {
-    setShowModal(true);
-  }
-
 
   return resultsToShow ? (
     <div className="k-questions-list">
@@ -40,14 +47,20 @@ const QuestionsList = ( { resultsToShow, currentCount, handleHelpful, itemId, ha
               </div>
             </div>
               <Answers
+              answersToShow={answersToShow}
               questionId={id}
-              answerData={answerData}
-              setAnswerData={setAnswerData}
               itemId={itemId}
               />
-              <span className="k-load-more-answers"
-              ><strong>LOAD MORE ANSWERS/ SEE MORE ANSWERS</strong>
+              {answersToShow <= 2 ?
+                <span className="k-load-more-answers"
+                onClick={(e) => handleAnswersToShow(e)}
+                ><strong>SEE MORE ANSWERS</strong>
+                </span>
+              : <span className="k-collapse-answers"
+              onClick={(e) => handleCollapseAnswers(e)}
+              ><strong>COLLAPSE ANSWERS</strong>
               </span>
+              }
           </div>
         )
       })}

@@ -9,11 +9,17 @@
 }
 
 .k-question-block {
+  margin-top: 20px;
  display: flex;
  justify-content: space-between;
  width: 100%;
  align-items: flex-start;
- margin-bottom: 10px;
+ margin-bottom: 20px;
+}
+
+.k-question-body {
+  font-weight: bold;
+  font-size: large;
 }
 
 .k-question-helpful {
@@ -27,6 +33,12 @@
 }
 
 .k-load-more-answers {
+  font-size: 14px;
+  color: #686868;
+  cursor: pointer;
+}
+
+.k-collapse-answers {
   font-size: 14px;
   color: #686868;
   cursor: pointer;
