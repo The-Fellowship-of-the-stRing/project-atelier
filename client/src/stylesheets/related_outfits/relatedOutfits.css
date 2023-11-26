@@ -65,6 +65,13 @@
   position: absolute;
   margin-right: 0;
 }
+.c-prev {
+  justify-self: start;
+  align-self: center;
+  margin: 0;
+  position: absolute;
+  margin-left: 0;
+}
 .c-cards {
   display: flex;
   align-items: flex-start;
@@ -72,6 +79,7 @@
   overflow-y: scroll;
   width: 80vw;
   margin-right: 20px;
+  margin: 0 20px 0 20px;
 }
 
 .c-card {
