@@ -11,7 +11,6 @@ const Card = ( {cardDetails, itemName, className, cardKey, action, addProduct, d
     setCardData(cardDetails);
   }, [])
 
-
   let priceString =
     (cardData && cardData.sale_price && cardData.original_price)
       ? (<p className="c-card-price"><s className="c-card-price-sales">${cardData.sale_price}</s> ${cardData.original_price}</p>)

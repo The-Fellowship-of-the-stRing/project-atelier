@@ -5,10 +5,9 @@ import fetchCardData from '../../utils/fetchCardData.js';
 import getProductDataById from '../../utils/getProductDataById.js';
 import getStyleDataById from '../../utils/getStyleDataById.js';
 
-const Related = ( {itemId, cardIds, itemFeatures, itemName, updateMainProduct} ) => {
+const Carousel = ( {itemId, cardIds, itemFeatures, itemName, updateMainProduct,    cards, pWidth} ) => {
   const ref = useRef(null);
   const [mainProductId, setMainProductId] = useState(null);
-  const [width, setWidth] = useState(0);
   const [relatedIds, setRelatedIds] = useState(null);
   const [allCards, setAllCards] = useState(null);
   const [visibleCards, setVisibleCards] = useState(null);
@@ -17,40 +16,6 @@ const Related = ( {itemId, cardIds, itemFeatures, itemName, updateMainProduct} )
   const [isNextShown, setIsNextShown] = useState(false);
   const [isPrevShown, setIsPrevShown] = useState(false);
 
-  const fetchRelatedIds = async () => {
-    try {
-      if (itemId !== mainProductId) {
-        setMainProductId(itemId);
-        setIndexOfFirstVisibleCard(0);
-        setIsNextShown(true);
-        setIsPrevShown(false);
-        const fetchedIds = await getRelatedItems(itemId);
-        let cards = await Promise.all(fetchedIds.map((id,index) => fetchCardData(id)));
-        let cardElements = cards.map((card, index) =>
-          <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id+itemId} key={card.id+itemId+index} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>);
-        setRelatedIds(fetchedIds);
-        setAllCards(cardElements);
-        setVisibleCards(cardElements.slice(0, getCardCount(ref.current.offsetWidth)));
-        (visibleCardCount >= cardElements.length) ? setIsNextShown(false)
-          : setIsNextShown(true);
-      } else if (!allCards) {
-        setMainProductId(itemId);
-        const fetchedIds = await getRelatedItems(itemId);
-        let cards = await Promise.all(fetchedIds.map((id,index) => fetchCardData(id)));
-        let cardElements = cards.map((card, index) =>
-          <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id+itemId} key={card.id+itemId+index} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct}/>);
-        setRelatedIds(fetchedIds);
-        setAllCards(cardElements);
-        setVisibleCards(cardElements.slice(0, getCardCount(ref.current.offsetWidth)));
-        (visibleCardCount >= cardElements.length) ? setIsNextShown(false)
-          : setIsNextShown(true);
-      } else {
-        setVisibleCards(allCards.slice(0, getCardCount(ref.current.offsetWidth)));
-      }
-    } catch (err) {
-      console.error('Error getting item details: ', err);
-    }
-  }
 
   const getCardCount = (w) => {
     // Left and right margins of card list is 20px each
@@ -59,27 +24,23 @@ const Related = ( {itemId, cardIds, itemFeatures, itemName, updateMainProduct} )
   }
   const updateCardsBasedOnWidth = () => {
     if(allCards) {
-      let newCardCount = getCardCount(ref.current.offsetWidth);
+      let newCardCount = getCardCount(pWidth);
       setVisibleCards(allCards.slice(indexOfFirstVisibleCard, indexOfFirstVisibleCard + newCardCount));
       setVisibleCardCount(newCardCount);
     }
   }
 
   useEffect(() => {
-    const handleResize = () => {
-      setWidth(ref.current.offsetWidth);
-      setVisibleCardCount(getCardCount(ref.current.offsetWidth));
-    };
-    setTimeout(handleResize, 500);
-    fetchRelatedIds();
+    setAllCards(cards);
     setMainProductId(itemId);
-    window.addEventListener('resize', handleResize);
-    updateCardsBasedOnWidth();
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    }
-
-  }, [width, itemId, cardIds]);
+    setIndexOfFirstVisibleCard(0);
+    let cardCount = getCardCount(pWidth);
+    setVisibleCardCount(cardCount);
+    setVisibleCards(cards.slice(0, cardCount));
+    (visibleCardCount >= cards.length) ? setIsNextShown(false)
+      : setIsNextShown(true);
+    setIsPrevShown(false);
+  }, [pWidth, cards]);
 
   const updateVisibleCards = (incrementer) => {
     let updatedIndex = indexOfFirstVisibleCard + incrementer;
@@ -91,7 +52,7 @@ const Related = ( {itemId, cardIds, itemFeatures, itemName, updateMainProduct} )
     (updatedIndex + visibleCardCount === allCards.length) ? setIsNextShown(false)
       : setIsNextShown(true);
   };
-
+  console.log(pWidth);
   return visibleCards&&visibleCardCount ? (
     <div className="c-related-container" ref={ref}>
       {isPrevShown && <p className="c-prev"onClick={() => updateVisibleCards(-1)}>{'<'}</p>}
@@ -105,4 +66,4 @@ const Related = ( {itemId, cardIds, itemFeatures, itemName, updateMainProduct} )
   )
 }
 
-export default Related
+export default Carousel
