@@ -10,6 +10,7 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
   const [visibleCards, setVisibleCards] = useState(null);
   const [visibleCardCount, setVisibleCardCount] = useState(null)
   const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(0);
+  const [isNextShown, setIsNextShown] = useState(true);
 
   const fetchCardData = async (id) => {
     try {
@@ -59,8 +60,11 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
   }, []);
 
   const nextClickHandler = () => {
+    let updatedIndex = indexOfFirstVisibleCard + 1;
     setVisibleCards([...visibleCards.slice(1), allCards[indexOfFirstVisibleCard+visibleCardCount]]);
-    setIndexOfFirstVisibleCard(indexOfFirstVisibleCard + 1);
+    setIndexOfFirstVisibleCard(updatedIndex);
+    /* Remove next button if there are no more cards */
+    (updatedIndex + visibleCardCount === allCards.length) && setIsNextShown(false);
   };
 
   return visibleCards ? (
@@ -68,7 +72,7 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
       <div className="c-cards">
         {visibleCards}
       </div>
-      { <p className="c-next"onClick={nextClickHandler}>></p>}
+      {isNextShown && <p className="c-next"onClick={nextClickHandler}>></p>}
     </div>
   ) : (
     <div>No Related Items</div>
