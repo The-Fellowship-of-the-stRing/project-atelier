@@ -6,6 +6,7 @@ import getStyleDataById from '../../utils/getStyleDataById.js';
 
 const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
   const ref = useRef(null);
+  const [mainProductId, setMainProductId] = useState(null);
   const [width, setWidth] = useState(0);
   const [relatedIds, setRelatedIds] = useState(null);
   const [allCards, setAllCards] = useState(null);
@@ -19,7 +20,6 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
     try {
       const productData = await getProductDataById(id);
       const styleData = await getStyleDataById(id);
-      // if(productData&&styleData) {}
         let response = {
           id: id,
           name: productData.name || "NO NAME",
@@ -41,7 +41,7 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
   }
   const fetchRelatedIds = async () => {
     try {
-      if(!allCards) {
+      if(!allCards || itemId !== mainProductId) {
         const fetchedIds = await getRelatedItems(itemId);
         let cards = await Promise.all(fetchedIds.map((id,index) => fetchCardData(id)));
         let cardElements = cards.map((card, index) =>
@@ -71,17 +71,20 @@ const Related = ( {itemId, itemFeatures, itemName, updateMainProduct} ) => {
   }
 
   useEffect(() => {
+
     const handleResize = () => {
       setWidth(ref.current.offsetWidth);
       setVisibleCardCount(getCardCount(ref.current.offsetWidth));
     };
     setTimeout(handleResize, 500);
     fetchRelatedIds();
+    setMainProductId(itemId);
     window.addEventListener('resize', handleResize);
     updateCardsBasedOnWidth();
     return () => {
       window.removeEventListener('resize', handleResize);
     }
+
   }, [width, itemId]);
 
   const updateVisibleCards = (incrementer) => {
