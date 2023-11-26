@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect,useRef} from "react";
 import RatingsReviews from './containers/RatingsReviews';
 import getFirstItem from './utils/getFirstItem.js';
 import getProductDataById from './utils/getProductDataById.js';
@@ -11,6 +11,11 @@ import './styles.css'
 
 const App = () =>{
   const [currentItem, setCurrentItem] = useState(null);
+  const reviewRef = useRef(null);
+
+  const handleRef = () => {
+    reviewRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const updateMainProduct = async (itemId) => {
     try {
@@ -37,10 +42,10 @@ const App = () =>{
               <span className="main-loader"></span>
           ) : (
             <>
-              <ProductDetails itemId={currentItem.id}/>
+              <ProductDetails itemId={currentItem.id} handleRef= {handleRef}/>
               <RelatedOutfits itemId={currentItem.id} itemName={currentItem.name} itemFeatures={currentItem.features} updateMainProduct={updateMainProduct}/>
               <QuestionsAnswers itemId={currentItem.id} itemName={currentItem.name}/>
-              <RatingsReviews itemId={currentItem.id} itemName={currentItem.name}/>
+              <RatingsReviews itemId={currentItem.id} itemName={currentItem.name} ref={reviewRef}/>
             </>
           )}
       </div>
