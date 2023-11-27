@@ -21,6 +21,12 @@ const Outfits = ({ itemId, updateMainProduct }) => {
     setIsAdded(true);
   };
 
+  const addCard = (
+    <div className="c-card">
+      <button type="button" className="c-card-action-add" onClick={() => addProduct()}>+</button>
+    </div>
+  );
+
   const deleteProduct = (productId) => {
     console.log('Deleted Id', productId);
     const parsedData = getOutfits();
@@ -64,7 +70,7 @@ const Outfits = ({ itemId, updateMainProduct }) => {
           <button type="button" className="c-card-action-add" onClick={() => addProduct()}>+</button>
         </div>
       ) : null} */}
-      <Carousel className="c-outfits-carousel" itemId={itemId} cardIds={outfitIdsByUser} cards={allCards} pWidth={width} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />
+      <Carousel className="c-outfits-carousel" itemId={itemId} cardIds={outfitIdsByUser} cards={allCards} pWidth={width} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} addCard={addCard} isAdded={isAdded} />
     </div>
   ) : (
     <div className="c-outfits-container" ref={ref}>No Outfits</div>

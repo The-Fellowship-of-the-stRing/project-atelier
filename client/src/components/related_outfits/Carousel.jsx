@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 
 const Carousel = ({
-  cards, pWidth,
+  cards, pWidth, addCard, isAdded,
 }) => {
   const ref = useRef(null);
   // const [mainProductId, setMainProductId] = useState(null);
@@ -12,6 +12,8 @@ const Carousel = ({
   const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(0);
   const [isNextShown, setIsNextShown] = useState(false);
   const [isPrevShown, setIsPrevShown] = useState(false);
+
+
 
   // Left and right margins of card list is 20px each
   // Each card is 200px wide with right-margin of 10px
@@ -76,6 +78,7 @@ const Carousel = ({
         </button>
       )}
       <div className="c-cards">
+        {!isAdded && addCard}
         {visibleCards}
       </div>
       {isNextShown && (

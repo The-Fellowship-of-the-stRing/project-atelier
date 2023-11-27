@@ -72,6 +72,17 @@ const Card = ({
       >
         ❌
       </div>),
+    add: (
+      <div
+        className="c-card-action-add"
+        role="button"
+        tabIndex="0"
+        onKeyPress={() => deleteProduct(cardData.id)}
+        onClick={() => deleteProduct(cardData.id)}
+      >
+        ❌
+      </div>),
+
   };
 
   return cardData
