@@ -117,7 +117,7 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
             role="button"
             onClick={() => handleMoreAnsweredQuestions()}
           >
-            More Answered Questions
+            MORE ANSWERED QUESTIONS
           </div>
         )}
         <div
@@ -127,7 +127,7 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
           role="button"
           onClick={() => handleQuestionModal(true)}
         >
-          Add a Question +
+          ADD A QUESTION +
         </div>
       </div>
     </div>
@@ -139,7 +139,7 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
       onKeyDown={() => handleQuestionModal(true)}
       onClick={() => handleQuestionModal(true)}
     >
-      Add a Question +
+      ADD A QUESTION +
     </div>
   );
 };
