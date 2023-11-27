@@ -7,6 +7,7 @@ const getReviewMeta = async (id) => {
   } catch (err) {
     console.error(err);
   }
+  return null;
 };
 
 export default getReviewMeta;

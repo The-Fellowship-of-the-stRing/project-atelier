@@ -7,6 +7,7 @@ const getReviews = async (itemId, term, count) => {
   } catch (err) {
     console.error(err);
   }
+  return null;
 };
 
 export default getReviews;

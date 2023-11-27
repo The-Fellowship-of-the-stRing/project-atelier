@@ -58,7 +58,17 @@ const ReviewTile = ({ review, handleHelpful, handleReport }) => {
       <div className="l-review-tile-body" data-testid="review-body">
         {body}
         {' '}
-        <span className="l-review-tile-show-more" data-testid="show-more" onClick={() => handleShowMore()} hidden={!showMore}>Show More</span>
+        <span
+          role="button"
+          tabIndex="0"
+          onKeyDown={() => handleShowMore()}
+          className="l-review-tile-show-more"
+          data-testid="show-more"
+          onClick={() => handleShowMore()}
+          hidden={!showMore}
+        >
+          Show More
+        </span>
       </div>
       {review.recommend && (
         <div>
@@ -83,13 +93,31 @@ const ReviewTile = ({ review, handleHelpful, handleReport }) => {
       <div className="l-review-tile-helpfulness">
         Helpful?
         {' '}
-        <span className="l-review-tile-yes" data-testid="helpfull-button" style={{ cursor: !markedHelp ? 'pointer' : 'default' }} onClick={() => handleMark()}>Yes</span>
+        <span
+          role="button"
+          tabIndex="0"
+          onKeyDown={() => handleMark()}
+          className="l-review-tile-yes"
+          data-testid="helpfull-button"
+          style={{ cursor: !markedHelp ? 'pointer' : 'default' }}
+          onClick={() => handleMark()}
+        >
+          Yes
+        </span>
         {' '}
         (
         {review.helpfulness}
         )  |
         {' '}
-        <span className="l-review-tile-report" onClick={() => handleReport(review.review_id)}>Report</span>
+        <span
+          role="button"
+          tabIndex="0"
+          onKeyDown={() => handleReport(review.review_id)}
+          className="l-review-tile-report"
+          onClick={() => handleReport(review.review_id)}
+        >
+          Report
+        </span>
       </div>
     </div>
   );

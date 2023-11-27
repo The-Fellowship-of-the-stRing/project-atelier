@@ -8,6 +8,7 @@ const getFirstItem = async () => {
   } catch (err) {
     console.error(err);
   }
+  return null;
 };
 
 export default getFirstItem;
