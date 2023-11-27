@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import ExpandedView from './ExpandedView.jsx';
 import '../../stylesheets/product_details/imageGallery.css';
 import ImageSelect from './ImageSelect.jsx';
 
@@ -7,6 +8,7 @@ const ImageGallery = ({ style }) => {
   const [pageCount, setPageCount] = useState(1);
   const [lowIndex, setLowIndex] = useState(0);
   const [highIndex, setHighIndex] = useState(7);
+  const [modalState, setModalState] = useState(false);
   const handleIndex = async (value) => {
     await setCurrentIndex(value);
   };
@@ -29,6 +31,12 @@ const ImageGallery = ({ style }) => {
     setLowIndex(lowIndex - 7);
     setHighIndex(highIndex - 7);
   };
+  const handleModalTrue = () => {
+    setModalState(true);
+  };
+  const handleModalFalse = () => {
+    setModalState(false);
+  };
   useEffect(() => {
     setCurrentIndex(0);
     if (style) {
@@ -38,20 +46,15 @@ const ImageGallery = ({ style }) => {
 
   return style ? (
     <div className="g-images-container">
-      <div className="g-left-spacer" />
-
       <div className="g-images-main-container">
         {currentIndex > 0 && (
-        <button
-          type="button"
-          style={{ zIndex: 2 }}
-          onClick={previousImage}
-        >
+        <button type="button" style={{ zIndex: 2 }} onClick={previousImage}>
           Previous Image
         </button>
         )}
-        <div className="g-images-select">
-          {lowIndex > 0 && (
+        <div className="g-images-select-container">
+          {lowIndex > 0
+          && (
           <button
             type="button"
             onClick={handlePageIndexLower}
@@ -69,18 +72,29 @@ const ImageGallery = ({ style }) => {
           />
           {(highIndex / 7) < pageCount
           && (
-          <button
-            type="button"
-            onClick={handlePageIndexRaise}
-          >
+          <button type="button" onClick={handlePageIndexRaise}>
             Next Page
-
           </button>
           )}
         </div>
-        <img className="g-images-main" src={style.photos[`${currentIndex}`].url} alt="current item" />
-        {currentIndex < style.photos.length - 1 && <button type="button" onClick={nextImage}>Next Image</button>}
+        <img onClick={handleModalTrue} className="g-images-main" src={style.photos[`${currentIndex}`].url} />
+        {currentIndex < style.photos.length - 1
+        && (
+        <button type="button" onClick={nextImage}>
+          Next Image
+        </button>
+        )}
       </div>
+      {modalState === true && (
+      <ExpandedView
+        style={style}
+        handleIndex={handleIndex}
+        currentIndex={currentIndex}
+        handlePage={handlePage}
+        lowIndex={lowIndex}
+        highIndex={highIndex}
+      />
+      )}
     </div>
   )
     : (
