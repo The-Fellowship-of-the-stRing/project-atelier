@@ -85,7 +85,9 @@ const ImageGallery = ({ style }) => {
           </button>
           )}
         </div>
-        <img className="g-images-main" src={style.photos[`${currentIndex}`].url} alt="current item" />
+        <div role="button" tabIndex={0} onKeyDown={handleModalTrue} onClick={handleModalTrue}>
+          <img className="g-images-main" src={style.photos[`${currentIndex}`].url} alt="current item" />
+        </div>
         {currentIndex < style.photos.length - 1 && <button type="button" onClick={nextImage}>Next Image</button>}
       </div>
       {modalState === true && <ExpandedView />}
