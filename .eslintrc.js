@@ -36,7 +36,5 @@ module.exports = {
     'react/function-component-definition': [1, { namedComponents: 'arrow-function' }],
     'import/extensions': 'off',
     'no-console': 0,
-    // 'jsx-a11y/click-events-have-key-events': 'off',
-    // 'jsx-a11y/no-noninteractive-element-interactions': 'off',
   },
 };

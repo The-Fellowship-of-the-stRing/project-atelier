@@ -7,6 +7,7 @@ const getStyleDataById = async (itemId) => {
   } catch (err) {
     console.error(err);
   }
+  return null;
 };
 
 export default getStyleDataById;
