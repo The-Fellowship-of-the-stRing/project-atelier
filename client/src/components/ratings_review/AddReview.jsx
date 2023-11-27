@@ -59,7 +59,7 @@ const AddReview = ({
   };
 
   const checkIfSelected = () => {
-    for (let i = 0; i < factorOptions.length; i++) {
+    for (let i = 0; i < factorOptions.length; i += 1) {
       if (factorRating[factorOptions[i]].value === 0) {
         setSelectOption(true);
         break;
@@ -96,9 +96,9 @@ const AddReview = ({
       setNickname(e.target.value);
     }
   };
-  const validateEmail = (email) => {
+  const validateEmail = (currentEmail) => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return emailRegex.test(email);
+    return emailRegex.test(currentEmail);
   };
   const handleEmail = (e) => {
     const input = e.target.value;
@@ -107,19 +107,25 @@ const AddReview = ({
   };
 
   const handleSubmit = () => {
-    if (overall === 0 || selectOption || formBody.length < 50 || nickname.length < 1 || !validEmail) {
+    if (
+      overall === 0
+      || selectOption
+      || formBody.length < 50
+      || nickname.length < 1
+      || !validEmail
+    ) {
       setShowError(true);
     } else {
       setShowError(false);
       const obj = {};
-      for (let i = 0; i < factorOptions.length; i++) {
+      for (let i = 0; i < factorOptions.length; i += 1) {
         const currentFactor = factorOptions[i];
         const factorId = totals.characteristics[currentFactor].id;
-        obj[factorId] = Number.parseInt(factorRating[currentFactor].value);
+        obj[factorId] = parseInt(factorRating[currentFactor].value, 10);
       }
       const recommended = recommend === 'Yes';
       const data = {
-        product_id: Number.parseInt(totals.product_id),
+        product_id: parseInt(totals.product_id, 10),
         rating: overall,
         summary,
         body: formBody,
@@ -163,41 +169,49 @@ const AddReview = ({
             </div>
           </div>
           <div className="l-add-review-recommend">
-            <label className="l-add-review-section-title">Do you recommend?</label>
-            <input
-              type="radio"
-              name="yes"
-              value="Yes"
-              id="l-add-review-yes"
-              checked={recommend === 'Yes'}
-              onChange={onOptionChange}
-            />
-            <label>Yes</label>
-            <input
-              type="radio"
-              name="no"
-              value="No"
-              id="l-add-review-no"
-              checked={recommend === 'No'}
-              onChange={onOptionChange}
-            />
-            <label>No</label>
+            <div
+              className="l-add-review-section-title"
+            >
+              Do you recommend?
+            </div>
+            <label htmlFor="l-add-review-yes">
+              <input
+                type="radio"
+                name="yes"
+                value="Yes"
+                id="l-add-review-yes"
+                checked={recommend === 'Yes'}
+                onChange={onOptionChange}
+              />
+              Yes
+            </label>
+            <label htmlFor="l-add-review-yes">
+              <input
+                type="radio"
+                name="no"
+                value="No"
+                id="l-add-review-no"
+                checked={recommend === 'No'}
+                onChange={onOptionChange}
+              />
+              No
+            </label>
           </div>
 
-          <label className="l-add-review-section-title">Characteristics</label>
+          <section className="l-add-review-section-title">Characteristics</section>
           {factorOptions.map((factor) => (
             <div key={factor} className="l-add-review-single-factor">
               <div className="l-add-review-factor-name-decription">
-                <label className="l-add-review-factor-category">
+                <div className="l-add-review-factor-category">
                   {factor}
                   {' '}
                   -
                   {' '}
-                </label>
-                <label className="l-add-review-factor-description">
+                </div>
+                <div className="l-add-review-factor-description">
                   {' '}
                   {factorRating[factor].text}
-                </label>
+                </div>
               </div>
               <div className="l-add-review-factor-options">
                 {characteristics[factor].map((option, index) => {
