@@ -6,7 +6,6 @@
   font-family: 'M PLUS Rounded 1c', sans-serif;
   flex-direction: row;
   align-items: center;
-  overflow: scroll;
 }
 .g-product-details-column1{
   display: flex;
@@ -20,7 +19,6 @@
   height: 100%;
   padding-left: 62em;
   width: 40%;
-  overflow: scroll;
   position: absolute;
   justify-content: center;
   align-items: flex-start;
