@@ -12,17 +12,18 @@ const ProductDetails = ({ itemId, handleRef }) => {
   const [data, setData] = useState(null);
   const [styles, setStyles] = useState([]);
   const [style, setStyle] = useState(null);
-  // const [price, setPrice] = useState(null);
-  // const [isSale, setIsSale] = useState(false);
-  // const [sku, setSku] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [isSale, setIsSale] = useState(false);
+  const [salePrice, setSalePrice] = useState(null);
+  const [sku, setSku] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const productData = await getProductDataById(itemId);
         const styleData = await getStyleDataById(itemId);
         // Leaving console.logs in comments for when I need to reference it
-        // console.log(productData);
-        // console.log(styleData);
+        console.log(productData);
+        console.log(styleData);
         const values = {};
         values.name = productData.name;
         values.slogan = productData.slogan;
@@ -41,11 +42,22 @@ const ProductDetails = ({ itemId, handleRef }) => {
     for (let i = 0; i < styles.length; i += 1) {
       if (styles[i]['default?'] === true) {
         setStyle(styles[i]);
+        setPrice(styles[i].original_price);
+        if (styles[i].sale_price) {
+          setIsSale(true);
+          setSalePrice(styles[i].sale_price);
+        }
         def = true;
       }
     }
-    if (def === false) {
+    if (def === false && styles.length > 1) {
       setStyle(styles[0]);
+      console.log(styles);
+      setPrice(styles[0].original_price);
+      if (styles[0].sale_price) {
+        setIsSale(true);
+        setSalePrice(styles[0].sale_price);
+      }
     }
   }, [styles]);
   // const handlePrice = () => {
@@ -53,6 +65,12 @@ const ProductDetails = ({ itemId, handleRef }) => {
   // };
   const handleStyle = (value) => {
     setStyle(styles[value]);
+    console.log(styles[value].original_price);
+    setPrice(styles[value].original_price);
+    if (styles[value].sale_price) {
+      setIsSale(true);
+      setSalePrice(styles[value].sale_price);
+    }
   };
   return data && styles ? (
     <div className="g-product-details-main-container">
@@ -65,6 +83,21 @@ const ProductDetails = ({ itemId, handleRef }) => {
           <div>{data.category}</div>
           <div>{data.name}</div>
           <div>{data.slogan}</div>
+          { isSale === true && (
+          <div>
+            <div className="g-product-details-sale">{salePrice}</div>
+            <div>{price}</div>
+          </div>
+          )}
+          { isSale === false && (
+          <div>
+            <div>
+              $
+              {price}
+
+            </div>
+          </div>
+          )}
         </div>
         <StyleList itemId={itemId} styles={styles} style={style} handleStyle={handleStyle} />
         <Cart itemId={itemId} />
