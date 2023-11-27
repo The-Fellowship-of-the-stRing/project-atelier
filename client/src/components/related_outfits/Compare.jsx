@@ -5,34 +5,34 @@ const CompareModal = ({
   cardKey, itemName, compareName, itemFeatures, cardData, compareClickHandler,
 }) => {
   const compareData = {};
-  for (let i = 0; i < itemFeatures.length; i++) {
+  for (let i = 0; i < itemFeatures.length; i += 1) {
     const currentFeature = itemFeatures[i];
     compareData[currentFeature.feature] = { current: currentFeature.value };
   }
-  for (let i = 0; i < cardData.features.length; i++) {
+  for (let i = 0; i < cardData.features.length; i += 1) {
     const currentFeature = cardData.features[i];
-    compareData[currentFeature.feature]
-      ? compareData[currentFeature.feature].compared = currentFeature.value
-      : compareData[currentFeature.feature] = { compared: currentFeature.value };
+    if (compareData[currentFeature.feature]) {
+      compareData[currentFeature.feature].compared = currentFeature.value;
+    } else {
+      compareData[currentFeature.feature] = { compared: currentFeature.value };
+    }
   }
-
-  const featureList = [];
+  let featureList;
   if (compareData) {
     let index = 0;
-    for (const feature in compareData) {
-      featureList.push(
-        <tr key={cardKey + index} className="c-compare-feature-item">
-          <td>{feature.toUpperCase()}</td>
-          <td>{compareData[feature].current ? compareData[feature].current : ''}</td>
-          <td>{compareData[feature].compared ? compareData[feature].compared : ''}</td>
-        </tr>,
-      );
-      index++;
-    }
+    const features = Object.keys(compareData);
+    featureList = features.map((feature) => (
+      <tr key={cardKey + index} className="c-compare-feature-item">
+        <td>{feature.toUpperCase()}</td>
+        <td>{compareData[feature].current ? compareData[feature].current : ''}</td>
+        <td>{compareData[feature].compared ? compareData[feature].compared : ''}</td>
+      </tr>
+    ));
+    index += 1;
   }
 
   return (
-    <div className="c-compare-modal" onClick={() => compareClickHandler()}>
+    <div className="c-compare-modal" role="button" tabIndex="0" onKeyPress={() => compareClickHandler()} onClick={() => compareClickHandler()}>
       <div className="c-overlay" />
       <table className="c-compare-modal-table">
         <thead className="c-compare-header">
