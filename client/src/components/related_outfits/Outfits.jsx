@@ -9,7 +9,10 @@ const Outfits = ({ itemId, updateMainProduct }) => {
   const [outfitIdsByUser, setOutfitIdsByUser] = useState(null);
   const [width, setWidth] = useState(0);
   const [allCards, setAllCards] = useState(null);
+  const [mainCard, setMainCard] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
+
+  // STORE allCard in local storage
 
   const getOutfits = () => JSON.parse(localStorage.getItem(document.cookie)) || [];
 
@@ -33,14 +36,27 @@ const Outfits = ({ itemId, updateMainProduct }) => {
     const updatedState = parsedData.filter((id) => id !== productId);
     localStorage.removeItem(document.cookie);
     localStorage.setItem(document.cookie, JSON.stringify(updatedState));
+    // setIsAdded(!(productId === itemId));
     setIsAdded(updatedState.includes(itemId));
     setOutfitIdsByUser(updatedState);
   };
+
   const getAllCardData = async () => {
     try {
       const parsedData = getOutfits();
       const cards = await Promise.all(parsedData.map((id) => fetchCardData(id)));
-      const cardElement = cards.map((card) => (<Card className="c-card" cardDetails={card} cardKey={card.id + itemId} key={card.id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />));
+      const cardElement = cards.map((card) => {
+        const cardEl = (<Card className="c-card" cardDetails={card} cardKey={card.id + itemId} key={card.id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />);
+        if (card.id === itemId) {
+          setMainCard(cardEl);
+        }
+        return cardEl;
+      });
+      if (!mainCard) {
+        const mainCardData = await fetchCardData(itemId);
+        const mainCardEl = (<Card className="c-card" cardDetails={mainCardData} cardKey={mainCardData.id + itemId} key={mainCardData.id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />);
+        setMainCard(mainCardEl);
+      }
       setOutfitIdsByUser(parsedData);
       setAllCards(cardElement);
       if (parsedData) {
