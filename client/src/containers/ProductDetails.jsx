@@ -38,9 +38,9 @@ const ProductDetails = ({ itemId, handleRef }) => {
   }, [itemId]);
   useEffect(() => {
     let def = false;
-    for (const x of styles) {
-      if (x['default?'] === true) {
-        setStyle(x);
+    for (let i = 0; i < styles.length; i += 1) {
+      if (styles[i]['default?'] === true) {
+        setStyle(styles[i]);
         def = true;
       }
     }
@@ -48,9 +48,9 @@ const ProductDetails = ({ itemId, handleRef }) => {
       setStyle(styles[0]);
     }
   }, [styles]);
-  const handlePrice = () => {
+  // const handlePrice = () => {
 
-  };
+  // };
   const handleStyle = (value) => {
     setStyle(styles[value]);
   };
