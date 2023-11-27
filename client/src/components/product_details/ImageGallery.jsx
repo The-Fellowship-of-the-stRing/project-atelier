@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ExpandedView from './ExpandedView.jsx';
 import '../../stylesheets/product_details/imageGallery.css';
 import ImageSelect from './ImageSelect.jsx';
+import ExpandedView from './ExpandedView.jsx';
 
 const ImageGallery = ({ style }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -46,6 +47,7 @@ const ImageGallery = ({ style }) => {
 
   return style ? (
     <div className="g-images-container">
+      <div className="g-left-spacer" />
       <div className="g-images-main-container">
         {currentIndex > 0 && (
         <button type="button" style={{ zIndex: 2 }} onClick={previousImage}>
@@ -77,13 +79,10 @@ const ImageGallery = ({ style }) => {
           </button>
           )}
         </div>
-        <img onClick={handleModalTrue} className="g-images-main" src={style.photos[`${currentIndex}`].url} />
-        {currentIndex < style.photos.length - 1
-        && (
-        <button type="button" onClick={nextImage}>
-          Next Image
-        </button>
-        )}
+        <div role="button" tabIndex={0} onKeyDown={handleModalTrue} onClick={handleModalTrue}>
+          <img className="g-images-main" src={style.photos[`${currentIndex}`].url} alt="current item" />
+        </div>
+        {currentIndex < style.photos.length - 1 && <button type="button" onClick={nextImage}>Next Image</button>}
       </div>
       {modalState === true && (
       <ExpandedView
