@@ -18,3 +18,5 @@ const RelatedOutfits = ( {itemId, itemFeatures, itemName, updateMainProduct} ) =
     </div>
   )
 }
+
+export default RelatedOutfits;

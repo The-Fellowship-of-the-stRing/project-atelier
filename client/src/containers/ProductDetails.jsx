@@ -7,7 +7,8 @@ import SocialMedia from '../components/product_details/SocialMedia.jsx';
 import StyleList from '../components/product_details/StyleList.jsx';
 import ImageGallery from '../components/product_details/ImageGallery.jsx';
 import '../stylesheets/product_details/productDetails.css';
-const ProductDetails = ({itemId,handleRef}) => {
+
+const ProductDetails = ({ itemId, handleRef }) => {
   const [data, setData] = useState(null);
   const [styles, setStyles] = useState([]);
   const [style, setStyle] = useState(null);
@@ -35,21 +36,21 @@ const ProductDetails = ({itemId,handleRef}) => {
     };
     fetchData();
   }, [itemId]);
-  useEffect(()=> {
-    var def = false;
-    for(let x of styles) {
-      if(x["default?"]=== true) {
+  useEffect(() => {
+    let def = false;
+    for (const x of styles) {
+      if (x['default?'] === true) {
         setStyle(x);
         def = true;
       }
     }
-    if(def===false) {
+    if (def === false) {
       setStyle(styles[0]);
     }
-  },[styles])
+  }, [styles]);
   const handlePrice = () => {
 
-  }
+  };
   const handleStyle = (value) => {
     setStyle(styles[value]);
   };
@@ -59,7 +60,7 @@ const ProductDetails = ({itemId,handleRef}) => {
         <ImageGallery itemId={itemId} style={style} />
       </div>
       <div className="g-product-details-column2">
-        <Reviews itemId = {itemId} handleRef={handleRef}/>
+        <Reviews itemId={itemId} handleRef={handleRef} />
         <div className="g-product-details-info">
           <div>{data.category}</div>
           <div>{data.name}</div>

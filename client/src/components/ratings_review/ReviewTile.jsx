@@ -10,8 +10,6 @@ const ReviewTile = ({ review, handleHelpful, handleReport }) => {
   const [markedHelp, setMarkedHelp] = useState(false);
   const date = new Date(review.date);
 
-  console.log(review);
-
   const formatContent = () => {
     if (body.length > 250) {
       let formatBody = review.body.slice(0, 250);

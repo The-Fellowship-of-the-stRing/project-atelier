@@ -56,7 +56,7 @@ const AddAnswer = ({
           {questionBody}
         </h2>
         <div>
-          <label className="k-answer-container">
+          <label htmlFor="answer-body" className="k-answer-container">
             <div className="k-answer-title">*Your Answer:</div>
             <input
               placeholder="Your answer here..."
@@ -65,7 +65,7 @@ const AddAnswer = ({
               onChange={(e) => setYourAnswer(e.target.value)}
             />
           </label>
-          <label className="k-answer-nickname-container">
+          <label htmlFor="answer-nickname" className="k-answer-nickname-container">
             <div className="k-answer-nickname-title">*Your Nickname:</div>
             <input
               className="k-your-nickname"
@@ -75,7 +75,7 @@ const AddAnswer = ({
             />
             <span className="k-nickname-privacy">For privacy reasons, do not use your full name.</span>
           </label>
-          <label className="k-answer-email-container">
+          <label htmlFor="answer-email-field" className="k-answer-email-container">
             <div className="k-answer-email-title">*Your Email:</div>
             <input
               placeholder="Example: jack@email.com"

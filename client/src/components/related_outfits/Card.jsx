@@ -4,12 +4,14 @@ import getStyleDataById from '../../utils/getStyleDataById.js';
 import Stars from './Stars.jsx';
 import Compare from './Compare.jsx';
 
-const Card = ( {cardDetails, itemName, className, cardKey, action, addProduct, deleteProduct, itemFeatures, updateMainProduct} ) => {
+const Card = ({
+  cardDetails, itemName, className, cardKey, action, addProduct, deleteProduct, itemFeatures, updateMainProduct,
+}) => {
   const [cardData, setCardData] = useState(null);
   const [isCompareShown, setIsCompareShown] = useState(false);
   useEffect(() => {
     setCardData(cardDetails);
-  }, [])
+  }, []);
 
   const priceString = (cardData && cardData.sale_price && cardData.original_price)
     ? (
@@ -47,13 +49,16 @@ const Card = ( {cardDetails, itemName, className, cardKey, action, addProduct, d
     outfits: (<p className="c-card-action-delete" onClick={() => deleteProduct(itemId)}>❌</p>),
   };
 
-  return cardData ?
-    (
-      <div className={className} >
+  return cardData
+    ? (
+      <div className={className}>
         {isCompareShown ? <Compare itemId={cardData.id} cardKey={cardKey} itemFeatures={itemFeatures} cardData={cardData} itemName={itemName} compareName={cardData.name} compareClickHandler={compareClickHandler} /> : null}
         <div className="c-card-img-container">
-          <img className="c-card-img" onClick={() => updateMainProduct(cardData.id)}
-          src={cardData.photos} />
+          <img
+            className="c-card-img"
+            onClick={() => updateMainProduct(cardData.id)}
+            src={cardData.photos}
+          />
           {actionButtons[action]}
         </div>
 
