@@ -79,13 +79,15 @@ const AddQuestion = ({
             />
             <span className="k-email-privacy">For authentication reasons, you will not be emailed.</span>
           </label>
-          <button
-            type="button"
+          <div
+            onKeyDown={(e) => sendQuestionData(e)}
+            tabIndex="0"
+            role="button"
             className="k-add-queston-submit"
             onClick={(e) => sendQuestionData(e)}
           >
             Submit Your Question
-          </button>
+          </div>
           {isInvalid
                 && (
                 <ul className="k-question-error-message">

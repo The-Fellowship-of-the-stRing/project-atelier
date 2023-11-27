@@ -22,27 +22,22 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
     setAddQuestionModal(value);
   };
 
-  const handleAnswerModal = (value, body = {}, questionId) => {
-    setQuestionId(questionId);
+  const handleAnswerModal = (value, qId, body = {}) => {
+    setQuestionId(qId);
     setQuesitonBody(body);
     setAddAnswerModal(value);
-  };
-
-  const handleHelpful = (questionId) => {
-    axios.put(`/qa/questions/${questionId}/helpful`)
-      .then(() => {
-        fetchQuestionData();
-      })
-      .catch((err) => console.error(err));
   };
 
   const fetchQuestionData = async () => {
     try {
       const response = await axios.get(`/qa/questions/?product_id=${itemId}&count=${numOfQuestionsToGet}`);
       const notReported = response.data.results.filter((value) => value.reported === false);
-      const sortedResults = notReported.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
+      const sortedResults = notReported
+        .sort((a, b) => b.question_helpfulness - a.question_helpfulness);
       if (searchTerm.length >= 3) {
-        const filteredBySearchText = sortedResults.filter((question) => question.question_body.toLowerCase().includes(searchTerm.toLowerCase()));
+        const filteredBySearchText = sortedResults
+          .filter((question) => (
+            question.question_body.toLowerCase().includes(searchTerm.toLowerCase())));
         setResultsToShow(filteredBySearchText);
       } else {
         setQuestionData(sortedResults);
@@ -50,7 +45,16 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
       return response.data;
     } catch (err) {
       console.error(err);
+      return err;
     }
+  };
+
+  const handleHelpful = (qId) => {
+    axios.put(`/qa/questions/${qId}/helpful`)
+      .then(() => {
+        fetchQuestionData();
+      })
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
@@ -106,29 +110,37 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
       <div className="k-btns-container">
         {(resultsToShow.length >= 2) && (resultsToShow.length <= 20) && (
 
-          <button
+          <div
+            onKeyDown={() => handleMoreAnsweredQuestions()}
             className="k-more-answered-questions"
+            tabIndex="0"
+            role="button"
             onClick={() => handleMoreAnsweredQuestions()}
           >
             More Answered Questions
-          </button>
+          </div>
         )}
-        <button
+        <div
+          onKeyDown={() => handleQuestionModal(true)}
           className="k-add-a-question"
+          tabIndex="0"
+          role="button"
           onClick={() => handleQuestionModal(true)}
         >
           Add a Question +
-        </button>
+        </div>
       </div>
     </div>
   ) : (
-    // <div>Loading...</div>
-    <button
+    <div
       className="k-add-a-question"
+      tabIndex="0"
+      role="button"
+      onKeyDown={() => handleQuestionModal(true)}
       onClick={() => handleQuestionModal(true)}
     >
       Add a Question +
-    </button>
+    </div>
   );
 };
 
