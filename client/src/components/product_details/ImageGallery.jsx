@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import ExpandedView from './ExpandedView.jsx';
 import '../../stylesheets/product_details/imageGallery.css';
 import ImageSelect from './ImageSelect.jsx';
-import ExpandedView from './ExpandedView.jsx';
 
 const ImageGallery = ({ style }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
