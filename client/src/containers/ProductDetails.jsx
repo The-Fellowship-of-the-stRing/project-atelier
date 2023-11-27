@@ -70,6 +70,8 @@ const ProductDetails = ({ itemId, handleRef }) => {
     if (styles[value].sale_price) {
       setIsSale(true);
       setSalePrice(styles[value].sale_price);
+    } else {
+      setIsSale(false);
     }
   };
   return data && styles ? (
@@ -84,9 +86,16 @@ const ProductDetails = ({ itemId, handleRef }) => {
           <div>{data.name}</div>
           <div>{data.slogan}</div>
           { isSale === true && (
-          <div>
-            <div className="g-product-details-sale">{salePrice}</div>
-            <div>{price}</div>
+          <div className="g-product-details-price">
+            <div className="g-product-details-sale">
+              $
+              {price}
+            </div>
+            <div>
+              &nbsp;
+              $
+              {salePrice}
+            </div>
           </div>
           )}
           { isSale === false && (
@@ -94,7 +103,6 @@ const ProductDetails = ({ itemId, handleRef }) => {
             <div>
               $
               {price}
-
             </div>
           </div>
           )}

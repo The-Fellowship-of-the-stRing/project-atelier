@@ -19,6 +19,14 @@
 }
 
 .g-product-details-info{
-  display:flex;
+  display: flex;
   flex-direction: column;
+}
+.g-product-details-price{
+  display: flex;
+  flex-direction: row;
+}
+.g-product-details-sale{
+  color:#BB0A21;
+  text-decoration: line-through;
 }
