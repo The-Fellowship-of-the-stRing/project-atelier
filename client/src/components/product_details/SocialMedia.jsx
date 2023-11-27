@@ -14,3 +14,7 @@ const SocialMedia = () => {
   );
 };
 export default SocialMedia;
+
+// localhost:8080
+// https://twitter.com/intent/tweet?url=http://localhost:3000&text=
+// https://pinterest.com/pin/create/button/?url=http://localhost:3000&media=&description=
