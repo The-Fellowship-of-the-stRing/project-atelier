@@ -6,7 +6,13 @@ const StarBar = ({
   value, total, current, updateFilter,
 }) => (
   <div className="l-star-bar-main" data-testid="star-bar">
-    <div className="l-star-bar-text" onClick={() => updateFilter(current)}>
+    <div
+      role="button"
+      tabIndex="0"
+      onKeyDown={() => updateFilter(current)}
+      className="l-star-bar-text"
+      onClick={() => updateFilter(current)}
+    >
       {current}
       {' '}
       stars

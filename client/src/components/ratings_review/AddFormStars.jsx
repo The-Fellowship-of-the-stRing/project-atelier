@@ -12,7 +12,7 @@ const AddFormStars = ({ rating, updateRating }) => {
         starLength.map((star, index) => (
           <div
             role="button"
-            tabIndex={index}
+            tabIndex={index + 1}
             onKeyDown={() => updateRating(index + 1)}
             key={star}
             id="star-outline"
@@ -31,7 +31,7 @@ const AddFormStars = ({ rating, updateRating }) => {
         starLength.map((star, index) => (
           <div
             role="button"
-            tabIndex={index}
+            tabIndex={index + 1}
             onKeyDown={() => updateRating(index + 1)}
             key={star}
             id="star-fill"

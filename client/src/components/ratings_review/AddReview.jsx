@@ -232,14 +232,18 @@ const AddReview = ({
               </div>
             </div>
           ))}
-          <label className="l-add-review-section-title">Review Summary (optional)</label>
-          <input type="text" className="l-add-review-summary" value={summary} placeholder="Example: Best purchase ever!" onChange={(e) => handleSummary(e)} />
+          <label htmlFor="summary-body" className="l-add-review-section-title">
+            Review Summary (optional)
+            <input id="summary-body" type="text" className="l-add-review-summary" value={summary} placeholder="Example: Best purchase ever!" onChange={(e) => handleSummary(e)} />
+          </label>
 
-          <label className="l-add-review-section-title">Review Body</label>
-          <textarea type="text" className="l-add-review-body" value={formBody} placeholder="Why did you like the product or not?" onChange={(e) => handleBody(e)} />
+          <label htmlFor="add-review-body" className="l-add-review-section-title">
+            Review Body
+            <textarea id="add-review-body" type="text" className="l-add-review-body" value={formBody} placeholder="Why did you like the product or not?" onChange={(e) => handleBody(e)} />
+          </label>
           <div className="l-add-review-body-count">{charCount <= 0 ? 'Minimum reached' : `Minimum required characters left: ${charCount}`}</div>
 
-          <label className="l-add-review-section-title">Upload your photos (optional)</label>
+          <div className="l-add-review-section-title">Upload your photos (optional)</div>
           <ImageUploading
             multiple
             value={images}
@@ -259,15 +263,17 @@ const AddReview = ({
               // write your building UI
               <div className="upload__image-wrapper">
                 {images.length > 0 && (
-                  <button onClick={onImageRemoveAll} className="l-add-review-image-btn-all">Remove all images</button>
+                  <button type="button" onClick={onImageRemoveAll} className="l-add-review-image-btn-all">Remove all images</button>
                 )}
                 <div className="l-add-review-thumbnails">
                   {showAddImage && (
                   <button
+                    type="button"
                     aria-label="Upload Image"
                     data-testid="image-uploader"
                     style={isDragging ? { color: 'red' } : undefined}
                     onClick={onImageUpload}
+                    // eslint-disable-next-line react/jsx-props-no-spreading
                     {...dragProps}
                     className="l-add-review-add-image"
                   >
@@ -275,11 +281,11 @@ const AddReview = ({
                   </button>
                   )}
                   {imageList.map((image, index) => (
-                    <div key={index} className="image-item">
-                      <img src={image.data_url} alt="image-thumbnail" width="100" className="l-add-review-single-thumbnail" />
+                    <div key={image.data_url} className="image-item">
+                      <img src={image.data_url} alt="product-thumbnail" width="100" className="l-add-review-single-thumbnail" />
                       <div className="image-item__btn-wrapper">
-                        <button onClick={() => onImageUpdate(index)} className="l-add-review-image-btn"><FiEdit /></button>
-                        <button onClick={() => onImageRemove(index)} className="l-add-review-image-btn"><FaRegTrashAlt /></button>
+                        <button type="button" onClick={() => onImageUpdate(index)} className="l-add-review-image-btn"><FiEdit /></button>
+                        <button type="button" onClick={() => onImageRemove(index)} className="l-add-review-image-btn"><FaRegTrashAlt /></button>
                       </div>
                     </div>
                   ))}
@@ -288,13 +294,26 @@ const AddReview = ({
             )}
           </ImageUploading>
 
-          <label className="l-add-review-section-title">What is your nickname?</label>
-          <input type="text" alt="nickname field" value={nickname} placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} className="l-add-review-summary" />
-          <label className="l-add-review-input-footer">For privacy reasons, do not use your full name or email address</label>
+          <label htmlFor="add-review-nickname" className="l-add-review-section-title">
+            What is your nickname?
+            <input
+              type="text"
+              id="add-review-nickname"
+              alt="nickname field"
+              value={nickname}
+              placeholder="Example: jackson11!"
+              onChange={(e) => handleNickname(e)}
+              className="l-add-review-summary"
+            />
+          </label>
+          <div className="l-add-review-input-footer">For privacy reasons, do not use your full name or email address</div>
 
-          <label className="l-add-review-section-title">Your email</label>
-          <input type="email" value={email} alt="user email" placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} className="l-add-review-summary" />
-          <label className="l-add-review-input-footer">For authentication reasons, you will not be emailed</label>
+          <label htmlFor="add-review-email" className="l-add-review-section-title">
+            Your email
+            <input id="add-review-email" type="email" value={email} alt="user email" placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} className="l-add-review-summary" />
+          </label>
+
+          <div className="l-add-review-input-footer">For authentication reasons, you will not be emailed</div>
 
           {showError && (
             <div className="l-add-review-errors">
@@ -304,6 +323,7 @@ const AddReview = ({
                   <li data-testid="error-message">Select an overall rating</li>
                 )}
                 {selectOption && (
+                  // eslint-disable-next-line react/no-unescaped-entities
                   <li data-testid="error-message">Please rate the product's characteristics</li>
                 )}
                 {formBody.length <= 50 && (

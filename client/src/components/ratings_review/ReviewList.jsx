@@ -39,10 +39,15 @@ const ReviewList = ({
             if (currentFilter.indexOf(`${review.rating}`) !== -1 || currentFilter.length < 1) {
               return (
                 <div data-testid="review-item" key={review.review_id} className="l-review-list-tile-main">
-                  <ReviewTile review={review} handleHelpful={handleHelpful} handleReport={handleReport} />
+                  <ReviewTile
+                    review={review}
+                    handleHelpful={handleHelpful}
+                    handleReport={handleReport}
+                  />
                 </div>
               );
             }
+            return null;
           })}
         </div>
       )}
