@@ -8,6 +8,7 @@ const ImageGallery = ({itemId, style}) => {
   const [pageCount, setPageCount] = useState(1);
   const [lowIndex, setLowIndex] = useState(0);
   const [highIndex, setHighIndex] = useState(7);
+  const [modalState, setModalState]= useState(false);
   const handleIndex = async (value) => {
     await setCurrentIndex(value)
   }
@@ -30,6 +31,12 @@ const ImageGallery = ({itemId, style}) => {
     setLowIndex(lowIndex - 7);
     setHighIndex(highIndex - 7);
   }
+  const handleModalTrue = () => {
+    setModalState(true);
+  }
+  const handleModalFalse = () => {
+    setModalState(false);
+  }
   useEffect(()=> {
     setCurrentIndex(0);
     if(style) {
@@ -39,11 +46,9 @@ const ImageGallery = ({itemId, style}) => {
 
   return style?(
     <div className="g-images-container">
-      <div className= "g-left-spacer"/>
-
       <div className= "g-images-main-container">
        {currentIndex>0&&<button style={{zIndex:2}} onClick= {previousImage}>Previous Image</button>}
-       <div className= "g-images-select">
+       <div className= "g-images-select-container">
         {lowIndex>0&&<button onClick={handlePageIndexLower}>Previous Page</button>}
         <ImageSelect
         style = {style}
@@ -54,9 +59,10 @@ const ImageGallery = ({itemId, style}) => {
         highIndex = {highIndex}/>
         {(highIndex/7) < pageCount && <button onClick={handlePageIndexRaise}>Next Page</button>}
       </div>
-      <img  className="g-images-main" src={style.photos[`${currentIndex}`].url}/>
+      <img  onClick= {handleModalTrue} className="g-images-main" src={style.photos[`${currentIndex}`].url}/>
       {currentIndex<style.photos.length-1&&<button onClick={nextImage}>Next Image</button>}
       </div>
+      {modalState===true && <ExpandedView/>}
     </div>
   ):
   <div>
