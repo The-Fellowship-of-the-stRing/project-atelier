@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-// import ReactDOM from 'react-dom';
 import Answers from './Answers.jsx';
-// import AddAnswer from './AddAnswer.jsx';
 import '../../stylesheets/questions_answers/questionsAnswers.css';
 import '../../stylesheets/questions_answers/questionsList.css';
 
@@ -9,7 +7,6 @@ const QuestionsList = ({
   resultsToShow, handleHelpful, itemId, handleAnswerModal,
 }) => {
   const [marked, setMarked] = useState({});
-  // const [showModal, setShowModal] = useState(false);
   const [answersToShow, setAnswersToShow] = useState(2);
 
   const handleAnswersToShow = (e) => {
