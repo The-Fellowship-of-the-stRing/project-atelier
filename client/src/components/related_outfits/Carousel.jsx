@@ -1,18 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react';
 
 const Carousel = ({
-  cards, pWidth,
+  cards, pWidth, addCard, isAdded,
 }) => {
   const ref = useRef(null);
-  // const [mainProductId, setMainProductId] = useState(null);
-  // const [relatedIds, setRelatedIds] = useState(null);
   const [allCards, setAllCards] = useState(null);
   const [visibleCards, setVisibleCards] = useState(null);
   const [visibleCardCount, setVisibleCardCount] = useState(null);
   const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(0);
   const [isNextShown, setIsNextShown] = useState(false);
   const [isPrevShown, setIsPrevShown] = useState(false);
-
   // Left and right margins of card list is 20px each
   // Each card is 200px wide with right-margin of 10px
   const getCardCount = (w) => Math.floor((w - 40) / 210);
@@ -26,7 +23,6 @@ const Carousel = ({
   //     setVisibleCardCount(newCardCount);
   //   }
   // };
-
   useEffect(() => {
     setAllCards(cards);
     // setMainProductId(itemId);
@@ -40,7 +36,7 @@ const Carousel = ({
       setIsNextShown(true);
     }
     setIsPrevShown(false);
-  }, [pWidth, cards]);
+  }, [pWidth, cards, isAdded]);
 
   const updateVisibleCards = (incrementer) => {
     const updatedIndex = indexOfFirstVisibleCard + incrementer;
@@ -76,6 +72,7 @@ const Carousel = ({
         </button>
       )}
       <div className="c-cards">
+        {!isAdded && addCard}
         {visibleCards}
       </div>
       {isNextShown && (
