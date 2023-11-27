@@ -22,7 +22,7 @@ const ProductDetails = ({ itemId, handleRef }) => {
         const styleData = await getStyleDataById(itemId);
         // Leaving console.logs in comments for when I need to reference it
         // console.log(productData);
-        // console.log(styleData);
+        console.log(styleData);
         const values = {};
         values.name = productData.name;
         values.slogan = productData.slogan;
