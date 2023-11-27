@@ -22,8 +22,8 @@ const ProductDetails = ({ itemId, handleRef }) => {
         const productData = await getProductDataById(itemId);
         const styleData = await getStyleDataById(itemId);
         // Leaving console.logs in comments for when I need to reference it
-        console.log(productData);
-        console.log(styleData);
+        // console.log(productData);
+        // console.log(styleData);
         const values = {};
         values.name = productData.name;
         values.slogan = productData.slogan;
@@ -52,7 +52,6 @@ const ProductDetails = ({ itemId, handleRef }) => {
     }
     if (def === false && styles.length > 1) {
       setStyle(styles[0]);
-      console.log(styles);
       setPrice(styles[0].original_price);
       if (styles[0].sale_price) {
         setIsSale(true);
@@ -65,7 +64,6 @@ const ProductDetails = ({ itemId, handleRef }) => {
   // };
   const handleStyle = (value) => {
     setStyle(styles[value]);
-    console.log(styles[value].original_price);
     setPrice(styles[value].original_price);
     if (styles[value].sale_price) {
       setIsSale(true);
