@@ -5,18 +5,26 @@
   width: 100vw;
   justify-content: center;
   align-items: center;
-  border: 1px solid green;
   margin-top: 80px;
-  margin-bottom: 90px;
+  margin-bottom: 200px;
 }
 
-.k-questions-answers-search {
+.k-q-a-title {
   display: flex;
-  height: 100px;
-  width: 100vw;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid purple;
+  align-self: flex-start;
+  margin-left: 17%;
+  font-weight: bold;
+  font-size:x-large;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.k-btns-container {
+  display: flex;
+  align-self: flex-start;
+  margin-left: 17%;
+  margin-top: 20px;
+  gap: 10px;
 }
 
 .k-more-answered-questions {

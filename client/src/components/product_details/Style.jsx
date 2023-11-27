@@ -1,7 +1,14 @@
-import React,{useState,useEffect} from 'react';
-const Style = ({thumbnail,handleStyle,index}) => {
-  return(
-     <img className= "g-style_image" src = {thumbnail} onClick ={()=> handleStyle(index)}/>
-    )
-}
-export default Style
+import React from 'react';
+
+const Style = ({ thumbnail, handleStyle, index }) => (
+  <div
+    role="button"
+    className="g-style_image"
+    tabIndex={index}
+    style={{ padding: '10px', backgroundImage: `url(${thumbnail})` }}
+    onKeyDown={() => handleStyle(index)}
+    onClick={() => handleStyle(index)}
+    alt="style option"
+  />
+);
+export default Style;

@@ -5,7 +5,7 @@ const getProductDataById = async (itemId) => {
     const response = await axios.get(`/products/${itemId}`);
     return response.data;
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 };
 

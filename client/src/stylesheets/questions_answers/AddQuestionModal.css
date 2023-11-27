@@ -1,4 +1,4 @@
-.k-add-answer-overlay {
+.k-add-question-overlay {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@
   z-index: 3;
 }
 
-.k-add-answer-modal {
+.k-add-question-modal {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -19,49 +19,60 @@
   align-items: center;
   min-width: 500px;
   width: 30%;
-  height: 50%;
+  height: 35%;
   background-color: #F6F8FF;
   box-shadow: 1px 1px 5px #00000065;
   overflow-y: scroll;
 }
 
-.k-answer-header {
+.k-question-header {
   display: flex;
   justify-content: center;
   width: 100%;
   height: auto;
 }
 
-.k-answer-sub-header {
+.k-question-sub-header {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
 
-.modal-content {
+.k-question-container {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  margin-top: 10px;
 }
 
-.k-answer-container,
-.k-answer-nickname-container,
-.k-answer-email-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 15px;
-}
-
-.k-answer-title,
-.k-answer-nickname-title,
-.k-answer-email-title {
+.k-question-title {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-.k-your-answer,
+.k-your-question {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.k-nickname-container,
+.k-email-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.k-nickname-title,
+.k-email-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
 .k-your-nickname,
 .k-your-email {
   width: 100%;
@@ -72,13 +83,13 @@
 }
 
 .k-nickname-privacy,
-.k-answer-email-privacy {
+.k-email-privacy {
   font-size: 12px;
   margin-top: 5px;
   color: #555;
 }
 
-.k-add-answer-submit {
+.k-add-queston-submit {
   display: flex;
   padding: 20px;
   background-color: #F6F8FF;
@@ -92,14 +103,14 @@
   margin-top: 10px;
 }
 
-.k-answer-error-message {
+.k-question-error-message {
   list-style: none;
   padding: 0;
   color: red;
   margin-top: 10px;
 }
 
-.k-add-answer-close {
+.k-add-question-close {
   position: absolute;
   top: 10px;
   right: 10px;

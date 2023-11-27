@@ -5,7 +5,7 @@ const getStyleDataById = async (itemId) => {
     const response = await axios.get(`/products/${itemId}/styles`);
     return response.data.results;
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 };
 

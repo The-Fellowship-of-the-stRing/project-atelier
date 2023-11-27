@@ -1,0 +1,17 @@
+.k-questions-answers-search {
+  display: flex;
+  align-self: flex-start;
+  margin-left: 17%;
+  height: 110px;
+  width: 65vw;
+}
+
+.k-search-input {
+  height: 5vh;
+  width: 55vw;
+  margin: 5px 2px 5px 2px;
+}
+
+.k-clear-search-btn {
+  height: 5.5vh;
+}

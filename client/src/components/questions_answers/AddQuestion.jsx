@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { AiOutlineClose } from 'react-icons/ai';
-import '../../stylesheets/questions_answers/AddAnswerModal.css';
+import '../../stylesheets/questions_answers/AddQuestionModal.css';
 
-const AddAnswer = ({
-  questionBody, handleAnswerModal, itemName, questionId, fetchQuestionData,
+const AddQuestion = ({
+  itemId, itemName, handleQuestionModal, fetchQuestionData,
 }) => {
-  const [yourAnswer, setYourAnswer] = useState('');
+  const [yourQuestion, setYourQuestion] = useState('');
   const [yourNickName, setYourNickName] = useState('');
   const [yourEmail, setYourEmail] = useState('');
   const [isInvalid, setIsInvalid] = useState(false);
 
   const checkValidity = () => {
-    if ((yourAnswer.length > 1000 || yourAnswer.length === 0)
+    if ((yourQuestion.length > 1000 || yourQuestion.length === 0)
         || (yourNickName.length > 60 || yourNickName.length === 0)
         || (yourEmail.length > 60 || yourEmail.length === 0)
         || !yourEmail.includes('@')) {
       setIsInvalid(true);
-      setYourAnswer('');
+      setYourQuestion('');
       setYourNickName('');
       setYourEmail('');
     } else {
@@ -25,82 +25,76 @@ const AddAnswer = ({
     }
   };
 
-  const sendAnswerData = (e) => {
+  const sendQuestionData = (e) => {
     e.preventDefault();
     checkValidity();
     if (isInvalid === false) {
-      axios.post(`/qa/questions/${questionId}/answers`, {
-        body: yourAnswer,
+      axios.post('/qa/questions', {
+        product_id: itemId,
+        body: yourQuestion,
         name: yourNickName,
         email: yourEmail,
-        photos: [],
       })
         .then(() => {
           fetchQuestionData();
         })
-        .then(() => handleAnswerModal(false))
+        .then(() => handleQuestionModal(false))
         .catch((err) => console.error(err));
     }
     setTimeout(() => setIsInvalid(false), '5000');
   };
 
   return (
-    <div className="k-add-answer-overlay">
-      <div className="k-add-answer-modal">
-        <h1 className="k-answer-header">Submit Your Answer</h1>
-        <h2 className="k-answer-sub-header">
-          {itemName}
-          {' '}
-          :
-          {' '}
-          {questionBody}
-        </h2>
+    <div className="k-add-question-overlay">
+      <div className="k-add-question-modal">
+        <h1 className="k-question-header">Ask your question about:</h1>
+        <h2 className="k-question-sub-header">{itemName}</h2>
         <div>
-          <label htmlFor="answer-body" className="k-answer-container">
-            <div className="k-answer-title">*Your Answer:</div>
+          <label htmlFor="question-body" className="k-question-container">
+            <div className="k-question-title">*Your Question:</div>
             <input
-              placeholder="Your answer here..."
-              className="k-your-answer"
-              value={yourAnswer}
-              onChange={(e) => setYourAnswer(e.target.value)}
+              placeholder="Your question here..."
+              className="k-your-question"
+              value={yourQuestion}
+              onChange={(e) => setYourQuestion(e.target.value)}
             />
           </label>
-          <label htmlFor="answer-nickname" className="k-answer-nickname-container">
-            <div className="k-answer-nickname-title">*Your Nickname:</div>
+          <label htmlFor="nickname-field" className="k-nickname-container">
+            <div className="k-nickname-title">*What is Your Nickname:</div>
             <input
               className="k-your-nickname"
-              placeholder="Example: jack543!"
+              placeholder="Example: jackson11!"
               value={yourNickName}
               onChange={(e) => setYourNickName(e.target.value)}
             />
             <span className="k-nickname-privacy">For privacy reasons, do not use your full name.</span>
           </label>
-          <label htmlFor="answer-email-field" className="k-answer-email-container">
-            <div className="k-answer-email-title">*Your Email:</div>
+          <label htmlFor="email-field" className="k-email-container">
+            <div className="k-email-title">*Your Email:</div>
             <input
               placeholder="Example: jack@email.com"
               className="k-your-email"
               value={yourEmail}
               onChange={(e) => setYourEmail(e.target.value)}
             />
-            <span className="k-answer-email-privacy">For authentication reasons, you will not be emailed.</span>
+            <span className="k-email-privacy">For authentication reasons, you will not be emailed.</span>
           </label>
           <button
             type="button"
-            className="k-add-answer-submit"
-            onClick={(e) => sendAnswerData(e)}
+            className="k-add-queston-submit"
+            onClick={(e) => sendQuestionData(e)}
           >
-            Submit
+            Submit Your Question
           </button>
           {isInvalid
                 && (
-                <ul className="k-answer-error-message">
+                <ul className="k-question-error-message">
                   <li>Fields must not be blank</li>
                   <li>Email must be in correct format: name@email.com</li>
                 </ul>
                 )}
         </div>
-        <AiOutlineClose className="k-add-answer-close" onClick={() => handleAnswerModal(false)} />
+        <AiOutlineClose className="k-add-question-close" onClick={() => handleQuestionModal(false)} />
         <span className="k-denotes-mandatory">* denotes mandatory field</span>
       </div>
     </div>
@@ -108,4 +102,4 @@ const AddAnswer = ({
   );
 };
 
-export default AddAnswer;
+export default AddQuestion;
