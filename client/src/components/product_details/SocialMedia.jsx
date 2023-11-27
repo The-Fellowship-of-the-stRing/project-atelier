@@ -1,4 +1,5 @@
-import React,{useState,useEffect} from 'react';
+import React from 'react';
+
 const SocialMedia = () => {
   const facebook = 'https://www.facebook.com/sharer/sharer.php?u=http://localhost:8080';
   const twitter = 'https://twitter.com/intent/tweet?url=http://localhost:8080';
@@ -12,10 +13,9 @@ const SocialMedia = () => {
     </div>
 
   );
-}
-export default SocialMedia
+};
+export default SocialMedia;
 
-// https://www.facebook.com/sharer/sharer.php?u=http://localhost:8080
+// localhost:8080
 // https://twitter.com/intent/tweet?url=http://localhost:3000&text=
 // https://pinterest.com/pin/create/button/?url=http://localhost:3000&media=&description=
-
