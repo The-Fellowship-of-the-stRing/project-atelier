@@ -20,16 +20,15 @@ const Outfits = ({ itemId, updateMainProduct }) => {
     setIsAdded(true);
     setAllCards([mainCard, ...allCards]);
   };
-
   const deleteProduct = (productId) => {
-    console.log('Deleted Id', productId);
+    console.log('Deleted Id', productId, allCards[0]);
     const parsedData = getOutfits();
     const updatedState = parsedData.filter((id) => id !== productId);
     localStorage.removeItem(document.cookie);
     localStorage.setItem(document.cookie, JSON.stringify(updatedState));
 
-    // setIsAdded(!(productId === itemId));
-    setIsAdded(updatedState.includes(itemId));
+    setIsAdded(!(productId === itemId));
+    // setIsAdded(updatedState.includes(itemId));
   };
 
   const addCard = (
