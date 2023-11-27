@@ -4,7 +4,7 @@ import Carousel from './Carousel.jsx';
 import fetchCardData from '../../utils/fetchCardData.js';
 import getRelatedItems from '../../utils/getRelatedItems.js';
 
-const Outfits = ( {itemId, updateMainProduct} ) => {
+const Outfits = ({ itemId, updateMainProduct }) => {
   // localStorage.clear();
   const ref = useRef(null);
   const [outfitIdsByUser, setOutfitIdsByUser] = useState(null);
@@ -48,13 +48,13 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
     localStorage.setItem(document.cookie, JSON.stringify(parsedData));
     setOutfitIdsByUser(parsedData);
     setIsAdded(true);
-  }
+  };
 
   const deleteProduct = (product_id) => {
-    let parsedData = getOutfits();
-    let updatedState = [];
-    for (let id of parsedData) {
-      if(id !== product_id) {
+    const parsedData = getOutfits();
+    const updatedState = [];
+    for (const id of parsedData) {
+      if (id !== product_id) {
         updatedState.push(id);
       }
     }
@@ -79,4 +79,4 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
 
 }
 
-export default Outfits
+export default Outfits;

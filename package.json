@@ -4,7 +4,7 @@
   "description": "FEC project for Hackreactor",
   "main": "index.js",
   "scripts": {
-    "start": "npx webpack-dev-server --watch",
+    "start": "nodemon server.js",
     "build": "npx webpack --watch",
     "server": "npm run build & nodemon server.js --watch ./client --ext js,json,jsx",
     "test": "jest --env=jsdom --watchAll",

@@ -87,8 +87,8 @@
   margin-right: 4px;
 }
 .c-card-img {
-  max-width: 200px;
-  max-height: 225px;
+  width: 200px;
+  height: 225px;
   justify-self: center;
   align-self: center;
 }

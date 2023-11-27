@@ -8,7 +8,7 @@ const getRelatedItems = async (itemId) => {
     let uniqueResponse = Array.from(new Set(filteredResponse));
     return uniqueResponse;
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 };
 
