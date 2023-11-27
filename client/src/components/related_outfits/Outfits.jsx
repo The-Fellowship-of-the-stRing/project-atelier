@@ -40,11 +40,6 @@ const Outfits = ({ itemId, updateMainProduct }) => {
       if (parsedData) {
         setIsAdded(parsedData.includes(itemId));
       }
-      // if (parsedData && parsedData.includes(itemId)) {
-      //   setIsAdded(parsedData.includes(itemId));
-      // } else {
-      //   setIsAdded(false);
-      // }
     } catch (err) {
       console.error('Error getting item details: ', err);
     }
@@ -64,11 +59,11 @@ const Outfits = ({ itemId, updateMainProduct }) => {
 
   return allCards ? (
     <div className="c-outfits-container" ref={ref}>
-      {!isAdded ? (
-        <div className="c-card-container">
+      {/* {!isAdded ? (
+        <div className="c-card">
           <button type="button" className="c-card-action-add" onClick={() => addProduct()}>+</button>
         </div>
-      ) : null}
+      ) : null} */}
       <Carousel className="c-outfits-carousel" itemId={itemId} cardIds={outfitIdsByUser} cards={allCards} pWidth={width} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />
     </div>
   ) : (
