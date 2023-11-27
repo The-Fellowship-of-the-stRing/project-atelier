@@ -1,38 +1,39 @@
-import React,{useState, useEffect} from 'react';
-import '../../stylesheets/related_outfits/CompareModal.css'
+import React from 'react';
+import '../../stylesheets/related_outfits/CompareModal.css';
 
-const CompareModal = ( {itemId, cardKey, itemName, compareName, itemFeatures, cardData, compareClickHandler} ) => {
-
-  let compareData = {};
+const CompareModal = ({
+  cardKey, itemName, compareName, itemFeatures, cardData, compareClickHandler,
+}) => {
+  const compareData = {};
   for (let i = 0; i < itemFeatures.length; i++) {
-    let currentFeature = itemFeatures[i];
-    compareData[currentFeature.feature] = {current:currentFeature.value};
+    const currentFeature = itemFeatures[i];
+    compareData[currentFeature.feature] = { current: currentFeature.value };
   }
   for (let i = 0; i < cardData.features.length; i++) {
-    let currentFeature = cardData.features[i];
+    const currentFeature = cardData.features[i];
     compareData[currentFeature.feature]
       ? compareData[currentFeature.feature].compared = currentFeature.value
-      : compareData[currentFeature.feature] = {compared:currentFeature.value};
+      : compareData[currentFeature.feature] = { compared: currentFeature.value };
   }
 
-  let featureList = [];
-  if(compareData){
+  const featureList = [];
+  if (compareData) {
     let index = 0;
-    for (let feature in compareData) {
+    for (const feature in compareData) {
       featureList.push(
-        <tr key={cardKey+index} className="c-compare-feature-item">
+        <tr key={cardKey + index} className="c-compare-feature-item">
           <td>{feature.toUpperCase()}</td>
-          <td>{compareData[feature].current ? compareData[feature].current : ""}</td>
-          <td>{compareData[feature].compared ? compareData[feature].compared : ""}</td>
-        </tr>
-      )
+          <td>{compareData[feature].current ? compareData[feature].current : ''}</td>
+          <td>{compareData[feature].compared ? compareData[feature].compared : ''}</td>
+        </tr>,
+      );
       index++;
     }
   }
 
   return (
     <div className="c-compare-modal" onClick={() => compareClickHandler()}>
-      <div className="c-overlay"></div>
+      <div className="c-overlay" />
       <table className="c-compare-modal-table">
         <thead className="c-compare-header">
           <tr>
@@ -46,6 +47,6 @@ const CompareModal = ( {itemId, cardKey, itemName, compareName, itemFeatures, ca
         </tbody>
       </table>
     </div>
-    )
-}
-export default CompareModal
+  );
+};
+export default CompareModal;
