@@ -2,11 +2,15 @@ import React from 'react';
 import Image from './Image.jsx';
 
 const ImageSelect = ({
-  style, handleIndex, currentIndex, lowIndex, highIndex,
+  style,
+  handleIndex,
+  currentIndex,
+  lowIndex,
+  highIndex,
 }) => (
   style.photos.map((value, index) => (
     <Image
-      key={value.thumbnail_url}
+      key={value.style_id}
       thumbnail={value.thumbnail_url}
       handleIndex={handleIndex}
       index={index}

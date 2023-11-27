@@ -7,6 +7,7 @@ const getProductDataById = async (itemId) => {
   } catch (err) {
     console.error(err);
   }
+  return null;
 };
 
 export default getProductDataById;

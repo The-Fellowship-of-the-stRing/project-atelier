@@ -27,7 +27,7 @@ app.get('/*', (req, res) => {
 
 app.put('/*', (req, res) => {
   axios.put(`${url + req.url}`, null, headers)
-    .then((response) => res.sendStatus(200))
+    .then(() => res.sendStatus(200))
     .catch((err) => {
       res.status(500).json({ message: err.message });
     });
@@ -35,7 +35,7 @@ app.put('/*', (req, res) => {
 
 app.post('/*', (req, res) => {
   axios.post(`${url + req.url}`, req.body, headers)
-    .then((response) => res.sendStatus(200))
+    .then(() => res.sendStatus(200))
     .catch((err) => {
       res.status(500).json({ message: err.message });
     });

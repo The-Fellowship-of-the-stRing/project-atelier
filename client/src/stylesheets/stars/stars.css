@@ -31,4 +31,6 @@
 #star-outline, #star-fill {
   width: 1em;
   height: 1.3em;
+  border: none;
+  background-color: #F6F8FF;
 }
