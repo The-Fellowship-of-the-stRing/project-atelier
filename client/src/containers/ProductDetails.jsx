@@ -21,8 +21,8 @@ const ProductDetails = ({ itemId, handleRef }) => {
         const productData = await getProductDataById(itemId);
         const styleData = await getStyleDataById(itemId);
         // Leaving console.logs in comments for when I need to reference it
-        console.log(productData);
-        console.log(styleData);
+        // console.log(productData);
+        // console.log(styleData);
         const values = {};
         values.name = productData.name;
         values.slogan = productData.slogan;
@@ -38,9 +38,9 @@ const ProductDetails = ({ itemId, handleRef }) => {
   }, [itemId]);
   useEffect(() => {
     let def = false;
-    for (const x of styles) {
-      if (x['default?'] === true) {
-        setStyle(x);
+    for (let i = 0; i < styles.length; i += 1) {
+      if (styles[i]['default?'] === true) {
+        setStyle(styles[i]);
         def = true;
       }
     }
@@ -48,9 +48,9 @@ const ProductDetails = ({ itemId, handleRef }) => {
       setStyle(styles[0]);
     }
   }, [styles]);
-  const handlePrice = () => {
+  // const handlePrice = () => {
 
-  };
+  // };
   const handleStyle = (value) => {
     setStyle(styles[value]);
   };
