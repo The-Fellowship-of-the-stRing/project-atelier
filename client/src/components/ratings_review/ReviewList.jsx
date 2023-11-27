@@ -54,7 +54,6 @@ const ReviewList = ({
       <div className="l-review-list-btn-placement">
         <button type="button" className="l-review-list-more-btn" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length}>
           MORE REVIEWS
-          <div className="l-review-button-effect" />
         </button>
         <button data-testid="add-review-btn" type="button" className="l-review-list-more-btn" onClick={() => handleModal()}>
           ADD A REVIEW

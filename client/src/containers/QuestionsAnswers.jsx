@@ -16,7 +16,7 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
   const [questionId, setQuestionId] = useState({});
   const [searchTerm, setSearchTerm] = useState('');
 
-  const numOfQuestionsToGet = 400;
+  const numOfQuestionsToGet = 10;
 
   const handleQuestionModal = (value) => {
     setAddQuestionModal(value);

@@ -235,3 +235,8 @@ margin-left: 20px;
   box-shadow: 2px 2px 2px #1F2041;
   margin-left: 10px;
 }
+
+.l-add-review-section-title {
+  display: flex;
+  flex-direction: column;
+}

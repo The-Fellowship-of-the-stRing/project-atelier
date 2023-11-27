@@ -1,9 +1,7 @@
 import React, { useState, useEffect, forwardRef } from 'react';
-import SortDropDown from '../components/ratings_review/SortDropDown.jsx';
 import ReviewList from '../components/ratings_review/ReviewList.jsx';
 import RatingBreakdown from '../components/ratings_review/RatingBreakdown.jsx';
 import AddReview from '../components/ratings_review/AddReview.jsx';
-
 import getReviews from '../utils/getReviews.js';
 import markHelpful from '../utils/markHelpful.js';
 import reportReview from '../utils/reportReview.js';
@@ -113,9 +111,20 @@ const RatingsReviews = forwardRef(({ itemId, itemName }, ref) => {
   return totals ? (
     <div ref={ref} className="ratings-review-main-container">
       {showModal && (
-        <AddReview handleModal={handleModal} itemName={itemName} totals={totals} updateItemReviews={updateItemReviews} />
+        <AddReview
+          handleModal={handleModal}
+          itemName={itemName}
+          totals={totals}
+          updateItemReviews={updateItemReviews}
+        />
       )}
-      <RatingBreakdown itemId={itemId} results={results} totals={totals} updateFilter={updateFilter} currentFilter={currentFilter} />
+      <RatingBreakdown
+        itemId={itemId}
+        results={results}
+        totals={totals}
+        updateFilter={updateFilter}
+        currentFilter={currentFilter}
+      />
       <ReviewList
         results={results}
         sort={sort}
