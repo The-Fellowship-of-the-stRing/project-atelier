@@ -22,6 +22,7 @@ const Outfits = ({ itemId, updateMainProduct }) => {
   };
 
   const deleteProduct = (productId) => {
+    console.log('Deleted Id', productId);
     const parsedData = getOutfits();
     const updatedState = parsedData.filter((id) => id !== productId);
     localStorage.removeItem(document.cookie);
@@ -36,11 +37,14 @@ const Outfits = ({ itemId, updateMainProduct }) => {
       const cardElement = cards.map((card) => (<Card className="c-card" cardDetails={card} cardKey={card.id + itemId} key={card.id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />));
       setOutfitIdsByUser(parsedData);
       setAllCards(cardElement);
-      if (parsedData && parsedData.includes(itemId)) {
+      if (parsedData) {
         setIsAdded(parsedData.includes(itemId));
-      } else {
-        setIsAdded(false);
       }
+      // if (parsedData && parsedData.includes(itemId)) {
+      //   setIsAdded(parsedData.includes(itemId));
+      // } else {
+      //   setIsAdded(false);
+      // }
     } catch (err) {
       console.error('Error getting item details: ', err);
     }
