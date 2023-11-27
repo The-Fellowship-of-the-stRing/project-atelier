@@ -100,29 +100,33 @@ const Answers = ({ questionId, answersToShow }) => {
               <div className="k-answer-helpful">
                 Helpful?
                 {' '}
-                <button
-                  type="button"
+                <div
                   className="k-answer-yes-click"
+                  onKeyDown={() => checkMarked(id)}
+                  tabIndex="0"
+                  role="button"
                   style={{ cursor: marked[id] ? 'default' : 'pointer' }}
                   onClick={() => checkMarked(id)}
                 >
                   Yes
 
-                </button>
+                </div>
                 {' '}
                 (
                 {answer.helpfulness}
                 ) |
               </div>
               <div className="k-answer-report">
-                <button
-                  type="button"
+                <div
                   className="k-answer-report-click"
+                  onKeyDown={() => checkReported(id)}
+                  tabIndex="0"
+                  role="button"
                   onClick={() => checkReported(id)}
                   style={{ cursor: reported[id] ? 'default' : 'pointer' }}
                 >
                   {reported[id] ? 'Reported' : 'Report'}
-                </button>
+                </div>
               </div>
             </div>
           </div>
