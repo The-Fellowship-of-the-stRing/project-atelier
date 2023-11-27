@@ -45,25 +45,29 @@ const QuestionsList = ({
               <div className="k-question-helpful">
                 Helpful?
                 {' '}
-                <button
-                  type="button"
+                <div
+                  onKeyDown={() => checkMarked(id)}
+                  tabIndex="0"
+                  role="button"
                   onClick={() => checkMarked(id)}
                   className="k-question-yes-click"
                   style={{ cursor: marked[id] ? 'default' : 'pointer' }}
                 >
                   Yes
-                </button>
+                </div>
                 (
                 {question.question_helpfulness}
                 )  |
                 {' '}
-                <button
-                  type="button"
+                <div
+                  onKeyDown={() => handleAnswerModal(true, id, question.question_body)}
+                  tabIndex="0"
+                  role="button"
                   className="k-add-answer"
-                  onClick={() => handleAnswerModal(true, question.question_body, id)}
+                  onClick={() => handleAnswerModal(true, id, question.question_body)}
                 >
                   Add answer
-                </button>
+                </div>
               </div>
             </div>
             <Answers
@@ -73,22 +77,26 @@ const QuestionsList = ({
             />
             {answersToShow <= 2
               ? (
-                <button
-                  type="button"
+                <div
+                  onKeyDown={(e) => handleAnswersToShow(e)}
+                  tabIndex="0"
+                  role="button"
                   className="k-load-more-answers"
                   onClick={(e) => handleAnswersToShow(e)}
                 >
                   <strong>SEE MORE ANSWERS</strong>
-                </button>
+                </div>
               )
               : (
-                <button
-                  type="button"
+                <div
+                  onKeyDown={(e) => handleCollapseAnswers(e)}
+                  tabIndex="0"
+                  role="button"
                   className="k-collapse-answers"
                   onClick={(e) => handleCollapseAnswers(e)}
                 >
                   <strong>COLLAPSE ANSWERS</strong>
-                </button>
+                </div>
               )}
           </div>
         );
