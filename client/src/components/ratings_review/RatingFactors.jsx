@@ -23,11 +23,7 @@ const RatingFactors = ({ totals }) => {
   useEffect(() => {
     if (totals) {
       const obj = totals.characteristics;
-      const keys = [];
-      for (const key in obj) {
-        keys.push(key);
-      }
-      setCategories(keys);
+      setCategories(Object.keys(obj));
     }
   }, [totals]);
 
@@ -53,6 +49,7 @@ const RatingFactors = ({ totals }) => {
             </div>
           );
         }
+        return null;
       })}
     </div>
   );

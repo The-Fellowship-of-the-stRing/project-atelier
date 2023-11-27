@@ -59,7 +59,7 @@ const AddReview = ({
   };
 
   const checkIfSelected = () => {
-    for (let i = 0; i < factorOptions.length; i++) {
+    for (let i = 0; i < factorOptions.length; i += 1) {
       if (factorRating[factorOptions[i]].value === 0) {
         setSelectOption(true);
         break;
@@ -96,9 +96,9 @@ const AddReview = ({
       setNickname(e.target.value);
     }
   };
-  const validateEmail = (email) => {
+  const validateEmail = (currentEmail) => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return emailRegex.test(email);
+    return emailRegex.test(currentEmail);
   };
   const handleEmail = (e) => {
     const input = e.target.value;
@@ -107,19 +107,25 @@ const AddReview = ({
   };
 
   const handleSubmit = () => {
-    if (overall === 0 || selectOption || formBody.length < 50 || nickname.length < 1 || !validEmail) {
+    if (
+      overall === 0
+      || selectOption
+      || formBody.length < 50
+      || nickname.length < 1
+      || !validEmail
+    ) {
       setShowError(true);
     } else {
       setShowError(false);
       const obj = {};
-      for (let i = 0; i < factorOptions.length; i++) {
+      for (let i = 0; i < factorOptions.length; i += 1) {
         const currentFactor = factorOptions[i];
         const factorId = totals.characteristics[currentFactor].id;
-        obj[factorId] = Number.parseInt(factorRating[currentFactor].value);
+        obj[factorId] = parseInt(factorRating[currentFactor].value, 10);
       }
       const recommended = recommend === 'Yes';
       const data = {
-        product_id: Number.parseInt(totals.product_id),
+        product_id: parseInt(totals.product_id, 10),
         rating: overall,
         summary,
         body: formBody,
@@ -163,41 +169,49 @@ const AddReview = ({
             </div>
           </div>
           <div className="l-add-review-recommend">
-            <label className="l-add-review-section-title">Do you recommend?</label>
-            <input
-              type="radio"
-              name="yes"
-              value="Yes"
-              id="l-add-review-yes"
-              checked={recommend === 'Yes'}
-              onChange={onOptionChange}
-            />
-            <label>Yes</label>
-            <input
-              type="radio"
-              name="no"
-              value="No"
-              id="l-add-review-no"
-              checked={recommend === 'No'}
-              onChange={onOptionChange}
-            />
-            <label>No</label>
+            <div
+              className="l-add-review-section-title"
+            >
+              Do you recommend?
+            </div>
+            <label htmlFor="l-add-review-yes">
+              <input
+                type="radio"
+                name="yes"
+                value="Yes"
+                id="l-add-review-yes"
+                checked={recommend === 'Yes'}
+                onChange={onOptionChange}
+              />
+              Yes
+            </label>
+            <label htmlFor="l-add-review-yes">
+              <input
+                type="radio"
+                name="no"
+                value="No"
+                id="l-add-review-no"
+                checked={recommend === 'No'}
+                onChange={onOptionChange}
+              />
+              No
+            </label>
           </div>
 
-          <label className="l-add-review-section-title">Characteristics</label>
+          <section className="l-add-review-section-title">Characteristics</section>
           {factorOptions.map((factor) => (
             <div key={factor} className="l-add-review-single-factor">
               <div className="l-add-review-factor-name-decription">
-                <label className="l-add-review-factor-category">
+                <div className="l-add-review-factor-category">
                   {factor}
                   {' '}
                   -
                   {' '}
-                </label>
-                <label className="l-add-review-factor-description">
+                </div>
+                <div className="l-add-review-factor-description">
                   {' '}
                   {factorRating[factor].text}
-                </label>
+                </div>
               </div>
               <div className="l-add-review-factor-options">
                 {characteristics[factor].map((option, index) => {
@@ -218,14 +232,18 @@ const AddReview = ({
               </div>
             </div>
           ))}
-          <label className="l-add-review-section-title">Review Summary (optional)</label>
-          <input type="text" className="l-add-review-summary" value={summary} placeholder="Example: Best purchase ever!" onChange={(e) => handleSummary(e)} />
+          <label htmlFor="summary-body" className="l-add-review-section-title">
+            Review Summary (optional)
+            <input id="summary-body" type="text" className="l-add-review-summary" value={summary} placeholder="Example: Best purchase ever!" onChange={(e) => handleSummary(e)} />
+          </label>
 
-          <label className="l-add-review-section-title">Review Body</label>
-          <textarea type="text" className="l-add-review-body" value={formBody} placeholder="Why did you like the product or not?" onChange={(e) => handleBody(e)} />
+          <label htmlFor="add-review-body" className="l-add-review-section-title">
+            Review Body
+            <textarea id="add-review-body" type="text" className="l-add-review-body" value={formBody} placeholder="Why did you like the product or not?" onChange={(e) => handleBody(e)} />
+          </label>
           <div className="l-add-review-body-count">{charCount <= 0 ? 'Minimum reached' : `Minimum required characters left: ${charCount}`}</div>
 
-          <label className="l-add-review-section-title">Upload your photos (optional)</label>
+          <div className="l-add-review-section-title">Upload your photos (optional)</div>
           <ImageUploading
             multiple
             value={images}
@@ -245,15 +263,17 @@ const AddReview = ({
               // write your building UI
               <div className="upload__image-wrapper">
                 {images.length > 0 && (
-                  <button onClick={onImageRemoveAll} className="l-add-review-image-btn-all">Remove all images</button>
+                  <button type="button" onClick={onImageRemoveAll} className="l-add-review-image-btn-all">Remove all images</button>
                 )}
                 <div className="l-add-review-thumbnails">
                   {showAddImage && (
                   <button
+                    type="button"
                     aria-label="Upload Image"
                     data-testid="image-uploader"
                     style={isDragging ? { color: 'red' } : undefined}
                     onClick={onImageUpload}
+                    // eslint-disable-next-line react/jsx-props-no-spreading
                     {...dragProps}
                     className="l-add-review-add-image"
                   >
@@ -261,11 +281,11 @@ const AddReview = ({
                   </button>
                   )}
                   {imageList.map((image, index) => (
-                    <div key={index} className="image-item">
-                      <img src={image.data_url} alt="image-thumbnail" width="100" className="l-add-review-single-thumbnail" />
+                    <div key={image.data_url} className="image-item">
+                      <img src={image.data_url} alt="product-thumbnail" width="100" className="l-add-review-single-thumbnail" />
                       <div className="image-item__btn-wrapper">
-                        <button onClick={() => onImageUpdate(index)} className="l-add-review-image-btn"><FiEdit /></button>
-                        <button onClick={() => onImageRemove(index)} className="l-add-review-image-btn"><FaRegTrashAlt /></button>
+                        <button type="button" onClick={() => onImageUpdate(index)} className="l-add-review-image-btn"><FiEdit /></button>
+                        <button type="button" onClick={() => onImageRemove(index)} className="l-add-review-image-btn"><FaRegTrashAlt /></button>
                       </div>
                     </div>
                   ))}
@@ -274,13 +294,26 @@ const AddReview = ({
             )}
           </ImageUploading>
 
-          <label className="l-add-review-section-title">What is your nickname?</label>
-          <input type="text" alt="nickname field" value={nickname} placeholder="Example: jackson11!" onChange={(e) => handleNickname(e)} className="l-add-review-summary" />
-          <label className="l-add-review-input-footer">For privacy reasons, do not use your full name or email address</label>
+          <label htmlFor="add-review-nickname" className="l-add-review-section-title">
+            What is your nickname?
+            <input
+              type="text"
+              id="add-review-nickname"
+              alt="nickname field"
+              value={nickname}
+              placeholder="Example: jackson11!"
+              onChange={(e) => handleNickname(e)}
+              className="l-add-review-summary"
+            />
+          </label>
+          <div className="l-add-review-input-footer">For privacy reasons, do not use your full name or email address</div>
 
-          <label className="l-add-review-section-title">Your email</label>
-          <input type="email" value={email} alt="user email" placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} className="l-add-review-summary" />
-          <label className="l-add-review-input-footer">For authentication reasons, you will not be emailed</label>
+          <label htmlFor="add-review-email" className="l-add-review-section-title">
+            Your email
+            <input id="add-review-email" type="email" value={email} alt="user email" placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} className="l-add-review-summary" />
+          </label>
+
+          <div className="l-add-review-input-footer">For authentication reasons, you will not be emailed</div>
 
           {showError && (
             <div className="l-add-review-errors">
@@ -290,6 +323,7 @@ const AddReview = ({
                   <li data-testid="error-message">Select an overall rating</li>
                 )}
                 {selectOption && (
+                  // eslint-disable-next-line react/no-unescaped-entities
                   <li data-testid="error-message">Please rate the product's characteristics</li>
                 )}
                 {formBody.length <= 50 && (

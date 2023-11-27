@@ -37,16 +37,17 @@ const RatingBreakdown = ({
 
   useEffect(() => {
     if (totals) {
-      const yesNum = Number.parseInt(totals.recommended.true);
-      const noNum = Number.parseInt(totals.recommended.false);
-      const calcYes = Math.floor(yesNum / (noNum + yesNum) * 100);
+      const yesNum = parseInt(totals.recommended.true, 10);
+      const noNum = parseInt(totals.recommended.false, 10);
+      const calcYes = Math.floor((yesNum / (noNum + yesNum)) * 100);
       setPercentGood(calcYes);
 
       const { ratings } = totals;
+      const dataArray = Object.values(ratings);
       let counter = 0;
-      for (const key in ratings) {
-        counter += Number.parseInt(ratings[key]);
-      }
+      dataArray.forEach((value) => {
+        counter += parseInt(value, 10);
+      });
       setTotalReviews(counter);
     }
   }, [totals]);
@@ -77,7 +78,13 @@ const RatingBreakdown = ({
               Total Stars
               {' '}
               {currentFilter.map((value, index) => (index === currentFilter.length - 1 ? `${value}` : `${value}, `))}
-              <div className="l-rating-bars-remove" onClick={() => updateFilter([])}>
+              <div
+                role="button"
+                onKeyDown={() => updateFilter([])}
+                tabIndex="0"
+                className="l-rating-bars-remove"
+                onClick={() => updateFilter([])}
+              >
                 Remove Filters
               </div>
             </>
