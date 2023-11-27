@@ -1,12 +1,10 @@
 import React, {
-  useLayoutEffect, useRef, useState, useEffect,
+  useRef, useState, useEffect,
 } from 'react';
 import Card from './Card.jsx';
 import Carousel from './Carousel.jsx';
 import getRelatedItems from '../../utils/getRelatedItems.js';
 import fetchCardData from '../../utils/fetchCardData.js';
-import getProductDataById from '../../utils/getProductDataById.js';
-import getStyleDataById from '../../utils/getStyleDataById.js';
 
 const Related = ({
   itemId, itemFeatures, itemName, updateMainProduct,
@@ -14,7 +12,7 @@ const Related = ({
   const ref = useRef(null);
   const [mainProductId, setMainProductId] = useState(null);
   const [width, setWidth] = useState(0);
-  const [relatedIds, setRelatedIds] = useState(null);
+  // const [relatedIds, setRelatedIds] = useState(null);
   const [allCards, setAllCards] = useState(null);
 
   const fetchRelatedIds = async () => {
@@ -22,16 +20,16 @@ const Related = ({
       if (itemId !== mainProductId) {
         setMainProductId(itemId);
         const fetchedIds = await getRelatedItems(itemId);
-        const cards = await Promise.all(fetchedIds.map((id, index) => fetchCardData(id)));
-        const cardElements = cards.map((card, index) => <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id + itemId} key={card.id + itemId + index} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct} />);
-        setRelatedIds(fetchedIds);
+        const cards = await Promise.all(fetchedIds.map((id) => fetchCardData(id)));
+        const cardElements = cards.map((card) => <Card className="c-card" cardDetails={card} cardKey={card.id + itemId} key={card.id} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct} />);
+        // setRelatedIds(fetchedIds);
         setAllCards(cardElements);
       } else if (!allCards) {
         setMainProductId(itemId);
         const fetchedIds = await getRelatedItems(itemId);
-        const cards = await Promise.all(fetchedIds.map((id, index) => fetchCardData(id)));
-        const cardElements = cards.map((card, index) => <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id + itemId} key={card.id + itemId + index} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct} />);
-        setRelatedIds(fetchedIds);
+        const cards = await Promise.all(fetchedIds.map((id) => fetchCardData(id)));
+        const cardElements = cards.map((card, index) => <Card className={`c-card c-card-${index}`} cardDetails={card} cardKey={card.id + itemId} key={card.id} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct} />);
+        // setRelatedIds(fetchedIds);
         setAllCards(cardElements);
       }
     } catch (err) {
@@ -55,7 +53,12 @@ const Related = ({
   return allCards ? (
     <div className="c-related-container" ref={ref}>
       <div className="c-cards">
-        <Carousel cards={allCards} pWidth={width} itemFeatures={itemFeatures} updateMainProduct={updateMainProduct} />
+        <Carousel
+          cards={allCards}
+          pWidth={width}
+          itemFeatures={itemFeatures}
+          updateMainProduct={updateMainProduct}
+        />
       </div>
     </div>
   ) : (
