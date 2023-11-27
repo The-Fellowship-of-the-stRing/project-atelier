@@ -6,13 +6,10 @@ import fetchCardData from '../../utils/fetchCardData.js';
 const Outfits = ({ itemId, updateMainProduct }) => {
   // localStorage.clear();
   const ref = useRef(null);
-  const [outfitIdsByUser, setOutfitIdsByUser] = useState(null);
   const [width, setWidth] = useState(0);
   const [allCards, setAllCards] = useState(null);
   const [mainCard, setMainCard] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
-
-  // STORE allCard in local storage
 
   const getOutfits = () => JSON.parse(localStorage.getItem(document.cookie)) || [];
 
@@ -20,15 +17,9 @@ const Outfits = ({ itemId, updateMainProduct }) => {
     let parsedData = getOutfits();
     parsedData = [itemId, ...parsedData];
     localStorage.setItem(document.cookie, JSON.stringify(parsedData));
-    setOutfitIdsByUser(parsedData);
     setIsAdded(true);
+    setAllCards([mainCard, ...allCards]);
   };
-
-  const addCard = (
-    <div className="c-card">
-      <button type="button" className="c-card-action-add" onClick={() => addProduct()}>+</button>
-    </div>
-  );
 
   const deleteProduct = (productId) => {
     console.log('Deleted Id', productId);
@@ -36,10 +27,16 @@ const Outfits = ({ itemId, updateMainProduct }) => {
     const updatedState = parsedData.filter((id) => id !== productId);
     localStorage.removeItem(document.cookie);
     localStorage.setItem(document.cookie, JSON.stringify(updatedState));
+
     // setIsAdded(!(productId === itemId));
     setIsAdded(updatedState.includes(itemId));
-    setOutfitIdsByUser(updatedState);
   };
+
+  const addCard = (
+    <div className="c-card">
+      <button type="button" className="c-card-action-add" onClick={() => addProduct()}>+</button>
+    </div>
+  );
 
   const getAllCardData = async () => {
     try {
@@ -52,12 +49,11 @@ const Outfits = ({ itemId, updateMainProduct }) => {
         }
         return cardEl;
       });
-      if (!mainCard) {
-        const mainCardData = await fetchCardData(itemId);
-        const mainCardEl = (<Card className="c-card" cardDetails={mainCardData} cardKey={mainCardData.id + itemId} key={mainCardData.id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />);
-        setMainCard(mainCardEl);
-      }
-      setOutfitIdsByUser(parsedData);
+      /* REFACTOR THIS LATER ALL TO ABOVE PROMISE ALL */
+      const mainCardData = await fetchCardData(itemId);
+      const mainCardEl = (<Card className="c-card" cardDetails={mainCardData} cardKey={mainCardData.id + itemId} key={mainCardData.id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />);
+      setMainCard(mainCardEl);
+
       setAllCards(cardElement);
       if (parsedData) {
         setIsAdded(parsedData.includes(itemId));
@@ -86,7 +82,7 @@ const Outfits = ({ itemId, updateMainProduct }) => {
           <button type="button" className="c-card-action-add" onClick={() => addProduct()}>+</button>
         </div>
       ) : null} */}
-      <Carousel className="c-outfits-carousel" itemId={itemId} cardIds={outfitIdsByUser} cards={allCards} pWidth={width} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} addCard={addCard} isAdded={isAdded} />
+      <Carousel className="c-outfits-carousel" itemId={itemId} cards={allCards} pWidth={width} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} addCard={addCard} isAdded={isAdded} />
     </div>
   ) : (
     <div className="c-outfits-container" ref={ref}>No Outfits</div>
