@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import ImageUploading from 'react-images-uploading';
 import { AiOutlineClose } from 'react-icons/ai';
-import { FaPlus } from 'react-icons/fa6';
-import { FaRegTrashAlt } from 'react-icons/fa';
-import { FiEdit } from 'react-icons/fi';
+import Header from './form/Header';
+import OverallRating from './form/OverallRating';
+import Recommend from './form/Recommend';
+import Characteristics from './form/Characteristics';
+import Summary from './form/Summary';
+import Body from './form/Body';
+import UploadImage from './form/UploadImage';
+import Nickname from './form/Nickname';
+import Email from './form/Email';
+import FieldErrors from './form/FieldErrors';
 
-import AddFormStars from './AddFormStars.jsx';
+import characteristics from '../../lib/characteristics.js';
+import factorDefaults from '../../lib/factorDefaults.js';
 
 import '../../stylesheets/ratings_review/addReview.css';
 
@@ -24,14 +31,7 @@ const AddReview = ({
   const [validEmail, setValidEmail] = useState(false);
   const [showError, setShowError] = useState(false);
   const [selectOption, setSelectOption] = useState(false);
-  const [factorRating, setFactorRating] = useState({
-    Size: { value: 0, text: 'none selected' },
-    Width: { value: 0, text: 'none selected' },
-    Comfort: { value: 0, text: 'none selected' },
-    Quality: { value: 0, text: 'none selected' },
-    Length: { value: 0, text: 'none selected' },
-    Fit: { value: 0, text: 'none selected' },
-  });
+  const [factorRating, setFactorRating] = useState(factorDefaults);
   const [showAddImage, setShowAddImage] = useState(true);
 
   const maxNumber = 5;
@@ -39,15 +39,6 @@ const AddReview = ({
   const options = ['Poor', 'Fair', 'Average', 'Good', 'Great'];
 
   const factorOptions = Object.keys(totals.characteristics);
-
-  const characteristics = {
-    Size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
-    Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
-    Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
-    Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
-    Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-    Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
-  };
 
   const updateRating = (value) => {
     setOverall(value);
@@ -152,194 +143,45 @@ const AddReview = ({
     <div className="l-add-review-overlay">
       <div className="l-add-review-modal">
         <AiOutlineClose className="l-add-review-close" onClick={() => handleModal()} />
-        <div className="l-add-review-header">
-          <h1>Write Your Review</h1>
-          <h3>
-            About the
-            {' '}
-            {itemName}
-          </h3>
-        </div>
+        <Header itemName={itemName} />
         <div className="l-add-review-form">
-          <div className="l-add-review-section-title">
-            Overall Rating
-            <div className="l-add-review-stars">
-              <AddFormStars rating={overall} updateRating={updateRating} />
-              <span style={{ marginLeft: '10px' }}>{ratingDef}</span>
-            </div>
-          </div>
-          <div className="l-add-review-recommend">
-            <div
-              className="l-add-review-section-title"
-            >
-              Do you recommend?
-            </div>
-            <label htmlFor="l-add-review-yes">
-              <input
-                type="radio"
-                name="yes"
-                value="Yes"
-                id="l-add-review-yes"
-                checked={recommend === 'Yes'}
-                onChange={onOptionChange}
-              />
-              Yes
-            </label>
-            <label htmlFor="l-add-review-yes">
-              <input
-                type="radio"
-                name="no"
-                value="No"
-                id="l-add-review-no"
-                checked={recommend === 'No'}
-                onChange={onOptionChange}
-              />
-              No
-            </label>
-          </div>
-
-          <section className="l-add-review-section-title">Characteristics</section>
-          {factorOptions.map((factor) => (
-            <div key={factor} className="l-add-review-single-factor">
-              <div className="l-add-review-factor-name-decription">
-                <div className="l-add-review-factor-category">
-                  {factor}
-                  {' '}
-                  -
-                  {' '}
-                </div>
-                <div className="l-add-review-factor-description">
-                  {' '}
-                  {factorRating[factor].text}
-                </div>
-              </div>
-              <div className="l-add-review-factor-options">
-                {characteristics[factor].map((option, index) => {
-                  const check = factor + option;
-                  return (
-                    <div key={check} className="l-add-review-selections">
-                      <input
-                        type="radio"
-                        name={factor + option}
-                        value={index + 1}
-                        id="l-add-review-no"
-                        checked={(factor + factorRating[factor].text) === check}
-                        onChange={(e) => onFactorChange(e, factor, option)}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-          <label htmlFor="summary-body" className="l-add-review-section-title">
-            Review Summary (optional)
-            <input id="summary-body" type="text" className="l-add-review-summary" value={summary} placeholder="Example: Best purchase ever!" onChange={(e) => handleSummary(e)} />
-          </label>
-
-          <label htmlFor="add-review-body" className="l-add-review-section-title">
-            Review Body
-            <textarea id="add-review-body" type="text" className="l-add-review-body" value={formBody} placeholder="Why did you like the product or not?" onChange={(e) => handleBody(e)} />
-          </label>
-          <div className="l-add-review-body-count">{charCount <= 0 ? 'Minimum reached' : `Minimum required characters left: ${charCount}`}</div>
-
-          <div className="l-add-review-section-title">Upload your photos (optional)</div>
-          <ImageUploading
-            multiple
-            value={images}
-            onChange={handleImageChange}
+          <OverallRating overall={overall} updateRating={updateRating} ratingDef={ratingDef} />
+          <Recommend recommend={recommend} onOptionChange={onOptionChange} />
+          <Characteristics
+            factorOptions={factorOptions}
+            factorRating={factorRating}
+            characteristics={characteristics}
+            onFactorChange={onFactorChange}
+          />
+          <Summary summary={summary} handleSummary={handleSummary} />
+          <Body formBody={formBody} handleBody={handleBody} charCount={charCount} />
+          <UploadImage
+            images={images}
+            handleImageChange={handleImageChange}
             maxNumber={maxNumber}
-            dataURLKey="data_url"
-          >
-            {({
-              imageList,
-              onImageUpload,
-              onImageRemoveAll,
-              onImageUpdate,
-              onImageRemove,
-              isDragging,
-              dragProps,
-            }) => (
-              // write your building UI
-              <div className="upload__image-wrapper">
-                {images.length > 0 && (
-                  <button type="button" onClick={onImageRemoveAll} className="l-add-review-image-btn-all">Remove all images</button>
-                )}
-                <div className="l-add-review-thumbnails">
-                  {showAddImage && (
-                  <button
-                    type="button"
-                    aria-label="Upload Image"
-                    data-testid="image-uploader"
-                    style={isDragging ? { color: 'red' } : undefined}
-                    onClick={onImageUpload}
-                    // eslint-disable-next-line react/jsx-props-no-spreading
-                    {...dragProps}
-                    className="l-add-review-add-image"
-                  >
-                    <FaPlus />
-                  </button>
-                  )}
-                  {imageList.map((image, index) => (
-                    <div key={image.data_url} className="image-item">
-                      <img src={image.data_url} alt="product-thumbnail" width="100" className="l-add-review-single-thumbnail" />
-                      <div className="image-item__btn-wrapper">
-                        <button type="button" onClick={() => onImageUpdate(index)} className="l-add-review-image-btn"><FiEdit /></button>
-                        <button type="button" onClick={() => onImageRemove(index)} className="l-add-review-image-btn"><FaRegTrashAlt /></button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </ImageUploading>
-
-          <label htmlFor="add-review-nickname" className="l-add-review-section-title">
-            What is your nickname?
-            <input
-              type="text"
-              id="add-review-nickname"
-              alt="nickname field"
-              value={nickname}
-              placeholder="Example: jackson11!"
-              onChange={(e) => handleNickname(e)}
-              className="l-add-review-summary"
-            />
-          </label>
-          <div className="l-add-review-input-footer">For privacy reasons, do not use your full name or email address</div>
-
-          <label htmlFor="add-review-email" className="l-add-review-section-title">
-            Your email
-            <input id="add-review-email" type="email" value={email} alt="user email" placeholder="Example: jackson11@email.com" onChange={(e) => handleEmail(e)} className="l-add-review-summary" />
-          </label>
-
-          <div className="l-add-review-input-footer">For authentication reasons, you will not be emailed</div>
-
+            showAddImage={showAddImage}
+          />
+          <Nickname nickname={nickname} handleNickname={handleNickname} />
+          <Email email={email} handleEmail={handleEmail} />
           {showError && (
-            <div className="l-add-review-errors">
-              You must enter the following:
-              <ul>
-                {overall === 0 && (
-                  <li data-testid="error-message">Select an overall rating</li>
-                )}
-                {selectOption && (
-                  // eslint-disable-next-line react/no-unescaped-entities
-                  <li data-testid="error-message">Please rate the product's characteristics</li>
-                )}
-                {formBody.length <= 50 && (
-                  <li data-testid="error-message">Review body must be longer than 50 characters</li>
-                )}
-                {nickname.length < 1 && (
-                  <li data-testid="error-message">Please add your nickname. Example: jackson11!</li>
-                )}
-                {!validEmail && (
-                  <li data-testid="error-message">Please use valid email. Example: jackson11@email.com</li>
-                )}
-              </ul>
-            </div>
+            <FieldErrors
+              overall={overall}
+              selectOption={selectOption}
+              formBody={formBody}
+              nickname={nickname}
+              validEmail={validEmail}
+            />
           )}
 
-          <button type="button" data-testid="submit-button" className="l-add-review-btn" alt="submit button" onClick={() => handleSubmit()}>SUBMIT</button>
+          <button
+            type="button"
+            data-testid="submit-button"
+            className="l-add-review-btn"
+            alt="submit button"
+            onClick={() => handleSubmit()}
+          >
+            SUBMIT
+          </button>
         </div>
       </div>
     </div>
