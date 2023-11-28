@@ -6,36 +6,38 @@ const Answers = ({ questionId }) => {
   const [marked, setMarked] = useState({});
   const [reported, setReported] = useState({});
   const [answersToShow, setAnswersToShow] = useState([]);
-  const [initialAnswers, setInitialAnswers] = useState([]);
   const [allAnswers, setAllAnswers] = useState([]);
   const [showAll, setShowAll] = useState(false);
-  const [countToGet, setCountToGet] = useState(50);
+  const [countToGet, setCountToGet] = useState(100);
 
   const fetchData = async () => {
-    console.log('Checking fetches... allAnswers: ', allAnswers);
     try {
-      const response = await axios.get(`/qa/questions/${questionId}/answers?question_id=${questionId}`, { count: countToGet });
+      const response = await axios.get(`/qa/questions/${questionId}/answers?question_id=${questionId}&count=${countToGet}`);
       const sortedResults = response.data.results.sort((a, b) => b.helpfulness - a.helpfulness);
       const sellerToTop = sortedResults.sort((a, b) => (b.answerer_name === 'Seller') - (a.answerer_name === 'Seller'));
-      setAllAnswers(sellerToTop);
-      setInitialAnswers(sellerToTop.slice(0, 2));
-      setAnswersToShow(sellerToTop.slice(0, 2));
+      if (countToGet > 100) {
+        setAnswersToShow(sellerToTop);
+      }
+      if (countToGet === 100) {
+        setAllAnswers(sellerToTop);
+        setAnswersToShow(sellerToTop.slice(0, 2));
+      }
     } catch (err) {
       console.error(err);
     }
   };
 
-  const handleAnswersToShow = (e) => {
+  const handleShowAllAnswers = (e) => {
     e.preventDefault();
-    if (showAll) {
-      setAnswersToShow(initialAnswers);
-      setShowAll(!showAll);
-    } else {
-      setCountToGet(countToGet + 50);
-      // fetchData();
-      setAnswersToShow(allAnswers);
-      setShowAll(!showAll);
-    }
+    setAnswersToShow(allAnswers);
+    setCountToGet(1000);
+    setShowAll(!showAll);
+  };
+
+  const handleShowFewerAnswers = (e) => {
+    e.preventDefault();
+    setAnswersToShow(allAnswers.slice(0, 2));
+    setShowAll(!showAll);
   };
 
   const handleReported = (answerId) => {
@@ -149,22 +151,22 @@ const Answers = ({ questionId }) => {
       })}
       {!showAll && (
         <div
-          onKeyDown={(e) => handleAnswersToShow(e)}
+          onKeyDown={(e) => handleShowAllAnswers(e)}
           tabIndex="0"
           role="button"
           className="k-load-more-answers"
-          onClick={(e) => handleAnswersToShow(e)}
+          onClick={(e) => handleShowAllAnswers(e)}
         >
           <strong>SEE MORE ANSWERS</strong>
         </div>
       )}
       {showAll && (
         <div
-          onKeyDown={(e) => handleAnswersToShow(e)}
+          onKeyDown={(e) => handleShowFewerAnswers(e)}
           tabIndex="0"
           role="button"
           className="k-collapse-answers"
-          onClick={(e) => handleAnswersToShow(e)}
+          onClick={(e) => handleShowFewerAnswers(e)}
         >
           <strong>COLLAPSE ANSWERS</strong>
         </div>
