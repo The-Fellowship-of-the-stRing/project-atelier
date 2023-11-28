@@ -64,18 +64,18 @@
   background-position: center;
   background-repeat: no-repeat;
   object-fit: cover;
-  width:60px;
+  width:20px;
   padding: 5px;
-  height:60px;
+  height:20px;
 }
 .g-image_selected-expand {
   background-position: center;
   background-repeat: no-repeat;
   object-fit: cover;
   filter: brightness(180%);
-  width:60px;
+  width:20px;
   padding: 5px;
-  height:60px;
+  height:20px;
 }
 .g-left-button{
   z-index: 2;
