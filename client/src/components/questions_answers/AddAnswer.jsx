@@ -25,8 +25,7 @@ const AddAnswer = ({
     }
   };
 
-  const sendAnswerData = (e) => {
-    e.preventDefault();
+  const sendAnswerData = () => {
     checkValidity();
     if (isInvalid === false) {
       axios.post(`/qa/questions/${questionId}/answers`, {
@@ -88,7 +87,7 @@ const AddAnswer = ({
           <button
             type="button"
             className="k-add-answer-submit"
-            onClick={(e) => sendAnswerData(e)}
+            onClick={() => sendAnswerData()}
           >
             Submit
           </button>

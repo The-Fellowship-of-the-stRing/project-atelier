@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Carousel from './Carousel.jsx';
 
 const Outfits = ({ itemId, updateMainProduct }) => {
-  // localStorage.clear();
+  localStorage.clear();
   const ref = useRef(null);
   const [width, setWidth] = useState(0);
   const [outfitsByUser, setOutfitsByUser] = useState(null);
