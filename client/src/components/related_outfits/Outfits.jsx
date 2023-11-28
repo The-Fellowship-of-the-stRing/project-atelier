@@ -13,14 +13,15 @@ const Outfits = ({ itemId, updateMainProduct }) => {
   const [isAdded, setIsAdded] = useState(null);
 
   const getLocalStorage = () => JSON.parse(localStorage.getItem(document.cookie)) || [];
-  console.log("Storage", getLocalStorage());
+  console.log("allCards", allCards);
   const postLocalStorage = (newOutfits) => {
     localStorage.removeItem(document.cookie);
     localStorage.setItem(document.cookie, JSON.stringify(newOutfits));
   };
 
   const addProduct = () => {
-    const updatedOutfits = { ...mainCard, ...allCards };
+    // const updatedOutfits = { ...mainCard, ...allCards };
+    const updatedOutfits = [mainCard, ...allCards];
     postLocalStorage(updatedOutfits);
     setIsAdded(true);
     setAllCards(updatedOutfits);
@@ -43,13 +44,18 @@ const Outfits = ({ itemId, updateMainProduct }) => {
   const getAllCardData = async () => {
     try {
       const parsedData = Object.keys(getLocalStorage());
-      console.log(parsedData);
-
       const cards = await Promise.all(parsedData.map((id) => fetchCardData(Number(id))));
-      const cardElement = {};
-      cards.forEach((card) => {
+      // const cardElement = {};
+      // cards.forEach((card) => {
+      //   const cardEl = (<Card className="c-card" cardDetails={card} cardKey={card.id + itemId} key={card.id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />);
+      //   cardElement[card.id] = cardEl;
+      // });
+
+      const cardElement = cards.map((card) => {
         const cardEl = (<Card className="c-card" cardDetails={card} cardKey={card.id + itemId} key={card.id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />);
-        cardElement[card.id] = cardEl;
+        const cardObj = {};
+        cardObj[card.id] = cardEl;
+        return cardObj;
       });
 
       /* REFACTOR THIS LATER ALL TO ABOVE PROMISE ALL */
@@ -79,7 +85,7 @@ const Outfits = ({ itemId, updateMainProduct }) => {
 
   return allCards ? (
     <div className="c-outfits-container" ref={ref}>
-      <Carousel className="c-outfits-carousel" itemId={itemId} cards={Object.values(allCards)} pWidth={width} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} addCard={addCard} isAdded={isAdded} />
+      <Carousel className="c-outfits-carousel" itemId={itemId} cards={allCards.map((card) => Object.values(card))} pWidth={width} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} addCard={addCard} isAdded={isAdded} />
     </div>
   ) : (
     <div className="c-outfits-container" ref={ref}>No Outfits</div>
