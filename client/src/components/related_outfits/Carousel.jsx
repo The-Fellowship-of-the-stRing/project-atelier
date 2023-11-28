@@ -1,64 +1,56 @@
 import React, { useRef, useState, useEffect } from 'react';
+import Card from './Card.jsx';
 
 const Carousel = ({
-  cards, pWidth, addCard, isAdded,
+  cards, action, pWidth, addCard, isAdded, ids, deleteProduct, updateMainProduct,
 }) => {
   const ref = useRef(null);
-  const [allCards, setAllCards] = useState(null);
+
   const [visibleCards, setVisibleCards] = useState(null);
   const [visibleCardCount, setVisibleCardCount] = useState(null);
   const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(0);
   const [isNextShown, setIsNextShown] = useState(false);
   const [isPrevShown, setIsPrevShown] = useState(false);
+  const [type, setType] = useState(null);
   // Left and right margins of card list is 20px each
   // Each card is 200px wide with right-margin of 10px
   const getCardCount = (w) => Math.floor((w - 40) / 210);
 
-  // const updateCardsBasedOnWidth = () => {
-  //   if (allCards) {
-  //     const newCardCount = getCardCount(pWidth);
-  //     setVisibleCards(
-  //       allCards.slice(indexOfFirstVisibleCard, indexOfFirstVisibleCard + newCardCount),
-  //     );
-  //     setVisibleCardCount(newCardCount);
-  //   }
-  // };
   useEffect(() => {
-    setAllCards(cards);
     setIndexOfFirstVisibleCard(0);
+    setType(action);
     const cardCount = getCardCount(pWidth);
     setVisibleCardCount(cardCount);
-    setVisibleCards(cards.slice(0, cardCount));
-    if (visibleCardCount >= cards.length) {
+    setVisibleCards(ids.slice(0, cardCount));
+    if (visibleCardCount >= ids.length) {
       setIsNextShown(false);
     } else {
       setIsNextShown(true);
     }
     setIsPrevShown(false);
-  }, [pWidth, cards, isAdded]);
-
+  }, [pWidth, cards, isAdded, ids]);
   const updateVisibleCards = (incrementer) => {
     const updatedIndex = indexOfFirstVisibleCard + incrementer;
     setIndexOfFirstVisibleCard(updatedIndex);
     if (incrementer === 1) {
       setVisibleCards([...visibleCards.slice(1),
-        allCards[indexOfFirstVisibleCard + visibleCards.length]]);
+        ids[indexOfFirstVisibleCard + visibleCards.length]]);
     } else {
-      setVisibleCards([allCards[updatedIndex], ...visibleCards.slice(0, visibleCards.length - 1)]);
+      setVisibleCards([ids[updatedIndex], ...visibleCards.slice(0, visibleCards.length - 1)]);
     }
     if (updatedIndex === 0) {
       setIsPrevShown(false);
     } else {
       setIsPrevShown(true);
     }
-    if (updatedIndex + visibleCardCount === allCards.length) {
+    if (updatedIndex + visibleCardCount === ids.length) {
       setIsNextShown(false);
     } else {
       setIsNextShown(true);
     }
   };
 
-  return visibleCards && visibleCardCount ? (
+  return ids && visibleCards ? (
     <div className="c-related-container" ref={ref}>
       {isPrevShown && (
         <button
@@ -72,7 +64,7 @@ const Carousel = ({
       )}
       <div className="c-cards">
         {!isAdded && addCard}
-        {visibleCards}
+        {visibleCards.map((id) => (<Card className={"c-card"} itemId={id} key={id} deleteProduct={deleteProduct} action={action} updateMainProduct={updateMainProduct} />))}
       </div>
       {isNextShown && (
         <button

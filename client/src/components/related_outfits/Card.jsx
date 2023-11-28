@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Stars from './Stars.jsx';
 import Compare from './Compare.jsx';
+import getProductDataById from '../../utils/getProductDataById.js';
+import getStyleDataById from '../../utils/getStyleDataById.js';
 
 const Card = ({
+  itemId,
   cardDetails,
   itemName,
   className,
@@ -15,6 +18,34 @@ const Card = ({
   const [cardData, setCardData] = useState(null);
   const [isCompareShown, setIsCompareShown] = useState(false);
   useEffect(() => {
+    const fetchCardData = async () => {
+      try {
+        const productData = await getProductDataById(itemId);
+        const styleData = await getStyleDataById(itemId);
+        console.log(productData, styleData);
+        if(productData && styleData) {
+          let response = {
+            name: productData.name || "NO NAME",
+            category: productData.category || "NO CAT",
+            features: productData.features || []
+          };
+          /* USE DEFAULT STYLE || FIRST STYLE */
+          for (let i = 0; i < styleData.length; i++) {
+            let style = styleData[i];
+            if (i === 0 || style["default?"]) {
+              response.photos = style.photos[0].thumbnail_url || "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg";
+              response.original_price = style.original_price;
+              response.sale_price = style.sale_price;
+            }
+          }
+          console.log(response);
+          return setCardData(response);
+        }
+      } catch (err) {
+        console.error('Error getting item details: ', err);
+      }
+    }
+    fetchCardData();
     setCardData(cardDetails);
   }, []);
   let priceString;
@@ -67,8 +98,8 @@ const Card = ({
         className="c-card-action-delete"
         role="button"
         tabIndex="0"
-        onKeyPress={() => deleteProduct(cardData.id)}
-        onClick={() => deleteProduct(cardData.id)}
+        onKeyPress={() => deleteProduct(itemId)}
+        onClick={() => deleteProduct(itemId)}
       >
         ❌
       </div>),
@@ -92,8 +123,8 @@ const Card = ({
           <div
             role="button"
             tabIndex="0"
-            onKeyPress={() => updateMainProduct(cardData.id)}
-            onClick={() => updateMainProduct(cardData.id)}
+            onKeyPress={() => updateMainProduct(itemId)}
+            onClick={() => updateMainProduct(itemId)}
           >
             <img className="c-card-img" src={cardData.photos} alt="product-preview" />
           </div>
@@ -106,13 +137,13 @@ const Card = ({
             className="c-card-name"
             role="button"
             tabIndex="0"
-            onKeyPress={() => updateMainProduct(cardData.id)}
-            onClick={() => updateMainProduct(cardData.id)}
+            onKeyPress={() => updateMainProduct(itemId)}
+            onClick={() => updateMainProduct(itemId)}
           >
             {cardData.name}
           </div>
           <div className="c-card-price">{priceString}</div>
-          <Stars itemId={cardData.id} />
+          <Stars itemId={itemId} />
         </div>
       </div>
     ) : (

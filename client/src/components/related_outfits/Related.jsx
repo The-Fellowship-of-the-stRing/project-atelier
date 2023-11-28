@@ -56,6 +56,8 @@ const Related = ({
         <Carousel
           cards={allCards}
           pWidth={width}
+          ids={relatedIds}
+          action="related"
           itemFeatures={itemFeatures}
           updateMainProduct={updateMainProduct}
         />
