@@ -12,7 +12,6 @@ const Outfits = ({ itemId, updateMainProduct }) => {
   const postLocalStorage = (newOutfits) => {
     localStorage.removeItem(document.cookie);
     localStorage.setItem(document.cookie, JSON.stringify(newOutfits));
-    console.log('Posted', getLocalStorage());
   };
 
   useEffect(() => {
@@ -51,7 +50,17 @@ const Outfits = ({ itemId, updateMainProduct }) => {
   );
   return outfitsByUser ? (
     <div className="c-outfits-container" ref={ref}>
-      <Carousel className="c-outfits-carousel" itemId={itemId} ids={outfitsByUser} pWidth={width} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} addCard={addCard} isAdded={isAdded} />
+      <Carousel
+        className="c-outfits-carousel"
+        itemId={itemId}
+        ids={outfitsByUser}
+        pWidth={width}
+        deleteProduct={deleteProduct}
+        action="outfits"
+        updateMainProduct={updateMainProduct}
+        addCard={addCard}
+        isAdded={isAdded}
+      />
     </div>
   ) : (
     <div className="c-outfits-container" ref={ref}>No Outfits</div>

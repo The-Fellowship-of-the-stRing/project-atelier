@@ -66,7 +66,19 @@ const Carousel = ({
       )}
       <div className="c-cards">
         {!isAdded && addCard}
-        {visibleCards.map((id) => (<Card className="c-card" itemId={id} key={id} mainId={itemId} deleteProduct={deleteProduct} action={action} updateMainProduct={updateMainProduct} itemFeatures={itemFeatures} itemName={itemName} />))}
+        {visibleCards.map((id) => (
+          <Card
+            className="c-card"
+            temId={id}
+            key={id}
+            mainId={itemId}
+            deleteProduct={deleteProduct}
+            action={action}
+            updateMainProduct={updateMainProduct}
+            itemFeatures={itemFeatures}
+            itemName={itemName}
+          />
+        ))}
       </div>
       {isNextShown && (
         <button

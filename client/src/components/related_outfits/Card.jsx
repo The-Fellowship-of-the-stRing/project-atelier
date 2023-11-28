@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Stars from './Stars.jsx';
+import Stars from '../stars/Stars.jsx';
 import Compare from './Compare.jsx';
 import fetchCardData from '../../utils/fetchCardData.js';
 
