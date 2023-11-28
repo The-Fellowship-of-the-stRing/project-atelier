@@ -1,0 +1,8 @@
+.g-cart {
+  display: flex;
+  flex-direction: column;
+}
+.g-dropdowns {
+  display: flex;
+  flex-direction: row;
+}
