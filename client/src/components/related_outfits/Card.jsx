@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Stars from './Stars.jsx';
 import Compare from './Compare.jsx';
-import getProductDataById from '../../utils/getProductDataById.js';
-import getStyleDataById from '../../utils/getStyleDataById.js';
+import fetchCardData from '../../utils/fetchCardData.js';
 
 const Card = ({
   itemId,
-  cardDetails,
   itemName,
   className,
-  cardKey,
   action,
   deleteProduct,
   itemFeatures,
@@ -17,37 +14,20 @@ const Card = ({
 }) => {
   const [cardData, setCardData] = useState(null);
   const [isCompareShown, setIsCompareShown] = useState(false);
-  useEffect(() => {
-    const fetchCardData = async () => {
-      try {
-        const productData = await getProductDataById(itemId);
-        const styleData = await getStyleDataById(itemId);
-        console.log(productData, styleData);
-        if(productData && styleData) {
-          let response = {
-            name: productData.name || "NO NAME",
-            category: productData.category || "NO CAT",
-            features: productData.features || []
-          };
-          /* USE DEFAULT STYLE || FIRST STYLE */
-          for (let i = 0; i < styleData.length; i++) {
-            let style = styleData[i];
-            if (i === 0 || style["default?"]) {
-              response.photos = style.photos[0].thumbnail_url || "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg";
-              response.original_price = style.original_price;
-              response.sale_price = style.sale_price;
-            }
-          }
-          console.log(response);
-          return setCardData(response);
-        }
-      } catch (err) {
-        console.error('Error getting item details: ', err);
-      }
+
+  const getCardData = async () => {
+    try {
+      const response = await fetchCardData(itemId);
+      setCardData(response);
+    } catch (err) {
+      console.error('Error getting item details: ', err);
     }
-    fetchCardData();
-    setCardData(cardDetails);
+  };
+
+  useEffect(() => {
+    getCardData();
   }, []);
+
   let priceString;
   if (cardData && cardData.sale_price && cardData.original_price) {
     priceString = (
@@ -111,7 +91,6 @@ const Card = ({
         {isCompareShown ? (
           <Compare
             itemId={cardData.id}
-            cardKey={cardKey}
             itemFeatures={itemFeatures}
             cardData={cardData}
             itemName={itemName}

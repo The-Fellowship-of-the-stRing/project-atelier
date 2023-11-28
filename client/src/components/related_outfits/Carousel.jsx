@@ -2,7 +2,10 @@ import React, { useRef, useState, useEffect } from 'react';
 import Card from './Card.jsx';
 
 const Carousel = ({
-  cards, action, pWidth, addCard, isAdded, ids, deleteProduct, updateMainProduct,
+  cards, action, pWidth,
+  addCard, isAdded, ids,
+  deleteProduct, updateMainProduct,
+  itemFeatures, itemName, itemId,
 }) => {
   const ref = useRef(null);
 
@@ -11,14 +14,12 @@ const Carousel = ({
   const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(0);
   const [isNextShown, setIsNextShown] = useState(false);
   const [isPrevShown, setIsPrevShown] = useState(false);
-  const [type, setType] = useState(null);
+
   // Left and right margins of card list is 20px each
   // Each card is 200px wide with right-margin of 10px
   const getCardCount = (w) => Math.floor((w - 40) / 210);
-
   useEffect(() => {
     setIndexOfFirstVisibleCard(0);
-    setType(action);
     const cardCount = getCardCount(pWidth);
     setVisibleCardCount(cardCount);
     setVisibleCards(ids.slice(0, cardCount));
@@ -29,6 +30,7 @@ const Carousel = ({
     }
     setIsPrevShown(false);
   }, [pWidth, cards, isAdded, ids]);
+
   const updateVisibleCards = (incrementer) => {
     const updatedIndex = indexOfFirstVisibleCard + incrementer;
     setIndexOfFirstVisibleCard(updatedIndex);
@@ -64,7 +66,7 @@ const Carousel = ({
       )}
       <div className="c-cards">
         {!isAdded && addCard}
-        {visibleCards.map((id) => (<Card className={"c-card"} itemId={id} key={id} deleteProduct={deleteProduct} action={action} updateMainProduct={updateMainProduct} />))}
+        {visibleCards.map((id) => (<Card className="c-card" itemId={id} key={id} mainId={itemId} deleteProduct={deleteProduct} action={action} updateMainProduct={updateMainProduct} itemFeatures={itemFeatures} itemName={itemName} />))}
       </div>
       {isNextShown && (
         <button

@@ -1,25 +1,28 @@
-import React,{useRef, useState, useEffect} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Carousel from './Carousel.jsx';
 
-const Outfits = ( {itemId, updateMainProduct} ) => {
+const Outfits = ({ itemId, updateMainProduct }) => {
   // localStorage.clear();
   const ref = useRef(null);
   const [width, setWidth] = useState(0);
   const [outfitsByUser, setOutfitsByUser] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
 
-  const getOutfits = () => {
-    return JSON.parse(localStorage.getItem(document.cookie)) || [];
-  }
+  const getLocalStorage = () => JSON.parse(localStorage.getItem(document.cookie)) || [];
+  const postLocalStorage = (newOutfits) => {
+    localStorage.removeItem(document.cookie);
+    localStorage.setItem(document.cookie, JSON.stringify(newOutfits));
+    console.log('Posted', getLocalStorage());
+  };
 
   useEffect(() => {
     const handleResize = () => {
       setWidth(ref.current.offsetWidth);
     };
     setTimeout(handleResize, 500);
-    let parsedData = getOutfits();
+    const parsedData = getLocalStorage();
     setOutfitsByUser(parsedData);
-    (parsedData && parsedData.includes(itemId)) ? setIsAdded(parsedData.includes(itemId)) : setIsAdded(false);
+    setIsAdded(getLocalStorage().includes(itemId));
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -27,28 +30,20 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
   }, [width, itemId]);
 
   const addProduct = () => {
-    let parsedData = getOutfits();
-    parsedData = [itemId, ...parsedData];
-    localStorage.setItem(document.cookie, JSON.stringify(parsedData));
-    console.log(parsedData);
-    setOutfitsByUser(parsedData);
+    const parsedData = getLocalStorage();
+    const updatedState = [itemId, ...parsedData];
+    postLocalStorage(updatedState);
+    setOutfitsByUser(updatedState);
     setIsAdded(true);
-  }
+  };
 
-  const deleteProduct = (product_id) => {
-    let parsedData = getOutfits();
-    let updatedState = [];
-    for (let id of parsedData) {
-      if(id !== product_id) {
-        updatedState.push(id);
-      }
-    }
-    console.log(parsedData, updatedState);
-    localStorage.removeItem(document.cookie);
-    localStorage.setItem(document.cookie, JSON.stringify(updatedState));
+  const deleteProduct = (productId) => {
+    const parsedData = getLocalStorage();
+    const updatedState = parsedData.filter((id) => id !== productId);
+    postLocalStorage(updatedState);
     setIsAdded(updatedState.includes(itemId));
     setOutfitsByUser(updatedState);
-  }
+  };
   const addCard = (
     <div className="c-card">
       <button type="button" className="c-card-action-add" onClick={() => addProduct()}>+</button>
@@ -61,6 +56,6 @@ const Outfits = ( {itemId, updateMainProduct} ) => {
   ) : (
     <div className="c-outfits-container" ref={ref}>No Outfits</div>
   );
-}
+};
 
 export default Outfits;
