@@ -18,16 +18,25 @@
 }
 
 .k-question-body {
-  font-weight: bold;
+  font-weight: bolder;
   font-size: large;
+}
+
+.k-question-helpful,
+.k-question-yes-click,
+.k-add-answer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .k-question-helpful {
   font-size: 14px;
+  margin-right: 5px;
   color: #686868
 }
 
 .k-question-yes-click {
+  margin-left: 5px;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -46,6 +55,7 @@
 
 .k-add-answer {
   font-size: 14px;
+  margin-left: 5px;
   color: #686868;
   text-decoration: underline;
   cursor: pointer;

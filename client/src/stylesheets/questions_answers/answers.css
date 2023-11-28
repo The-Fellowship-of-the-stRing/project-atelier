@@ -29,10 +29,12 @@
 .k-answer-yes-click {
   text-decoration: underline;
   cursor: pointer;
+  margin-right: 5px;
 }
 
 .k-answer-report {
   margin-right: 5px;
+  margin-left: 5px;
   text-decoration: underline;
   cursor: pointer;
 }
