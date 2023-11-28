@@ -15,7 +15,7 @@ const ProductDetails = ({ itemId, handleRef }) => {
   const [price, setPrice] = useState(null);
   const [isSale, setIsSale] = useState(false);
   const [salePrice, setSalePrice] = useState(null);
-  const [sku, setSku] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -59,9 +59,7 @@ const ProductDetails = ({ itemId, handleRef }) => {
       }
     }
   }, [styles]);
-  // const handlePrice = () => {
 
-  // };
   const handleStyle = (value) => {
     setStyle(styles[value]);
     setPrice(styles[value].original_price);
@@ -75,7 +73,7 @@ const ProductDetails = ({ itemId, handleRef }) => {
   return data && styles ? (
     <div className="g-product-details-main-container">
       <div className="g-product-details-column1">
-        <ImageGallery itemId={itemId} style={style} />
+        <ImageGallery style={style} />
       </div>
       <div className="g-product-details-column2">
         <Reviews itemId={itemId} handleRef={handleRef} />
@@ -105,9 +103,9 @@ const ProductDetails = ({ itemId, handleRef }) => {
           </div>
           )}
         </div>
-        <StyleList itemId={itemId} styles={styles} style={style} handleStyle={handleStyle} />
-        <Cart itemId={itemId} />
-        <SocialMedia itemId={itemId} />
+        <StyleList styles={styles} style={style} handleStyle={handleStyle} />
+        <Cart style={style} />
+        <SocialMedia />
         {data.description}
       </div>
     </div>
