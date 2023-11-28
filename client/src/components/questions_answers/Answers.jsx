@@ -9,10 +9,12 @@ const Answers = ({ questionId }) => {
   const [initialAnswers, setInitialAnswers] = useState([]);
   const [allAnswers, setAllAnswers] = useState([]);
   const [showAll, setShowAll] = useState(false);
+  const [countToGet, setCountToGet] = useState(50);
 
   const fetchData = async () => {
+    console.log('Checking fetches... allAnswers: ', allAnswers);
     try {
-      const response = await axios.get(`/qa/questions/${questionId}/answers?question_id=${questionId}`, { count: 50 });
+      const response = await axios.get(`/qa/questions/${questionId}/answers?question_id=${questionId}`, { count: countToGet });
       const sortedResults = response.data.results.sort((a, b) => b.helpfulness - a.helpfulness);
       const sellerToTop = sortedResults.sort((a, b) => (b.answerer_name === 'Seller') - (a.answerer_name === 'Seller'));
       setAllAnswers(sellerToTop);
@@ -29,6 +31,8 @@ const Answers = ({ questionId }) => {
       setAnswersToShow(initialAnswers);
       setShowAll(!showAll);
     } else {
+      setCountToGet(countToGet + 50);
+      // fetchData();
       setAnswersToShow(allAnswers);
       setShowAll(!showAll);
     }
@@ -77,7 +81,7 @@ const Answers = ({ questionId }) => {
 
   useEffect(() => {
     fetchData();
-  }, [questionId]);
+  }, [questionId, countToGet]);
 
   return answersToShow ? (
     <>
