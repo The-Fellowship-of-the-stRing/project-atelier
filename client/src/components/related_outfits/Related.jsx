@@ -12,7 +12,6 @@ const Related = ({
   const ref = useRef(null);
   const [mainProductId, setMainProductId] = useState(null);
   const [width, setWidth] = useState(0);
-  // const [relatedIds, setRelatedIds] = useState(null);
   const [allCards, setAllCards] = useState(null);
 
   const fetchRelatedIds = async () => {
