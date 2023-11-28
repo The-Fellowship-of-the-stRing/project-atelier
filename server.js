@@ -1,10 +1,10 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
+const compression = require('compression'); // Added compression
 require('dotenv').config();
 
 const app = express();
-
 const port = process.env.PORT || 8080;
 const url = process.env.GIT_API_URL;
 
@@ -14,6 +14,7 @@ const headers = {
   },
 };
 
+app.use(compression()); // Use compression middleware
 app.use(express.json());
 app.use(express.static(path.join(__dirname, './public')));
 
