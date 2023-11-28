@@ -46,6 +46,17 @@ const ImageGallery = ({ style }) => {
 
   return style ? (
     <div className="g-images-container">
+      {modalState === true && (
+        <ExpandedView
+          style={style}
+          handleIndex={handleIndex}
+          currentIndex={currentIndex}
+          handlePage={handlePage}
+          lowIndex={lowIndex}
+          highIndex={highIndex}
+          handleModalFalse={handleModalFalse}
+        />
+      )}
       <div className="g-left-spacer" />
       <div className="g-images-main-container">
         {currentIndex > 0 && (
@@ -83,16 +94,7 @@ const ImageGallery = ({ style }) => {
         </div>
         {currentIndex < style.photos.length - 1 && <button type="button" onClick={nextImage}>Next Image</button>}
       </div>
-      {modalState === true && (
-      <ExpandedView
-        style={style}
-        handleIndex={handleIndex}
-        currentIndex={currentIndex}
-        handlePage={handlePage}
-        lowIndex={lowIndex}
-        highIndex={highIndex}
-      />
-      )}
+
     </div>
   )
     : (
