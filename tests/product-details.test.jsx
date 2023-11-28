@@ -3,8 +3,9 @@ import { render, fireEvent, screen, toBeInTheDocument } from '@testing-library/r
 import ProductDetails from '../client/src/containers/ProductDetails.jsx'
 
 describe('Checks if data is being displayed on the product details', () => {
-  it('Values are displayed properly', () => {
+  it('Loading is displayed properly in product_details', async () => {
     render(<ProductDetails/>);
-    expect(screen.findByText('Style')).toBeTruthy();
+    const text = await screen.findByText('Loading...')
+    expect(text).toBeTruthy();
   });
 });
