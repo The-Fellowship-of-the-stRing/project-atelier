@@ -16,7 +16,11 @@ const headers = {
 
 app.use(compression());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, './public')));
+
+const oneYearInSeconds = 60 * 60 * 24 * 365;
+app.use(express.static(path.join(__dirname, './public'), {
+  maxAge: oneYearInSeconds * 1000,
+}));
 
 app.get('/*', (req, res) => {
   axios.get(`${url + req.url}`, headers)
