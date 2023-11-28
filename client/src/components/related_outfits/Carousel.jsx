@@ -25,7 +25,6 @@ const Carousel = ({
   // };
   useEffect(() => {
     setAllCards(cards);
-    // setMainProductId(itemId);
     setIndexOfFirstVisibleCard(0);
     const cardCount = getCardCount(pWidth);
     setVisibleCardCount(cardCount);
