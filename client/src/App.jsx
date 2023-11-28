@@ -42,7 +42,7 @@ const App = () => {
       {!currentItem ? (
         <span className="main-loader" />
       ) : (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<span className="main-loader" />}>
           <ProductDetails itemId={currentItem.id} handleRef={handleRef} />
           <RelatedOutfits
             itemId={currentItem.id}

@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
-const compression = require('compression'); // Added compression
+const compression = require('compression');
 require('dotenv').config();
 
 const app = express();
@@ -14,7 +14,7 @@ const headers = {
   },
 };
 
-app.use(compression()); // Use compression middleware
+app.use(compression());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, './public')));
 
