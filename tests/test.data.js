@@ -1,4 +1,4 @@
-const data = [
+module.exports.products = [
   {
       "review_id": 1277605,
       "rating": 4,
@@ -88,4 +88,24 @@ const data = [
   }
 ]
 
-module.exports = data
+module.exports.mockTotals = {
+    recommended: { true: 100, false: 50 },
+    ratings: { '5': 50, '4': 30, '3': 15, '2': 5, '1': 0 },
+    characteristics: {
+      "Size": {value: 0, text: "none selected"},
+      "Width": {value: 0, text: "none selected"}
+    }
+  };
+
+  module.exports.mockReviewData = {
+    body: "fdagfdagadsfgafgfjfkld;halgjd;fg; jflis; jlkjkl sdjdsf; j; jj l;kjs;jf kgl;jfs l;gfjd; fj; sjfgdjl ;skjfglj ds;lkgjndflskjg lsg hjreoigj l;fdgn l;fdhgjls;dfhgjfkl;ds ngklfjds hgjk;fdh;kfsgj;dfkl hgl;jfd shg;jfkldsgn ;jslkfd hg;jklfdng;klj dfxnfjk; gnk;fjd gnk;jfdsgk;jldgkj;fds",
+    date: "2022-06-04T00:00:00.000Z",
+    helpfulness: 2,
+    photos: [],
+    rating: 5,
+    recommend: true,
+    response: null,
+    review_id: 1275164,
+    reviewer_name: "jioesjfs",
+    summary: "adawdawd"
+  }
