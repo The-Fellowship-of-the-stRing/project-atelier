@@ -21,7 +21,6 @@
 #stars-filled-container{
   display: flex;
   position: absolute;
-  z-index: 1;
   left: 0;
   overflow: hidden;
   align-items: center;
