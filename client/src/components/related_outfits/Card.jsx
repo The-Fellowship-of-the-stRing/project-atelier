@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Stars from './Stars.jsx';
+import Stars from '../stars/Stars.jsx';
 import Compare from './Compare.jsx';
+import fetchCardData from '../../utils/fetchCardData.js';
 
 const Card = ({
-  cardDetails,
+  itemId,
   itemName,
   className,
-  cardKey,
   action,
   deleteProduct,
   itemFeatures,
@@ -14,9 +14,20 @@ const Card = ({
 }) => {
   const [cardData, setCardData] = useState(null);
   const [isCompareShown, setIsCompareShown] = useState(false);
+
+  const getCardData = async () => {
+    try {
+      const response = await fetchCardData(itemId);
+      setCardData(response);
+    } catch (err) {
+      console.error('Error getting item details: ', err);
+    }
+  };
+
   useEffect(() => {
-    setCardData(cardDetails);
+    getCardData();
   }, []);
+
   let priceString;
   if (cardData && cardData.sale_price && cardData.original_price) {
     priceString = (
@@ -67,8 +78,8 @@ const Card = ({
         className="c-card-action-delete"
         role="button"
         tabIndex="0"
-        onKeyPress={() => deleteProduct(cardData.id)}
-        onClick={() => deleteProduct(cardData.id)}
+        onKeyPress={() => deleteProduct(itemId)}
+        onClick={() => deleteProduct(itemId)}
       >
         ❌
       </div>),
@@ -80,7 +91,6 @@ const Card = ({
         {isCompareShown ? (
           <Compare
             itemId={cardData.id}
-            cardKey={cardKey}
             itemFeatures={itemFeatures}
             cardData={cardData}
             itemName={itemName}
@@ -92,8 +102,8 @@ const Card = ({
           <div
             role="button"
             tabIndex="0"
-            onKeyPress={() => updateMainProduct(cardData.id)}
-            onClick={() => updateMainProduct(cardData.id)}
+            onKeyPress={() => updateMainProduct(itemId)}
+            onClick={() => updateMainProduct(itemId)}
           >
             <img className="c-card-img" src={cardData.photos} alt="product-preview" />
           </div>
@@ -106,13 +116,13 @@ const Card = ({
             className="c-card-name"
             role="button"
             tabIndex="0"
-            onKeyPress={() => updateMainProduct(cardData.id)}
-            onClick={() => updateMainProduct(cardData.id)}
+            onKeyPress={() => updateMainProduct(itemId)}
+            onClick={() => updateMainProduct(itemId)}
           >
             {cardData.name}
           </div>
           <div className="c-card-price">{priceString}</div>
-          <Stars itemId={cardData.id} />
+          <Stars itemId={itemId} />
         </div>
       </div>
     ) : (
