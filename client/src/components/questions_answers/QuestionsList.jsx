@@ -7,17 +7,6 @@ const QuestionsList = ({
   resultsToShow, handleHelpful, itemId, handleAnswerModal,
 }) => {
   const [marked, setMarked] = useState({});
-  const [answersToShow, setAnswersToShow] = useState(2);
-
-  const handleAnswersToShow = (e) => {
-    e.preventDefault();
-    setAnswersToShow(Infinity);
-  };
-
-  const handleCollapseAnswers = (e) => {
-    e.preventDefault();
-    setAnswersToShow(2);
-  };
 
   const checkMarked = (id) => {
     if (!marked[id]) {
@@ -68,33 +57,9 @@ const QuestionsList = ({
               </div>
             </div>
             <Answers
-              answersToShow={answersToShow}
               questionId={id}
               itemId={itemId}
             />
-            {answersToShow <= 2
-              ? (
-                <div
-                  onKeyDown={(e) => handleAnswersToShow(e)}
-                  tabIndex="0"
-                  role="button"
-                  className="k-load-more-answers"
-                  onClick={(e) => handleAnswersToShow(e)}
-                >
-                  <strong>SEE MORE ANSWERS</strong>
-                </div>
-              )
-              : (
-                <div
-                  onKeyDown={(e) => handleCollapseAnswers(e)}
-                  tabIndex="0"
-                  role="button"
-                  className="k-collapse-answers"
-                  onClick={(e) => handleCollapseAnswers(e)}
-                >
-                  <strong>COLLAPSE ANSWERS</strong>
-                </div>
-              )}
           </div>
         );
       })}

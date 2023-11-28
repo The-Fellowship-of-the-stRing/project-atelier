@@ -16,7 +16,7 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
   const [questionId, setQuestionId] = useState({});
   const [searchTerm, setSearchTerm] = useState('');
 
-  const numOfQuestionsToGet = 10;
+  const numOfQuestionsToGet = 100;
 
   const handleQuestionModal = (value) => {
     setAddQuestionModal(value);
@@ -31,6 +31,7 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
   const fetchQuestionData = async () => {
     try {
       const response = await axios.get(`/qa/questions/?product_id=${itemId}&count=${numOfQuestionsToGet}`);
+      // console.log('respsonse.data.results: ', response.data.results);
       const notReported = response.data.results.filter((value) => value.reported === false);
       const sortedResults = notReported
         .sort((a, b) => b.question_helpfulness - a.question_helpfulness);
@@ -41,6 +42,7 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
         setResultsToShow(filteredBySearchText);
       } else {
         setQuestionData(sortedResults);
+        // console.log('questionData: ', questionData);
       }
       return response.data;
     } catch (err) {
@@ -63,10 +65,14 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
 
   useEffect(() => {
     setResultsToShow(questionData.slice(0, currentCount));
+    // console.log('resultsToShow.length: ', resultsToShow.length);
   }, [questionData, currentCount]);
 
   const handleMoreAnsweredQuestions = () => {
+    // console.log('inside the more answered questions:');
+    // console.log('currentCount: ', currentCount);
     setCurrentCount(currentCount + 2);
+    // console.log('currentCount: ', currentCount);
   };
 
   return resultsToShow ? (

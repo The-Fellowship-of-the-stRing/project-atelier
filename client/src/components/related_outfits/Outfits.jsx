@@ -4,7 +4,7 @@ import Carousel from './Carousel.jsx';
 import fetchCardData from '../../utils/fetchCardData.js';
 
 const Outfits = ({ itemId, updateMainProduct }) => {
-  // localStorage.clear();
+  localStorage.clear();
   const ref = useRef(null);
   const [width, setWidth] = useState(0);
   const [allCards, setAllCards] = useState(null);
