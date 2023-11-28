@@ -17,11 +17,12 @@ const CompareModal = ({
       compareData[currentFeature.feature] = { compared: currentFeature.value };
     }
   }
+
   let featureList;
   if (compareData) {
     const features = Object.keys(compareData);
-    featureList = features.map((feature, index) => (
-      <tr key={itemName + index} className="c-compare-feature-item">
+    featureList = features.map((feature) => (
+      <tr key={feature} className="c-compare-feature-item">
         <td>{feature.toUpperCase()}</td>
         <td>{compareData[feature].current ? compareData[feature].current : ''}</td>
         <td>{compareData[feature].compared ? compareData[feature].compared : ''}</td>
