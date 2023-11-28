@@ -12,6 +12,7 @@ const Related = ({
   const ref = useRef(null);
   const [mainProductId, setMainProductId] = useState(null);
   const [width, setWidth] = useState(0);
+  const [relatedIds, setRelatedIds] = useState(null);
   const [allCards, setAllCards] = useState(null);
 
   const fetchRelatedIds = async () => {
@@ -21,7 +22,7 @@ const Related = ({
         const fetchedIds = await getRelatedItems(itemId);
         const cards = await Promise.all(fetchedIds.map((id) => fetchCardData(id)));
         const cardElements = cards.map((card) => <Card className="c-card" cardDetails={card} cardKey={card.id + itemId} key={card.id} itemName={itemName} itemFeatures={itemFeatures} action="related" updateMainProduct={updateMainProduct} />);
-        // setRelatedIds(fetchedIds);
+        setRelatedIds(fetchedIds);
         setAllCards(cardElements);
       } else if (!allCards) {
         setMainProductId(itemId);

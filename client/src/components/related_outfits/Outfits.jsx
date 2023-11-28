@@ -7,52 +7,72 @@ const Outfits = ({ itemId, updateMainProduct }) => {
   // localStorage.clear();
   const ref = useRef(null);
   const [width, setWidth] = useState(0);
-  const [outfitIds, setOutfitIds] = useState(null);
   const [mainCard, setMainCard] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
+  const [outfitIds, setOutfitIds] = useState(null);
   const [outfitObj, setOutfitObj] = useState(null);
-
+  const [outfitEl, setOutfitEl] = useState(null);
 
   const getLocalStorage = () => JSON.parse(localStorage.getItem(document.cookie)) || [];
   const postLocalStorage = (newOutfits) => {
+    console.log("Pre", getLocalStorage());
     localStorage.removeItem(document.cookie);
     localStorage.setItem(document.cookie, JSON.stringify(newOutfits));
+    console.log("Post", getLocalStorage());
   };
 
   const addProduct = () => {
-    postLocalStorage([itemId, ...outfitIds]);
+    const updatedStorage = [itemId, ...outfitIds];
+    postLocalStorage(updatedStorage);
+    console.log("element", [mainCard, ...outfitEl]);
+    setOutfitEl([mainCard, ...outfitEl]);
+    setOutfitIds(updatedStorage);
+    console.log("obj", [[itemId, mainCard], ...outfitObj]);
     setOutfitObj([[itemId, mainCard], ...outfitObj]);
-    setOutfitIds([itemId, ...outfitIds]);
     setIsAdded(true);
   };
 
   const deleteProduct = (productId) => {
-    const updatedOutfitIds = outfitIds.filter((id) => id !== productId);
+    const updatedOutfitIds = [];
+    const updatedOutfitObj = [];
+    const updatedOutfitEl = [];
+
+    console.log("1.Pre", outfitObj);
+    outfitObj.forEach((outfit) => {
+      console.log("curr", outfit[0], "to remove", productId);
+      if (outfit[0] !== productId) {
+        updatedOutfitIds.push(outfit[0]);
+        updatedOutfitEl.push(outfit[1]);
+        updatedOutfitObj.push([outfit]);
+      }
+    });
+    console.log("1.Post", outfitObj);
+    setOutfitEl(updatedOutfitEl);
+    setOutfitIds(updatedOutfitIds);
+    setOutfitObj(updatedOutfitObj);
     postLocalStorage(updatedOutfitIds);
     if (productId === itemId) {
       setIsAdded(false);
     }
-    setOutfitIds(updatedOutfitIds);
   };
+
   const setAllCardData = async () => {
     try {
       const currentIds = outfitIds || getLocalStorage();
-      setOutfitIds(currentIds);
+      const currentEl = [];
       const cards = await Promise.all(currentIds.map((id) => fetchCardData(id)));
-      const cardEl = cards.map((card) => {
+      const cardObj = cards.map((card) => {
         const temp = (<Card className="c-card" cardDetails={card} cardKey={card.id + itemId} key={card.id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />);
+        currentEl.push(temp);
         return [card.id, temp];
       });
-      setOutfitObj(cardEl);
+      setOutfitEl(currentEl);
+      setOutfitIds(currentIds);
+      setOutfitObj(cardObj);
     } catch (err) {
       console.error('Error getting item details: ', err);
     }
   };
-  const addCard = (
-    <div className="c-card">
-      <button type="button" className="c-card-action-add" onClick={() => addProduct()}>+</button>
-    </div>
-  );
 
   const getMainCard = async () => {
     try {
@@ -78,9 +98,16 @@ const Outfits = ({ itemId, updateMainProduct }) => {
     };
   }, [width, itemId]);
 
+  const addCard = (
+    <div className="c-card">
+      <button type="button" className="c-card-action-add" onClick={() => addProduct()}>+</button>
+    </div>
+  );
+  // cards={outfitObj.map((el) => el[1])}
+
   return outfitObj ? (
     <div className="c-outfits-container" ref={ref}>
-      <Carousel className="c-outfits-carousel" itemId={itemId} cards={outfitObj.map((el) => el[1])} pWidth={width} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} addCard={addCard} isAdded={isAdded} />
+      <Carousel className="c-outfits-carousel" itemId={itemId} cards={outfitEl} pWidth={width} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} addCard={addCard} isAdded={isAdded} />
     </div>
   ) : (
     <div className="c-outfits-container" ref={ref}>No Outfits</div>
