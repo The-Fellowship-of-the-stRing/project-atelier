@@ -54,7 +54,6 @@
   align-items: center;
   height: auto;
   position: relative;
-  z-index: 2;
 }
 
 .l-review-button-effect {
@@ -65,7 +64,6 @@
   top:0;
   left: 0;
   transition: scale .3s ease-in-out, top .3s ease-in-out;
-  z-index: 1;
 
 }
 

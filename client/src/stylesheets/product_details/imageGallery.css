@@ -60,6 +60,23 @@
   justify-content: start;
   align-items: center;
 }
+.g-image_select-expand{
+  background-position: center;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  width:60px;
+  padding: 5px;
+  height:60px;
+}
+.g-image_selected-expand {
+  background-position: center;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  filter: brightness(180%);
+  width:60px;
+  padding: 5px;
+  height:60px;
+}
 .g-left-button{
   z-index: 2;
   position:absolute;
