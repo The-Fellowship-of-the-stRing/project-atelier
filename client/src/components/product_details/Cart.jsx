@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import QuantityDropdown from './QuantityDropdown.jsx';
+import SizeDropdown from './SizeDropdown.jsx';
 
-const Cart = () => (
-  <div className="g-cart">
-    Cart
-  </div>
-);
+const Cart = ({ style }) => {
+  const [sku, setSku] = useState(null);
+  const [quantity, setQuantity] = useState(null);
+  const handleSku = (e) => {
+    setSku(e.target.value);
+  };
+  const handleQuantity = (e) => {
+    setQuantity(e.target.value);
+  };
+  return style ? (
+    <div className="g-cart">
+      <div className="g-dropdowns">
+        <SizeDropdown style={style} handleSku={handleSku} />
+        <QuantityDropdown style={style} handleQuantity={handleQuantity} sku={sku} />
+      </div>
+      <button type="button"> Add to Cart </button>
+    </div>
+  ) : <div />;
+};
 export default Cart;
