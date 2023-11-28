@@ -7,35 +7,28 @@ const Outfits = ({ itemId, updateMainProduct }) => {
   // localStorage.clear();
   const ref = useRef(null);
   const [width, setWidth] = useState(0);
-  const [outfitIds, setOutfitIds] = useState(null);
+  // const [outfitIds, setOutfitIds] = useState(null);
   const [allCards, setAllCards] = useState(null);
   const [mainCard, setMainCard] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
 
-  // const getOutfits = () => JSON.parse(localStorage.getItem(document.cookie)) || [];
   const getLocalStorage = () => JSON.parse(localStorage.getItem(document.cookie)) || [];
+  console.log("Storage", getLocalStorage());
   const postLocalStorage = (newOutfits) => {
     localStorage.removeItem(document.cookie);
     localStorage.setItem(document.cookie, JSON.stringify(newOutfits));
   };
 
   const addProduct = () => {
-    // let parsedData = getOutfits();
-    // parsedData = [itemId, ...parsedData];
-    // localStorage.setItem(document.cookie, JSON.stringify(parsedData));
-    const updatedOutfitIds = [itemId, ...outfitIds];
-    postLocalStorage(updatedOutfitIds);
-    setOutfitIds(updatedOutfitIds);
+    const updatedOutfits = { ...mainCard, ...allCards };
+    postLocalStorage(updatedOutfits);
     setIsAdded(true);
-    setAllCards({ ...mainCard, ...allCards });
-    // const updatedCards =
-    setAllCards();
+    setAllCards(updatedOutfits);
   };
   const deleteProduct = (productId) => {
-    // const parsedData = getLocalStorage();
-    const updatedOutfitIds = outfitIds.filter((id) => id !== productId);
+    const currentOutfits = getLocalStorage();
+    const updatedOutfitIds = currentOutfits.filter((id) => id !== productId);
     postLocalStorage(updatedOutfitIds);
-    setOutfitIds(updatedOutfitIds);
     if (productId === itemId) {
       setIsAdded(false);
     }
@@ -49,39 +42,24 @@ const Outfits = ({ itemId, updateMainProduct }) => {
 
   const getAllCardData = async () => {
     try {
-      const parsedData = getLocalStorage();
-      setOutfitIds(parsedData);
-      const cards = await Promise.all(parsedData.map((id) => fetchCardData(id)));
+      const parsedData = Object.keys(getLocalStorage());
+      console.log(parsedData);
 
+      const cards = await Promise.all(parsedData.map((id) => fetchCardData(Number(id))));
       const cardElement = {};
       cards.forEach((card) => {
-        const cardId = card.id;
         const cardEl = (<Card className="c-card" cardDetails={card} cardKey={card.id + itemId} key={card.id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />);
-        if (card.id === itemId) {
-          const mainCard = {};
-          mainCard[card.id] = cardEl;
-          setMainCard(mainCard);
-        }
-        cardElement[cardId] = cardEl;
+        cardElement[card.id] = cardEl;
       });
 
-      // const cardElement = cards.map((card) => {
-      //   const cardId = card.id;
-      //   const cardEl = (<Card className="c-card" cardDetails={card} cardKey={card.id + itemId} key={card.id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />);
-      //   if (card.id === itemId) {
-      //     setMainCard(cardEl);
-      //   }
-      //   const cardObj = {};
-      //   cardObj[cardId] = cardEl;
-      //   return cardObj;
-      // });
       /* REFACTOR THIS LATER ALL TO ABOVE PROMISE ALL */
       const mainCardData = await fetchCardData(itemId);
       const mainCardEl = (<Card className="c-card" cardDetails={mainCardData} cardKey={mainCardData.id + itemId} key={mainCardData.id} deleteProduct={deleteProduct} action="outfits" updateMainProduct={updateMainProduct} />);
-      console.log('1.', cardElement);
-      setMainCard(mainCardEl);
+      const mainCardObj = {};
+      mainCardObj[itemId] = mainCardEl;
+      setMainCard(mainCardObj);
       setAllCards(cardElement);
-      setIsAdded(parsedData.includes(itemId));
+      setIsAdded(Object.keys(cardElement).includes(String(itemId)));
     } catch (err) {
       console.error('Error getting item details: ', err);
     }
