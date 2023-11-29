@@ -1,6 +1,7 @@
 import React, {
   useState, useEffect, useRef, Suspense,
 } from 'react';
+import { GoDash } from 'react-icons/go';
 import ProductDetails from './containers/ProductDetails.jsx';
 import getProductDataById from './utils/getProductDataById.js';
 
@@ -13,6 +14,7 @@ const RelatedOutfits = React.lazy(() => import('./containers/RelatedOutfits'));
 
 const App = () => {
   const [currentItem, setCurrentItem] = useState(null);
+  const [siteOffer, setSiteOffer] = useState(null);
   const reviewRef = useRef(null);
   const topRef = useRef(null);
 
@@ -20,6 +22,9 @@ const App = () => {
     try {
       const item = await getProductDataById(itemId);
       setCurrentItem(item);
+      if (!siteOffer) {
+        setSiteOffer(item);
+      }
     } catch (error) {
       console.error('Error fetching item:', error);
     }
@@ -42,6 +47,27 @@ const App = () => {
       ) : (
         <Suspense fallback={<span className="main-loader" />}>
           <NavBar topRef={topRef} />
+          <div className="app-site-offer-header">
+            <span className="app-site-offer-start">SIDE-WIDE ANNOUNCEMENT MESSAGE!</span>
+            {' '}
+            <GoDash />
+            {' '}
+            SALE / DISCOUNT
+            {' '}
+            <b>OFFER</b>
+            {' '}
+            <GoDash />
+            {' '}
+            <span
+              role="button"
+              tabIndex="0"
+              onKeyDown={() => updateMainProduct(siteOffer.id)}
+              onClick={() => updateMainProduct(siteOffer.id)}
+              className="app-site-offer-link"
+            >
+              {siteOffer.name}
+            </span>
+          </div>
           <ProductDetails itemId={currentItem.id} reviewRef={reviewRef} />
           <RelatedOutfits
             itemId={currentItem.id}

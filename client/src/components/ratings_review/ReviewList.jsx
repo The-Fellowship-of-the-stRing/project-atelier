@@ -70,18 +70,14 @@ const ReviewList = ({
         </div>
       )}
       <div className="l-review-list-btn-placement">
-        <button type="button" className="l-review-list-more-btn" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length}>
-          {isLoading ? (
-            <div className="scroll-loader" />
-          ) : (
-            'MORE REVIEWS'
-          )}
-        </button>
         <button data-testid="add-review-btn" type="button" className="l-review-list-more-btn" onClick={() => handleModal()}>
           ADD A REVIEW
           {' '}
           <FaPlus className="l-review-list-btn-icon" />
         </button>
+        {isLoading && (
+        <div className="scroll-loader" />
+        )}
       </div>
     </div>
   );
