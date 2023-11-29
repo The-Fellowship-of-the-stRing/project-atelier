@@ -105,6 +105,7 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
       />
       <QuestionsList
         updateAnswers={updateAnswers}
+        setUpdateAnswers={setUpdateAnswers}
         searchTerm={searchTerm}
         handleHelpful={handleHelpful}
         resultsToShow={resultsToShow}

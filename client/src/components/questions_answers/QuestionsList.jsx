@@ -9,6 +9,7 @@ const QuestionsList = ({
   itemId,
   handleAnswerModal,
   updateAnswers,
+  setUpdateAnswers,
 }) => {
   const [marked, setMarked] = useState({});
 
@@ -62,6 +63,7 @@ const QuestionsList = ({
             </div>
             <Answers
               updateAnswers={updateAnswers}
+              setUpdateAnswers={setUpdateAnswers}
               questionId={id}
               itemId={itemId}
             />
