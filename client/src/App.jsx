@@ -22,6 +22,7 @@ const App = () => {
   const updateMainProduct = async (itemId) => {
     try {
       const item = await getProductDataById(itemId);
+      console.log(itemId);
       setCurrentItem(item);
     } catch (error) {
       console.error('Error fetching item:', error);
@@ -35,7 +36,7 @@ const App = () => {
     40345 - Has default style, but no images
     40352 - No default style
     */
-    updateMainProduct(40344);
+    updateMainProduct(40349);
   }, []);
 
   return (

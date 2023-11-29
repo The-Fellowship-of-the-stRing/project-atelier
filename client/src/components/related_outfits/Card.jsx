@@ -14,7 +14,6 @@ const Card = ({
 }) => {
   const [cardData, setCardData] = useState(null);
   const [isCompareShown, setIsCompareShown] = useState(false);
-
   const getCardData = async () => {
     try {
       const response = await fetchCardData(itemId);
