@@ -1,10 +1,10 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
+const compression = require('compression');
 require('dotenv').config();
 
 const app = express();
-
 const port = process.env.PORT || 8080;
 const url = process.env.GIT_API_URL;
 
@@ -14,8 +14,13 @@ const headers = {
   },
 };
 
+app.use(compression());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, './public')));
+
+const oneYearInSeconds = 60 * 60 * 24 * 365;
+app.use(express.static(path.join(__dirname, './public'), {
+  maxAge: oneYearInSeconds * 1000,
+}));
 
 app.get('/*', (req, res) => {
   axios.get(`${url + req.url}`, headers)

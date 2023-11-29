@@ -8,16 +8,7 @@ import AddReview from '../client/src/components/ratings_review/AddReview.jsx'
 import StarBar from '../client/src/components/ratings_review/StarBar.jsx'
 import ReviewTile from '../client/src/components/ratings_review/ReviewTile.jsx'
 
-import data from './test.data.js'
-
-const mockTotals = {
-  recommended: { true: 100, false: 50 },
-  ratings: { '5': 50, '4': 30, '3': 15, '2': 5, '1': 0 },
-  characteristics: {
-    "Size": {value: 0, text: "none selected"},
-    "Width": {value: 0, text: "none selected"}
-  }
-};
+import { products, mockTotals, mockReviewData } from './test.data.js'
 
 jest.mock('../client/src/utils/getItemDetails', () => ({
   __esModule: true,
@@ -36,7 +27,7 @@ describe('checks Ratings and Review elements', () => {
     const mockHandleViewMore = jest.fn(() => { currentView += 2 });
     const { rerender } = render(
     <ReviewList
-      results={data}
+      results={products}
       currentView={currentView}
       handleViewMore={mockHandleViewMore}
       currentFilter={[]}
@@ -45,7 +36,7 @@ describe('checks Ratings and Review elements', () => {
     fireEvent.click(screen.getByRole('button', { name: /more reviews/i }));
     rerender(
       <ReviewList
-      results={data}
+      results={products}
       currentView={currentView}
       handleViewMore={mockHandleViewMore}
       currentFilter={[]}
@@ -151,18 +142,13 @@ describe('checks Add Review module', () => {
 describe('Image upload in AddReview', () => {
   it('should allow image upload and update the state', async () => {
     render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
-
     const mockImageData = ['image1']
-
     const mockAddImage = () => {
       mockImageData.push('image2')
     }
-
     const imageUploadButton = await screen.findByRole('button', { name: /Upload Image/i });
     expect(imageUploadButton).toBeTruthy()
-
     mockAddImage()
-
     expect(mockImageData.length).toBeGreaterThan(1)
   });
 
@@ -172,62 +158,32 @@ describe('Client side error handling', () => {
     render(<AddReview itemName="Shoes" totals={mockTotals} updateItemReviews={() => {}} handleModal={() => {}} />);
     const submitButton = await screen.findByTestId("submit-button")
     expect(submitButton).toBeTruthy()
-
     fireEvent.click(submitButton)
-
     const errors = await screen.findAllByTestId("error-message")
-
     expect(errors).toHaveLength(5)
   })
 });
 
 describe('Individual review tile', () => {
-  const mockReviewData = {
-    body: "fdagfdagadsfgafgfjfkld;halgjd;fg; jflis; jlkjkl sdjdsf; j; jj l;kjs;jf kgl;jfs l;gfjd; fj; sjfgdjl ;skjfglj ds;lkgjndflskjg lsg hjreoigj l;fdgn l;fdhgjls;dfhgjfkl;ds ngklfjds hgjk;fdh;kfsgj;dfkl hgl;jfd shg;jfkldsgn ;jslkfd hg;jklfdng;klj dfxnfjk; gnk;fjd gnk;jfdsgk;jldgkj;fds",
-    date: "2022-06-04T00:00:00.000Z",
-    helpfulness: 2,
-    photos: [],
-    rating: 5,
-    recommend: true,
-    response: null,
-    review_id: 1275164,
-    reviewer_name: "jioesjfs",
-    summary: "adawdawd"
-  }
-
   const mockHandleHelpful = ()=> {
     mockReviewData.helpfulness = mockReviewData.helpfulness + 1
   }
-
   it('should increase the helpfulness value', async () => {
-
     const mockHandleReport = jest.fn()
     render(<ReviewTile review={mockReviewData} handleHelpful={mockHandleHelpful} handleReport={mockHandleReport}/>);
-
     const helpfulButton = screen.getByTestId("helpfull-button")
     expect(helpfulButton).toBeTruthy()
-
     fireEvent.click(helpfulButton)
-
     expect(mockReviewData.helpfulness).toBeGreaterThan(2)
   })
 
   it('should show the full text of the body on click', async () => {
-    let mockToShow = mockReviewData.body.slice(0, 250)
-
-    const mockHandleShowMore = ()=> {
-      mockToShow = mockReviewData.body
-    }
     const mockHandleReport = jest.fn()
     render(<ReviewTile review={mockReviewData} handleHelpful={mockHandleHelpful} handleReport={mockHandleReport}/>);
-
     const showMoreButton = screen.getByTestId("show-more")
     expect(showMoreButton).toBeTruthy()
-
     fireEvent.click(showMoreButton)
-
-    const bodyText = await screen.findByText("fdagfdagadsfgafgfjfkld;halgjd;fg; jflis; jlkjkl sdjdsf; j; jj l;kjs;jf kgl;jfs l;gfjd; fj; sjfgdjl ;skjfglj ds;lkgjndflskjg lsg hjreoigj l;fdgn l;fdhgjls;dfhgjfkl;ds ngklfjds hgjk;fdh;kfsgj;dfkl hgl;jfd shg;jfkldsgn ;jslkfd hg;jklfdng;klj dfxnfjk; gnk;fjd gnk;jfdsgk;jldgkj;fds")
-
+    const bodyText = await screen.findByText(mockReviewData.body)
     expect(bodyText).toBeTruthy()
   })
 });

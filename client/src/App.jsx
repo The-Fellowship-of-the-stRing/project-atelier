@@ -1,11 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-import RatingsReviews from './containers/RatingsReviews';
-import getProductDataById from './utils/getProductDataById.js';
-import QuestionsAnswers from './containers/QuestionsAnswers';
-import RelatedOutfits from './containers/RelatedOutfits';
+import React, {
+  useState, useEffect, useRef, Suspense,
+} from 'react';
 import ProductDetails from './containers/ProductDetails.jsx';
+import getProductDataById from './utils/getProductDataById.js';
 
 import './styles.css';
+
+const NavBar = React.lazy(() => import('./containers/NavBar'));
+const RatingsReviews = React.lazy(() => import('./containers/RatingsReviews'));
+const QuestionsAnswers = React.lazy(() => import('./containers/QuestionsAnswers'));
+const RelatedOutfits = React.lazy(() => import('./containers/RelatedOutfits'));
 
 const App = () => {
   const [currentItem, setCurrentItem] = useState(null);
@@ -39,7 +43,8 @@ const App = () => {
       {!currentItem ? (
         <span className="main-loader" />
       ) : (
-        <>
+        <Suspense fallback={<span className="main-loader" />}>
+          <NavBar />
           <ProductDetails itemId={currentItem.id} handleRef={handleRef} />
           <RelatedOutfits
             itemId={currentItem.id}
@@ -49,7 +54,7 @@ const App = () => {
           />
           <QuestionsAnswers itemId={currentItem.id} itemName={currentItem.name} />
           <RatingsReviews itemId={currentItem.id} itemName={currentItem.name} ref={reviewRef} />
-        </>
+        </Suspense>
       )}
     </div>
   );

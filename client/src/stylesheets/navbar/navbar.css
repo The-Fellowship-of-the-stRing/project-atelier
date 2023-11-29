@@ -1,0 +1,13 @@
+.l-navbar-container {
+  width: 100dvw;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.l-navbar-main {
+  width: 80%;
+  height: 100px;
+  background-color: #1F2041;
+  color: #F6F8FF;
+}
