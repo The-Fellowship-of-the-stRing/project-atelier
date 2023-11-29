@@ -6,6 +6,7 @@ import getProductDataById from './utils/getProductDataById.js';
 
 import './styles.css';
 
+const NavBar = React.lazy(() => import('./containers/NavBar'));
 const RatingsReviews = React.lazy(() => import('./containers/RatingsReviews'));
 const QuestionsAnswers = React.lazy(() => import('./containers/QuestionsAnswers'));
 const RelatedOutfits = React.lazy(() => import('./containers/RelatedOutfits'));
@@ -43,6 +44,7 @@ const App = () => {
         <span className="main-loader" />
       ) : (
         <Suspense fallback={<span className="main-loader" />}>
+          <NavBar />
           <ProductDetails itemId={currentItem.id} handleRef={handleRef} />
           <RelatedOutfits
             itemId={currentItem.id}
