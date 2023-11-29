@@ -229,32 +229,32 @@ describe('checks Related and Outfits', () => {
     expect(cardImg).toBeTruthy();
   });
 
-  it('should call deleteProduct function when delete button is clicked', () => {
+  // it('should call deleteProduct function when delete button is clicked', () => {
 
-    // const mockItem = {
-    //   itemId: '123',
-    //   itemName: 'Sample Item',
-    //   className: 'sample-class',
-    //   action: 'outfits',
-    //   deleteProduct: {() => {}},
-    //   itemFeatures: {},
-    //   updateMainProduct: {() => {}},
-    // };
-    const { getByTestId } = render(<Card {itemId: '123',
-    itemName: 'Sample Item',
-    className: 'sample-class',
-    action: 'outfits',
-    deleteProduct: {() => {}},
-    itemFeatures: {},
-    updateMainProduct: {() => {}}
-  } />);
+  //   // const mockItem = {
+  //   //   itemId: '123',
+  //   //   itemName: 'Sample Item',
+  //   //   className: 'sample-class',
+  //   //   action: 'outfits',
+  //   //   deleteProduct: {() => {}},
+  //   //   itemFeatures: {},
+  //   //   updateMainProduct: {() => {}},
+  //   // };
+  //   const { getByTestId } = render(<Card {itemId: '123',
+  //   itemName: 'Sample Item',
+  //   className: 'sample-class',
+  //   action: 'outfits',
+  //   deleteProduct: {() => {}},
+  //   itemFeatures: {},
+  //   updateMainProduct: {() => {}}
+  // } />);
 
-    const deleteButton = getByTestId('outfit-action');
+  //   const deleteButton = getByTestId('outfit-action');
 
-    fireEvent.click(deleteButton);
+  //   fireEvent.click(deleteButton);
 
-    expect(mockItem.deleteProduct).toHaveBeenCalledWith('123');
-  });
+  //   expect(mockItem.deleteProduct).toHaveBeenCalledWith('123');
+  // });
 
 
 

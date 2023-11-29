@@ -8,7 +8,7 @@ import StyleList from '../components/product_details/StyleList.jsx';
 import ImageGallery from '../components/product_details/ImageGallery.jsx';
 import '../stylesheets/product_details/productDetails.css';
 
-const ProductDetails = ({ itemId, handleRef }) => {
+const ProductDetails = ({ itemId, reviewRef }) => {
   const [data, setData] = useState(null);
   const [styles, setStyles] = useState([]);
   const [style, setStyle] = useState(null);
@@ -78,7 +78,7 @@ const ProductDetails = ({ itemId, handleRef }) => {
           <ImageGallery style={style} />
         </div>
         <div className="g-product-details-column2">
-          <Reviews itemId={itemId} handleRef={handleRef} />
+          <Reviews itemId={itemId} reviewRef={reviewRef} />
           <div className="g-product-details-info">
             <div>{data.category}</div>
             <div>{data.name}</div>

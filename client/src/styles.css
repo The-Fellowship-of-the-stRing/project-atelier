@@ -19,6 +19,7 @@
     align-items: center;
     width: 100dvw;
     height: auto;
+    padding-top: 200px;
   }
 
   @keyframes rotation {

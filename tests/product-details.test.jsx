@@ -38,13 +38,13 @@ describe('Checks if data is being displayed on the social media section', () => 
   });
 });
 
-// describe('Checks if data is being displayed on the ImageGallery section', () => {
-//   test('Loading is displayed properly in ImageGallery', async () => {
-//     render(<ImageGallery/>);
-//     const text = await screen.findByText('Loading gallery images');
-//     expect(text).toBeTruthy();
-//   });
-// });
+describe('Checks if data is being displayed on the ImageGallery section', () => {
+  test('Loading is displayed properly in ImageGallery', async () => {
+    render(<ImageGallery/>);
+    const text = await screen.findByText('Loading gallery images');
+    expect(text).toBeTruthy();
+  });
+});
 
 // describe('Checks if data is being displayed on the reviews section', () => {
 //   test('Loading is displayed properly in Reviews', async () => {
