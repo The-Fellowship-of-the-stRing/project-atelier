@@ -27,6 +27,9 @@
   box-shadow: 0px 0px 5px 5px #ffffff;
   margin-left: 50px;
   border-radius: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .l-navbar-search-container {
