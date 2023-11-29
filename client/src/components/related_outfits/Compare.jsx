@@ -31,9 +31,9 @@ const Compare = ({
       }
       return (
         <tr key={feature} className="c-compare-feature-item" data-testid="feature">
-          <td>{currentValue}</td>
-          <td>{feature.toUpperCase()}</td>
-          <td>{compareValue}</td>
+          <td className="c-compare-value">{currentValue}</td>
+          <td className="c-compare-feature-value">{feature.toUpperCase()}</td>
+          <td className="c-compare-value">{compareValue}</td>
         </tr>
       );
     });
@@ -49,7 +49,7 @@ const Compare = ({
           </tr>
           <tr>
             <th scope="col">{itemName}</th>
-            <th scope="col">Feature</th>
+            <th scope="col"></th>
             <th scope="col">{compareName}</th>
           </tr>
         </thead>

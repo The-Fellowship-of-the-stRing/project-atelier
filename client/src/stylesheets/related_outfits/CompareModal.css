@@ -13,18 +13,41 @@ body.show-modal {
   bottom: 0;
   position: fixed;
 }
-
-.c-compare-header {
-  font-weight: 500;
-  font-size: 1.5em;
+table {
+  border-spacing: 5px;
 }
-
-.c-feature-value {
-  font-weight: 800;
+.feature {
+  width: 30px;
+}
+th {
+  font-size: 16px;
+  font-weight: 900;
+  text-align: center;
+}
+thead th:nth-child(1) {
+  width: 40%
+}
+thead th:nth-child(2) {
+  width: 20%
+}
+thead th:nth-child(3) {
+  width: 40%
+}
+.c-compare-title {
+  font-size: 12px;
+  text-align: start;
 }
 
 .c-overlay {
   background: rgba(49,49,49,0.8);
+}
+.c-compare-feature-value {
+  text-align: center;
+  font-size: 12px;
+}
+.c-compare-value {
+  text-align: center;
+  /* font-size: 12px; */
 }
 
 
@@ -38,8 +61,8 @@ body.show-modal {
   background: #f1f1f1;
   padding: 14px 28px;
   border-radius: 3px;
-  max-width: 1200px;
-  min-width: 300px;
+  width: 500px;
+  /* min-width: 300px; */
 }
 
 .close-modal {
