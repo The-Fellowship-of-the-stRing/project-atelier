@@ -1,11 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { VscDiffAdded } from 'react-icons/vsc';
 import Carousel from './Carousel.jsx';
 
-const Outfits = ({ itemId, updateMainProduct }) => {
-  // localStorage.clear();
-  const ref = useRef(null);
-  const [width, setWidth] = useState(0);
+const Outfits = ({ itemId, updateMainProduct, maxCardCount }) => {
   const [outfitsByUser, setOutfitsByUser] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
 
@@ -16,18 +13,10 @@ const Outfits = ({ itemId, updateMainProduct }) => {
   };
 
   useEffect(() => {
-    const handleResize = () => {
-      setWidth(ref.current.offsetWidth);
-    };
-    setTimeout(handleResize, 500);
     const parsedData = getLocalStorage();
     setOutfitsByUser(parsedData);
-    setIsAdded(getLocalStorage().includes(itemId));
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [width, itemId]);
+    setIsAdded(parsedData.includes(itemId));
+  }, [itemId]);
 
   const addProduct = () => {
     const parsedData = getLocalStorage();
@@ -44,6 +33,7 @@ const Outfits = ({ itemId, updateMainProduct }) => {
     setIsAdded(updatedState.includes(itemId));
     setOutfitsByUser(updatedState);
   };
+
   const addCard = (
     <div
       className="c-card"
@@ -56,13 +46,13 @@ const Outfits = ({ itemId, updateMainProduct }) => {
       <VscDiffAdded className="c-card-action-add" />
     </div>
   );
-  return outfitsByUser ? (
-    <div className="c-outfits-container" ref={ref} data-testid="outfits">
+  return outfitsByUser && isAdded !== null ? (
+    <div className="c-outfits-container" data-testid="outfits">
       <Carousel
         className="c-outfits-carousel"
         itemId={itemId}
         ids={outfitsByUser}
-        pWidth={width}
+        maxCardCount={maxCardCount}
         deleteProduct={deleteProduct}
         action="outfits"
         updateMainProduct={updateMainProduct}
@@ -71,7 +61,7 @@ const Outfits = ({ itemId, updateMainProduct }) => {
       />
     </div>
   ) : (
-    <div ref={ref}>No Outfits</div>
+    <div>No Outfits</div>
   );
 };
 

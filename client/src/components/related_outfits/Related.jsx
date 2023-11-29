@@ -1,12 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Carousel from './Carousel.jsx';
 import getRelatedItems from '../../utils/getRelatedItems.js';
 
 const Related = ({
-  itemId, itemFeatures, itemName, updateMainProduct,
+  itemId, itemFeatures, itemName, updateMainProduct, maxCardCount,
 }) => {
-  const ref = useRef(null);
-  const [width, setWidth] = useState(0);
   const [relatedIds, setRelatedIds] = useState(null);
 
   const fetchRelatedIds = async () => {
@@ -18,22 +16,14 @@ const Related = ({
     }
   };
   useEffect(() => {
-    const handleResize = () => {
-      setWidth(ref.current.offsetWidth);
-    };
-    setTimeout(handleResize, 500);
     fetchRelatedIds();
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [width, itemId]);
+  }, [itemId]);
 
   return relatedIds && itemId ? (
-    <div className="c-related-container" ref={ref} data-testid="related">
+    <div className="c-related-container" data-testid="related">
       <Carousel
         className="c-outfits-carousel"
-        pWidth={width}
+        maxCardCount={maxCardCount}
         itemId={itemId}
         ids={relatedIds}
         itemName={itemName}
@@ -43,7 +33,7 @@ const Related = ({
       />
     </div>
   ) : (
-    <div ref={ref}>No Related Items</div>
+    <div>No Related Items</div>
   );
 };
 

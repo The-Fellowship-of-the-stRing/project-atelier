@@ -36,9 +36,6 @@
   position: relative;
   flex-direction: row;
 }
-/* .c-prev {
-  margin-left: -10px;
-} */
 .c-cards {
   display: flex;
   margin: 0 10px 0 10px;
@@ -48,7 +45,6 @@
   align-self: center;
 
 }
-
 .c-card {
   grid-area: name;
   display: grid;
