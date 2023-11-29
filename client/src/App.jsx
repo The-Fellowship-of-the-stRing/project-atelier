@@ -14,10 +14,7 @@ const RelatedOutfits = React.lazy(() => import('./containers/RelatedOutfits'));
 const App = () => {
   const [currentItem, setCurrentItem] = useState(null);
   const reviewRef = useRef(null);
-
-  const handleRef = () => {
-    reviewRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const topRef = useRef(null);
 
   const updateMainProduct = async (itemId) => {
     try {
@@ -39,13 +36,13 @@ const App = () => {
   }, []);
 
   return (
-    <div className="app-main-container">
+    <div className="app-main-container" ref={topRef}>
       {!currentItem ? (
         <span className="main-loader" />
       ) : (
         <Suspense fallback={<span className="main-loader" />}>
-          <NavBar />
-          <ProductDetails itemId={currentItem.id} handleRef={handleRef} />
+          <NavBar topRef={topRef} />
+          <ProductDetails itemId={currentItem.id} reviewRef={reviewRef} />
           <RelatedOutfits
             itemId={currentItem.id}
             itemName={currentItem.name}
@@ -53,7 +50,11 @@ const App = () => {
             updateMainProduct={updateMainProduct}
           />
           <QuestionsAnswers itemId={currentItem.id} itemName={currentItem.name} />
-          <RatingsReviews itemId={currentItem.id} itemName={currentItem.name} ref={reviewRef} />
+          <RatingsReviews
+            itemId={currentItem.id}
+            itemName={currentItem.name}
+            ref={reviewRef}
+          />
         </Suspense>
       )}
     </div>

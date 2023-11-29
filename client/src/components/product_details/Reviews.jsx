@@ -3,7 +3,9 @@ import Stars from '../stars/Stars.jsx';
 import getReviewMeta from '../../utils/getReviewMeta.js';
 import '../../stylesheets/product_details/reviews.css';
 
-const Reviews = ({ itemId, handleRef }) => {
+import handleRef from '../../utils/handleRef.js';
+
+const Reviews = ({ itemId, reviewRef }) => {
   const [reviewCount, setReviewCount] = useState(null);
   useEffect(() => {
     let count = 0;
@@ -20,7 +22,7 @@ const Reviews = ({ itemId, handleRef }) => {
   return reviewCount > 0 ? (
     <div className="g-reviews">
       <Stars itemId={itemId} />
-      <button type="button" id="g-review-scroll" onClick={handleRef}>
+      <button type="button" id="g-review-scroll" onClick={() => handleRef(reviewRef)}>
         {reviewCount}
         {' '}
         reviews

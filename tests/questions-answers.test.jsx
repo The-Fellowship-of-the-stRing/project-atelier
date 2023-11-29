@@ -79,37 +79,37 @@ describe('AddAnswer form state change', () => {
 })
 
 //Submit form with no inputs (which is invalid)
-// describe('AddAnswer form submit', () => {
-//   it('should check for invalid message if submission data is invalid', async () => {
-//     axios.post.mockRejectedValue({ message: 'Error'});
-//     const { findByTestId } = render(
-//     <AddAnswer
-//     fetchQuestionData={() => {}}
-//     questionBody={mockQuestionBody}
-//     handleAnswerModal={() => {}}
-//     itemName={mockItemName}
-//     questionId={mockQuestionId}
-//     />);
+describe('AddAnswer form submit', () => {
+  it('should check for invalid message if submission data is invalid', async () => {
+    // axios.post.mockRejectedValue({ message: 'Error'});
+    const { findByTestId } = render(
+    <AddAnswer
+    fetchQuestionData={() => {}}
+    questionBody={mockQuestionBody}
+    handleAnswerModal={() => {}}
+    itemName={mockItemName}
+    questionId={mockQuestionId}
+    />);
 
-//     const submitButton = await findByTestId('submit-button')
-//     expect(submitButton).toBeTruthy()
+    const submitButton = await findByTestId('submit-button')
+    expect(submitButton).toBeTruthy()
 
-//     fireEvent.click(submitButton);
+    fireEvent.click(submitButton);
 
 
-//     await waitFor(() => {
-//       expect(screen.getByText('Fields must not be blank')).toBeTruthy();
-//       expect(screen.getByText('Email must be in correct format: name@email.com')).toBeTruthy();
-//     })
-//     // expect(screen.findByText('Fields must not be blank'));
-//     // expect(screen.findByText('Email must be in correct format: name@email.com'));
+    // await waitFor(() => {
+    //   expect(screen.getByText('Fields must not be blank')).toBeTruthy();
+    //   expect(screen.getByText('Email must be in correct format: name@email.com')).toBeTruthy();
+    // })
+    // expect(screen.findByText('Fields must not be blank'));
+    // expect(screen.findByText('Email must be in correct format: name@email.com'));
 
-//     // const result1 = await screen.findByText('Fields must not be blank');
-//     // const result2 = await screen.findByText('Email must be in correct format: name@email.com');
-//     // expect(result1).toBeTruthy();
-//     // expect(result2).toBeTruthy();
-//   })
-// })
+    const result1 = await screen.findByText('Fields must not be blank');
+    const result2 = await screen.findByText('Email must be in correct format: name@email.com');
+    expect(result1).toBeTruthy();
+    expect(result2).toBeTruthy();
+  })
+})
 
 
 describe('AddQuestion h1 and h2 elements', () => {
