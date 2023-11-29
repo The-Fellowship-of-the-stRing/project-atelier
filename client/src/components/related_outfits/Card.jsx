@@ -11,8 +11,10 @@ const Card = ({
   deleteProduct,
   itemFeatures,
   updateMainProduct,
+  isVisible,
 }) => {
   const [cardData, setCardData] = useState(null);
+  const [isCardShown, setIsCardShown] = useState(true);
   const [isCompareShown, setIsCompareShown] = useState(false);
   const getCardData = async () => {
     try {
@@ -23,8 +25,13 @@ const Card = ({
     }
   };
   useEffect(() => {
-    getCardData();
-  }, []);
+    if (!cardData) {
+      getCardData();
+      setIsCardShown(isVisible);
+    } else {
+      setIsCardShown(isVisible);
+    }
+  }, [isVisible]);
 
   let priceString;
   if (cardData && cardData.sale_price && cardData.original_price) {
@@ -85,8 +92,8 @@ const Card = ({
       </div>),
   };
 
-  return cardData
-    ? (
+  if (cardData && isCardShown) {
+    return (
       <div className={className} data-testid="card">
         {isCompareShown ? (
           <Compare
@@ -109,7 +116,6 @@ const Card = ({
           </div>
           {actionButtons[action]}
         </div>
-
         <div className="c-card-text-container" data-testid="card-text">
           <div className="c-card-cat" data-testid="card-cat">{cardData.category.toUpperCase()}</div>
           <div
@@ -125,7 +131,53 @@ const Card = ({
           <Stars itemId={itemId} />
         </div>
       </div>
-    ) : (
-      <div className="c-card-container" data-testid="card">No Card Data</div>);
+    );
+  } if (cardData && !isCardShown) {
+    return (<div className="card-hidden" />);
+  }
+  return (<div data-testid="card">No Card Data</div>);
+
+  // return cardData && isCardShown
+  //   ? (
+  //     <div className={className} data-testid="card">
+  //       {isCompareShown ? (
+  //         <Compare
+  //           itemId={cardData.id}
+  //           itemFeatures={itemFeatures}
+  //           cardData={cardData}
+  //           itemName={itemName}
+  //           compareName={cardData.name}
+  //           compareClickHandler={compareClickHandler}
+  //         />
+  //       ) : null}
+  //       <div className="c-card-img-container" data-testid="action">
+  //         <div
+  //           role="button"
+  //           tabIndex="0"
+  //           onKeyPress={() => updateMainProduct(itemId)}
+  //           onClick={() => updateMainProduct(itemId)}
+  //         >
+  //           <img className="c-card-img" src={cardData.photos} alt="product-preview" data-testid="card-img" />
+  //         </div>
+  //         {actionButtons[action]}
+  //       </div>
+  //       <div className="c-card-text-container" data-testid="card-text">
+  //         <div className="c-card-cat" data-testid="card-cat">{cardData.category.toUpperCase()}</div>
+  //         <div
+  //           className="c-card-name"
+  //           role="button"
+  //           tabIndex="0"
+  //           onKeyPress={() => updateMainProduct(itemId)}
+  //           onClick={() => updateMainProduct(itemId)}
+  //         >
+  //           {cardData.name}
+  //         </div>
+  //         <div className="c-card-price">{priceString}</div>
+  //         <Stars itemId={itemId} />
+  //       </div>
+  //     </div>
+  //   ) : cardData && !isCardShown ? (<div className="card-hidden" />)
+  //     : (<div data-testid="card">No Card Data</div>);
 };
+
 export default Card;
