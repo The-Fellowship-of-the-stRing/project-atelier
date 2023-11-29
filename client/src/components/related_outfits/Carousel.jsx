@@ -20,17 +20,38 @@ const Carousel = ({
     if (!indexOfFirstVisibleCard) {
       setIndexOfFirstVisibleCard(0);
     }
-    // const cardCount = getCardCount(pWidth);
-    console.log("3", maxCardCount, action);
     setVisibleCardCount(maxCardCount);
-    setVisibleCards(ids.slice(0, maxCardCount)); // NEED TO HANDLE CASE WHEN NOT ON FIRST CARD
-    if (maxCardCount >= ids.length) {
+
+    let firstIndex = indexOfFirstVisibleCard || 0;
+    let lastIndex;
+    let newVisibleCards;
+    if (maxCardCount + firstIndex === ids.length) {
+      lastIndex = firstIndex + maxCardCount;
+      newVisibleCards = ids.slice(firstIndex, lastIndex);
+    } else if (maxCardCount + firstIndex < ids.length) {
+      lastIndex = maxCardCount + firstIndex;
+      newVisibleCards = ids.slice(firstIndex, lastIndex);
+    } else { // (maxCardCount + firstIndex > ids.length)
+      firstIndex = Math.max(0, ids.length - maxCardCount);
+      lastIndex = ids.length;
+      newVisibleCards = ids.slice(firstIndex, lastIndex);
+    }
+
+    setVisibleCards(newVisibleCards);
+    // setVisibleCards(ids.slice(0, maxCardCount)); // NEED TO HANDLE CASE WHEN NOT ON FIRST CARD
+
+    if (lastIndex === ids.length) {
       setIsNextShown(false);
     } else {
       setIsNextShown(true);
     }
-    setIsPrevShown(false);
-  }, [maxCardCount, isAdded]);
+
+    if (firstIndex === 0) {
+      setIsPrevShown(false);
+    } else {
+      setIsPrevShown(true);
+    }
+  }, [maxCardCount, isAdded, ids]);
 
   const updateVisibleCards = (incrementer) => {
     const updatedIndex = indexOfFirstVisibleCard + incrementer;
@@ -95,7 +116,7 @@ const Carousel = ({
       )}
     </div>
   ) : (
-    <div>No Related Items</div>
+    <div>Loading</div>
   );
 };
 

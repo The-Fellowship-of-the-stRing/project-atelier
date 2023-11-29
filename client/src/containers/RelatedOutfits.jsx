@@ -15,10 +15,10 @@ const RelatedOutfits = ({
   useEffect(() => {
     const handleResize = () => {
       // Left and right margins of card list is 20px each
-    // Each card is 200px wide with right-margin of 10px
-      if (maxCardCount !== Math.floor((ref.current.offsetWidth - 40) / 210)) {
-        setMaxCardCount(Math.floor((ref.current.offsetWidth - 40) / 210));
-        console.log("1.", Math.floor((ref.current.offsetWidth - 40) / 210));
+      // Each card is 200px wide with right-margin of 10px
+      const tempCardCount = Math.floor((ref.current.offsetWidth - 40) / 210);
+      if (maxCardCount !== tempCardCount) {
+        setMaxCardCount(tempCardCount);
       }
     };
     handleResize();

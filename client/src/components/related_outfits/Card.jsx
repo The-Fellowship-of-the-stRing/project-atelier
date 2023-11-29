@@ -135,7 +135,7 @@ const Card = ({
   } if (cardData && !isCardShown) {
     return (<div className="card-hidden" />);
   }
-  return (<div className={className} data-testid="card">API RATELIMIT :(</div>);
+  return (<div data-testid="card" />);
 };
 
 export default Card;
