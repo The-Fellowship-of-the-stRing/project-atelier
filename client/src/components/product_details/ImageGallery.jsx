@@ -4,6 +4,7 @@ import '../../stylesheets/product_details/imageGallery.css';
 import ImageSelect from './ImageSelect.jsx';
 
 const ImageGallery = ({ style }) => {
+  console.log(style);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [pageCount, setPageCount] = useState(1);
   const [lowIndex, setLowIndex] = useState(0);
