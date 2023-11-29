@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Stars from './Stars.jsx';
+import Stars from '../stars/Stars.jsx';
 import Compare from './Compare.jsx';
+import fetchCardData from '../../utils/fetchCardData.js';
 
 const Card = ({
-  cardDetails,
+  itemId,
   itemName,
   className,
-  cardKey,
   action,
   deleteProduct,
   itemFeatures,
@@ -14,9 +14,19 @@ const Card = ({
 }) => {
   const [cardData, setCardData] = useState(null);
   const [isCompareShown, setIsCompareShown] = useState(false);
+
+  const getCardData = async () => {
+    try {
+      const response = await fetchCardData(itemId);
+      setCardData(response);
+    } catch (err) {
+      console.error('Error getting item details: ', err);
+    }
+  };
   useEffect(() => {
-    setCardData(cardDetails);
+    getCardData();
   }, []);
+
   let priceString;
   if (cardData && cardData.sale_price && cardData.original_price) {
     priceString = (
@@ -55,6 +65,7 @@ const Card = ({
     related: (
       <div
         className="c-card-action-compare"
+        data-testid="related-action"
         role="button"
         tabIndex="0"
         onKeyPress={() => compareClickHandler()}
@@ -65,10 +76,11 @@ const Card = ({
     outfits: (
       <div
         className="c-card-action-delete"
+        data-testid="outfit-action"
         role="button"
         tabIndex="0"
-        onKeyPress={() => deleteProduct(cardData.id)}
-        onClick={() => deleteProduct(cardData.id)}
+        onKeyPress={() => deleteProduct(itemId)}
+        onClick={() => deleteProduct(itemId)}
       >
         ❌
       </div>),
@@ -76,11 +88,10 @@ const Card = ({
 
   return cardData
     ? (
-      <div className={className}>
+      <div className={className} data-testid="card">
         {isCompareShown ? (
           <Compare
             itemId={cardData.id}
-            cardKey={cardKey}
             itemFeatures={itemFeatures}
             cardData={cardData}
             itemName={itemName}
@@ -88,34 +99,34 @@ const Card = ({
             compareClickHandler={compareClickHandler}
           />
         ) : null}
-        <div className="c-card-img-container">
+        <div className="c-card-img-container" data-testid="action">
           <div
             role="button"
             tabIndex="0"
-            onKeyPress={() => updateMainProduct(cardData.id)}
-            onClick={() => updateMainProduct(cardData.id)}
+            onKeyPress={() => updateMainProduct(itemId)}
+            onClick={() => updateMainProduct(itemId)}
           >
-            <img className="c-card-img" src={cardData.photos} alt="product-preview" />
+            <img className="c-card-img" src={cardData.photos} alt="product-preview" data-testid="card-img" />
           </div>
           {actionButtons[action]}
         </div>
 
-        <div className="c-card-text-container">
-          <div className="c-card-cat">{cardData.category.toUpperCase()}</div>
+        <div className="c-card-text-container" data-testid="card-text">
+          <div className="c-card-cat" data-testid="card-cat">{cardData.category.toUpperCase()}</div>
           <div
             className="c-card-name"
             role="button"
             tabIndex="0"
-            onKeyPress={() => updateMainProduct(cardData.id)}
-            onClick={() => updateMainProduct(cardData.id)}
+            onKeyPress={() => updateMainProduct(itemId)}
+            onClick={() => updateMainProduct(itemId)}
           >
             {cardData.name}
           </div>
           <div className="c-card-price">{priceString}</div>
-          <Stars itemId={cardData.id} />
+          <Stars itemId={itemId} />
         </div>
       </div>
     ) : (
-      <div className="c-card-container" />);
+      <div className="c-card-container" data-testid="card">No Card Data</div>);
 };
 export default Card;

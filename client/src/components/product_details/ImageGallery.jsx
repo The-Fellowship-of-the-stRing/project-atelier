@@ -57,11 +57,11 @@ const ImageGallery = ({ style }) => {
           handleModalFalse={handleModalFalse}
         />
       )}
-      <div className="g-left-spacer" />
+      {/* removed div left spacer, not needed with corrected css styling */}
       <div className="g-images-main-container">
         {currentIndex > 0 && (
-        <button type="button" style={{ zIndex: 2 }} onClick={previousImage}>
-          Previous Image
+        <button type="button" className="g-images-select-container-prev-btn" onClick={previousImage}>
+          {'<'}
         </button>
         )}
         <div className="g-images-select-container">
@@ -92,7 +92,7 @@ const ImageGallery = ({ style }) => {
         <div role="button" tabIndex={0} onKeyDown={handleModalTrue} onClick={handleModalTrue}>
           <img className="g-images-main" src={style.photos[`${currentIndex}`].url} alt="current item" />
         </div>
-        {currentIndex < style.photos.length - 1 && <button type="button" onClick={nextImage}>Next Image</button>}
+        {currentIndex < style.photos.length - 1 && <button type="button" onClick={nextImage} className="g-images-select-container-next-btn">{'>'}</button>}
       </div>
 
     </div>

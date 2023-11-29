@@ -25,8 +25,7 @@ const AddAnswer = ({
     }
   };
 
-  const sendAnswerData = (e) => {
-    e.preventDefault();
+  const sendAnswerData = () => {
     checkValidity();
     if (isInvalid === false) {
       axios.post(`/qa/questions/${questionId}/answers`, {
@@ -86,9 +85,10 @@ const AddAnswer = ({
             <span className="k-answer-email-privacy">For authentication reasons, you will not be emailed.</span>
           </label>
           <button
+            data-testid="submit-button"
             type="button"
             className="k-add-answer-submit"
-            onClick={(e) => sendAnswerData(e)}
+            onClick={() => sendAnswerData()}
           >
             Submit
           </button>
