@@ -72,42 +72,45 @@ const ProductDetails = ({ itemId, handleRef }) => {
   };
   return data && styles ? (
     <div className="g-product-details-main-container">
-      <div className="g-product-details-column1">
-        <ImageGallery style={style} />
-      </div>
-      <div className="g-product-details-column2">
-        <Reviews itemId={itemId} handleRef={handleRef} />
-        <div className="g-product-details-info">
-          <div>{data.category}</div>
-          <div>{data.name}</div>
-          <div>{data.slogan}</div>
-          { isSale === true && (
-          <div className="g-product-details-price">
-            <div className="g-product-details-sale">
-              $
-              {price}
-            </div>
-            <div>
-              &nbsp;
-              $
-              {salePrice}
-            </div>
-          </div>
-          )}
-          { isSale === false && (
-          <div>
-            <div>
-              $
-              {price}
-            </div>
-          </div>
-          )}
+      {/* Added a container to house both columns and seporate the description */}
+      <div className="g-product-details-column-container">
+        <div className="g-product-details-column1">
+          <ImageGallery style={style} />
         </div>
-        <StyleList styles={styles} style={style} handleStyle={handleStyle} />
-        <Cart style={style} />
-        <SocialMedia />
-        {data.description}
+        <div className="g-product-details-column2">
+          <Reviews itemId={itemId} handleRef={handleRef} />
+          <div className="g-product-details-info">
+            <div>{data.category}</div>
+            <div>{data.name}</div>
+            <div>{data.slogan}</div>
+            { isSale === true && (
+            <div className="g-product-details-price">
+              <div className="g-product-details-sale">
+                $
+                {price}
+              </div>
+              <div>
+                &nbsp;
+                $
+                {salePrice}
+              </div>
+            </div>
+            )}
+            { isSale === false && (
+            <div>
+              <div>
+                $
+                {price}
+              </div>
+            </div>
+            )}
+          </div>
+          <StyleList styles={styles} style={style} handleStyle={handleStyle} />
+          <Cart style={style} />
+          <SocialMedia />
+        </div>
       </div>
+      {data.description}
     </div>
   )
     : (
