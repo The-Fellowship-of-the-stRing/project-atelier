@@ -29,7 +29,6 @@ const Compare = ({
         currentValue = <IoMdCheckmark />;
         compareValue = <IoMdCheckmark />;
       }
-
       return (
         <tr key={feature} className="c-compare-feature-item" data-testid="feature">
           <td>{currentValue}</td>

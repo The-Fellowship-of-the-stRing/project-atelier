@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { VscDiffAdded } from 'react-icons/vsc';
 import Carousel from './Carousel.jsx';
 
 const Outfits = ({ itemId, updateMainProduct }) => {
@@ -44,8 +45,15 @@ const Outfits = ({ itemId, updateMainProduct }) => {
     setOutfitsByUser(updatedState);
   };
   const addCard = (
-    <div className="c-card" data-testid="add-card">
-      <button type="button" className="c-card-action-add" onClick={() => addProduct()}>+</button>
+    <div
+      className="c-card"
+      data-testid="add-card"
+      role="button"
+      tabIndex="0"
+      onKeyPress={() => addProduct()}
+      onClick={() => addProduct()}
+    >
+      <VscDiffAdded className="c-card-action-add" />
     </div>
   );
   return outfitsByUser ? (
