@@ -12,6 +12,15 @@
   left: 50%;
   }
 
+  .app-main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100dvw;
+    height: auto;
+  }
+
   @keyframes rotation {
   0% {
       transform: rotate(0deg);
