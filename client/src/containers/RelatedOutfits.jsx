@@ -10,7 +10,7 @@ RENDERING LOGIC UPDATES:
 const RelatedOutfits = ({
   itemId, itemFeatures, itemName, updateMainProduct,
 }) => (
-  <div className="c-related-outfits-main-container">
+  <div className="c-related-outfits-main-container" data-testid="related-outfits">
     <h3 className="c-related-title">Related Products</h3>
     <Related
       itemId={itemId}

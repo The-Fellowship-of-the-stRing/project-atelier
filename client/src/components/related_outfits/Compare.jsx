@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../stylesheets/related_outfits/CompareModal.css';
 
-const CompareModal = ({
+const Compare = ({
   itemName, compareName, itemFeatures, cardData, compareClickHandler,
 }) => {
   const compareData = {};
@@ -19,10 +19,11 @@ const CompareModal = ({
   }
 
   let featureList;
+
   if (compareData) {
     const features = Object.keys(compareData);
     featureList = features.map((feature) => (
-      <tr key={feature} className="c-compare-feature-item">
+      <tr key={feature} className="c-compare-feature-item" data-testid="feature">
         <td>{feature.toUpperCase()}</td>
         <td>{compareData[feature].current ? compareData[feature].current : ''}</td>
         <td>{compareData[feature].compared ? compareData[feature].compared : ''}</td>
@@ -31,7 +32,7 @@ const CompareModal = ({
   }
 
   return (
-    <div className="c-compare-modal" role="button" tabIndex="0" onKeyPress={() => compareClickHandler()} onClick={() => compareClickHandler()}>
+    <div className="c-compare-modal" role="button" tabIndex="0" onKeyPress={() => compareClickHandler()} onClick={() => compareClickHandler()} data-testid="compare">
       <div className="c-overlay" />
       <table className="c-compare-modal-table">
         <thead className="c-compare-header">
@@ -48,4 +49,4 @@ const CompareModal = ({
     </div>
   );
 };
-export default CompareModal;
+export default Compare;

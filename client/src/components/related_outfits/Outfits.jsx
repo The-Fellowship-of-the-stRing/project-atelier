@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Carousel from './Carousel.jsx';
 
 const Outfits = ({ itemId, updateMainProduct }) => {
-  localStorage.clear();
+  // localStorage.clear();
   const ref = useRef(null);
   const [width, setWidth] = useState(0);
   const [outfitsByUser, setOutfitsByUser] = useState(null);
@@ -44,12 +44,12 @@ const Outfits = ({ itemId, updateMainProduct }) => {
     setOutfitsByUser(updatedState);
   };
   const addCard = (
-    <div className="c-card">
+    <div className="c-card" data-testid="add-card">
       <button type="button" className="c-card-action-add" onClick={() => addProduct()}>+</button>
     </div>
   );
   return outfitsByUser ? (
-    <div className="c-outfits-container" ref={ref}>
+    <div className="c-outfits-container" ref={ref} data-testid="outfits">
       <Carousel
         className="c-outfits-carousel"
         itemId={itemId}

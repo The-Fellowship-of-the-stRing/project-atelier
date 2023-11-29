@@ -69,6 +69,7 @@ const Carousel = ({
         {visibleCards.map((id) => (
           <Card
             className="c-card"
+            data-testid="card"
             itemId={id}
             key={id}
             mainId={itemId}
