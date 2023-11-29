@@ -53,7 +53,7 @@ const Carousel = ({
   };
 
   return ids && visibleCards ? (
-    <div className="c-related-container" ref={ref}>
+    <div className="c-carousel-container" ref={ref}>
       {isPrevShown && (
         <button
           className="c-prev"

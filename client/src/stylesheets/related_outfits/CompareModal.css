@@ -33,6 +33,7 @@ thead th:nth-child(2) {
 thead th:nth-child(3) {
   width: 40%
 }
+
 .c-compare-title {
   font-size: 12px;
   text-align: start;
@@ -41,13 +42,9 @@ thead th:nth-child(3) {
 .c-overlay {
   background: rgba(49,49,49,0.8);
 }
-.c-compare-feature-value {
+.c-compare-feature-value, .c-compare-value {
   text-align: center;
-  font-size: 12px;
-}
-.c-compare-value {
-  text-align: center;
-  /* font-size: 12px; */
+  font-size: 14px;
 }
 
 

@@ -71,7 +71,7 @@ const Outfits = ({ itemId, updateMainProduct }) => {
       />
     </div>
   ) : (
-    <div className="c-outfits-container" ref={ref}>No Outfits</div>
+    <div ref={ref}>No Outfits</div>
   );
 };
 

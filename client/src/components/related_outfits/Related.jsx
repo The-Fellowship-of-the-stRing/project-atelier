@@ -31,17 +31,16 @@ const Related = ({
 
   return relatedIds && itemId ? (
     <div className="c-related-container" ref={ref} data-testid="related">
-      <div className="c-cards">
-        <Carousel
-          pWidth={width}
-          itemId={itemId}
-          ids={relatedIds}
-          itemName={itemName}
-          action="related"
-          itemFeatures={itemFeatures}
-          updateMainProduct={updateMainProduct}
-        />
-      </div>
+      <Carousel
+        className="c-outfits-carousel"
+        pWidth={width}
+        itemId={itemId}
+        ids={relatedIds}
+        itemName={itemName}
+        action="related"
+        itemFeatures={itemFeatures}
+        updateMainProduct={updateMainProduct}
+      />
     </div>
   ) : (
     <div ref={ref}>No Related Items</div>

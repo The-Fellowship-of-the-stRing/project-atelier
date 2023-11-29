@@ -49,7 +49,7 @@ const Compare = ({
           </tr>
           <tr>
             <th scope="col">{itemName}</th>
-            <th scope="col"></th>
+            <th scope="col" />
             <th scope="col">{compareName}</th>
           </tr>
         </thead>
