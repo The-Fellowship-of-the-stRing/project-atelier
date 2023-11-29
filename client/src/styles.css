@@ -12,15 +12,6 @@
   left: 50%;
   }
 
-  .app-main-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100dvw;
-    height: auto;
-    padding-top: 200px;
-  }
 
   @keyframes rotation {
   0% {
@@ -29,6 +20,16 @@
   100% {
       transform: rotate(360deg);
   }
+  }
+
+  .app-main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100dvw;
+    height: auto;
+    padding-top: 200px;
   }
 
   body {
