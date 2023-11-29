@@ -10,9 +10,6 @@ const Answers = ({ questionId, updateAnswers, setUpdateAnswers }) => {
   const [showAll, setShowAll] = useState(false);
   const [countToGet, setCountToGet] = useState(100);
 
-  console.log('answersToShow', answersToShow);
-  console.log('reported: ', reported);
-
   const fetchData = async () => {
     try {
       const response = await axios.get(`/qa/questions/${questionId}/answers?question_id=${questionId}&count=${countToGet}`);
