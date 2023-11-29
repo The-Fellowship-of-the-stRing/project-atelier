@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../stylesheets/related_outfits/CompareModal.css';
+import { IoMdCheckmark } from 'react-icons/io';
 
 const Compare = ({
   itemName, compareName, itemFeatures, cardData, compareClickHandler,
@@ -19,24 +20,34 @@ const Compare = ({
   }
 
   let featureList;
-
   if (compareData) {
     const features = Object.keys(compareData);
-    featureList = features.map((feature) => (
-      <tr key={feature} className="c-compare-feature-item" data-testid="feature">
-        <td>{compareData[feature].current ? compareData[feature].current : ''}</td>
-        <td>{feature.toUpperCase()}</td>
-        <td>{compareData[feature].compared ? compareData[feature].compared : ''}</td>
-      </tr>
-    ));
+    featureList = features.map((feature) => {
+      let currentValue = compareData[feature].current ? compareData[feature].current : '';
+      let compareValue = compareData[feature].compared ? compareData[feature].compared : '';
+      if (currentValue === compareValue && currentValue !== '') {
+        currentValue = <IoMdCheckmark />;
+        compareValue = <IoMdCheckmark />;
+      }
+
+      return (
+        <tr key={feature} className="c-compare-feature-item" data-testid="feature">
+          <td>{currentValue}</td>
+          <td>{feature.toUpperCase()}</td>
+          <td>{compareValue}</td>
+        </tr>
+      );
+    });
   }
 
   return (
     <div className="c-compare-modal" role="button" tabIndex="0" onKeyPress={() => compareClickHandler()} onClick={() => compareClickHandler()} data-testid="compare">
-      <h3 className="c-compare-title">COMPARING</h3>
       <div className="c-overlay" />
       <table className="c-compare-modal-table">
         <thead className="c-compare-header">
+          <tr>
+            <th colSpan="3" className="c-compare-title">COMPARING</th>
+          </tr>
           <tr>
             <th scope="col">{itemName}</th>
             <th scope="col">Feature</th>
