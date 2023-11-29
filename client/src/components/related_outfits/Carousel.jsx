@@ -11,7 +11,7 @@ const Carousel = ({
 
   const [visibleCards, setVisibleCards] = useState(null);
   const [visibleCardCount, setVisibleCardCount] = useState(null);
-  const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(0);
+  const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(null);
   const [isNextShown, setIsNextShown] = useState(false);
   const [isPrevShown, setIsPrevShown] = useState(false);
 
@@ -19,7 +19,9 @@ const Carousel = ({
   // Each card is 200px wide with right-margin of 10px
   const getCardCount = (w) => Math.floor((w - 40) / 210);
   useEffect(() => {
-    setIndexOfFirstVisibleCard(0);
+    if (!indexOfFirstVisibleCard) {
+      setIndexOfFirstVisibleCard(0);
+    }
     const cardCount = getCardCount(pWidth);
     setVisibleCardCount(cardCount);
     setVisibleCards(ids.slice(0, cardCount));
