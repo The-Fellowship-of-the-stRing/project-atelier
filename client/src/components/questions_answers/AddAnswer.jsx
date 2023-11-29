@@ -4,7 +4,12 @@ import { AiOutlineClose } from 'react-icons/ai';
 import '../../stylesheets/questions_answers/AddAnswerModal.css';
 
 const AddAnswer = ({
-  questionBody, handleAnswerModal, itemName, questionId, fetchQuestionData,
+  questionBody,
+  handleAnswerModal,
+  itemName,
+  questionId,
+  fetchQuestionData,
+  setUpdateAnswers,
 }) => {
   const [yourAnswer, setYourAnswer] = useState('');
   const [yourNickName, setYourNickName] = useState('');
@@ -35,6 +40,7 @@ const AddAnswer = ({
         photos: [],
       })
         .then(() => {
+          setUpdateAnswers(true);
           fetchQuestionData();
         })
         .then(() => handleAnswerModal(false))

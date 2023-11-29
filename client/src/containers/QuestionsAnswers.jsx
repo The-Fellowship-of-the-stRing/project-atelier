@@ -10,13 +10,15 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
   const [questionData, setQuestionData] = useState([]);
   const [resultsToShow, setResultsToShow] = useState([]);
   const [currentCount, setCurrentCount] = useState(4);
-  const [questionBody, setQuesitonBody] = useState({});
-  const [addAnswerModal, setAddAnswerModal] = useState(false);
+  const [questionBody, setQuesitonBody] = useState({});//
+  const [addAnswerModal, setAddAnswerModal] = useState(false);//
+  const [questionId, setQuestionId] = useState({});//
   const [addQuestionModal, setAddQuestionModal] = useState(false);
-  const [questionId, setQuestionId] = useState({});
   const [searchTerm, setSearchTerm] = useState('');
 
   const numOfQuestionsToGet = 100;
+
+  const [updateAnswers, setUpdateAnswers] = useState(false);//
 
   const handleQuestionModal = (value) => {
     setAddQuestionModal(value);
@@ -76,6 +78,8 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
       {addAnswerModal && (
       <div>
         <AddAnswer
+          updateAnswers={updateAnswers}
+          setUpdateAnswers={setUpdateAnswers}
           fetchQuestionData={fetchQuestionData}
           questionBody={questionBody}
           itemId={itemId}
@@ -100,6 +104,7 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
         setSearchTerm={setSearchTerm}
       />
       <QuestionsList
+        updateAnswers={updateAnswers}
         searchTerm={searchTerm}
         handleHelpful={handleHelpful}
         resultsToShow={resultsToShow}
