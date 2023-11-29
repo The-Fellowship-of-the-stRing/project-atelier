@@ -24,8 +24,8 @@ const Compare = ({
     const features = Object.keys(compareData);
     featureList = features.map((feature) => (
       <tr key={feature} className="c-compare-feature-item" data-testid="feature">
-        <td>{feature.toUpperCase()}</td>
         <td>{compareData[feature].current ? compareData[feature].current : ''}</td>
+        <td>{feature.toUpperCase()}</td>
         <td>{compareData[feature].compared ? compareData[feature].compared : ''}</td>
       </tr>
     ));
@@ -33,12 +33,13 @@ const Compare = ({
 
   return (
     <div className="c-compare-modal" role="button" tabIndex="0" onKeyPress={() => compareClickHandler()} onClick={() => compareClickHandler()} data-testid="compare">
+      <h3 className="c-compare-title">COMPARING</h3>
       <div className="c-overlay" />
       <table className="c-compare-modal-table">
         <thead className="c-compare-header">
           <tr>
-            <th scope="col">Feature</th>
             <th scope="col">{itemName}</th>
+            <th scope="col">Feature</th>
             <th scope="col">{compareName}</th>
           </tr>
         </thead>
