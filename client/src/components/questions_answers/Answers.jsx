@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../stylesheets/questions_answers/answers.css';
 
-const Answers = ({ questionId }) => {
+const Answers = ({ questionId, updateAnswers, setUpdateAnswers }) => {
   const [marked, setMarked] = useState({});
   const [reported, setReported] = useState({});
   const [answersToShow, setAnswersToShow] = useState([]);
@@ -15,12 +15,19 @@ const Answers = ({ questionId }) => {
       const response = await axios.get(`/qa/questions/${questionId}/answers?question_id=${questionId}&count=${countToGet}`);
       const sortedResults = response.data.results.sort((a, b) => b.helpfulness - a.helpfulness);
       const sellerToTop = sortedResults.sort((a, b) => (b.answerer_name === 'Seller') - (a.answerer_name === 'Seller'));
+      const filterReported = sellerToTop.filter((answer) => (
+        !reported[answer.answer_id]
+      ));
+      if (updateAnswers) {
+        setAnswersToShow(filterReported);
+        setUpdateAnswers(false);
+      }
       if (countToGet > 100) {
-        setAnswersToShow(sellerToTop);
+        setAnswersToShow(filterReported);
       }
       if (countToGet === 100) {
-        setAllAnswers(sellerToTop);
-        setAnswersToShow(sellerToTop.slice(0, 2));
+        setAllAnswers(filterReported);
+        setAnswersToShow(filterReported.slice(0, 2));
       }
     } catch (err) {
       console.error(err);
@@ -83,7 +90,7 @@ const Answers = ({ questionId }) => {
 
   useEffect(() => {
     fetchData();
-  }, [questionId, countToGet]);
+  }, [questionId, countToGet, updateAnswers]);
 
   return answersToShow ? (
     <>
