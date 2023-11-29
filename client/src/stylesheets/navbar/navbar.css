@@ -4,22 +4,29 @@
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
 }
 .l-navbar-main {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 80dvw;
-  height: 100px;
+  height: 120px;
   background-color: #1F2041;
   color: #F6F8FF;
+  box-shadow: 0px 1px 2px #3838388a;
+  border-bottom: 10px solid #ffffff;
 }
 
 .l-navbar-icon {
   width: 50px;
   height: 50px;
   box-shadow: 0px 0px 5px 5px #ffffff;
-  margin-left: 30px;
+  margin-left: 50px;
+  border-radius: 100px;
 }
 
 .l-navbar-search-container {
@@ -28,7 +35,7 @@
   height: 100%;
   justify-content: center;
   align-items: center;
-  margin-right: 30px;
+  margin-right: 50px;
 }
 
 .l-navbar-search-icon {

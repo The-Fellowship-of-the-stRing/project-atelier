@@ -19,7 +19,6 @@ const NavBar = () => {
     <div className="l-navbar-container">
       <div className="l-navbar-main">
         <img src={icon} className="l-navbar-icon" alt="click crate icon" />
-        Click Crate
         <div className="l-navbar-search-container">
           <Search handleSearch={handleSearch} />
           <GoSearch className="l-navbar-search-icon" />
