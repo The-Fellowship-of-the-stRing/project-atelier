@@ -85,6 +85,7 @@ const AddAnswer = ({
             <span className="k-answer-email-privacy">For authentication reasons, you will not be emailed.</span>
           </label>
           <button
+            data-testid="submit-button"
             type="button"
             className="k-add-answer-submit"
             onClick={() => sendAnswerData()}
