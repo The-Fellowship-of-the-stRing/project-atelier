@@ -30,7 +30,7 @@ const Related = ({
   }, [width, itemId]);
 
   return relatedIds && itemId ? (
-    <div className="c-related-container" ref={ref}>
+    <div className="c-related-container" ref={ref} data-testid="related">
       <div className="c-cards">
         <Carousel
           pWidth={width}

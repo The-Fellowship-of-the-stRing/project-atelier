@@ -23,7 +23,6 @@ const Card = ({
       console.error('Error getting item details: ', err);
     }
   };
-
   useEffect(() => {
     getCardData();
   }, []);
@@ -66,6 +65,7 @@ const Card = ({
     related: (
       <div
         className="c-card-action-compare"
+        data-testid="related-action"
         role="button"
         tabIndex="0"
         onKeyPress={() => compareClickHandler()}
@@ -76,6 +76,7 @@ const Card = ({
     outfits: (
       <div
         className="c-card-action-delete"
+        data-testid="outfit-action"
         role="button"
         tabIndex="0"
         onKeyPress={() => deleteProduct(itemId)}
@@ -87,7 +88,7 @@ const Card = ({
 
   return cardData
     ? (
-      <div className={className}>
+      <div className={className} data-testid="card">
         {isCompareShown ? (
           <Compare
             itemId={cardData.id}
@@ -98,20 +99,20 @@ const Card = ({
             compareClickHandler={compareClickHandler}
           />
         ) : null}
-        <div className="c-card-img-container">
+        <div className="c-card-img-container" data-testid="action">
           <div
             role="button"
             tabIndex="0"
             onKeyPress={() => updateMainProduct(itemId)}
             onClick={() => updateMainProduct(itemId)}
           >
-            <img className="c-card-img" src={cardData.photos} alt="product-preview" />
+            <img className="c-card-img" src={cardData.photos} alt="product-preview" data-testid="card-img" />
           </div>
           {actionButtons[action]}
         </div>
 
-        <div className="c-card-text-container">
-          <div className="c-card-cat">{cardData.category.toUpperCase()}</div>
+        <div className="c-card-text-container" data-testid="card-text">
+          <div className="c-card-cat" data-testid="card-cat">{cardData.category.toUpperCase()}</div>
           <div
             className="c-card-name"
             role="button"
@@ -126,6 +127,6 @@ const Card = ({
         </div>
       </div>
     ) : (
-      <div className="c-card-container" />);
+      <div className="c-card-container" data-testid="card">No Card Data</div>);
 };
 export default Card;
