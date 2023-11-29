@@ -1,7 +1,7 @@
 .k-questions-answers-main-container {
   display: flex;
   flex-direction: column;
-  height: 400px;
+  height: 1000px;
   width: 100vw;
   justify-content: center;
   align-items: center;
