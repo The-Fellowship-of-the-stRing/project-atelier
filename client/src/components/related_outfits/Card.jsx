@@ -136,48 +136,6 @@ const Card = ({
     return (<div className="card-hidden" />);
   }
   return (<div data-testid="card">No Card Data</div>);
-
-  // return cardData && isCardShown
-  //   ? (
-  //     <div className={className} data-testid="card">
-  //       {isCompareShown ? (
-  //         <Compare
-  //           itemId={cardData.id}
-  //           itemFeatures={itemFeatures}
-  //           cardData={cardData}
-  //           itemName={itemName}
-  //           compareName={cardData.name}
-  //           compareClickHandler={compareClickHandler}
-  //         />
-  //       ) : null}
-  //       <div className="c-card-img-container" data-testid="action">
-  //         <div
-  //           role="button"
-  //           tabIndex="0"
-  //           onKeyPress={() => updateMainProduct(itemId)}
-  //           onClick={() => updateMainProduct(itemId)}
-  //         >
-  //           <img className="c-card-img" src={cardData.photos} alt="product-preview" data-testid="card-img" />
-  //         </div>
-  //         {actionButtons[action]}
-  //       </div>
-  //       <div className="c-card-text-container" data-testid="card-text">
-  //         <div className="c-card-cat" data-testid="card-cat">{cardData.category.toUpperCase()}</div>
-  //         <div
-  //           className="c-card-name"
-  //           role="button"
-  //           tabIndex="0"
-  //           onKeyPress={() => updateMainProduct(itemId)}
-  //           onClick={() => updateMainProduct(itemId)}
-  //         >
-  //           {cardData.name}
-  //         </div>
-  //         <div className="c-card-price">{priceString}</div>
-  //         <Stars itemId={itemId} />
-  //       </div>
-  //     </div>
-  //   ) : cardData && !isCardShown ? (<div className="card-hidden" />)
-  //     : (<div data-testid="card">No Card Data</div>);
 };
 
 export default Card;

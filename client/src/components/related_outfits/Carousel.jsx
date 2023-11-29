@@ -83,21 +83,6 @@ const Carousel = ({
             itemName={itemName}
           />
         ))}
-        {/* {visibleCards.map((id) => (
-          <Card
-            className="c-card"
-            data-testid="card"
-            visibleCards={visibleCards}
-            itemId={id}
-            key={id}
-            mainId={itemId}
-            deleteProduct={deleteProduct}
-            action={action}
-            updateMainProduct={updateMainProduct}
-            itemFeatures={itemFeatures}
-            itemName={itemName}
-          />
-        ))} */}
       </div>
       {isNextShown && (
         <button
