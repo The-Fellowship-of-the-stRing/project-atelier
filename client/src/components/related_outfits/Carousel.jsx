@@ -24,8 +24,8 @@ const Carousel = ({
       setMainId(itemId);
       setIndexOfFirstVisibleCard(0);
       setVisibleCards(ids.slice(0, maxCardCount));
-      setIsPrevShown(null);
-      if (maxCardCount === ids.length) {
+      setIsPrevShown(false);
+      if (maxCardCount >= ids.length) {
         setIsNextShown(false);
       } else {
         setIsNextShown(true);
