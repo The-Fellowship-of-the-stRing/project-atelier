@@ -13,52 +13,11 @@ const Carousel = ({
   const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(null);
   const [isNextShown, setIsNextShown] = useState(null);
   const [isPrevShown, setIsPrevShown] = useState(null);
+  const [handleOneCard, setHandleOneCard] = useState(false);
 
   // Left and right margins of card list is 20px each
   // Each card is 200px wide with right-margin of 10px
   // const getCardCount = (w) => Math.floor((w - 40) / 210);
-
-  // useEffect(() => {
-  //   setVisibleCardCount(maxCardCount);
-  //   if (itemId !== mainId) {
-  //     setMainId(itemId);
-  //     setIndexOfFirstVisibleCard(0);
-  //     setVisibleCards(ids.slice(0, maxCardCount));
-  //     setIsPrevShown(false);
-  //     if (maxCardCount >= ids.length) {
-  //       setIsNextShown(false);
-  //     } else {
-  //       setIsNextShown(true);
-  //     }
-  //   } else {
-  //     let firstIndex = indexOfFirstVisibleCard;
-  //     let lastIndex = firstIndex + maxCardCount;
-  //     let newVisibleCards;
-  //     if (lastIndex === ids.length) {
-  //       newVisibleCards = ids.slice(firstIndex, lastIndex);
-  //     } else if (lastIndex < ids.length) {
-  //       newVisibleCards = ids.slice(firstIndex, lastIndex);
-  //     } else {
-  //       firstIndex = Math.max(0, ids.length - maxCardCount);
-  //       lastIndex = ids.length;
-  //       newVisibleCards = ids.slice(firstIndex, lastIndex);
-  //     }
-  //     setIndexOfFirstVisibleCard(firstIndex);
-  //     setVisibleCards(newVisibleCards);
-
-  //     if (lastIndex === ids.length) {
-  //       setIsNextShown(false);
-  //     } else {
-  //       setIsNextShown(true);
-  //     }
-  //     if (firstIndex === 0) {
-  //       setIsPrevShown(false);
-  //     } else {
-  //       setIsPrevShown(true);
-  //     }
-  //   }
-  // }, [maxCardCount, isAdded, ids]);
-
   /* ---------------------- REFACTOR ---------------------- */
   useEffect(() => {
     let cardCount = maxCardCount;
@@ -155,8 +114,14 @@ const Carousel = ({
     const updatedIndex = indexOfFirstVisibleCard + incrementer;
     setIndexOfFirstVisibleCard(updatedIndex);
     if (incrementer === 1) {
-      setVisibleCards([...visibleCards.slice(1),
-        ids[indexOfFirstVisibleCard + visibleCards.length]]);
+      if (!isAdded && visibleCardCount === 0) {
+        setHandleOneCard(true);
+        setVisibleCardCount(1);
+        setVisibleCards(ids.slice(0, 1));
+      } else {
+        setVisibleCards([...visibleCards.slice(1),
+          ids[indexOfFirstVisibleCard + visibleCards.length]]);
+      }
     } else {
       setVisibleCards([ids[updatedIndex], ...visibleCards.slice(0, visibleCards.length - 1)]);
     }
@@ -185,7 +150,7 @@ const Carousel = ({
         </button>
       )}
       <div className="c-cards">
-        {!isAdded && addCard}
+        {(!handleOneCard && !isAdded) && addCard}
         {ids.map((id) => (
           <Card
             className="c-card"
