@@ -7,49 +7,55 @@ const Carousel = ({
   deleteProduct, updateMainProduct,
   itemFeatures, itemName, itemId, maxCardCount,
 }) => {
+  const [mainId, setMainId] = useState(null);
   const [visibleCards, setVisibleCards] = useState(null);
   const [visibleCardCount, setVisibleCardCount] = useState(null);
   const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(null);
-  const [isNextShown, setIsNextShown] = useState(false);
-  const [isPrevShown, setIsPrevShown] = useState(false);
+  const [isNextShown, setIsNextShown] = useState(null);
+  const [isPrevShown, setIsPrevShown] = useState(null);
 
   // Left and right margins of card list is 20px each
   // Each card is 200px wide with right-margin of 10px
   // const getCardCount = (w) => Math.floor((w - 40) / 210);
   useEffect(() => {
-    if (!indexOfFirstVisibleCard) {
-      setIndexOfFirstVisibleCard(0);
-    }
     setVisibleCardCount(maxCardCount);
 
-    let firstIndex = indexOfFirstVisibleCard || 0;
-    let lastIndex;
-    let newVisibleCards;
-    if (maxCardCount + firstIndex === ids.length) {
-      lastIndex = firstIndex + maxCardCount;
-      newVisibleCards = ids.slice(firstIndex, lastIndex);
-    } else if (maxCardCount + firstIndex < ids.length) {
-      lastIndex = maxCardCount + firstIndex;
-      newVisibleCards = ids.slice(firstIndex, lastIndex);
-    } else { // (maxCardCount + firstIndex > ids.length)
-      firstIndex = Math.max(0, ids.length - maxCardCount);
-      lastIndex = ids.length;
-      newVisibleCards = ids.slice(firstIndex, lastIndex);
-    }
-
-    setVisibleCards(newVisibleCards);
-    // setVisibleCards(ids.slice(0, maxCardCount)); // NEED TO HANDLE CASE WHEN NOT ON FIRST CARD
-
-    if (lastIndex === ids.length) {
-      setIsNextShown(false);
+    if (itemId !== mainId) {
+      setMainId(itemId);
+      setIndexOfFirstVisibleCard(0);
+      setVisibleCards(ids.slice(0, maxCardCount));
+      setIsPrevShown(null);
+      if (maxCardCount === ids.length) {
+        setIsNextShown(false);
+      } else {
+        setIsNextShown(true);
+      }
     } else {
-      setIsNextShown(true);
-    }
+      let firstIndex = indexOfFirstVisibleCard;
+      let lastIndex = firstIndex + maxCardCount;
+      let newVisibleCards;
+      if (lastIndex === ids.length) {
+        newVisibleCards = ids.slice(firstIndex, lastIndex);
+      } else if (lastIndex < ids.length) {
+        newVisibleCards = ids.slice(firstIndex, lastIndex);
+      } else {
+        firstIndex = Math.max(0, ids.length - maxCardCount);
+        lastIndex = ids.length;
+        newVisibleCards = ids.slice(firstIndex, lastIndex);
+      }
+      setIndexOfFirstVisibleCard(firstIndex);
+      setVisibleCards(newVisibleCards);
 
-    if (firstIndex === 0) {
-      setIsPrevShown(false);
-    } else {
-      setIsPrevShown(true);
+      if (lastIndex === ids.length) {
+        setIsNextShown(false);
+      } else {
+        setIsNextShown(true);
+      }
+      if (firstIndex === 0) {
+        setIsPrevShown(false);
+      } else {
+        setIsPrevShown(true);
+      }
     }
   }, [maxCardCount, isAdded, ids]);
 
