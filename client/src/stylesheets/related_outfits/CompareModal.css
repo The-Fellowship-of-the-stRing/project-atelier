@@ -15,10 +15,17 @@ body.show-modal {
 }
 table {
   border-spacing: 5px;
+
 }
 .feature {
   width: 30px;
 }
+td, tr {
+  border-bottom: 1px solid black;
+}
+/* td:first-child {
+  border-top: 1px solid black
+} */
 th {
   font-size: 16px;
   font-weight: 900;
@@ -44,7 +51,11 @@ thead th:nth-child(3) {
 }
 .c-compare-feature-value, .c-compare-value {
   text-align: center;
+  vertical-align: center;
   font-size: 14px;
+}
+.c-compare-feature-value {
+  font-weight: 900;
 }
 
 
