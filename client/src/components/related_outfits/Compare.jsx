@@ -40,8 +40,24 @@ const Compare = ({
   }
 
   return (
-    <div className="c-compare-modal" role="button" tabIndex="0" onKeyPress={() => compareClickHandler()} onClick={() => compareClickHandler()} data-testid="compare">
+    <div
+      className="c-compare-modal"
+      onClick={() => compareClickHandler()}
+      role="button"
+      tabIndex="0"
+      onKeyPress={() => compareClickHandler()}
+      data-testid="compare"
+    >
       <div className="c-overlay" />
+      {/* <div
+        className="c-close-compare"
+        role="button"
+        tabIndex="0"
+        onKeyPress={() => compareClickHandler()}
+        onClick={() => compareClickHandler()}
+      >
+        ❌
+      </div> */}
       <table className="c-compare-modal-table">
         <thead className="c-compare-header">
           <tr>

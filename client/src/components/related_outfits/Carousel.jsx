@@ -17,15 +17,15 @@ const Carousel = ({
   // Left and right margins of card list is 20px each
   // Each card is 200px wide with right-margin of 10px
   // const getCardCount = (w) => Math.floor((w - 40) / 210);
+
   useEffect(() => {
     setVisibleCardCount(maxCardCount);
-
     if (itemId !== mainId) {
       setMainId(itemId);
       setIndexOfFirstVisibleCard(0);
       setVisibleCards(ids.slice(0, maxCardCount));
-      setIsPrevShown(null);
-      if (maxCardCount === ids.length) {
+      setIsPrevShown(false);
+      if (maxCardCount >= ids.length) {
         setIsNextShown(false);
       } else {
         setIsNextShown(true);

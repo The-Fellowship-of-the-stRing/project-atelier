@@ -108,11 +108,18 @@ const Card = ({
         <div className="c-card-img-container" data-testid="action">
           <div
             role="button"
+            className="c-card-img"
             tabIndex="0"
+            data-testid="card-img"
             onKeyPress={() => updateMainProduct(itemId)}
             onClick={() => updateMainProduct(itemId)}
           >
-            <img className="c-card-img" src={cardData.photos} alt="product-preview" data-testid="card-img" />
+            <img
+              className="c-card-img"
+              src={cardData.photos}
+              alt="product-preview"
+              data-testid="card-img"
+            />
           </div>
           {actionButtons[action]}
         </div>
@@ -128,7 +135,10 @@ const Card = ({
             {cardData.name}
           </div>
           <div className="c-card-price">{priceString}</div>
-          <Stars itemId={itemId} />
+          <div className="c-card-star">
+            <Stars itemId={itemId} />
+
+          </div>
         </div>
       </div>
     );

@@ -5,7 +5,7 @@ body.show-modal {
 .c-compare-modal, .c-overlay {
   width: 100vw;
   height: 100vh;
-  z-index: 3;
+  z-index: 11;
   overflow-x: scroll;
   top: 0;
   left: 0;
@@ -15,10 +15,22 @@ body.show-modal {
 }
 table {
   border-spacing: 5px;
+
 }
 .feature {
   width: 30px;
 }
+td, tr {
+  border-bottom: 1px solid black;
+}
+
+.c-close-compare {
+  justify-self: end;
+  margin: -10px 5px;
+  position: absolute;
+  /* margin-right: 4px; */
+}
+
 th {
   font-size: 16px;
   font-weight: 900;
@@ -44,13 +56,17 @@ thead th:nth-child(3) {
 }
 .c-compare-feature-value, .c-compare-value {
   text-align: center;
+  vertical-align: center;
   font-size: 14px;
+}
+.c-compare-feature-value {
+  font-weight: 900;
 }
 
 
 .c-compare-modal-table {
   position: absolute;
-  z-index: 3;
+  z-index: 11;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
