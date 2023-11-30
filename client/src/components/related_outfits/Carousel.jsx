@@ -68,9 +68,9 @@ const Carousel = ({
     setVisibleCardCount(cardCount);
     setIndexOfFirstVisibleCard(0);
     setMainId(itemId);
-    setVisibleCards(ids.slice(0, maxCardCount));
+    setVisibleCards(ids.slice(0, cardCount));
     setIsPrevShown(false);
-    if (maxCardCount >= ids.length) {
+    if (cardCount >= ids.length) {
       setIsNextShown(false);
     } else {
       setIsNextShown(true);
@@ -80,7 +80,11 @@ const Carousel = ({
   useEffect(() => {
     if (itemId === mainId) {
       let firstIndex = indexOfFirstVisibleCard;
-      let lastIndex = firstIndex + maxCardCount;
+      let cardCount = maxCardCount;
+      if (!isAdded && action === 'outfits') {
+        cardCount -= 1;
+      }
+      let lastIndex = firstIndex + cardCount;
       if (lastIndex === ids.length) {
         setVisibleCards(ids.slice(firstIndex, lastIndex));
       } else if (lastIndex < ids.length) {
