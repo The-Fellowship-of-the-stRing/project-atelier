@@ -13,7 +13,6 @@ const Carousel = ({
   const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(null);
   const [isNextShown, setIsNextShown] = useState(null);
   const [isPrevShown, setIsPrevShown] = useState(null);
-  const [handleOneCard, setHandleOneCard] = useState(false);
 
   // Left and right margins of card list is 20px each
   // Each card is 200px wide with right-margin of 10px
@@ -94,6 +93,7 @@ const Carousel = ({
       - isAdded is false
       - MaxCardCount = 1
     */
+  // const [handleOneCard, setHandleOneCard] = useState(false);
   // const updateVisibleCards = (incrementer) => {
   //   let updatedIndex = indexOfFirstVisibleCard + incrementer;
   //   let cardCount = visibleCardCount;
@@ -146,7 +146,8 @@ const Carousel = ({
         </button>
       )}
       <div className="c-cards">
-        {(!handleOneCard && !isAdded) && addCard}
+        {/* {(!handleOneCard && !isAdded) && addCard} */}
+        {!isAdded && addCard}
         {ids.map((id) => (
           <Card
             className="c-card"
