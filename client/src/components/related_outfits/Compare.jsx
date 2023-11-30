@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../stylesheets/related_outfits/CompareModal.css';
+import { IoMdCheckmark } from 'react-icons/io';
 
 const Compare = ({
   itemName, compareName, itemFeatures, cardData, compareClickHandler,
@@ -19,16 +20,23 @@ const Compare = ({
   }
 
   let featureList;
-
   if (compareData) {
     const features = Object.keys(compareData);
-    featureList = features.map((feature) => (
-      <tr key={feature} className="c-compare-feature-item" data-testid="feature">
-        <td>{feature.toUpperCase()}</td>
-        <td>{compareData[feature].current ? compareData[feature].current : ''}</td>
-        <td>{compareData[feature].compared ? compareData[feature].compared : ''}</td>
-      </tr>
-    ));
+    featureList = features.map((feature) => {
+      let currentValue = compareData[feature].current ? compareData[feature].current : '';
+      let compareValue = compareData[feature].compared ? compareData[feature].compared : '';
+      if (currentValue === compareValue && currentValue !== '') {
+        currentValue = <IoMdCheckmark />;
+        compareValue = <IoMdCheckmark />;
+      }
+      return (
+        <tr key={feature} className="c-compare-feature-item" data-testid="feature">
+          <td className="c-compare-value">{currentValue}</td>
+          <td className="c-compare-feature-value">{feature.toUpperCase()}</td>
+          <td className="c-compare-value">{compareValue}</td>
+        </tr>
+      );
+    });
   }
 
   return (
@@ -37,8 +45,11 @@ const Compare = ({
       <table className="c-compare-modal-table">
         <thead className="c-compare-header">
           <tr>
-            <th scope="col">Feature</th>
+            <th colSpan="3" className="c-compare-title">COMPARING</th>
+          </tr>
+          <tr>
             <th scope="col">{itemName}</th>
+            <th scope="col" />
             <th scope="col">{compareName}</th>
           </tr>
         </thead>

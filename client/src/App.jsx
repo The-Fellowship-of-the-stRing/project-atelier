@@ -37,7 +37,7 @@ const App = () => {
     40345 - Has default style, but no images
     40352 - No default style
     */
-    updateMainProduct(40344);
+    updateMainProduct(40349);
   }, []);
 
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GoSearch } from 'react-icons/go';
-import Search from '../components/navbar/Search';
+import Search from '../components/navbar/Search.jsx';
 import icon from '../assets/images/CC_icon.png';
 
 import handleRef from '../utils/handleRef.js';

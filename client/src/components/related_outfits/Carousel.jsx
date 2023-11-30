@@ -1,35 +1,63 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './Card.jsx';
 
 const Carousel = ({
-  cards, action, pWidth,
+  action,
   addCard, isAdded, ids,
   deleteProduct, updateMainProduct,
-  itemFeatures, itemName, itemId,
+  itemFeatures, itemName, itemId, maxCardCount,
 }) => {
-  const ref = useRef(null);
-
+  const [mainId, setMainId] = useState(null);
   const [visibleCards, setVisibleCards] = useState(null);
   const [visibleCardCount, setVisibleCardCount] = useState(null);
-  const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(0);
-  const [isNextShown, setIsNextShown] = useState(false);
-  const [isPrevShown, setIsPrevShown] = useState(false);
+  const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(null);
+  const [isNextShown, setIsNextShown] = useState(null);
+  const [isPrevShown, setIsPrevShown] = useState(null);
 
   // Left and right margins of card list is 20px each
   // Each card is 200px wide with right-margin of 10px
-  const getCardCount = (w) => Math.floor((w - 40) / 210);
+  // const getCardCount = (w) => Math.floor((w - 40) / 210);
   useEffect(() => {
-    setIndexOfFirstVisibleCard(0);
-    const cardCount = getCardCount(pWidth);
-    setVisibleCardCount(cardCount);
-    setVisibleCards(ids.slice(0, cardCount));
-    if (visibleCardCount >= ids.length) {
-      setIsNextShown(false);
+    setVisibleCardCount(maxCardCount);
+
+    if (itemId !== mainId) {
+      setMainId(itemId);
+      setIndexOfFirstVisibleCard(0);
+      setVisibleCards(ids.slice(0, maxCardCount));
+      setIsPrevShown(null);
+      if (maxCardCount === ids.length) {
+        setIsNextShown(false);
+      } else {
+        setIsNextShown(true);
+      }
     } else {
-      setIsNextShown(true);
+      let firstIndex = indexOfFirstVisibleCard;
+      let lastIndex = firstIndex + maxCardCount;
+      let newVisibleCards;
+      if (lastIndex === ids.length) {
+        newVisibleCards = ids.slice(firstIndex, lastIndex);
+      } else if (lastIndex < ids.length) {
+        newVisibleCards = ids.slice(firstIndex, lastIndex);
+      } else {
+        firstIndex = Math.max(0, ids.length - maxCardCount);
+        lastIndex = ids.length;
+        newVisibleCards = ids.slice(firstIndex, lastIndex);
+      }
+      setIndexOfFirstVisibleCard(firstIndex);
+      setVisibleCards(newVisibleCards);
+
+      if (lastIndex === ids.length) {
+        setIsNextShown(false);
+      } else {
+        setIsNextShown(true);
+      }
+      if (firstIndex === 0) {
+        setIsPrevShown(false);
+      } else {
+        setIsPrevShown(true);
+      }
     }
-    setIsPrevShown(false);
-  }, [pWidth, cards, isAdded, ids]);
+  }, [maxCardCount, isAdded, ids]);
 
   const updateVisibleCards = (incrementer) => {
     const updatedIndex = indexOfFirstVisibleCard + incrementer;
@@ -53,7 +81,7 @@ const Carousel = ({
   };
 
   return ids && visibleCards ? (
-    <div className="c-related-container" ref={ref}>
+    <div className="c-carousel-container">
       {isPrevShown && (
         <button
           className="c-prev"
@@ -66,10 +94,11 @@ const Carousel = ({
       )}
       <div className="c-cards">
         {!isAdded && addCard}
-        {visibleCards.map((id) => (
+        {ids.map((id) => (
           <Card
             className="c-card"
             data-testid="card"
+            isVisible={visibleCards.includes(id)}
             itemId={id}
             key={id}
             mainId={itemId}
@@ -93,7 +122,7 @@ const Carousel = ({
       )}
     </div>
   ) : (
-    <div ref={ref}>No Related Items</div>
+    <div>Loading</div>
   );
 };
 

@@ -3,18 +3,13 @@
   display: grid;
   justify-content: center;
   align-items: center;
-  margin: 0px 0px 150px 0;
+  margin-bottom: 150px;
+  width: 80dvw;
   grid-template-areas:
   "related-title"
   "related"
   "outfit-title"
   "outfits";
-}
-.c-outfit-title, .c-related-title {
-  margin: 50px 0px 20px 0px;
-  display: flex;
-  align-items: flex-start;
-  grid-template-areas: "card card card";
 }
 .c-related-title {
   grid-area: related-title;
@@ -22,41 +17,34 @@
 .c-outfit-title {
   grid-area: outfit-title;
 }
+.c-outfit-title, .c-related-title {
+  display: grid;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  width: 75dvw;
+  align-self: start;
+}
 
 /* RELATED & OUTFITS CONTAINER */
 .c-related-container, .c-outfits-container {
   display: grid;
   position: relative;
 }
-.c-cards{
-  position: relative;
-  /* WIP: ADD GRADIENT TO RIGHT AND LEFT CARDS  */
-  /* background: linear-gradient(90deg, black,#f6f8ff ); */
-}
 
-.c-next {
-  justify-self: end;
-  align-self: center;
-  margin: 0;
-  position: absolute;
-  margin-right: 0;
-}
-.c-prev {
-  justify-self: start;
-  align-self: center;
-  margin: 0;
-  position: absolute;
-  margin-left: 0;
+.c-carousel-container {
+  display: flex;
+  position: relative;
+  flex-direction: row;
 }
 .c-cards {
   display: flex;
-  align-items: flex-start;
-  grid-template-areas: "card card card";
-  /* overflow-y: scroll; */
-  width: 80vw;
-  margin: 0 20px 0 20px;
+  margin: 0 10px 0 10px;
 }
 
+.c-next, .c-prev {
+  align-self: center;
+
+}
 .c-card {
   grid-area: name;
   display: grid;
