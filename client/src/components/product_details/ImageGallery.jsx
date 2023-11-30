@@ -55,6 +55,11 @@ const ImageGallery = ({ style }) => {
           lowIndex={lowIndex}
           highIndex={highIndex}
           handleModalFalse={handleModalFalse}
+          nextImage={nextImage}
+          previousImage={previousImage}
+          handlePageIndexLower={handlePageIndexLower}
+          handlePageIndexRaise={handlePageIndexRaise}
+          pageCount={pageCount}
         />
       )}
       {/* removed div left spacer, not needed with corrected css styling */}

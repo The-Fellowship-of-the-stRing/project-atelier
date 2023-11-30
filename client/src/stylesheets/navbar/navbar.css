@@ -23,9 +23,8 @@
 .l-navbar-icon {
   width: 50px;
   height: 50px;
-  box-shadow: 0px 0px 5px 5px #ffffff;
+  /* box-shadow: 0px 0px 5px 5px #ffffff; */
   margin-left: 50px;
-  border-radius: 100px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -56,4 +55,25 @@
 }
 .l-navbar-search-container input:focus {
   outline: none;
+}
+
+.l-navbar-icon-name {
+  display: flex;
+  height: 100%;
+  width: auto;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@media screen and (min-width: 881px) {
+.l-navbar-icon-name h1 {
+  font-size: 62px;
+  margin-left: 20px;
+}
+}
+
+@media screen and (max-width: 880px) {
+  .l-navbar-icon-name h1 {
+    display: none;
+  }
 }

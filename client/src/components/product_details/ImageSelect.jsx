@@ -10,7 +10,7 @@ const ImageSelect = ({
 }) => (
   style.photos.map((value, index) => (
     <Image
-      key={value.style_id}
+      key={value.thumbnail_url}
       thumbnail={value.thumbnail_url}
       handleIndex={handleIndex}
       index={index}

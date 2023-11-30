@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../stylesheets/questions_answers/Search.css';
+import { FaMagnifyingGlass } from 'react-icons/fa6';
 
 const Search = ({ searchTerm, setSearchTerm }) => {
   const clearSearch = (e) => {
@@ -12,15 +13,26 @@ const Search = ({ searchTerm, setSearchTerm }) => {
     clearSearch();
   };
 
+  const magnifyingGlassStyle = {
+    opacity: searchTerm.length > 2 ? 0.3 : 1,
+    transition: 'opacity 0.3s ease',
+  };
+
   return (
     <div className="k-questions-answers-search">
       <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          className="k-search-input"
-          placeholder="Have a question? Search for answers…"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+        <div className="k-search-container">
+          <input
+            className="k-search-input"
+            placeholder="Have a question? Search for answers…"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <FaMagnifyingGlass
+            className="k-mag-glass-search"
+            style={magnifyingGlassStyle}
+          />
+        </div>
         <button
           type="button"
           className="k-clear-search-btn"

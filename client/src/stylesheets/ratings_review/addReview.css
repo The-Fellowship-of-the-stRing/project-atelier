@@ -75,7 +75,7 @@
   height: 30px;
   align-items: center;
   margin-bottom: 20px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   justify-content: flex-start;
 }
 
@@ -122,6 +122,7 @@ margin-left: 20px;
   max-width: 98.5%;
   min-width: 98.5%;
   background-color: #F6F8FF;
+  resize: none;
 }
 
 .l-add-review-body-count {
@@ -169,11 +170,11 @@ margin-left: 20px;
 .l-add-review-btn {
   display: flex;
   padding: 20px;
-  background-color: #F6F8FF;
+  background-color: #1F2041;
   border: 1px solid #383838;
   cursor: pointer;
   font-weight: bold;
-  color: #383838;
+  color: #F6F8FF;
   align-items: center;
   height: auto;
   justify-content: center;
