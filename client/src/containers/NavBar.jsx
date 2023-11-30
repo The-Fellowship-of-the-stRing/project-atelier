@@ -20,15 +20,19 @@ const NavBar = ({ topRef }) => {
   return (
     <div className="l-navbar-container">
       <div className="l-navbar-main">
-        <div
-          role="button"
-          onKeyDown={() => handleRef(topRef)}
-          tabIndex="0"
-          style={{ backgroundImage: `url(${icon})` }}
-          className="l-navbar-icon"
-          alt="click crate icon"
-          onClick={() => handleRef(topRef)}
-        />
+        <div className="l-navbar-icon-name">
+
+          <div
+            role="button"
+            onKeyDown={() => handleRef(topRef)}
+            tabIndex="0"
+            style={{ backgroundImage: `url(${icon})` }}
+            className="l-navbar-icon"
+            alt="click crate icon"
+            onClick={() => handleRef(topRef)}
+          />
+          <h1>Click Crate</h1>
+        </div>
         <div className="l-navbar-search-container">
           <Search handleSearch={handleSearch} />
           <GoSearch className="l-navbar-search-icon" />

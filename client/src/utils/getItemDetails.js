@@ -8,7 +8,8 @@ const getItemDetails = async (itemId) => {
       const currentReview = response.data.results[i];
       result += currentReview.rating;
     }
-    const rating = await result / response.data.results.length;
+    const divide = response.data.results.length < 1 ? 1 : response.data.results.length;
+    const rating = result / divide;
     return rating;
   } catch (err) {
     console.error('An error occured while getting product ratings info: ', err);

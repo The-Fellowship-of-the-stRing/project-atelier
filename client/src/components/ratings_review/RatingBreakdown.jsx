@@ -23,16 +23,18 @@ const RatingBreakdown = ({
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getItemDetails(itemId);
-        const rounded = roundRating(response);
-        setAvgRating(rounded.toFixed(1));
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchData();
+    if (itemId) {
+      const fetchData = async () => {
+        try {
+          const response = await getItemDetails(itemId);
+          const rounded = roundRating(response);
+          setAvgRating(rounded.toFixed(1));
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      fetchData();
+    }
   }, [itemId]);
 
   useEffect(() => {

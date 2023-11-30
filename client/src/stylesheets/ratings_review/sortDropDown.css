@@ -1,8 +1,20 @@
+@media screen and (min-width: 771px) {
 .l-sort-drop-down-list {
   border: 0px;
   border-bottom: 2px solid #000000be;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
   background-color: #F6F8FF;
+}
+}
+@media screen and (max-width: 770px) {
+.l-sort-drop-down-list {
+  border: 0px;
+  border-bottom: 2px solid #000000be;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: bold;
+  background-color: #F6F8FF;
+}
 }
