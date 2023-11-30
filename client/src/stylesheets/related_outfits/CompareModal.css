@@ -5,7 +5,7 @@ body.show-modal {
 .c-compare-modal, .c-overlay {
   width: 100vw;
   height: 100vh;
-  z-index: 3;
+  z-index: 11;
   overflow-x: scroll;
   top: 0;
   left: 0;
@@ -23,9 +23,14 @@ table {
 td, tr {
   border-bottom: 1px solid black;
 }
-/* td:first-child {
-  border-top: 1px solid black
-} */
+
+.c-close-compare {
+  justify-self: end;
+  margin: -10px 5px;
+  position: absolute;
+  /* margin-right: 4px; */
+}
+
 th {
   font-size: 16px;
   font-weight: 900;
@@ -61,7 +66,7 @@ thead th:nth-child(3) {
 
 .c-compare-modal-table {
   position: absolute;
-  z-index: 3;
+  z-index: 11;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
