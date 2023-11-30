@@ -31,11 +31,11 @@
 .g-images-main-expanded{
   display:flex;
   margin: 0 auto;
-  background-position: ;
   /* set to no-repeat to prevent image repeating */
   background-repeat: no-repeat;
   /* set to contain to ensure image is properly filled in container */
   background-size: contain;
+  background-position: center;
   cursor:crosshair;
   height: 100%;
   width: 100%;

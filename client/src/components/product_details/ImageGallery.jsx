@@ -22,12 +22,10 @@ const ImageGallery = ({ style }) => {
     setCurrentIndex(currentIndex + 1);
   };
   const handlePageIndexRaise = () => {
-    console.log('Raising button worked');
     setLowIndex(lowIndex + 7);
     setHighIndex(highIndex + 7);
   };
   const handlePageIndexLower = () => {
-    console.log('Lowering button worked');
     setLowIndex(lowIndex - 7);
     setHighIndex(highIndex - 7);
   };

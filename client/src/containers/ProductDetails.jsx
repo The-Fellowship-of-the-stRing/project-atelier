@@ -21,9 +21,6 @@ const ProductDetails = ({ itemId, reviewRef }) => {
       try {
         const productData = await getProductDataById(itemId);
         const styleData = await getStyleDataById(itemId);
-        // Leaving console.logs in comments for when I need to reference it
-        // console.log(productData);
-        // console.log(styleData);
         const values = {};
         values.name = productData.name;
         values.slogan = productData.slogan;
