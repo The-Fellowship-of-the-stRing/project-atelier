@@ -1,17 +1,30 @@
 .k-questions-answers-search {
+  position: relative;
   display: flex;
   align-self: flex-start;
   margin-left: 17%;
   height: 110px;
-  width: 65vw;
+  width: 100vw;
+  margin-bottom: 15px;
+}
+
+.k-mag-glass-search {
+  position: absolute;
+  top: 33%;
+  left: 96%;
+  transform: translateY(-50%);
 }
 
 .k-search-input {
   height: 5vh;
-  width: 55vw;
-  margin: 5px 2px 5px 2px;
+  width: calc(81.6vw - 30px);
 }
 
 .k-clear-search-btn {
-  height: 5.5vh;
+  height: 2.5vh;
+  margin-top: 5px;
+}
+
+form {
+  position: relative;
 }
