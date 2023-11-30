@@ -16,7 +16,7 @@ const RelatedOutfits = ({
     const handleResize = () => {
       // Left and right margins of card list is 20px each
       // Each card is 200px wide with right-margin of 10px
-      const tempCardCount = Math.floor((ref.current.offsetWidth - 40) / 210);
+      const tempCardCount = Math.floor((ref.current.offsetWidth - 60) / 220);
       if (maxCardCount !== tempCardCount) {
         setMaxCardCount(tempCardCount);
       }
@@ -30,7 +30,7 @@ const RelatedOutfits = ({
 
   return maxCardCount ? (
     <div className="c-related-outfits-main-container" ref={ref} data-testid="related-outfits">
-      <h3 className="c-related-title">Related Products</h3>
+      <h3 className="c-related-title">RELATED PRODUCTS</h3>
       <Related
         itemId={itemId}
         itemName={itemName}
@@ -38,7 +38,7 @@ const RelatedOutfits = ({
         updateMainProduct={updateMainProduct}
         maxCardCount={maxCardCount}
       />
-      <h3 className="c-outfit-title">My Outfit</h3>
+      <h3 className="c-outfit-title">MY OUTFITS</h3>
       <Outfits itemId={itemId} updateMainProduct={updateMainProduct} maxCardCount={maxCardCount} />
     </div>
   ) : (
