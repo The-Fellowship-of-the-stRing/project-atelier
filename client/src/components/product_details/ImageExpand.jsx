@@ -6,13 +6,24 @@ const ImageExpand = ({
 }) => ((lowIndex <= index && highIndex > index) ? (
   <div>
     {currentIndex !== index && (
-    <div onKeyDown={() => handleIndex(index)} onClick={() => handleIndex(index)} role="button" tabIndex={index}>
-      <FaCircle> </FaCircle>
+    <div
+      onKeyDown={() => handleIndex(index)}
+      onClick={() => handleIndex(index)}
+      role="button"
+      tabIndex={index}
+    >
+      <FaRegCircle className="g-current-expanded-img-button" />
     </div>
     )}
     {currentIndex === index && (
-    <div onKeyDown={() => handleIndex(index)} onClick={() => handleIndex(index)} role="button" tabIndex={index}>
-      <FaRegCircle> </FaRegCircle>
+    <div
+      onKeyDown={() => handleIndex(index)}
+      onClick={() => handleIndex(index)}
+      role="button"
+      tabIndex={index}
+    >
+      <FaCircle className="g-current-expanded-img-button" />
+
     </div>
     )}
   </div>
