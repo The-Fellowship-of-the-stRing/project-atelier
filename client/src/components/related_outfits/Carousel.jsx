@@ -18,7 +18,7 @@ const Carousel = ({
   // Left and right margins of card list is 20px each
   // Each card is 200px wide with right-margin of 10px
   // const getCardCount = (w) => Math.floor((w - 40) / 210);
-  /* ---------------------- REFACTOR ---------------------- */
+
   useEffect(() => {
     let cardCount = maxCardCount;
     if (!isAdded && action === 'outfits') {
@@ -66,63 +66,15 @@ const Carousel = ({
       }
     }
   }, [maxCardCount]);
-  /*
-  useEffect(() => {
-    if (isAdded !== null && action === "outfits") {
-      let updatedCardCount;
-      let firstIndex;
-
-      if (isAdded) {
-        updatedCardCount = visibleCardCount - 1;
-        if (indexOfFirstVisibleCard + maxCardCount === ids.length) {
-          firstIndex = indexOfFirstVisibleCard + 1;
-          // setVisibleCardCount(updatedCardCount);
-          // setIndexOfFirstVisibleCard(firstIndex);
-          // setVisibleCards(ids.slice(firstIndex, firstIndex + updatedCardCount));
-        }
-        if (indexOfFirstVisibleCard + maxCardCount < ids.length) {
-          firstIndex = indexOfFirstVisibleCard;
-          // setVisibleCardCount(updatedCardCount);
-          // setIndexOfFirstVisibleCard(firstIndex);
-          // setVisibleCards(ids.slice(firstIndex, firstIndex + updatedCardCount));
-        }
-      } else { // !isAdded
-      // [1,2,3,4] curr [A,1,2] maxCount = 3 isAdd = true
-      // -> isAdd = false;
-      // [A,1,2]
-        updatedCardCount = Math.max(visibleCardCount + 1, ids.length);
-        if (indexOfFirstVisibleCard === 0) {
-          firstIndex = indexOfFirstVisibleCard;
-        }
-        if (indexOfFirstVisibleCard + maxCardCount <= ids.length) {
-          firstIndex = indexOfFirstVisibleCard - 1;
-        }
-        // if (indexOfFirstVisibleCard + maxCardCount < ids.length) {
-        //   firstIndex = indexOfFirstVisibleCard;
-        // }
-      }
-
-      setVisibleCardCount(updatedCardCount);
-      setIndexOfFirstVisibleCard(firstIndex);
-      setVisibleCards(ids.slice(firstIndex, firstIndex + updatedCardCount));
-    }
-  }, [isAdded]); */
-
-  /* ^^^^^^^^^^^^^^^^^^^^^^ REFACTOR ^^^^^^^^^^^^^^^^^^^^^^ */
 
   const updateVisibleCards = (incrementer) => {
     const updatedIndex = indexOfFirstVisibleCard + incrementer;
     setIndexOfFirstVisibleCard(updatedIndex);
     if (incrementer === 1) {
-      if (!isAdded && visibleCardCount === 0) {
-        setHandleOneCard(true);
-        setVisibleCardCount(1);
-        setVisibleCards(ids.slice(0, 1));
-      } else {
-        setVisibleCards([...visibleCards.slice(1),
-          ids[indexOfFirstVisibleCard + visibleCards.length]]);
-      }
-    } else {
+      setVisibleCards([...visibleCards.slice(1),
+        ids[indexOfFirstVisibleCard + visibleCards.length]]);
+    }
+    if (incrementer === -1) {
       setVisibleCards([ids[updatedIndex], ...visibleCards.slice(0, visibleCards.length - 1)]);
     }
     if (updatedIndex === 0) {
@@ -136,6 +88,50 @@ const Carousel = ({
       setIsNextShown(true);
     }
   };
+  /* WORK ON IF TIME
+    - WANT TO HANDLE CASE WHERE:
+      - OUTFITS HAS 1+ PRODUCTS
+      - isAdded is false
+      - MaxCardCount = 1
+    */
+  // const updateVisibleCards = (incrementer) => {
+  //   let updatedIndex = indexOfFirstVisibleCard + incrementer;
+  //   let cardCount = visibleCardCount;
+  //   setIndexOfFirstVisibleCard(updatedIndex);
+  //   if (incrementer === 1) {
+  //     if (!isAdded && visibleCardCount === 0) {
+  //       setHandleOneCard(true);
+  //       cardCount = 1;
+  //       updatedIndex += 1;
+  //       setVisibleCardCount(cardCount);
+  //       setVisibleCards(ids.slice(0, 1));
+  //     } else {
+  //       setVisibleCards([...visibleCards.slice(1),
+  //         ids[indexOfFirstVisibleCard + visibleCards.length]]);
+  //     }
+  //   }
+  //   if (incrementer === -1) {
+  //     if (!isAdded && handleOneCard && visibleCardCount === 1 && indexOfFirstVisibleCard === 1) {
+  //       setHandleOneCard(false);
+  //       cardCount = 0;
+  //       updatedIndex -= 1;
+  //       setVisibleCardCount(cardCount);
+  //       setVisibleCards([]);
+  //     } else {
+  //       setVisibleCards([ids[updatedIndex], ...visibleCards.slice(0, visibleCards.length - 1)]);
+  //     }
+  //   }
+  //   if (updatedIndex === 0) {
+  //     setIsPrevShown(false);
+  //   } else {
+  //     setIsPrevShown(true);
+  //   }
+  //   if (updatedIndex + cardCount === ids.length) {
+  //     setIsNextShown(false);
+  //   } else {
+  //     setIsNextShown(true);
+  //   }
+  // };
 
   return ids && visibleCards ? (
     <div className="c-carousel-container">
