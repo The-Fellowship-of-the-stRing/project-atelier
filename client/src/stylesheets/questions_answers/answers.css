@@ -1,52 +1,38 @@
 .k-answer-main-block {
-  display: flex;
-  flex-direction: column;
   width: 65%;
+  margin-left: 2px;
 }
 
 .k-answer-details-block {
   display: flex;
-  justify-content: flex-start;
-  width: 100%;
+  flex-wrap: wrap;
   align-items: flex-start;
   margin-bottom: 10px;
-  font-size: 14px;
-  color: #686868
-}
-
-.k-answer-user {
-  margin-right: 5px;
-}
-
-.k-answer-date {
-  margin-right: 5px;
-}
-
-.k-answer-helpful {
-  margin-right: 5px;
-}
-
-.k-answer-yes-click {
-  text-decoration: underline;
-  cursor: pointer;
-  margin-right: 5px;
-}
-
-.k-answer-report {
-  margin-right: 5px;
-  margin-left: 5px;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.k-load-more-answers {
+  margin-top: 10px;
+  margin-left: 20px;
   font-size: 14px;
   color: #686868;
+}
+
+.k-answer-user,
+.k-answer-date,
+.k-answer-helpful,
+.k-answer-yes-click,
+.k-answer-report {
+  margin: 0 5px 3px 0px;
+}
+
+.k-answer-yes-click,
+.k-answer-report {
+  text-decoration: underline;
   cursor: pointer;
 }
 
+.k-load-more-answers,
 .k-collapse-answers {
   font-size: 14px;
   color: #686868;
   cursor: pointer;
+  margin-bottom: 10px;
+  margin-left: 20px;
 }

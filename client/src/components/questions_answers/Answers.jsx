@@ -99,7 +99,7 @@ const Answers = ({ questionId, updateAnswers, setUpdateAnswers }) => {
             <div className="k-answer-main-block" key={id}>
 
               <div className="k-answer-body">
-                A:
+                <strong>A:</strong>
                 {' '}
                 {answer.body}
               </div>

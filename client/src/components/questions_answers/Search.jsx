@@ -21,16 +21,18 @@ const Search = ({ searchTerm, setSearchTerm }) => {
   return (
     <div className="k-questions-answers-search">
       <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          className="k-search-input"
-          placeholder="Have a question? Search for answers…"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <FaMagnifyingGlass
-          className="k-mag-glass-search"
-          style={magnifyingGlassStyle}
-        />
+        <div className="k-search-container">
+          <input
+            className="k-search-input"
+            placeholder="Have a question? Search for answers…"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <FaMagnifyingGlass
+            className="k-mag-glass-search"
+            style={magnifyingGlassStyle}
+          />
+        </div>
         <button
           type="button"
           className="k-clear-search-btn"
