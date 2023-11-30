@@ -4,7 +4,12 @@ import '../../stylesheets/questions_answers/questionsAnswers.css';
 import '../../stylesheets/questions_answers/questionsList.css';
 
 const QuestionsList = ({
-  resultsToShow, handleHelpful, itemId, handleAnswerModal,
+  resultsToShow,
+  handleHelpful,
+  itemId,
+  handleAnswerModal,
+  updateAnswers,
+  setUpdateAnswers,
 }) => {
   const [marked, setMarked] = useState({});
 
@@ -57,6 +62,8 @@ const QuestionsList = ({
               </div>
             </div>
             <Answers
+              updateAnswers={updateAnswers}
+              setUpdateAnswers={setUpdateAnswers}
               questionId={id}
               itemId={itemId}
             />

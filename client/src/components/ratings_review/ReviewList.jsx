@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaPlus } from 'react-icons/fa6';
 import SortDropDown from './SortDropDown.jsx';
 import ReviewTile from './ReviewTile.jsx';
@@ -17,6 +17,24 @@ const ReviewList = ({
   handleModal,
 }) => {
   const [resultsToShow, setResultsToShow] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const listElementRef = useRef(null);
+
+  const loadMoreReviews = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
+    await handleViewMore();
+    setIsLoading(false);
+  };
+
+  const handleScroll = (event) => {
+    if (isLoading) return;
+    const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
+    const buffer = 10;
+    if (scrollTop + clientHeight >= scrollHeight - buffer) {
+      loadMoreReviews();
+    }
+  };
 
   useEffect(() => {
     setResultsToShow(results.slice(0, currentView));
@@ -34,7 +52,7 @@ const ReviewList = ({
       {resultsToShow.length < 1 ? (
         <div>Please add a review</div>
       ) : (
-        <div className="l-review-list-container">
+        <div className="l-review-list-container" ref={listElementRef} onScroll={handleScroll}>
           {resultsToShow.map((review) => {
             if (currentFilter.indexOf(`${review.rating}`) !== -1 || currentFilter.length < 1) {
               return (
@@ -52,14 +70,14 @@ const ReviewList = ({
         </div>
       )}
       <div className="l-review-list-btn-placement">
-        <button type="button" className="l-review-list-more-btn" onClick={() => handleViewMore()} hidden={resultsToShow.length >= results.length}>
-          MORE REVIEWS
-        </button>
         <button data-testid="add-review-btn" type="button" className="l-review-list-more-btn" onClick={() => handleModal()}>
           ADD A REVIEW
           {' '}
           <FaPlus className="l-review-list-btn-icon" />
         </button>
+        {isLoading && (
+        <div className="scroll-loader" />
+        )}
       </div>
     </div>
   );

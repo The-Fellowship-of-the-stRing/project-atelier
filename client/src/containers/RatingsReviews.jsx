@@ -14,7 +14,7 @@ const RatingsReviews = forwardRef(({ itemId, itemName }, ref) => {
   const [sort, setSort] = useState('relevance');
   const [results, setResults] = useState([]);
   const [currentCount, setCurrentCount] = useState(10);
-  const [currentView, setCurrentView] = useState(2);
+  const [currentView, setCurrentView] = useState(5);
   const [totals, setTotals] = useState(null);
   const [currentFilter, setCurrentFilter] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +44,7 @@ const RatingsReviews = forwardRef(({ itemId, itemName }, ref) => {
   };
 
   const handleViewMore = async () => {
-    const newView = currentView + 2;
+    const newView = currentView + 5;
     if (newView === currentCount) {
       try {
         const response = await getReviews(itemId, sort, (currentCount + 10));
