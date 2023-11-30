@@ -15,27 +15,25 @@ const Answers = ({ questionId, updateAnswers, setUpdateAnswers }) => {
       const response = await axios.get(`/qa/questions/${questionId}/answers?question_id=${questionId}&count=${countToGet}`);
       const sortedResults = response.data.results.sort((a, b) => b.helpfulness - a.helpfulness);
       const sellerToTop = sortedResults.sort((a, b) => (b.answerer_name === 'Seller') - (a.answerer_name === 'Seller'));
-      const filterReported = sellerToTop.filter((answer) => (
-        !reported[answer.answer_id]
-      ));
       if (updateAnswers) {
-        setAnswersToShow(filterReported);
+        setAllAnswers(sellerToTop);
         setUpdateAnswers(false);
       }
       if (countToGet > 100) {
-        setAnswersToShow(filterReported);
+        setAnswersToShow(sellerToTop);
       }
       if (countToGet === 100) {
-        setAllAnswers(filterReported);
-        setAnswersToShow(filterReported.slice(0, 2));
+        setAllAnswers(sellerToTop);
+        setAnswersToShow(sellerToTop.slice(0, 2));
       }
     } catch (err) {
       console.error(err);
     }
   };
 
-  const handleShowAllAnswers = (e) => {
+  const handleShowAllAnswers = async (e) => {
     e.preventDefault();
+    await fetchData();
     setAnswersToShow(allAnswers);
     setCountToGet(1000);
     setShowAll(!showAll);
@@ -95,66 +93,69 @@ const Answers = ({ questionId, updateAnswers, setUpdateAnswers }) => {
   return answersToShow ? (
     <>
       {answersToShow.map((answer) => {
-        const id = answer.answer_id;
-        return (
-          <div className="k-answer-main-block" key={id}>
+        if (!reported[answer.answer_id]) {
+          const id = answer.answer_id;
+          return (
+            <div className="k-answer-main-block" key={id}>
 
-            <div className="k-answer-body">
-              A:
-              {' '}
-              {answer.body}
-            </div>
-
-            <div className="k-answer-details-block">
-              <div className="k-answer-user">
-                by
+              <div className="k-answer-body">
+                A:
                 {' '}
-                {answer.answerer_name === 'Seller'
-                  ? <strong>{answer.answerer_name}</strong>
-                  : answer.answerer_name}
-                ,
+                {answer.body}
               </div>
 
-              <div className="k-answer-date">
-                {formatDate(answer.date)}
-                {' '}
-                |
-                {' '}
-              </div>
+              <div className="k-answer-details-block">
+                <div className="k-answer-user">
+                  by
+                  {' '}
+                  {answer.answerer_name === 'Seller'
+                    ? <strong>{answer.answerer_name}</strong>
+                    : answer.answerer_name}
+                  ,
+                </div>
 
-              <div className="k-answer-helpful">
-                Helpful?
-                {' '}
-              </div>
-              <div
-                className="k-answer-yes-click"
-                onKeyDown={() => checkMarked(id)}
-                tabIndex="0"
-                role="button"
-                style={{ cursor: marked[id] ? 'default' : 'pointer' }}
-                onClick={() => checkMarked(id)}
-              >
-                Yes
-                {' '}
-              </div>
-              (
-              {answer.helpfulness}
-              ) |
-              <div className="k-answer-report">
+                <div className="k-answer-date">
+                  {formatDate(answer.date)}
+                  {' '}
+                  |
+                  {' '}
+                </div>
+
+                <div className="k-answer-helpful">
+                  Helpful?
+                  {' '}
+                </div>
                 <div
-                  className="k-answer-report-click"
-                  onKeyDown={() => checkReported(id)}
+                  className="k-answer-yes-click"
+                  onKeyDown={() => checkMarked(id)}
                   tabIndex="0"
                   role="button"
-                  onClick={() => checkReported(id)}
-                  style={{ cursor: reported[id] ? 'default' : 'pointer' }}
+                  style={{ cursor: marked[id] ? 'default' : 'pointer' }}
+                  onClick={() => checkMarked(id)}
                 >
-                  {reported[id] ? 'Reported' : 'Report'}
+                  Yes
+                  {' '}
+                </div>
+                (
+                {answer.helpfulness}
+                ) |
+                <div className="k-answer-report">
+                  <div
+                    className="k-answer-report-click"
+                    onKeyDown={() => checkReported(id)}
+                    tabIndex="0"
+                    role="button"
+                    onClick={() => checkReported(id)}
+                    style={{ cursor: reported[id] ? 'default' : 'pointer' }}
+                  >
+                    {reported[id] ? 'Reported' : 'Report'}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
+          );
+        }
+        return null;
       })}
       {!showAll && (
         <div
