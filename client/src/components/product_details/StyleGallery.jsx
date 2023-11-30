@@ -1,7 +1,7 @@
 import React from 'react';
 import Style from './Style.jsx';
 
-const StyleGallery = ({ styles, handleStyle }) => (
+const StyleGallery = ({ styles, handleStyle }) => ((
   styles.map((value, index) => (
     <Style
       key={value.style_id}
@@ -9,7 +9,6 @@ const StyleGallery = ({ styles, handleStyle }) => (
       handleStyle={handleStyle}
       index={index}
     />
-  ))
-);
+  ))));
 
 export default StyleGallery;

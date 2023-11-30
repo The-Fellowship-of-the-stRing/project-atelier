@@ -18,7 +18,43 @@
   justify-content: flex-start;
   align-items: center;
   position: relative;
-  width: 100%;
-  height: 80%;
+  width: inherit;
+  height: 80vh;
   background-color: #F6F8FF;
+}
+.g-images-main-expanded-container{
+  height: 70vh;
+  width: 115vh;
+  overflow:scroll;
+}
+.g-images-main-expanded{
+  display:flex;
+  margin: 0 auto;
+  background-position: center;
+  /* set to no-repeat to prevent image repeating */
+  background-repeat: no-repeat;
+  /* set to contain to ensure image is properly filled in container */
+  background-size: contain;
+  cursor:crosshair;
+  height: 70vh;
+  overflow:scroll;
+  /* set style background color */
+  background-color: #1F2041;
+  transition: transform .1s ease-in;
+}
+
+.g-expanded-main-container {
+  display:flex
+}
+
+.g-images-select-container-expanded-prev-btn {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+}
+
+.g-images-select-container-expanded-next-btn {
+  position: absolute;
+  top: 50%;
+  left: 90%;
 }

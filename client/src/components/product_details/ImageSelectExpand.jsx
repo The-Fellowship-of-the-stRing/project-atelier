@@ -10,7 +10,7 @@ const ImageSelectExpand = ({
 }) => (
   style.photos.map((value, index) => (
     <ImageExpand
-      key={value.style_id}
+      key={value.thumbnail_url}
       thumbnail={value.thumbnail_url}
       handleIndex={handleIndex}
       index={index}
