@@ -32,10 +32,19 @@
   margin-right: 10px;
 }
 
-.l-rating-percent {
-  height: 40px;
-  margin-top: 10px;
-  margin-bottom: 20px;
+@media screen and (min-width: 771px) {
+
+  .l-rating-percent {
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 770px) {
+
+  .l-rating-percent {
+    font-size: 12px;
+  }
 }
 
 .l-rating-bars-main {
@@ -57,3 +66,4 @@
   margin-top: 10px;
   cursor: pointer;
 }
+
