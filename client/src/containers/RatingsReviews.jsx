@@ -94,7 +94,7 @@ const RatingsReviews = forwardRef(({ itemId, itemName }, ref) => {
       }
     };
     fetchData();
-  }, [sort]);
+  }, [sort, itemId]);
 
   useEffect(() => {
     const fetchData = async () => {
