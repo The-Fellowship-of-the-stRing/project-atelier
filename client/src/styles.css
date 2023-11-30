@@ -40,11 +40,20 @@
     font-family: 'M PLUS Rounded 1c', sans-serif;
   }
 
+  @media screen and (max-width: 770px) {
+    .app-site-offer-header {
+      color: #686868;
+      font-size: 12px;
+      margin-bottom: 25px;
+    }
+  }
+  @media screen and (min-width: 771px) {
   .app-site-offer-header {
     color: #686868;
     font-size: 18px;
     margin-bottom: 25px;
   }
+}
 
   .app-site-offer-start {
     font-style: italic;
