@@ -29,6 +29,8 @@
 .c-related-container, .c-outfits-container {
   display: grid;
   position: relative;
+  align-self: center;
+  justify-self: center;
 }
 
 .c-carousel-container {
