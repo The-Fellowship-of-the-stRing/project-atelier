@@ -1,5 +1,7 @@
 import '../../stylesheets/product_details/expandedView.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { MdOutlineArrowForwardIos, MdOutlineArrowBackIos } from 'react-icons/md';
+import { AiOutlineClose } from 'react-icons/ai';
 import ImageSelectExpand from './ImageSelectExpand.jsx';
 import Pan from './Pan.jsx';
 
@@ -54,9 +56,9 @@ const ExpandedView = ({
       const quadrantHandleY = event.clientY - containerRect.top - container.clientHeight / 2;
       const mouseX = event.clientX - imageRect.left;
       const mouseY = event.clientY - imageRect.top;
-      console.log("quadrantx is at: ", quadrantHandleX);
+      console.log('quadrantx is at: ', quadrantHandleX);
       const move_X = mouseX - quadrantHandleX;
-      const  move_Y = mouseY - quadrantHandleY;
+      const move_Y = mouseY - quadrantHandleY;
       console.log('Image is at: ', mouseX, mouseY);
       console.log("You're going to translate to: ", move_X, move_Y);
       // img.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
@@ -78,25 +80,48 @@ const ExpandedView = ({
       <div className="g-expanded-modal">
         <div className="g-expanded-main-container">
           {currentIndex > 0 && (
-          <button type="button" className="g-images-select-container-expanded-prev-btn" onClick={previousImage}>
-            {'<'}
-          </button>
+          <MdOutlineArrowBackIos
+            type="button"
+            onKeyDown={previousImage}
+            tabIndex="0"
+            className="g-images-select-container-expanded-prev-btn"
+            onClick={previousImage}
+          />
           )}
-          <div id="g-images-main-expanded-container" className="g-images-main-expanded-container" role="button" tabIndex={0} onKeyDown={handleZoom} onClick={handleZoom}>
-            <img onMouseMove={(e) => panImage(e)} onFocus={(e) => panImage(e)} id="g-images-main-expanded" className="g-images-main-expanded" src={style.photos[`${currentIndex}`].url} alt="current item" />
-          </div>
-          {currentIndex < style.photos.length - 1 && <button type="button" className="g-images-select-container-expanded-next-btn" onClick={nextImage}>{'>'}</button>}
+          <div
+            role="button"
+            tabIndex={0}
+            onKeyDown={handleZoom}
+            onClick={handleZoom}
+            onMouseMove={(e) => panImage(e)}
+            onFocus={(e) => panImage(e)}
+            id="g-images-main-expanded"
+            className="g-images-main-expanded"
+            style={{ backgroundImage: `url(${style.photos[currentIndex].url})` }}
+            alt="current item"
+          />
+          {currentIndex < style.photos.length - 1
+          && (
+            <MdOutlineArrowForwardIos
+              type="button"
+              onKeyDown={nextImage}
+              tabIndex="0"
+              className="g-images-select-container-expanded-next-btn"
+              onClick={nextImage}
+            />
+          )}
         </div>
         <div className="g-images-select-expanded">
 
           {lowIndex > 0
           && (
-          <button
-            type="button"
-            onClick={handlePageIndexLower}
-          >
-            Previous Page
-          </button>
+            <MdOutlineArrowBackIos
+              type="button"
+              onKeyDown={handlePageIndexLower}
+              tabIndex="0"
+              className="g-images-select-container-expanded-prev-page-btn"
+              onClick={handlePageIndexLower}
+            />
           )}
           <ImageSelectExpand
             style={style}
@@ -108,12 +133,22 @@ const ExpandedView = ({
           />
           {(highIndex / 7) < pageCount
           && (
-          <button type="button" onClick={handlePageIndexRaise}>
-            Next Page
-          </button>
+          <MdOutlineArrowForwardIos
+            type="button"
+            onKeyDown={handlePageIndexRaise}
+            tabIndex="0"
+            className="g-images-select-container-expanded-next-page-btn"
+            onClick={handlePageIndexRaise}
+          />
           )}
         </div>
-        <button onClick={handleModalFalse} type="button"> Exit Expanded View </button>
+        <AiOutlineClose
+          onClick={handleModalFalse}
+          onKeyDown={handleModalFalse}
+          tabIndex="0"
+          role="button"
+          className="g-expanded-close-btn"
+        />
       </div>
     </div>
   );

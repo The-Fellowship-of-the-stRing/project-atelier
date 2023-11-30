@@ -15,46 +15,117 @@
 .g-expanded-modal {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   position: relative;
-  width: inherit;
-  height: 80vh;
+  width: 100%;
+  height: 100%;
   background-color: #F6F8FF;
+
 }
-.g-images-main-expanded-container{
+/* .g-images-main-expanded-container{
   height: 70vh;
   width: 115vh;
   overflow:scroll;
-}
+} */
 .g-images-main-expanded{
   display:flex;
   margin: 0 auto;
-  background-position: center;
+  background-position: ;
   /* set to no-repeat to prevent image repeating */
   background-repeat: no-repeat;
   /* set to contain to ensure image is properly filled in container */
   background-size: contain;
   cursor:crosshair;
-  height: 70vh;
-  overflow:scroll;
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
   /* set style background color */
   background-color: #1F2041;
   transition: transform .1s ease-in;
+  overflow: hidden;
 }
 
 .g-expanded-main-container {
-  display:flex
+  display:flex;
+  width:100%;
+  height: 100%;
 }
 
 .g-images-select-container-expanded-prev-btn {
+  height: 100px;
+  width: 30px;
+  background-color: #0000005c;
+  color: #F6F8FF;
   position: absolute;
   top: 50%;
   left: 10%;
+  padding: 10px;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: scale .1s ease-in-out, background-color .1s ease-in-out;
+  outline: none;
 }
 
 .g-images-select-container-expanded-next-btn {
+  height: 100px;
+  width: 30px;
+  background-color: #0000005c;
+  color: #F6F8FF;
   position: absolute;
   top: 50%;
   left: 90%;
+  padding: 10px;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: scale .1s ease-in-out, background-color .1s ease-in-out;
+  outline:none;
+}
+
+.g-images-select-container-expanded-next-btn:hover,
+.g-images-select-container-expanded-prev-btn:hover {
+  background-color: #000000af;
+  scale: 1.05;
+}
+
+.g-images-select-container-expanded-next-page-btn:hover {
+  background-color: #000000af;
+}
+
+.g-images-select-expanded {
+  position: absolute;
+  top: 90%;
+  transform: translateY(-50%);
+  color: #ffffff;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 300px;
+  height: 30px;
+}
+
+.g-images-select-container-expanded-next-page-btn,
+.g-images-select-container-expanded-prev-page-btn{
+  background-color: #0000005c;
+  padding: 5px;
+  color: #F6F8FF;
+  cursor: pointer;
+  transition: background-color .1s ease-in-out;
+  outline:none;
+  border-radius: 100%;
+}
+
+.g-expanded-close-btn {
+  color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-top: 30px;
+  margin-left: 30px;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.g-current-expanded-img-button {
+  cursor: pointer;
 }
