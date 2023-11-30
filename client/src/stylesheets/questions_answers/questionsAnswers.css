@@ -1,12 +1,12 @@
 .k-questions-answers-main-container {
   display: flex;
   flex-direction: column;
-  height: 1000px;
-  width: 100vw;
+  height: 500px;
+  width: 120vw;
   justify-content: center;
   align-items: center;
   margin-top: 80px;
-  margin-bottom: 200px;
+  margin-bottom: 100px;
 }
 
 .k-q-a-title {
@@ -23,7 +23,7 @@
   display: flex;
   align-self: flex-start;
   margin-left: 17%;
-  margin-top: 20px;
+  /* margin-top: 0px; */
   gap: 10px;
 }
 
