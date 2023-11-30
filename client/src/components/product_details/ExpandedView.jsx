@@ -39,7 +39,7 @@ const ExpandedView = ({
       yTranslate = Image.clientHeight / 2 - dimensions.y;
       Image.style.transform = `translate(${xTranslate}px, ${yTranslate}px)`;
       Image.style.scale = 2.5;
-      setZoomPoint([dimensions.x * 2.5, dimensions.y * 2.5]);
+      setZoomPoint([dimensions.x,dimensions.y]);
       setIsZoomed(true);
     }
   };
@@ -48,20 +48,29 @@ const ExpandedView = ({
     // const buffer = 10;
 
     if (isZoomed === true) {
+      console.log(zoomPoint);
       const container = document.getElementById('g-images-main-expanded-container');
       const img = document.getElementById('g-images-main-expanded');
       const containerRect = container.getBoundingClientRect();
       const imageRect = img.getBoundingClientRect();
-      const quadrantHandleX = event.clientX - containerRect.left - container.clientWidth / 2;
-      const quadrantHandleY = event.clientY - containerRect.top - container.clientHeight / 2;
+      const quadrantHandleX = 10/(event.clientX - containerRect.left - container.clientWidth / 2);
+      const quadrantHandleY = 10/(event.clientY - containerRect.top - container.clientHeight / 2);
       const mouseX = event.clientX - imageRect.left;
       const mouseY = event.clientY - imageRect.top;
+<<<<<<< Updated upstream
       console.log('quadrantx is at: ', quadrantHandleX);
       const move_X = mouseX - quadrantHandleX;
       const move_Y = mouseY - quadrantHandleY;
+=======
+      console.log("quadrantx is at: ", quadrantHandleX);
+      const move_X = zoomPoint[0] - quadrantHandleX;
+      const move_Y = zoomPoint[1] - quadrantHandleY;
+>>>>>>> Stashed changes
       console.log('Image is at: ', mouseX, mouseY);
+      console.log('Zoompoint is at: ' ,zoomPoint[0],zoomPoint[1]);
       console.log("You're going to translate to: ", move_X, move_Y);
-      // img.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+      img.style.transform = `translate(${move_X}px, -${move_Y}px)`;
+      setZoomPoint([move_X,move_Y])
     }
     // const maxX = img.clientWidth - container.clientWidth;
     // const maxY = img.clientHeight - container.clientHeight;
