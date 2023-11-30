@@ -30,7 +30,7 @@ const ReviewList = ({
   const handleScroll = (event) => {
     if (isLoading) return;
     const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
-    const buffer = 10;
+    const buffer = 30;
     if (scrollTop + clientHeight >= scrollHeight - buffer) {
       loadMoreReviews();
     }
