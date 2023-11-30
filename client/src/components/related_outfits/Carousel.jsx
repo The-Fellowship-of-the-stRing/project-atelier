@@ -19,7 +19,6 @@ const Carousel = ({
   // const getCardCount = (w) => Math.floor((w - 40) / 210);
   useEffect(() => {
     setVisibleCardCount(maxCardCount);
-
     if (itemId !== mainId) {
       setMainId(itemId);
       setIndexOfFirstVisibleCard(0);

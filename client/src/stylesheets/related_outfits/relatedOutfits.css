@@ -21,7 +21,7 @@
   display: grid;
   margin-top: 50px;
   margin-bottom: 20px;
-  width: 75dvw;
+  width: 80dvw;
   align-self: start;
 }
 
@@ -38,12 +38,17 @@
 }
 .c-cards {
   display: flex;
-  margin: 0 0 0 10px;
+  margin: 0 0 0 30px;
 }
 
 .c-next, .c-prev {
   align-self: center;
-
+  justify-self: center;
+  width: 20px;
+  height: 20px;
+}
+.c-prev {
+  margin-right: -20px;
 }
 .c-card {
   grid-area: name;
