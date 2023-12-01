@@ -10,7 +10,7 @@
 
 .k-mag-glass-search {
   position: absolute;
-  top: 33%;
+  top: 50%;
   left: 96%;
   transform: translateY(-50%);
 }
@@ -20,9 +20,22 @@
   width: calc(81.6vw - 30px);
 }
 
+.k-clear-search-btn:hover {
+  background-color: #eceef5;
+}
+
 .k-clear-search-btn {
-  height: 2.5vh;
-  margin-top: 5px;
+  position: absolute;
+  padding: 3px 3px 0px 3px;
+  height: 2vh;
+  margin-top: 60px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border: 1px solid #383838;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: small;
+  color: #383838;
 }
 
 form {

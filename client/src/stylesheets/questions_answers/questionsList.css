@@ -9,7 +9,7 @@
 }
 
 .k-question-block {
-  margin-top: 20px;
+  margin-top: 40px;
  display: flex;
  justify-content: space-between;
  width: 100%;
@@ -32,6 +32,7 @@
 
 .k-question-helpful {
   font-size: 14px;
+  margin-top: 5.8px;
   margin-right: 5px;
   color: #686868
 }

@@ -33,7 +33,7 @@ const QuestionsList = ({
             <div className="k-question-block">
               <div
                 className={`k-question-body ${isSearched ? 'highlight' : ''}`}
-                style={{ backgroundColor: isSearched ? 'yellow' : 'transparent' }}
+                style={{ backgroundColor: isSearched ? '#ECFFDC' : 'transparent' }}
               >
                 Q:
                 {' '}
