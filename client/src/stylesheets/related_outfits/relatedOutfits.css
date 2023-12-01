@@ -21,6 +21,7 @@
   display: grid;
   margin-top: 50px;
   margin-bottom: 20px;
+  margin: 50px 0 20px 15px;
   width: 80dvw;
   align-self: start;
 }
@@ -82,6 +83,24 @@
   "img-container"
   "text-container";
 }
+
+.c-card-no-hover {
+  grid-area: name;
+  display: grid;
+  height: 355px;
+  width: 200px;
+  margin-right: 20px;
+  grid-template-columns: 200px;
+  border-radius: 1%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 1.5px 1.5px 2px;
+  /* transition: transform .1s ease-in-out; */
+  justify-content: left;
+  align-items: flex-start;
+  grid-template-areas:
+  "img-container"
+  "text-container";
+}
 .c-card:hover {
   transform: scale(1.01) rotate(-0.2deg);
   box-shadow: 2px 2px 2px;
@@ -100,9 +119,9 @@
   margin: 10px 14px 0 0 ;
   position: absolute;
 }
-.c-card-action-compare:hover, .c-card-action-delete:hover {
+/* .c-card-action-compare:hover, .c-card-action-delete:hover {
   transform: scale(1.01);
-}
+} */
 .c-card-img {
   border-radius: 1%;
   background-position: center;
