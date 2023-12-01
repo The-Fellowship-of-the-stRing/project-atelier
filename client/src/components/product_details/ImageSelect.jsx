@@ -9,8 +9,12 @@ const ImageSelect = ({
   highIndex,
 }) => (
   style.photos.map((value, index) => {
-    const link = value.thumbnail_url.slice(value.thumbnail_url.indexOf('http'));
-    console.log(link);
+    let link = '';
+    if (value) {
+      if (value.thumbnail_url) {
+        link = value.thumbnail_url.slice(value.thumbnail_url.indexOf('http'));
+      }
+    }
     return (
       <Image
         key={link}
