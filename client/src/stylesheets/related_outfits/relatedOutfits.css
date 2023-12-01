@@ -24,6 +24,7 @@
   margin: 50px 0 20px 15px;
   width: 80dvw;
   align-self: start;
+  font-size: 24px;
 }
 
 /* RELATED & OUTFITS CONTAINER */
@@ -116,7 +117,7 @@
 }
 .c-card-action-compare, .c-card-action-delete {
   justify-self: end;
-  margin: 10px 14px 0 0 ;
+  margin: 10px 14px 0 0;
   position: absolute;
 }
 /* .c-card-action-compare:hover, .c-card-action-delete:hover {
