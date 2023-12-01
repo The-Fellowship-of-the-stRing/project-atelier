@@ -19,6 +19,7 @@
   display: flex;
     height: 100%;
     width: 70%;
+    margin-right: 5%;
     /* removed z-index as we dont need to control stacking with this component */
 }
 .g-product-details-column2{

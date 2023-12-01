@@ -77,6 +77,7 @@ const ImageGallery = ({ style }) => {
           />
           )}
         <ImageSelect
+          className="g-select"
           style={style}
           handleIndex={handleIndex}
           currentIndex={currentIndex}
