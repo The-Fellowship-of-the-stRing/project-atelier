@@ -9,6 +9,7 @@ const Style = ({ thumbnail, handleStyle, index }) => (
     onKeyDown={() => handleStyle(index)}
     onClick={() => handleStyle(index)}
     alt="style option"
+    aria-label="style"
   />
 );
 export default Style;

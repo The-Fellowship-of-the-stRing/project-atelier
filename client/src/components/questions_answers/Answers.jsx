@@ -132,6 +132,7 @@ const Answers = ({ questionId, updateAnswers, setUpdateAnswers }) => {
                   role="button"
                   style={{ cursor: marked[id] ? 'default' : 'pointer' }}
                   onClick={() => checkMarked(id)}
+                  aria-label="helpful"
                 >
                   Yes
                   {' '}
@@ -147,6 +148,7 @@ const Answers = ({ questionId, updateAnswers, setUpdateAnswers }) => {
                     role="button"
                     onClick={() => checkReported(id)}
                     style={{ cursor: reported[id] ? 'default' : 'pointer' }}
+                    aria-label="report answer"
                   >
                     {reported[id] ? 'Reported' : 'Report'}
                   </div>
@@ -164,6 +166,7 @@ const Answers = ({ questionId, updateAnswers, setUpdateAnswers }) => {
           role="button"
           className="k-load-more-answers"
           onClick={(e) => handleShowAllAnswers(e)}
+          aria-label="see more answers"
         >
           <strong>SEE MORE ANSWERS</strong>
         </div>
@@ -175,6 +178,7 @@ const Answers = ({ questionId, updateAnswers, setUpdateAnswers }) => {
           role="button"
           className="k-collapse-answers"
           onClick={(e) => handleShowFewerAnswers(e)}
+          aria-label="collapse answers"
         >
           <strong>COLLAPSE ANSWERS</strong>
         </div>

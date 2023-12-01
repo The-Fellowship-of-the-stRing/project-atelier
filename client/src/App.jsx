@@ -64,6 +64,7 @@ const App = () => {
               onKeyDown={() => updateMainProduct(siteOffer.id)}
               onClick={() => updateMainProduct(siteOffer.id)}
               className="app-site-offer-link"
+              aria-label="product highlight"
             >
               {siteOffer.name}
             </span>

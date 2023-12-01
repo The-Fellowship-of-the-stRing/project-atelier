@@ -27,6 +27,7 @@ const Reviews = ({ itemId, reviewRef }) => {
         id="g-review-scroll"
         onKeyDown={() => handleRef(reviewRef)}
         onClick={() => handleRef(reviewRef)}
+        aria-label="view reviews"
       >
         {reviewCount}
         {' '}

@@ -11,6 +11,7 @@ const ImageExpand = ({
       onClick={() => handleIndex(index)}
       role="button"
       tabIndex="0"
+      aria-label="select image to view"
     >
       <FaRegCircle className="g-current-expanded-img-button" />
     </div>
@@ -21,6 +22,7 @@ const ImageExpand = ({
       onClick={() => handleIndex(index)}
       role="button"
       tabIndex="0"
+      aria-label="current image selected"
     >
       <FaCircle className="g-current-expanded-img-button" />
 
