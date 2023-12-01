@@ -83,7 +83,7 @@ const App = () => {
             itemName={currentItem.name}
             ref={reviewRef}
           />
-          <Footer />
+          <Footer topRef={topRef} />
         </Suspense>
       )}
     </div>

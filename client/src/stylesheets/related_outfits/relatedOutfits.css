@@ -87,6 +87,7 @@
   grid-template-areas:
   "img-container"
   "text-container";
+  background-color: #F6F8FF;
 }
 
 .c-card-no-hover {
