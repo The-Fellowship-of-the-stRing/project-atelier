@@ -10,6 +10,7 @@ const ImageSelectExpand = ({
 }) => (
   style.photos.map((value, index) => {
     let link = '';
+    const key = index;
     if (value) {
       if (value.thumbnail_url) {
         link = value.thumbnail_url.slice(value.thumbnail_url.indexOf('http'));
@@ -17,7 +18,7 @@ const ImageSelectExpand = ({
     }
     return (
       <ImageExpand
-        key={link}
+        key={key}
         thumbnail={link}
         handleIndex={handleIndex}
         index={index}

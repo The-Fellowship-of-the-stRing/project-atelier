@@ -1,13 +1,14 @@
 .g-styleGallery{
   display: flex;
   flex-wrap: wrap;
-  width:240px;
+  width:360px;
 }
 .g-style_image {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width:40px;
+  width: 44px;
   padding: 10px;
-  height:40px;
+  height: 44px;
+  margin: 5px;
 }

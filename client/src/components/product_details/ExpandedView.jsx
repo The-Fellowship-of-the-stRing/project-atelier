@@ -65,6 +65,7 @@ const ExpandedView = ({
               backgroundImage: `url(${style.photos[currentIndex].url})`,
               backgroundPosition: isZoomed ? `${mouseX}% ${mouseY}%` : '',
               backgroundSize: isZoomed ? '250%' : 'contain',
+              cursor: isZoomed ? 'zoom-out' : 'zoom-in',
             }}
             alt="current item"
           />

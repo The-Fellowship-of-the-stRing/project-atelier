@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import QuantityDropdown from './QuantityDropdown.jsx';
 import SizeDropdown from './SizeDropdown.jsx';
+import '../../stylesheets/product_details/cart.css';
 
 const Cart = ({ style }) => {
   const [sku, setSku] = useState(null);
@@ -17,7 +18,7 @@ const Cart = ({ style }) => {
         <SizeDropdown style={style} handleSku={handleSku} />
         <QuantityDropdown style={style} handleQuantity={handleQuantity} sku={sku} />
       </div>
-      <button type="button"> Add to Cart </button>
+      <button className="g-cart-button" type="button"> Add to Cart </button>
     </div>
   ) : <div />;
 };
