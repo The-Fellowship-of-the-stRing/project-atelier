@@ -36,6 +36,7 @@ const Search = ({ searchTerm, setSearchTerm }) => {
         <button
           type="button"
           className="k-clear-search-btn"
+          // onKeyDown={(e) => (e.key === 'Enter' ? clearSearch(e) : '')}
           onClick={(e) => clearSearch(e)}
         >
           Clear Search
