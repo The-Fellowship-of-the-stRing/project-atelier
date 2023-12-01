@@ -33,14 +33,17 @@ const Search = ({ searchTerm, setSearchTerm }) => {
             style={magnifyingGlassStyle}
           />
         </div>
-        <button
-          type="button"
-          className="k-clear-search-btn"
-          onClick={(e) => clearSearch(e)}
-        >
-          Clear Search
-        </button>
       </form>
+      <div
+        onKeyDown={(e) => clearSearch(e)}
+        tabIndex="0"
+        role="button"
+        className="k-clear-search-btn"
+        // onKeyDown={(e) => (e.key === 'Enter' ? clearSearch(e) : '')}
+        onClick={(e) => clearSearch(e)}
+      >
+        Clear Search
+      </div>
     </div>
   );
 };

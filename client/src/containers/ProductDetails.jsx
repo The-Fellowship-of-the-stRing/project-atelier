@@ -21,9 +21,6 @@ const ProductDetails = ({ itemId, reviewRef }) => {
       try {
         const productData = await getProductDataById(itemId);
         const styleData = await getStyleDataById(itemId);
-        // Leaving console.logs in comments for when I need to reference it
-        // console.log(productData);
-        // console.log(styleData);
         const values = {};
         values.name = productData.name;
         values.slogan = productData.slogan;
@@ -80,29 +77,29 @@ const ProductDetails = ({ itemId, reviewRef }) => {
         <div className="g-product-details-column2">
           <Reviews itemId={itemId} reviewRef={reviewRef} />
           <div className="g-product-details-info">
-            <div>{data.category}</div>
-            <div>{data.name}</div>
-            <div>{data.slogan}</div>
+            <u style={{paddingLeft: '3px'}}>{data.category}</u>
+            <h1 style={{ marginBlockStart: '0.3em', marginBlockEnd: '0.3em' }}>{data.name}</h1>
+            <em style={{ color: 'gray', marginBlockStart: '0.1em', marginBlockEnd: '0.5em' }}>{data.slogan}</em>
             { isSale === true && (
             <div className="g-product-details-price">
-              <div className="g-product-details-sale">
+              <b className="g-product-details-sale">
                 $
                 {price}
-              </div>
-              <div>
+              </b>
+              <b style={{ color: '#BB0A21', fontStyle: 'italic' }}>
                 &nbsp;
                 $
                 {salePrice}
-              </div>
+              </b>
             </div>
             )}
             { isSale === false && (
-            <div>
-              <div>
+            <b className="g-product-details-price">
+              <b>
                 $
                 {price}
-              </div>
-            </div>
+              </b>
+            </b>
             )}
           </div>
           <StyleList styles={styles} style={style} handleStyle={handleStyle} />

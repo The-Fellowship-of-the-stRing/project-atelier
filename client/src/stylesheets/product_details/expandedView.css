@@ -31,11 +31,11 @@
 .g-images-main-expanded{
   display:flex;
   margin: 0 auto;
-  background-position: ;
   /* set to no-repeat to prevent image repeating */
   background-repeat: no-repeat;
   /* set to contain to ensure image is properly filled in container */
   background-size: contain;
+  background-position: center;
   cursor:crosshair;
   height: 100%;
   width: 100%;
@@ -59,7 +59,7 @@
   color: #F6F8FF;
   position: absolute;
   top: 50%;
-  left: 10%;
+  left: 5%;
   padding: 10px;
   cursor: pointer;
   transform: translateY(-50%);
@@ -74,7 +74,7 @@
   color: #F6F8FF;
   position: absolute;
   top: 50%;
-  left: 90%;
+  left: 95%;
   padding: 10px;
   cursor: pointer;
   transform: translateY(-50%);

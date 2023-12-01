@@ -11,7 +11,7 @@
 .g-product-details-column-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   height: 100%;
 }
@@ -19,6 +19,7 @@
   display: flex;
     height: 100%;
     width: 70%;
+    margin-right: 5%;
     /* removed z-index as we dont need to control stacking with this component */
 }
 .g-product-details-column2{
@@ -26,22 +27,25 @@
   flex-direction: column;
   height: 100%;
   /* removed excess padding, centering divs correctly positions in screen */
-  width: 30%;
+  width: 24vw;
   /* removed position property so divs dont stack */
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
 }
-
+.g-styleList {
+  margin-block-start: 4%;
+}
 .g-product-details-info{
   display: flex;
   flex-direction: column;
 }
 .g-product-details-price{
   display: flex;
+  font-size: larger;
+  margin-block-start: 6%;
   /* removed flex-direction row as this is a default property of flex */
 }
 .g-product-details-sale{
-  color:#BB0A21;
   text-decoration: line-through;
 }

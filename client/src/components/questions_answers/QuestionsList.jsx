@@ -10,6 +10,7 @@ const QuestionsList = ({
   handleAnswerModal,
   updateAnswers,
   setUpdateAnswers,
+  searchTerm,
 }) => {
   const [marked, setMarked] = useState({});
 
@@ -24,14 +25,19 @@ const QuestionsList = ({
     <div className="k-questions-list">
       {resultsToShow.map((question) => {
         const id = question.question_id;
+        const q = question.question_body;
+        const isSearched = searchTerm && q.toLowerCase().includes(searchTerm.toLowerCase());
         return (
-          <div className="k-question-answer-container" key={id}>
+          <div className={`k-question-answer-container ${isSearched ? 'hightlight' : ''}`} key={id}>
 
             <div className="k-question-block">
-              <div className="k-question-body">
+              <div
+                className={`k-question-body ${isSearched ? 'highlight' : ''}`}
+                style={{ backgroundColor: isSearched ? '#ECFFDC' : 'transparent' }}
+              >
                 Q:
                 {' '}
-                {question.question_body}
+                {q}
               </div>
               <div className="k-question-helpful">
                 Helpful?

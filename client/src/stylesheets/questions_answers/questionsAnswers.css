@@ -5,6 +5,17 @@
   width: 121dvw;
   justify-content: center;
   align-items: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.k-no-results-to-show {
+  display: flex;
+  flex-direction: column;
+  height: 10px;
+  width: 121dvw;
+  justify-content: center;
+  align-items: center;
   margin-top: 80px;
   margin-bottom: 100px;
 }
@@ -28,6 +39,11 @@
   margin-bottom: 40px;
 }
 
+.k-more-answered-questions:hover,
+.k-add-a-question:hover {
+  background-color: #eceef5;
+}
+
 .k-more-answered-questions {
   padding: 20px;
   background-color: #ffffff;
@@ -45,3 +61,4 @@
   font-weight: bold;
   color: #383838;
 }
+

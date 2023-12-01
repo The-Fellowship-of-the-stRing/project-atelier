@@ -59,7 +59,8 @@
   width: 90%;
   justify-content: flex-start;
   padding-top: 30px;
-  padding-bottom: 30px
+  padding-bottom: 30px;
+  margin-bottom: 80px
 }
 
 .l-add-review-stars {
@@ -75,7 +76,7 @@
   height: 30px;
   align-items: center;
   margin-bottom: 20px;
-  /* margin-top: 20px; */
+  margin-top: 20px;
   justify-content: flex-start;
 }
 
@@ -181,8 +182,13 @@ margin-left: 20px;
   margin-top: 10px;
 }
 
+.l-add-review-btn:hover {
+  background-color: #1f2041d9;
+}
+
 .l-add-review-thumbnails {
   display: flex;
+  margin-bottom: 20px
 }
 
 .l-add-review-add-image {
@@ -204,7 +210,7 @@ margin-left: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 10px
+  margin-left: 10px;
 }
 
 .l-add-review-image-btn-all {
@@ -220,8 +226,7 @@ margin-left: 20px;
 }
 .l-add-review-image-btn-all:hover,
 .l-add-review-image-btn:hover,
-.l-add-review-add-image:hover,
-.l-add-review-btn:hover {
+.l-add-review-add-image:hover {
   background-color: #eceef5;
 }
 

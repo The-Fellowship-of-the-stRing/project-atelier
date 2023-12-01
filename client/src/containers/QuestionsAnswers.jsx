@@ -73,7 +73,7 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
 
   return resultsToShow ? (
 
-    <div className="k-questions-answers-main-container">
+    <div className={resultsToShow.length === 0 ? 'k-no-results-to-show' : 'k-questions-answers-main-container'}>
       <div className="k-q-a-title">QUESTIONS AND ANSWERS</div>
       {addAnswerModal && (
       <div>

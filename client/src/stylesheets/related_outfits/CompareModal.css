@@ -7,14 +7,22 @@ body.show-modal {
   pointer-events: none;
   width: 100vw;
   height: 100vh;
-  z-index: 11;
   overflow-x: scroll;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+
+}
+.c-compare-modal{
+  z-index: 12;
+  position:relative
+}
+.c-overlay {
+  z-index: 11;
   position: fixed;
 }
+
 table {
   border-spacing: 5px;
 

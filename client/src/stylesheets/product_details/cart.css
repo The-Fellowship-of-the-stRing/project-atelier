@@ -5,4 +5,32 @@
 .g-dropdowns {
   display: flex;
   flex-direction: row;
+  background-color: #F6F8FF;
+  height: 35px;
+  min-width: 150px;
+  margin-block-start: 1em;
+  width:50%
+}
+.g-size-drop-down {
+  margin-right:20px;
+}
+.g-cart-button {
+  display: flex;
+    padding: 20px;
+    background-color: #BB0A21    ;
+    border: 1px solid #383838;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    margin-right: 50px;
+    align-items: center;
+    height: 55px;
+    position: relative;
+    min-width: 150px;
+    justify-content: center;
+    margin-top: 20px;
+}
+.g-cart-button:hover {
+
+  background-color: #cc112a;
 }
