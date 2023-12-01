@@ -49,6 +49,7 @@ const Compare = ({
           tabIndex="0"
           onKeyPress={() => compareClickHandler()}
           onClick={() => compareClickHandler()}
+          aria-label="close compare"
         >
           ❌
         </div>

@@ -11,7 +11,7 @@ const ImageGallery = ({ style }) => {
   const [lowIndex, setLowIndex] = useState(0);
   const [highIndex, setHighIndex] = useState(7);
   const [modalState, setModalState] = useState(false);
-  const handleIndex =(value) => {
+  const handleIndex = (value) => {
     setCurrentIndex(value);
   };
   const handlePage = () => {
@@ -72,7 +72,7 @@ const ImageGallery = ({ style }) => {
             style={{ color: 'white' }}
             type="button"
             onKeyDown={handlePageIndexLower}
-            tabIndex={0}
+            tabIndex="0"
             onClick={handlePageIndexLower}
           />
           )}
@@ -91,14 +91,20 @@ const ImageGallery = ({ style }) => {
               style={{ color: 'white' }}
               type="button"
               onKeyDown={handlePageIndexRaise}
-              tabIndex={0}
+              tabIndex="0"
               onClick={handlePageIndexRaise}
             />
           )}
       </div>
       <div className="g-images-main-container">
 
-        <div role="button" tabIndex={0} onKeyDown={handleModalTrue} onClick={handleModalTrue}>
+        <div
+          role="button"
+          tabIndex="0"
+          onKeyDown={handleModalTrue}
+          onClick={handleModalTrue}
+          aria-label="current item"
+        >
           <img className="g-images-main" src={style.photos[`${currentIndex}`].url} alt="current item" />
         </div>
         {currentIndex > 0 && (

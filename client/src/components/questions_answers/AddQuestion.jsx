@@ -85,6 +85,7 @@ const AddQuestion = ({
             role="button"
             className="k-add-queston-submit"
             onClick={(e) => sendQuestionData(e)}
+            aria-label="submit your question"
           >
             Submit Your Question
           </div>

@@ -42,6 +42,7 @@ const Outfits = ({ itemId, updateMainProduct, maxCardCount }) => {
       tabIndex="0"
       onKeyPress={() => addProduct()}
       onClick={() => addProduct()}
+      aria-label="add card"
     >
       <VscDiffAdded className="c-card-action-add" />
     </div>

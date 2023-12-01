@@ -60,6 +60,7 @@ const ReviewTile = ({ review, handleHelpful, handleReport }) => {
         {' '}
         <span
           role="button"
+          aria-label="show more review body"
           tabIndex="0"
           onKeyDown={() => handleShowMore()}
           className="l-review-tile-show-more"
@@ -101,6 +102,7 @@ const ReviewTile = ({ review, handleHelpful, handleReport }) => {
           data-testid="helpfull-button"
           style={{ cursor: !markedHelp ? 'pointer' : 'default' }}
           onClick={() => handleMark()}
+          aria-label="mark helpful"
         >
           Yes
         </span>
@@ -115,6 +117,7 @@ const ReviewTile = ({ review, handleHelpful, handleReport }) => {
           onKeyDown={() => handleReport(review.review_id)}
           className="l-review-tile-report"
           onClick={() => handleReport(review.review_id)}
+          aria-label="report review"
         >
           Report
         </span>

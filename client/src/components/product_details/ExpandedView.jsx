@@ -54,7 +54,8 @@ const ExpandedView = ({
           )}
           <div
             role="button"
-            tabIndex={0}
+            aria-label="zoom into image"
+            tabIndex="0"
             onKeyDown={handleZoom}
             onClick={handleZoom}
             onMouseMove={(e) => panImage(e)}
@@ -119,6 +120,7 @@ const ExpandedView = ({
           tabIndex="0"
           role="button"
           className="g-expanded-close-btn"
+          aria-label="close expanded view"
         />
       </div>
     </div>

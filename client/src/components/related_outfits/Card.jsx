@@ -83,6 +83,7 @@ const Card = ({
         tabIndex="0"
         onKeyPress={() => compareClickHandler()}
         onClick={() => compareClickHandler()}
+        aria-label="view compare"
       >
         ⭐
       </div>),
@@ -94,6 +95,7 @@ const Card = ({
         tabIndex="0"
         onKeyPress={() => deleteProduct(itemId)}
         onClick={() => deleteProduct(itemId)}
+        aria-label="remove item from outfit"
       >
         ❌
       </div>),
@@ -124,6 +126,7 @@ const Card = ({
             // onKeyPress={() => updateMainProduct(itemId)}
             // onClick={() => updateMainProduct(itemId)}
             style={{ backgroundImage: `url(${cardImage})` }}
+            aria-label="view product"
           />
           {actionButtons[action]}
           {/* // <div
@@ -170,6 +173,7 @@ const Card = ({
             tabIndex="0"
             onKeyPress={() => updateMainProduct(itemId)}
             onClick={() => updateMainProduct(itemId)}
+            aria-label="view card details"
           >
             {cardData.name}
           </div>
