@@ -37,6 +37,9 @@
   margin-left: 20px;
 }
 
+.k-answer-report:hover {
+  color: #A52A2A;
+}
 .k-answer-report {
   margin-left: 5px;
 }
