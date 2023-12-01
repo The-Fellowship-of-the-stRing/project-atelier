@@ -26,8 +26,8 @@ const Compare = ({
       let currentValue = compareData[feature].current ? compareData[feature].current : '';
       let compareValue = compareData[feature].compared ? compareData[feature].compared : '';
       if (currentValue === compareValue && currentValue !== '') {
-        currentValue = <IoMdCheckmark />;
-        compareValue = <IoMdCheckmark />;
+        currentValue = <IoMdCheckmark className="c-compare-value" />;
+        compareValue = <IoMdCheckmark className="c-compare-value" />;
       }
       return (
         <tr key={feature} className="c-compare-feature-item" data-testid="feature">

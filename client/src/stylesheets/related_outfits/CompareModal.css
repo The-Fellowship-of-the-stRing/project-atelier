@@ -61,8 +61,15 @@ thead th:nth-child(3) {
   text-align: center;
   vertical-align: center;
   font-size: 14px;
+
 }
+.c-compare-value {
+  color: rgb(61, 220, 151);
+  font-weight: 500;
+}
+
 .c-compare-feature-value {
+  color: gray;
   font-weight: 900;
 }
 
