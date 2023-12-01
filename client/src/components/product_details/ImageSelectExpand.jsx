@@ -17,7 +17,7 @@ const ImageSelectExpand = ({
     }
     return (
       <ImageExpand
-        key={link}
+        key={value.thumbnail_url}
         thumbnail={link}
         handleIndex={handleIndex}
         index={index}

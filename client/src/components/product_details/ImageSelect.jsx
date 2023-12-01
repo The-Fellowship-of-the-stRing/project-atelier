@@ -10,6 +10,7 @@ const ImageSelect = ({
 }) => (
   style.photos.map((value, index) => {
     let link = '';
+    console.log(value);
     if (value) {
       if (value.thumbnail_url) {
         link = value.thumbnail_url.slice(value.thumbnail_url.indexOf('http'));
@@ -17,7 +18,11 @@ const ImageSelect = ({
     }
     return (
       <Image
+<<<<<<< Updated upstream
         key={index}
+=======
+        key={value.thumbnail_url}
+>>>>>>> Stashed changes
         thumbnail={link}
         handleIndex={handleIndex}
         index={index}

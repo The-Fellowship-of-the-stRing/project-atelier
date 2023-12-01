@@ -65,9 +65,8 @@ const ImageGallery = ({ style }) => {
         />
       )}
       {/* removed div left spacer, not needed with corrected css styling */}
-      <div className="g-images-main-container">
-        <div className="g-images-select-container">
-          {lowIndex > 0
+      <div className="g-images-select-container">
+        {lowIndex > 0
           && (
           <IoChevronUp
             style={{ color: 'white' }}
@@ -77,15 +76,15 @@ const ImageGallery = ({ style }) => {
             onClick={handlePageIndexLower}
           />
           )}
-          <ImageSelect
-            style={style}
-            handleIndex={handleIndex}
-            currentIndex={currentIndex}
-            handlePage={handlePage}
-            lowIndex={lowIndex}
-            highIndex={highIndex}
-          />
-          {(highIndex / 7) < pageCount
+        <ImageSelect
+          style={style}
+          handleIndex={handleIndex}
+          currentIndex={currentIndex}
+          handlePage={handlePage}
+          lowIndex={lowIndex}
+          highIndex={highIndex}
+        />
+        {(highIndex / 7) < pageCount
           && (
             <IoChevronDown
               style={{ color: 'white' }}
@@ -95,7 +94,9 @@ const ImageGallery = ({ style }) => {
               onClick={handlePageIndexRaise}
             />
           )}
-        </div>
+      </div>
+      <div className="g-images-main-container">
+
         <div role="button" tabIndex={0} onKeyDown={handleModalTrue} onClick={handleModalTrue}>
           <img className="g-images-main" src={style.photos[`${currentIndex}`].url} alt="current item" />
         </div>

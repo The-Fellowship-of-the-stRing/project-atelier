@@ -21,6 +21,8 @@ const ProductDetails = ({ itemId, reviewRef }) => {
       try {
         const productData = await getProductDataById(itemId);
         const styleData = await getStyleDataById(itemId);
+        console.log(productData);
+        console.log(styleData);
         const values = {};
         values.name = productData.name;
         values.slogan = productData.slogan;
