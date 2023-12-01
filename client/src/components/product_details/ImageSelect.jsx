@@ -8,16 +8,19 @@ const ImageSelect = ({
   lowIndex,
   highIndex,
 }) => (
-  style.photos.map((value, index) => (
-    <Image
-      key={value.thumbnail_url}
-      thumbnail={value.thumbnail_url}
-      handleIndex={handleIndex}
-      index={index}
-      currentIndex={currentIndex}
-      lowIndex={lowIndex}
-      highIndex={highIndex}
-    />
-  ))
-);
+  style.photos.map((value, index) => {
+    const link = value.thumbnail_url.slice(value.thumbnail_url.indexOf('http'));
+    console.log(link);
+    return (
+      <Image
+        key={link}
+        thumbnail={link}
+        handleIndex={handleIndex}
+        index={index}
+        currentIndex={currentIndex}
+        lowIndex={lowIndex}
+        highIndex={highIndex}
+      />
+    );
+  }));
 export default ImageSelect;
