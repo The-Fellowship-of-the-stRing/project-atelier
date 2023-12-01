@@ -11,8 +11,8 @@ const ImageGallery = ({ style }) => {
   const [lowIndex, setLowIndex] = useState(0);
   const [highIndex, setHighIndex] = useState(7);
   const [modalState, setModalState] = useState(false);
-  const handleIndex = async (value) => {
-    await setCurrentIndex(value);
+  const handleIndex =(value) => {
+    setCurrentIndex(value);
   };
   const handlePage = () => {
     setPageCount(pageCount + 1);
