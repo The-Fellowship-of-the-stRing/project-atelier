@@ -1,6 +1,7 @@
 .g-cart {
   display: flex;
   flex-direction: column;
+  width: 100%
 }
 .g-dropdowns {
   display: flex;
@@ -29,6 +30,7 @@
     min-width: 150px;
     justify-content: center;
     margin-top: 20px;
+    width: 50%;
 }
 .g-cart-button:hover {
 
