@@ -54,7 +54,7 @@ const ExpandedView = ({
           )}
           <div
             role="button"
-            tabIndex={0}
+            tabIndex="0"
             onKeyDown={handleZoom}
             onClick={handleZoom}
             onMouseMove={(e) => panImage(e)}

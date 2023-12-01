@@ -82,6 +82,7 @@ const RatingBreakdown = ({
               {currentFilter.map((value, index) => (index === currentFilter.length - 1 ? `${value}` : `${value}, `))}
               <div
                 role="button"
+                aria-label="remove filters"
                 onKeyDown={() => updateFilter([])}
                 tabIndex="0"
                 className="l-rating-bars-remove"

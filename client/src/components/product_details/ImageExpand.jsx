@@ -10,7 +10,7 @@ const ImageExpand = ({
       onKeyDown={() => handleIndex(index)}
       onClick={() => handleIndex(index)}
       role="button"
-      tabIndex={index}
+      tabIndex="0"
     >
       <FaRegCircle className="g-current-expanded-img-button" />
     </div>
@@ -20,7 +20,7 @@ const ImageExpand = ({
       onKeyDown={() => handleIndex(index)}
       onClick={() => handleIndex(index)}
       role="button"
-      tabIndex={index}
+      tabIndex="0"
     >
       <FaCircle className="g-current-expanded-img-button" />
 

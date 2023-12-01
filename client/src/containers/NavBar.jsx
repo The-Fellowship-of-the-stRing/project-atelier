@@ -24,6 +24,7 @@ const NavBar = ({ topRef }) => {
 
           <div
             role="button"
+            aria-label="app icon"
             onKeyDown={() => handleRef(topRef)}
             tabIndex="0"
             style={{ backgroundImage: `url(${icon})` }}
@@ -35,7 +36,7 @@ const NavBar = ({ topRef }) => {
         </div>
         <div className="l-navbar-search-container">
           <Search handleSearch={handleSearch} />
-          <GoSearch className="l-navbar-search-icon" />
+          <GoSearch className="l-navbar-search-icon" aria-label="search icon" />
         </div>
       </div>
     </div>

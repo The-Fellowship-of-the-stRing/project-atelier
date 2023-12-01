@@ -21,7 +21,13 @@ const Reviews = ({ itemId, reviewRef }) => {
   return reviewCount > 0 ? (
     <div className="g-reviews">
       <Stars itemId={itemId} />
-      <div role="button" tabIndex={0} id="g-review-scroll" onKeyDown={() => handleRef(reviewRef)} onClick={() => handleRef(reviewRef)}>
+      <div
+        role="button"
+        tabIndex="0"
+        id="g-review-scroll"
+        onKeyDown={() => handleRef(reviewRef)}
+        onClick={() => handleRef(reviewRef)}
+      >
         {reviewCount}
         {' '}
         reviews

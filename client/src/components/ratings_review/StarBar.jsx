@@ -12,6 +12,7 @@ const StarBar = ({
       onKeyDown={() => updateFilter(current)}
       className="l-star-bar-text"
       onClick={() => updateFilter(current)}
+      aria-label="filter for stars"
     >
       {current}
       {' '}
