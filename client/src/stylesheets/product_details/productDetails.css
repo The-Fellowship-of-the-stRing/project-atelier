@@ -5,7 +5,7 @@
   justify-content: center;
   font-family: 'M PLUS Rounded 1c', sans-serif;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 /* Added this style to hold the two columns seporate from the item description */
 .g-product-details-column-container {
@@ -48,4 +48,20 @@
 }
 .g-product-details-sale{
   text-decoration: line-through;
+}
+
+.g-product-details-desc {
+  display: flex;
+  flex-direction: column;
+  margin-block-start: 2em;
+
+}
+
+#g-desc-slogan {
+  font-style: italic;
+  font-weight: bold;
+  font-size: x-large;
+}
+#g-desc-description{
+  margin-block-start: 1em;
 }
