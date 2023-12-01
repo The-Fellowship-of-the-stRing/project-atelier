@@ -39,9 +39,10 @@ const Carousel = ({
     if (itemId === mainId) {
       let firstIndex = indexOfFirstVisibleCard;
       let cardCount = maxCardCount;
-      // if (!isAdded && action === 'outfits') {
-      //   cardCount -= 1;
-      // }
+      if (!isAdded && action === 'outfits') {
+        cardCount -= 1;
+      }
+      setVisibleCardCount(cardCount);
       let lastIndex = firstIndex + cardCount;
       if (lastIndex === ids.length) {
         setVisibleCards(ids.slice(firstIndex, lastIndex));
