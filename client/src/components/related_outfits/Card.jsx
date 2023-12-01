@@ -140,7 +140,7 @@ const Card = ({
               //   style={{ backgroundImage: `url(${photo.thumbnail_url})` }}
               // /> */}
           <div className="c-card-pre-img-container">
-            {cardData.prePhotos.map((photo, index) => index < 4
+            {cardData.prePhotos.map((photo, index) => index < 4 && photo.thumbnail_url
               && (
                 // <PreviewImage
                 //   className="c-card-pre-img"
