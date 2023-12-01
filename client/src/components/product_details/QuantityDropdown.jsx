@@ -11,7 +11,7 @@ const QuantityDropdown = ({ style, handleQuantity, sku }) => {
   }
   return data ? (
     <select onChange={handleQuantity} className="g-size-drop-down">
-      <option value={null}>Select Quantity</option>
+      <option value={null} selected>Select Quantity</option>
       {quantityList.map((quantity) => (
         <Quantity key={data.size + quantity} quantity={quantity} />
       ))}
@@ -19,7 +19,7 @@ const QuantityDropdown = ({ style, handleQuantity, sku }) => {
   )
     : (
       <select>
-        <option value="Select Size First" disabled> Select Size First</option>
+        <option value="Select Size First" disabled selected> Select Size First</option>
       </select>
     );
 };

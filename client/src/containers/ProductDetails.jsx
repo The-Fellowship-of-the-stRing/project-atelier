@@ -77,7 +77,7 @@ const ProductDetails = ({ itemId, reviewRef }) => {
         <div className="g-product-details-column2">
           <Reviews itemId={itemId} reviewRef={reviewRef} />
           <div className="g-product-details-info">
-            <u style={{paddingLeft: '3px'}}>{data.category}</u>
+            <u style={{ paddingLeft: '3px' }}>{data.category}</u>
             <h1 style={{ marginBlockStart: '0.3em', marginBlockEnd: '0.3em' }}>{data.name}</h1>
             <em style={{ color: 'gray', marginBlockStart: '0.1em', marginBlockEnd: '0.5em' }}>{data.slogan}</em>
             { isSale === true && (
@@ -107,7 +107,11 @@ const ProductDetails = ({ itemId, reviewRef }) => {
           <SocialMedia />
         </div>
       </div>
-      {data.description}
+      <div className="g-product-details-desc">
+        <div id="g-desc-slogan">{data.slogan}</div>
+        <div id="g-desc-description">{data.description}</div>
+      </div>
+
     </div>
   )
     : (
