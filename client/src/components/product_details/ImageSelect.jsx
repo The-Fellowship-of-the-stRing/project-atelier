@@ -17,7 +17,7 @@ const ImageSelect = ({
     }
     return (
       <Image
-        key={link}
+        key={index}
         thumbnail={link}
         handleIndex={handleIndex}
         index={index}
