@@ -113,14 +113,8 @@ const Card = ({
             data-testid="card-img"
             onKeyPress={() => updateMainProduct(itemId)}
             onClick={() => updateMainProduct(itemId)}
-          >
-            <img
-              className="c-card-img"
-              src={cardData.photos}
-              alt="product-preview"
-              data-testid="card-img"
-            />
-          </div>
+            style={{ backgroundImage: `url(${cardData.photos})` }}
+          />
           {actionButtons[action]}
         </div>
         <div className="c-card-text-container" data-testid="card-text">
