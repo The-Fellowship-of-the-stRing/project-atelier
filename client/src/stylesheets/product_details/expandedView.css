@@ -59,7 +59,7 @@
   color: #F6F8FF;
   position: absolute;
   top: 50%;
-  left: 10%;
+  left: 5%;
   padding: 10px;
   cursor: pointer;
   transform: translateY(-50%);
@@ -74,7 +74,7 @@
   color: #F6F8FF;
   position: absolute;
   top: 50%;
-  left: 90%;
+  left: 95%;
   padding: 10px;
   cursor: pointer;
   transform: translateY(-50%);

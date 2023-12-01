@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { MdOutlineArrowForwardIos, MdOutlineArrowBackIos } from 'react-icons/md';
+import { IoChevronDown, IoChevronUp } from 'react-icons/io5';
 import ExpandedView from './ExpandedView.jsx';
 import '../../stylesheets/product_details/imageGallery.css';
 import ImageSelect from './ImageSelect.jsx';
@@ -24,10 +26,12 @@ const ImageGallery = ({ style }) => {
   const handlePageIndexRaise = () => {
     setLowIndex(lowIndex + 7);
     setHighIndex(highIndex + 7);
+    setCurrentIndex(lowIndex + 7);
   };
   const handlePageIndexLower = () => {
     setLowIndex(lowIndex - 7);
     setHighIndex(highIndex - 7);
+    setCurrentIndex(lowIndex - 7);
   };
   const handleModalTrue = () => {
     setModalState(true);
@@ -62,20 +66,16 @@ const ImageGallery = ({ style }) => {
       )}
       {/* removed div left spacer, not needed with corrected css styling */}
       <div className="g-images-main-container">
-        {currentIndex > 0 && (
-        <button type="button" className="g-images-select-container-prev-btn" onClick={previousImage}>
-          {'<'}
-        </button>
-        )}
         <div className="g-images-select-container">
           {lowIndex > 0
           && (
-          <button
+          <IoChevronUp
+            style={{ color: 'white' }}
             type="button"
+            onKeyDown={handlePageIndexLower}
+            tabIndex={0}
             onClick={handlePageIndexLower}
-          >
-            Previous Page
-          </button>
+          />
           )}
           <ImageSelect
             style={style}
@@ -87,15 +87,39 @@ const ImageGallery = ({ style }) => {
           />
           {(highIndex / 7) < pageCount
           && (
-          <button type="button" onClick={handlePageIndexRaise}>
-            Next Page
-          </button>
+            <IoChevronDown
+              style={{ color: 'white' }}
+              type="button"
+              onKeyDown={handlePageIndexRaise}
+              tabIndex={0}
+              onClick={handlePageIndexRaise}
+            />
           )}
         </div>
         <div role="button" tabIndex={0} onKeyDown={handleModalTrue} onClick={handleModalTrue}>
           <img className="g-images-main" src={style.photos[`${currentIndex}`].url} alt="current item" />
         </div>
-        {currentIndex < style.photos.length - 1 && <button type="button" onClick={nextImage} className="g-images-select-container-next-btn">{'>'}</button>}
+        {currentIndex > 0 && (
+        <MdOutlineArrowBackIos
+          style={{ color: 'white' }}
+          type="button"
+          onKeyDown={previousImage}
+          tabIndex="0"
+          className="g-images-select-container-prev-btn"
+          onClick={previousImage}
+        />
+        )}
+        {currentIndex < style.photos.length - 1
+         && (
+         <MdOutlineArrowForwardIos
+           style={{ color: 'white' }}
+           type="button"
+           onKeyDown={nextImage}
+           tabIndex="0"
+           className="g-images-select-container-next-btn"
+           onClick={nextImage}
+         />
+         )}
       </div>
 
     </div>
