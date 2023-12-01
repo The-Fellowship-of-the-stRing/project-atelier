@@ -54,6 +54,7 @@ const ExpandedView = ({
           )}
           <div
             role="button"
+            aria-label="zoom into image"
             tabIndex="0"
             onKeyDown={handleZoom}
             onClick={handleZoom}
@@ -119,6 +120,7 @@ const ExpandedView = ({
           tabIndex="0"
           role="button"
           className="g-expanded-close-btn"
+          aria-label="close expanded view"
         />
       </div>
     </div>

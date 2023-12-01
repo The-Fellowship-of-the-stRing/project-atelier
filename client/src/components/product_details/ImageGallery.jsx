@@ -103,6 +103,7 @@ const ImageGallery = ({ style }) => {
           tabIndex="0"
           onKeyDown={handleModalTrue}
           onClick={handleModalTrue}
+          aria-label="current item"
         >
           <img className="g-images-main" src={style.photos[`${currentIndex}`].url} alt="current item" />
         </div>

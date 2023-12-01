@@ -49,6 +49,7 @@ const QuestionsList = ({
                   onClick={() => checkMarked(id)}
                   className="k-question-yes-click"
                   style={{ cursor: marked[id] ? 'default' : 'pointer' }}
+                  aria-label="yes helpful"
                 >
                   Yes
                 </div>
@@ -62,6 +63,7 @@ const QuestionsList = ({
                   role="button"
                   className="k-add-answer"
                   onClick={() => handleAnswerModal(true, id, question.question_body)}
+                  aria-label="add answer"
                 >
                   Add answer
                 </div>

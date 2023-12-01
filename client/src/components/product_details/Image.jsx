@@ -10,6 +10,7 @@ const Image = ({
       onClick={() => handleIndex(index)}
       role="button"
       tabIndex="0"
+      aria-label="image thumbnail"
     >
       <img
         className="g-image_select"
@@ -24,6 +25,7 @@ const Image = ({
       onClick={() => handleIndex(index)}
       role="button"
       tabIndex="0"
+      aria-label="image thumbnail"
     >
       <img
         className="g-image_selected"

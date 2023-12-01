@@ -122,6 +122,7 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
             tabIndex="0"
             role="button"
             onClick={() => handleMoreAnsweredQuestions()}
+            aria-label="more answered questions"
           >
             MORE ANSWERED QUESTIONS
           </div>
@@ -132,6 +133,7 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
           tabIndex="0"
           role="button"
           onClick={() => handleQuestionModal(true)}
+          aria-label="add a question"
         >
           ADD A QUESTION +
         </div>
@@ -144,6 +146,7 @@ const QuestionsAnswers = ({ itemId, itemName }) => {
       role="button"
       onKeyDown={() => handleQuestionModal(true)}
       onClick={() => handleQuestionModal(true)}
+      aria-label="add a question"
     >
       ADD A QUESTION +
     </div>

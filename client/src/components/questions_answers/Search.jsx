@@ -39,6 +39,7 @@ const Search = ({ searchTerm, setSearchTerm }) => {
         tabIndex="0"
         role="button"
         className="k-clear-search-btn"
+        aria-label="clear search"
         // onKeyDown={(e) => (e.key === 'Enter' ? clearSearch(e) : '')}
         onClick={(e) => clearSearch(e)}
       >
