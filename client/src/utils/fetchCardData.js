@@ -16,6 +16,7 @@ const fetchCardData = async (id) => {
         const style = styleData[i];
         if (i === 0 || style['default?']) {
           response.photos = style.photos[0].thumbnail_url || 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
+          response.prePhotos = style.photos.slice(1);
           response.original_price = style.original_price;
           response.sale_price = style.sale_price;
         }

@@ -6,7 +6,7 @@ const StyleList = ({ styles, style, handleStyle }) => (style ? (
   <div className="g-styleList">
     Selected Style:
     {' '}
-    <span style={{ color: '#3DDC97' }}>{style.name}</span>
+    <span>{style.name}</span>
     <div className="g-styleGallery">
       <StyleGallery styles={styles} handleStyle={handleStyle} />
     </div>

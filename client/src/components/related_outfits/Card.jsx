@@ -32,7 +32,6 @@ const Card = ({
       setIsCardShown(isVisible);
     }
   }, [isVisible]);
-
   let priceString;
   if (cardData && cardData.sale_price && cardData.original_price) {
     priceString = (
@@ -111,11 +110,16 @@ const Card = ({
             className="c-card-img"
             tabIndex="0"
             data-testid="card-img"
-            onKeyPress={() => updateMainProduct(itemId)}
-            onClick={() => updateMainProduct(itemId)}
+            // onKeyPress={() => updateMainProduct(itemId)}
+            // onClick={() => updateMainProduct(itemId)}
             style={{ backgroundImage: `url(${cardData.photos})` }}
           />
           {actionButtons[action]}
+          <div className="c-card-pre-img-container">
+            {cardData.prePhotos.map((photo, index) => index < 4
+              && (<img className="c-card-pre-img" alt={photo.thumbnail_url} src={photo.thumbnail_url} />
+              ))}
+          </div>
         </div>
         <div className="c-card-text-container" data-testid="card-text">
           <div className="c-card-cat" data-testid="card-cat">{cardData.category.toUpperCase()}</div>
