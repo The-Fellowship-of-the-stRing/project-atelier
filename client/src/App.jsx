@@ -11,6 +11,7 @@ const NavBar = React.lazy(() => import('./containers/NavBar'));
 const RatingsReviews = React.lazy(() => import('./containers/RatingsReviews'));
 const QuestionsAnswers = React.lazy(() => import('./containers/QuestionsAnswers'));
 const RelatedOutfits = React.lazy(() => import('./containers/RelatedOutfits'));
+const Footer = React.lazy(() => import('./containers/Footer'));
 
 const App = () => {
   const [currentItem, setCurrentItem] = useState(null);
@@ -82,6 +83,7 @@ const App = () => {
             itemName={currentItem.name}
             ref={reviewRef}
           />
+          <Footer />
         </Suspense>
       )}
     </div>
