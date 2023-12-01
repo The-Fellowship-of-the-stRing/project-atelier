@@ -74,7 +74,7 @@
 .c-card {
   grid-area: name;
   display: grid;
-  height: 355px;
+  height: 365px;
   width: 200px;
   margin-right: 20px;
   grid-template-columns: 200px;
@@ -92,7 +92,7 @@
 .c-card-no-hover {
   grid-area: name;
   display: grid;
-  height: 355px;
+  height: 365px;
   width: 200px;
   margin-right: 20px;
   grid-template-columns: 200px;
@@ -127,16 +127,24 @@
   width: 40px;
   height: 40px;
   object-fit: cover;
+  transform: scale(1.1);
+  border-radius: 1%;
   padding: 0 2px 0 2px;
+  box-shadow: 0 30px 40px rgba(0,0,0,.1);
 }
 .c-card-pre-img-container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  width:100%;
   position: absolute;
   left: 0;
-  bottom: 0;
-  margin: 0 0 2px 11px;
-  overflow-x: scroll;
+  bottom: 2px;
+  margin: 0 0 2px 0;
+}
+.c-card-pre-img:hover {
+  transform: scale(1.01);
+  box-shadow: 2px 2px 2px;
 }
 
 .c-card-img {
@@ -161,6 +169,7 @@
   height: 115px;
   margin-left: 10px;
   align-self: end;
+  padding-bottom: 10px;
 }
 
 .c-card-name, .c-card-price, .c-card-star {
@@ -186,4 +195,5 @@
 .c-card-action-add {
   align-self: center;
   justify-self: center;
+  border-radius: 5%;
 }

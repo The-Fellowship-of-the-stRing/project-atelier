@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Stars from '../stars/Stars.jsx';
 import Compare from './Compare.jsx';
+// import PreviewImage from './PreviewImage.jsx';
 import fetchCardData from '../../utils/fetchCardData.js';
 
 const Card = ({
@@ -13,12 +14,14 @@ const Card = ({
   updateMainProduct,
   isVisible,
 }) => {
+  const [cardImage, setCardImage] = useState(null);
   const [cardData, setCardData] = useState(null);
   const [isCardShown, setIsCardShown] = useState(true);
   const [isCompareShown, setIsCompareShown] = useState(false);
   const getCardData = async () => {
     try {
       const response = await fetchCardData(itemId);
+      setCardImage(response.photos);
       setCardData(response);
     } catch (err) {
       console.error('Error getting item details: ', err);
@@ -32,6 +35,11 @@ const Card = ({
       setIsCardShown(isVisible);
     }
   }, [isVisible]);
+
+  const updateImage = (newImage) => {
+    setCardImage(newImage);
+  };
+
   let priceString;
   if (cardData && cardData.sale_price && cardData.original_price) {
     priceString = (
@@ -95,7 +103,10 @@ const Card = ({
 
   if (cardData && isCardShown) {
     return (
-      <div className={!isCompareShown ? className : 'c-card-no-hover'} data-testid="card">
+      <div
+        className={!isCompareShown ? className : 'c-card-no-hover'}
+        data-testid="card"
+      >
         {isCompareShown ? (
           <Compare
             itemId={cardData.id}
@@ -114,17 +125,47 @@ const Card = ({
             data-testid="card-img"
             // onKeyPress={() => updateMainProduct(itemId)}
             // onClick={() => updateMainProduct(itemId)}
-            style={{ backgroundImage: `url(${cardData.photos})` }}
+            style={{ backgroundImage: `url(${cardImage})` }}
             aria-label="view product"
           />
           {actionButtons[action]}
+          {/* // <div
+              //   role="button"
+              //   className="c-card-pre-img"
+              //   key={photo.thumbnail_url}
+              //   onClick={() => updateImage(photo.thumbnail_url)}
+              //   onKeyPress={() => updateImage(photo.thumbnail_url)}
+              //   tabIndex="0"
+              //   data-testid="card-img"
+              //   style={{ backgroundImage: `url(${photo.thumbnail_url})` }}
+              // /> */}
           <div className="c-card-pre-img-container">
             {cardData.prePhotos.map((photo, index) => index < 4
-              && (<img className="c-card-pre-img" alt={photo.thumbnail_url} src={photo.thumbnail_url} />
+              && (
+                // <PreviewImage
+                //   className="c-card-pre-img"
+                //   parentImage={cardImage}
+                //   previewImage={photo.thumbnail_url}
+                //   updateImage={updateImage}
+                // />
+                <img
+                  className="c-card-pre-img"
+                  key={index}
+                  src={photo.thumbnail_url}
+                  alt={photo.thumbnail_url}
+                  onClick={() => updateImage(photo.thumbnail_url)}
+                  onKeyPress={() => updateImage(photo.thumbnail_url)}
+                />
               ))}
           </div>
         </div>
-        <div className="c-card-text-container" data-testid="card-text">
+        <div
+          className="c-card-text-container"
+          data-testid="card-text"
+          role="button"
+          tabIndex="0"
+          onKeyPress={() => updateMainProduct(itemId)}
+          onClick={() => updateMainProduct(itemId)}>
           <div className="c-card-cat" data-testid="card-cat">{cardData.category.toUpperCase()}</div>
           <div
             className="c-card-name"
