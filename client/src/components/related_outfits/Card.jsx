@@ -32,7 +32,6 @@ const Card = ({
       setIsCardShown(isVisible);
     }
   }, [isVisible]);
-  console.log(cardData);
   let priceString;
   if (cardData && cardData.sale_price && cardData.original_price) {
     priceString = (
