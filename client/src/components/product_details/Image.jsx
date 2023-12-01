@@ -5,7 +5,12 @@ const Image = ({
 }) => ((lowIndex <= index && highIndex > index) ? (
   <div>
     {currentIndex !== index && (
-    <div onKeyDown={() => handleIndex(index)} onClick={() => handleIndex(index)} role="button" tabIndex={index}>
+    <div
+      onKeyDown={() => handleIndex(index)}
+      onClick={() => handleIndex(index)}
+      role="button"
+      tabIndex="0"
+    >
       <img
         className="g-image_select"
         src={thumbnail}
@@ -14,7 +19,12 @@ const Image = ({
     </div>
     )}
     {currentIndex === index && (
-    <div onKeyDown={() => handleIndex(index)} onClick={() => handleIndex(index)} role="button" tabIndex={index}>
+    <div
+      onKeyDown={() => handleIndex(index)}
+      onClick={() => handleIndex(index)}
+      role="button"
+      tabIndex="0"
+    >
       <img
         className="g-image_selected"
         src={thumbnail}

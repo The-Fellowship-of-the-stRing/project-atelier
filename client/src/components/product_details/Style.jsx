@@ -4,7 +4,7 @@ const Style = ({ thumbnail, handleStyle, index }) => (
   <div
     role="button"
     className="g-style_image"
-    tabIndex={index}
+    tabIndex="0"
     style={{ padding: '10px', backgroundImage: `url(${thumbnail})` }}
     onKeyDown={() => handleStyle(index)}
     onClick={() => handleStyle(index)}
