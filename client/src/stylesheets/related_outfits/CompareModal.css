@@ -1,8 +1,10 @@
 body.show-modal {
   overflow-y: hidden;
+
 }
 
-.c-compare-modal, .c-overlay {
+.c-overlay, .c-compare-modal {
+  pointer-events: none;
   width: 100vw;
   height: 100vh;
   overflow-x: scroll;
@@ -32,13 +34,6 @@ td, tr {
   border-bottom: 1px solid black;
 }
 
-.c-close-compare {
-  justify-self: end;
-  margin: -10px 5px;
-  position: absolute;
-  /* margin-right: 4px; */
-}
-
 th {
   font-size: 16px;
   font-weight: 900;
@@ -66,28 +61,42 @@ thead th:nth-child(3) {
   text-align: center;
   vertical-align: center;
   font-size: 14px;
+
 }
+.c-compare-value {
+  color: rgb(61, 220, 151);
+  font-weight: 500;
+}
+
 .c-compare-feature-value {
+  color: gray;
   font-weight: 900;
 }
 
-.c-compare-modal-table {
+ .c-modal-container {
   position: absolute;
   z-index: 11;
-  top: 40%;
   left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
   line-height: 1.4;
   background: #f1f1f1;
   padding: 14px 28px;
   border-radius: 3px;
-  width: 500px;
-  /* min-width: 300px; */
+  width: 65vw;
+  display: grid;
+}
+.c-close-compare {
+  justify-self: end;
+  text-align: end;
+  margin: 10px 14px 0 0;
+  position: absolute;
+}
+.c-compare-modal-table {
+  height: 100%;
+  width: 100%;
 }
 
 .close-modal {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 5px 7px;
 }

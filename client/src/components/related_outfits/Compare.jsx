@@ -26,8 +26,8 @@ const Compare = ({
       let currentValue = compareData[feature].current ? compareData[feature].current : '';
       let compareValue = compareData[feature].compared ? compareData[feature].compared : '';
       if (currentValue === compareValue && currentValue !== '') {
-        currentValue = <IoMdCheckmark />;
-        compareValue = <IoMdCheckmark />;
+        currentValue = <IoMdCheckmark className="c-compare-value" />;
+        compareValue = <IoMdCheckmark className="c-compare-value" />;
       }
       return (
         <tr key={feature} className="c-compare-feature-item" data-testid="feature">
@@ -40,39 +40,34 @@ const Compare = ({
   }
 
   return (
-    <div
-      className="c-compare-modal"
-      onClick={() => compareClickHandler()}
-      role="button"
-      tabIndex="0"
-      onKeyPress={() => compareClickHandler()}
-      data-testid="compare"
-    >
+    <div>
       <div className="c-overlay" />
-      {/* <div
-        className="c-close-compare"
-        role="button"
-        tabIndex="0"
-        onKeyPress={() => compareClickHandler()}
-        onClick={() => compareClickHandler()}
-      >
-        ❌
-      </div> */}
-      <table className="c-compare-modal-table">
-        <thead className="c-compare-header">
-          <tr>
-            <th colSpan="3" className="c-compare-title">COMPARING</th>
-          </tr>
-          <tr>
-            <th scope="col">{itemName}</th>
-            <th scope="col" />
-            <th scope="col">{compareName}</th>
-          </tr>
-        </thead>
-        <tbody className="c-compare-body">
-          {featureList}
-        </tbody>
-      </table>
+      <div className="c-modal-container">
+        <div
+          className="c-close-compare"
+          role="button"
+          tabIndex="0"
+          onKeyPress={() => compareClickHandler()}
+          onClick={() => compareClickHandler()}
+        >
+          ❌
+        </div>
+        <table className="c-compare-modal-table">
+          <thead className="c-compare-header">
+            <tr>
+              <th colSpan="2" className="c-compare-title">COMPARING</th>
+            </tr>
+            <tr>
+              <th scope="col">{itemName}</th>
+              <th scope="col" />
+              <th scope="col">{compareName}</th>
+            </tr>
+          </thead>
+          <tbody className="c-compare-body">
+            {featureList}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

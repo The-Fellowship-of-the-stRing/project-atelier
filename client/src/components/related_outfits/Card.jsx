@@ -94,7 +94,7 @@ const Card = ({
 
   if (cardData && isCardShown) {
     return (
-      <div className={className} data-testid="card">
+      <div className={!isCompareShown ? className : 'c-card-no-hover'} data-testid="card">
         {isCompareShown ? (
           <Compare
             itemId={cardData.id}
