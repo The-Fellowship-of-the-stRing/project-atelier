@@ -7,14 +7,14 @@ const PreviewImage = ({
 
   useEffect(() => {
     setCardImage(previewImage);
-  }, [parentImage]);
+  }, []);
   return (
     <img
       className="c-card-pre-img"
       src={cardImage}
       alt={cardImage}
       onClick={() => {
-        updateImage(previewImage);
+        updateImage(cardImage);
         setCardImage(parentImage);
       }}
       onKeyPress={() => updateImage(previewImage, parentImage)}

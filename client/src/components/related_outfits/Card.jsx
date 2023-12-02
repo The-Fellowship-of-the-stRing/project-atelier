@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Stars from '../stars/Stars.jsx';
 import Compare from './Compare.jsx';
-// import PreviewImage from './PreviewImage.jsx';
+import PreviewImage from './PreviewImage.jsx';
 import fetchCardData from '../../utils/fetchCardData.js';
 
 const Card = ({
@@ -34,7 +34,7 @@ const Card = ({
     } else {
       setIsCardShown(isVisible);
     }
-  }, [isVisible]);
+  }, [isVisible, cardImage]);
 
   const updateImage = (newImage) => {
     setCardImage(newImage);
@@ -123,38 +123,18 @@ const Card = ({
             className="c-card-img"
             tabIndex="0"
             data-testid="card-img"
-            // onKeyPress={() => updateMainProduct(itemId)}
-            // onClick={() => updateMainProduct(itemId)}
             style={{ backgroundImage: `url(${cardImage})` }}
             aria-label="view product"
           />
           {actionButtons[action]}
-          {/* // <div
-              //   role="button"
-              //   className="c-card-pre-img"
-              //   key={photo.thumbnail_url}
-              //   onClick={() => updateImage(photo.thumbnail_url)}
-              //   onKeyPress={() => updateImage(photo.thumbnail_url)}
-              //   tabIndex="0"
-              //   data-testid="card-img"
-              //   style={{ backgroundImage: `url(${photo.thumbnail_url})` }}
-              // /> */}
           <div className="c-card-pre-img-container">
             {cardData.prePhotos.map((photo, index) => index < 4 && photo.thumbnail_url
               && (
-                // <PreviewImage
-                //   className="c-card-pre-img"
-                //   parentImage={cardImage}
-                //   previewImage={photo.thumbnail_url}
-                //   updateImage={updateImage}
-                // />
-                <img
+                <PreviewImage
                   className="c-card-pre-img"
-                  key={index}
-                  src={photo.thumbnail_url}
-                  alt={photo.thumbnail_url}
-                  onClick={() => updateImage(photo.thumbnail_url)}
-                  onKeyPress={() => updateImage(photo.thumbnail_url)}
+                  parentImage={cardImage}
+                  previewImage={photo.thumbnail_url}
+                  updateImage={updateImage}
                 />
               ))}
           </div>
