@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-/* WIP */
+
 const PreviewImage = ({
   parentImage, previewImage, updateImage,
 }) => {
@@ -9,17 +9,26 @@ const PreviewImage = ({
     setCardImage(previewImage);
   }, []);
   return (
-    <img
-      className="c-card-pre-img"
-      src={cardImage}
-      alt={cardImage}
+    <div
+      className="c-card-pre-div"
+      role="button"
+      tabIndex="0"
       onClick={() => {
         updateImage(cardImage);
         setCardImage(parentImage);
       }}
-      onKeyPress={() => updateImage(previewImage, parentImage)}
-    />
+      onKeyPress={() => {
+        updateImage(cardImage);
+        setCardImage(parentImage);
+      }}
+    >
+      <img
+        className="c-card-pre-img"
+        src={cardImage}
+        alt={cardImage}
+      />
+    </div>
   );
-  };
+};
 
 export default PreviewImage;

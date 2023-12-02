@@ -145,7 +145,8 @@ const Card = ({
           role="button"
           tabIndex="0"
           onKeyPress={() => updateMainProduct(itemId)}
-          onClick={() => updateMainProduct(itemId)}>
+          onClick={() => updateMainProduct(itemId)}
+        >
           <div className="c-card-cat" data-testid="card-cat">{cardData.category.toUpperCase()}</div>
           <div
             className="c-card-name"
@@ -160,7 +161,6 @@ const Card = ({
           <div className="c-card-price">{priceString}</div>
           <div className="c-card-star">
             <Stars itemId={itemId} />
-
           </div>
         </div>
       </div>
