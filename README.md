@@ -173,14 +173,14 @@ simply spreading the word!
 
 <h3 align='center'> Kyle</h3>
 <h4 align='center'>
-  <a href="https://github.com/kssampson">GitHub</a> |
   <a href="https://www.linkedin.com/in/sampsonkyle/">Linkedin</a> |
+  <a href="https://github.com/kssampson">GitHub</a>
 </h4>
 
 <h3 align='center'> Gordon</h3>
 <h4 align='center'>
-  <a href="https://github.com/gordon1213">GitHub</a> |
   <a href="https://www.linkedin.com/in/gordon-chiu/">Linkedin</a> |
+  <a href="https://github.com/gordon1213">GitHub</a>
 </h4>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
