@@ -61,7 +61,9 @@
 ## About
 
 <div align="center">
-  <img src="./client/src/assets/demo.gif" alt="project landing page image" width="700px" />
+  <img src="./client/src/assets/demo1.gif" alt="project landing page image" width="700px" />
+<br />
+  <img src="./client/src/assets/demo2.gif" alt="project landing page image" width="700px" />
 </div>
 
 <br />
