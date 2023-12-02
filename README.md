@@ -47,9 +47,6 @@
       <a href="#optimizations">Optimizations</a>
     </li>
     <li>
-      <a href="#lessons-learned">Lessons Learned</a>
-    </li>
-    <li>
       <a href="#contributing">Contributing</a>
     </li>
     <li>
