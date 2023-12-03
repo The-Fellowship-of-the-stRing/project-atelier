@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { VscDiffAdded } from 'react-icons/vsc';
 import Carousel from './Carousel.jsx';
 
-const Outfits = ({ itemId, updateMainProduct, maxCardCount }) => {
+const Outfits = ({
+  itemId, updateMainProduct, maxCardCount, topRef,
+}) => {
   const [outfitsByUser, setOutfitsByUser] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
 
@@ -59,6 +61,7 @@ const Outfits = ({ itemId, updateMainProduct, maxCardCount }) => {
         updateMainProduct={updateMainProduct}
         addCard={addCard}
         isAdded={isAdded}
+        topRef={topRef}
       />
     </div>
   ) : (

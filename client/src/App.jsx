@@ -76,6 +76,7 @@ const App = () => {
             itemName={currentItem.name}
             itemFeatures={currentItem.features}
             updateMainProduct={updateMainProduct}
+            topRef={topRef}
           />
           <QuestionsAnswers itemId={currentItem.id} itemName={currentItem.name} />
           <RatingsReviews

@@ -3,6 +3,7 @@ import Stars from '../stars/Stars.jsx';
 import Compare from './Compare.jsx';
 import PreviewImage from './PreviewImage.jsx';
 import fetchCardData from '../../utils/fetchCardData.js';
+import handleRef from '../../utils/handleRef.js';
 
 const Card = ({
   itemId,
@@ -12,6 +13,7 @@ const Card = ({
   itemFeatures,
   updateMainProduct,
   isVisible,
+  topRef,
 }) => {
   const [cardImage, setCardImage] = useState(null);
   const [cardData, setCardData] = useState(null);
@@ -116,8 +118,14 @@ const Card = ({
       <div
         data-testid="card"
         className={!isCompareShown ? 'c-card' : 'c-card-no-hover'}
-        onKeyPress={() => updateMainProduct(itemId)}
-        onClick={() => updateMainProduct(itemId)}
+        onKeyPress={() => {
+          updateMainProduct(itemId);
+          handleRef(topRef);
+        }}
+        onClick={() => {
+          updateMainProduct(itemId);
+          handleRef(topRef);
+        }}
         role="button"
         tabIndex="0"
       >
@@ -159,16 +167,16 @@ const Card = ({
           data-testid="card-text"
           role="button"
           tabIndex="0"
-          onKeyPress={() => updateMainProduct(itemId)}
-          onClick={() => updateMainProduct(itemId)}
+          // onKeyPress={() => updateMainProduct(itemId)}
+          // onClick={() => updateMainProduct(itemId)}
         >
           <div className="c-card-cat" data-testid="card-cat">{cardData.category.toUpperCase()}</div>
           <div
             className="c-card-name"
             role="button"
             tabIndex="0"
-            onKeyPress={() => updateMainProduct(itemId)}
-            onClick={() => updateMainProduct(itemId)}
+            // onKeyPress={() => updateMainProduct(itemId)}
+            // onClick={() => updateMainProduct(itemId)}
             aria-label="view card details"
           >
             {cardData.name}

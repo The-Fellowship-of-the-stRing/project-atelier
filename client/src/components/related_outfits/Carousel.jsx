@@ -5,7 +5,7 @@ const Carousel = ({
   action,
   addCard, isAdded, ids,
   deleteProduct, updateMainProduct,
-  itemFeatures, itemName, itemId, maxCardCount,
+  itemFeatures, itemName, itemId, maxCardCount, topRef,
 }) => {
   const [mainId, setMainId] = useState(null);
   const [visibleCards, setVisibleCards] = useState(null);
@@ -160,6 +160,7 @@ const Carousel = ({
             updateMainProduct={updateMainProduct}
             itemFeatures={itemFeatures}
             itemName={itemName}
+            topRef={topRef}
           />
         ))}
       </div>

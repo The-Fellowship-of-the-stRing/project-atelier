@@ -8,7 +8,7 @@ RENDERING LOGIC UPDATES:
 - If product is in outfits and is a related product, do not render id Related Products
 */
 const RelatedOutfits = ({
-  itemId, itemFeatures, itemName, updateMainProduct,
+  itemId, itemFeatures, itemName, updateMainProduct, topRef,
 }) => {
   const ref = useRef(null);
   const [maxCardCount, setMaxCardCount] = useState(null);
@@ -37,9 +37,15 @@ const RelatedOutfits = ({
         itemFeatures={itemFeatures}
         updateMainProduct={updateMainProduct}
         maxCardCount={maxCardCount}
+        topRef={topRef}
       />
       <h3 className="c-outfit-title">MY OUTFITS</h3>
-      <Outfits itemId={itemId} updateMainProduct={updateMainProduct} maxCardCount={maxCardCount} />
+      <Outfits
+        itemId={itemId}
+        updateMainProduct={updateMainProduct}
+        maxCardCount={maxCardCount}
+        topRef={topRef}
+      />
     </div>
   ) : (
     <div className="c-related-outfits-main-container" ref={ref} data-testid="related-outfits" />
