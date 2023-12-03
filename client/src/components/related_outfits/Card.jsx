@@ -73,7 +73,6 @@ const Card = ({
   } else {
     document.body.classList.remove('show-modal');
   }
-
   const actionButtons = {
     related: (
       <div
@@ -127,11 +126,12 @@ const Card = ({
             aria-label="view product"
           />
           {actionButtons[action]}
-          <div className="c-card-pre-img-container">
+          <div className={Object.keys(cardData.prePhotos).length >= 4 ? 'c-card-pre-img-container' : 'c-card-pre-img-container-small'}>
             {cardData.prePhotos.map((photo) => photo.thumbnail_url
               && (
                 <PreviewImage
                   className="c-card-pre-img"
+                  key={photo.thumbnail_url}
                   parentImage={cardImage}
                   previewImage={photo.thumbnail_url}
                   updateImage={updateImage}
