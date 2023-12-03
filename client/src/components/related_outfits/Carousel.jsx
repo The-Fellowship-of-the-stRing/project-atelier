@@ -14,10 +14,6 @@ const Carousel = ({
   const [isNextShown, setIsNextShown] = useState(null);
   const [isPrevShown, setIsPrevShown] = useState(null);
 
-  // Left and right margins of card list is 20px each
-  // Each card is 200px wide with right-margin of 10px
-  // const getCardCount = (w) => Math.floor((w - 40) / 210);
-
   useEffect(() => {
     let cardCount = maxCardCount;
     if (!isAdded && action === 'outfits') {
