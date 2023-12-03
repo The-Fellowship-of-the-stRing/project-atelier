@@ -128,7 +128,7 @@ const Card = ({
           />
           {actionButtons[action]}
           <div className="c-card-pre-img-container">
-            {cardData.prePhotos.map((photo, index) => index < 4 && photo.thumbnail_url
+            {cardData.prePhotos.map((photo) => photo.thumbnail_url
               && (
                 <PreviewImage
                   className="c-card-pre-img"
