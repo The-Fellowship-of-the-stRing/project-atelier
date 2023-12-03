@@ -80,8 +80,14 @@ const Card = ({
         data-testid="related-action"
         role="button"
         tabIndex="0"
-        onKeyPress={() => compareClickHandler()}
-        onClick={() => compareClickHandler()}
+        onKeyPress={(event) => {
+          compareClickHandler();
+          event.stopPropagation();
+        }}
+        onClick={(event) => {
+          compareClickHandler();
+          event.stopPropagation();
+        }}
         aria-label="view compare"
       >
         ⭐
@@ -92,8 +98,14 @@ const Card = ({
         data-testid="outfit-action"
         role="button"
         tabIndex="0"
-        onKeyPress={() => deleteProduct(itemId)}
-        onClick={() => deleteProduct(itemId)}
+        onKeyPress={(event) => {
+          deleteProduct(itemId);
+          event.stopPropagation();
+        }}
+        onClick={(event) => {
+          deleteProduct(itemId);
+          event.stopPropagation();
+        }}
         aria-label="remove item from outfit"
       >
         ❌
@@ -103,8 +115,10 @@ const Card = ({
   if (cardData && isCardShown) {
     return (
       <div
-        className={!isCompareShown ? className : 'c-card-no-hover'}
         data-testid="card"
+        className={!isCompareShown ? "c-card" : 'c-card-no-hover'}
+        onKeyPress={() => updateMainProduct(itemId)}
+        onClick={() => updateMainProduct(itemId)}
       >
         {isCompareShown ? (
           <Compare

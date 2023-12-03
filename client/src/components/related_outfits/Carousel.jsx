@@ -151,8 +151,6 @@ const Carousel = ({
         {!isAdded && addCard}
         {ids.map((id) => (
           <Card
-            className="c-card"
-            data-testid="card"
             isVisible={visibleCards.includes(id)}
             itemId={id}
             key={id}

@@ -13,13 +13,15 @@ const PreviewImage = ({
       className="c-card-pre-div"
       role="button"
       tabIndex="0"
-      onClick={() => {
+      onClick={(event) => {
         updateImage(cardImage);
         setCardImage(parentImage);
+        event.stopPropagation();
       }}
-      onKeyPress={() => {
+      onKeyPress={(event) => {
         updateImage(cardImage);
         setCardImage(parentImage);
+        event.stopPropagation();
       }}
     >
       <img
