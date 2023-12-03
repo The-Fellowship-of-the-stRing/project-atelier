@@ -7,7 +7,6 @@ import fetchCardData from '../../utils/fetchCardData.js';
 const Card = ({
   itemId,
   itemName,
-  className,
   action,
   deleteProduct,
   itemFeatures,
@@ -116,9 +115,11 @@ const Card = ({
     return (
       <div
         data-testid="card"
-        className={!isCompareShown ? "c-card" : 'c-card-no-hover'}
+        className={!isCompareShown ? 'c-card' : 'c-card-no-hover'}
         onKeyPress={() => updateMainProduct(itemId)}
         onClick={() => updateMainProduct(itemId)}
+        role="button"
+        tabIndex="0"
       >
         {isCompareShown ? (
           <Compare
