@@ -68,7 +68,6 @@ const App = () => {
           <ProductDetails itemId={currentItem.id} reviewRef={reviewRef} />
           <RelatedOutfits
             itemId={currentItem.id}
-            itemName={currentItem.name}
             itemFeatures={currentItem.features}
             updateMainProduct={updateMainProduct}
             topRef={topRef}

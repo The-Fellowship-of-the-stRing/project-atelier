@@ -4,7 +4,7 @@ import Outfits from '../components/related_outfits/Outfits.jsx';
 import '../stylesheets/related_outfits/relatedOutfits.css';
 
 const RelatedOutfits = ({
-  itemId, itemFeatures, itemName, updateMainProduct, topRef,
+  itemId, itemFeatures, updateMainProduct, topRef,
 }) => {
   const ref = useRef(null);
   const [maxCardCount, setMaxCardCount] = useState(null);
@@ -30,7 +30,6 @@ const RelatedOutfits = ({
       <h3 className="c-related-title">RELATED PRODUCTS</h3>
       <Related
         itemId={itemId}
-        itemName={itemName}
         itemFeatures={itemFeatures}
         updateMainProduct={updateMainProduct}
         maxCardCount={maxCardCount}

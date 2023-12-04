@@ -3,7 +3,7 @@ import Carousel from './Carousel.jsx';
 import getRelatedItems from '../../utils/getRelatedItems.js';
 
 const Related = ({
-  itemId, itemFeatures, itemName, updateMainProduct, maxCardCount, topRef,
+  itemId, itemFeatures, updateMainProduct, maxCardCount, topRef,
 }) => {
   const [relatedIds, setRelatedIds] = useState(null);
 
@@ -26,7 +26,6 @@ const Related = ({
         maxCardCount={maxCardCount}
         itemId={itemId}
         ids={relatedIds}
-        itemName={itemName}
         action="related"
         itemFeatures={itemFeatures}
         updateMainProduct={updateMainProduct}

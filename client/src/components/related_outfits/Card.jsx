@@ -7,7 +7,6 @@ import handleRef from '../../utils/handleRef.js';
 
 const Card = ({
   itemId,
-  itemName,
   action,
   deleteProduct,
   itemFeatures,
@@ -137,7 +136,6 @@ const Card = ({
             itemId={cardData.id}
             itemFeatures={itemFeatures}
             cardData={cardData}
-            itemName={itemName}
             compareName={cardData.name}
             compareClickHandler={compareClickHandler}
           />
