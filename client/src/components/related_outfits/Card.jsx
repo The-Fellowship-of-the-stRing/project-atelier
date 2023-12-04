@@ -64,7 +64,10 @@ const Card = ({
   } else {
     priceString = (<p className="c-card-price">NO PRICE :(</p>);
   }
-
+  const validImageUrl = (imageUrl) => {
+    const thumbnailImage = imageUrl || 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
+    return thumbnailImage.slice(thumbnailImage.indexOf('https:'));
+  };
   const compareClickHandler = () => {
     setIsCompareShown(!isCompareShown);
   };
@@ -156,7 +159,7 @@ const Card = ({
                   className="c-card-pre-img"
                   key={photo.thumbnail_url}
                   parentImage={cardImage}
-                  previewImage={photo.thumbnail_url}
+                  previewImage={validImageUrl(photo.thumbnail_url)}
                   updateImage={updateImage}
                 />
               ))}
