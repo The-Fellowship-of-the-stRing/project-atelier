@@ -84,51 +84,6 @@ const Carousel = ({
       setIsNextShown(true);
     }
   };
-  /* WORK ON IF TIME
-    - WANT TO HANDLE CASE WHERE:
-      - OUTFITS HAS 1+ PRODUCTS
-      - isAdded is false
-      - MaxCardCount = 1
-    */
-  // const [handleOneCard, setHandleOneCard] = useState(false);
-  // const updateVisibleCards = (incrementer) => {
-  //   let updatedIndex = indexOfFirstVisibleCard + incrementer;
-  //   let cardCount = visibleCardCount;
-  //   setIndexOfFirstVisibleCard(updatedIndex);
-  //   if (incrementer === 1) {
-  //     if (!isAdded && visibleCardCount === 0) {
-  //       setHandleOneCard(true);
-  //       cardCount = 1;
-  //       updatedIndex += 1;
-  //       setVisibleCardCount(cardCount);
-  //       setVisibleCards(ids.slice(0, 1));
-  //     } else {
-  //       setVisibleCards([...visibleCards.slice(1),
-  //         ids[indexOfFirstVisibleCard + visibleCards.length]]);
-  //     }
-  //   }
-  //   if (incrementer === -1) {
-  //     if (!isAdded && handleOneCard && visibleCardCount === 1 && indexOfFirstVisibleCard === 1) {
-  //       setHandleOneCard(false);
-  //       cardCount = 0;
-  //       updatedIndex -= 1;
-  //       setVisibleCardCount(cardCount);
-  //       setVisibleCards([]);
-  //     } else {
-  //       setVisibleCards([ids[updatedIndex], ...visibleCards.slice(0, visibleCards.length - 1)]);
-  //     }
-  //   }
-  //   if (updatedIndex === 0) {
-  //     setIsPrevShown(false);
-  //   } else {
-  //     setIsPrevShown(true);
-  //   }
-  //   if (updatedIndex + cardCount === ids.length) {
-  //     setIsNextShown(false);
-  //   } else {
-  //     setIsNextShown(true);
-  //   }
-  // };
 
   return ids && visibleCards ? (
     <div className="c-carousel-container">

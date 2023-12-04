@@ -11,8 +11,7 @@ const RelatedOutfits = ({
 
   useEffect(() => {
     const handleResize = () => {
-      // Left and right margins of card list is 20px each
-      // Each card is 200px wide with right-margin of 20px
+      // Each card is 220px wide with total margin of 75px
       const tempCardCount = Math.floor((ref.current.offsetWidth - 75) / 220);
       if (maxCardCount !== tempCardCount) {
         setMaxCardCount(tempCardCount);

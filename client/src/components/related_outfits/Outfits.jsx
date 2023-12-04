@@ -8,30 +8,30 @@ const Outfits = ({
   const [outfitsByUser, setOutfitsByUser] = useState(null);
   const [isAdded, setIsAdded] = useState(null);
 
-  const getLocalStorage = () => JSON.parse(localStorage.getItem(document.cookie)) || [];
-  const postLocalStorage = (newOutfits) => {
+  const getOutfits = () => JSON.parse(localStorage.getItem(document.cookie)) || [];
+  const postOutfits = (newOutfits) => {
     localStorage.removeItem(document.cookie);
     localStorage.setItem(document.cookie, JSON.stringify(newOutfits));
   };
 
   useEffect(() => {
-    const parsedData = getLocalStorage();
+    const parsedData = getOutfits();
     setOutfitsByUser(parsedData);
     setIsAdded(parsedData.includes(itemId));
   }, [itemId]);
 
   const addProduct = () => {
-    const parsedData = getLocalStorage();
+    const parsedData = getOutfits();
     const updatedState = [itemId, ...parsedData];
-    postLocalStorage(updatedState);
+    postOutfits(updatedState);
     setOutfitsByUser(updatedState);
     setIsAdded(true);
   };
 
   const deleteProduct = (productId) => {
-    const parsedData = getLocalStorage();
+    const parsedData = getOutfits();
     const updatedState = parsedData.filter((id) => id !== productId);
-    postLocalStorage(updatedState);
+    postOutfits(updatedState);
     setIsAdded(updatedState.includes(itemId));
     setOutfitsByUser(updatedState);
   };

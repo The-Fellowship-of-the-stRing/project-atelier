@@ -15,17 +15,18 @@ const Related = ({
       console.error('Error getting item details: ', err);
     }
   };
+
   useEffect(() => {
     fetchRelatedIds();
   }, [itemId]);
 
-  return relatedIds && itemId ? (
+  return relatedIds ? (
     <div className="c-related-container" data-testid="related">
       <Carousel
         className="c-outfits-carousel"
-        maxCardCount={maxCardCount}
         itemId={itemId}
         ids={relatedIds}
+        maxCardCount={maxCardCount}
         action="related"
         itemFeatures={itemFeatures}
         updateMainProduct={updateMainProduct}
