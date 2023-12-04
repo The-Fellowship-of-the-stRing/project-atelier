@@ -98,7 +98,6 @@ const Carousel = ({
         </button>
       )}
       <div className="c-cards">
-        {/* {(!handleOneCard && !isAdded) && addCard} */}
         {!isAdded && addCard}
         {ids.map((id) => (
           <Card
