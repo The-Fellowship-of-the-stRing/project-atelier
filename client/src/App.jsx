@@ -4,8 +4,6 @@ import React, {
 import { GoDash } from 'react-icons/go';
 import ProductDetails from './containers/ProductDetails.jsx';
 import getProductDataById from './utils/getProductDataById.js';
-import getLocalStorage from './utils/getLocalStorage.js';
-import postLocalStorage from './utils/postLocalStorage.js';
 
 import './styles.css';
 
@@ -23,12 +21,7 @@ const App = () => {
 
   const updateMainProduct = async (itemId) => {
     try {
-      let storage = getLocalStorage(itemId);
-      console.log(storage);
-      if (!storage) {
-        storage = await getProductDataById(itemId);
-      }
-      postLocalStorage(itemId, storage);
+      const storage = await getProductDataById(itemId);
       setCurrentItem(storage);
       if (!siteOffer) {
         setSiteOffer(storage);

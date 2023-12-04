@@ -3,17 +3,17 @@ import getStyleDataById from './getStyleDataById.js';
 
 const fetchCardData = async (id) => {
   try {
+    await getStyleDataById(id);
     const productData = await getProductDataById(id);
-    const styleData = await getStyleDataById(id);
-    if (productData && styleData) {
+    if (productData) {
       const response = {
         id,
         name: productData.name || 'NO NAME',
         category: productData.category || 'NO CAT',
         features: productData.features || [],
       };
-      for (let i = 0; i < styleData.length; i += 1) {
-        const style = styleData[i];
+      for (let i = 0; i < productData.styles.length; i += 1) {
+        const style = productData.styles[i];
         if (i === 0 || style['default?']) {
           response.photos = style.photos[0].thumbnail_url || 'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
           response.prePhotos = style.photos.slice(1);

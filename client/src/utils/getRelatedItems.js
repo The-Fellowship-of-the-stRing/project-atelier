@@ -16,7 +16,6 @@ const getRelatedItems = async (id) => {
       }
     }
     postLocalStorage(id, { related: result });
-    console.log(getLocalStorage(id));
     return result;
   } catch (err) {
     console.error(err);
