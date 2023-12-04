@@ -73,6 +73,7 @@
 }
 .c-card {
   grid-area: name;
+  z-index: 0;
   display: grid;
   height: 365px;
   width: 200px;
@@ -114,38 +115,54 @@
 .c-card-img-container {
   width: 180px;
   height: 225px;
-  padding: 10px 10px 0 10px;
+  margin: 10px 10px 0 10px;
   grid-area: img-container;
   display: grid;
   position: relative;
 }
 .c-card-action-compare, .c-card-action-delete {
+  z-index: 1;
   justify-self: end;
-  margin: 10px 14px 0 0;
+  margin: 1px 4px 0 0;
   position: absolute;
 }
+.c-card-pre-div {
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 1%;
+  margin: 0 0 2px 4px;
+}
 .c-card-pre-img {
+  z-index: 1;
   width: 40px;
   height: 40px;
   object-fit: cover;
-  transform: scale(1.1);
   border-radius: 1%;
-  padding: 0 2px 0 2px;
-  box-shadow: 0 30px 40px rgba(0,0,0,.1);
 }
 .c-card-pre-img-container {
   display: flex;
+  z-index: 1;
+  flex-direction: row;
+  justify-content: left;
+  width: 175px;
+  position: absolute;
+  left: 0.9px;
+  bottom: 0;
+  overflow-x: scroll;
+}
+.c-card-pre-img-container-small {
+  display: flex;
   flex-direction: row;
   justify-content: center;
-  width:100%;
+  width: 168px;
   position: absolute;
-  left: 0;
-  bottom: 2px;
-  margin: 0 0 2px 0;
+  left: 5px;
+  bottom: 0;
 }
-.c-card-pre-img:hover {
-  transform: scale(1.01);
-  box-shadow: 2px 2px 2px;
+.c-card-pre-div:hover {
+  transform: scale(1.02);
+  box-shadow: 1px 1px 1px;
 }
 
 .c-card-img {

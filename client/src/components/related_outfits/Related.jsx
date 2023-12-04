@@ -3,7 +3,7 @@ import Carousel from './Carousel.jsx';
 import getRelatedItems from '../../utils/getRelatedItems.js';
 
 const Related = ({
-  itemId, itemFeatures, itemName, updateMainProduct, maxCardCount,
+  itemId, itemFeatures, updateMainProduct, maxCardCount, topRef,
 }) => {
   const [relatedIds, setRelatedIds] = useState(null);
 
@@ -15,21 +15,22 @@ const Related = ({
       console.error('Error getting item details: ', err);
     }
   };
+
   useEffect(() => {
     fetchRelatedIds();
   }, [itemId]);
 
-  return relatedIds && itemId ? (
+  return relatedIds ? (
     <div className="c-related-container" data-testid="related">
       <Carousel
         className="c-outfits-carousel"
-        maxCardCount={maxCardCount}
         itemId={itemId}
         ids={relatedIds}
-        itemName={itemName}
+        maxCardCount={maxCardCount}
         action="related"
         itemFeatures={itemFeatures}
         updateMainProduct={updateMainProduct}
+        topRef={topRef}
       />
     </div>
   ) : (

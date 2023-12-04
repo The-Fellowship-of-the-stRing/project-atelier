@@ -47,8 +47,14 @@ const Compare = ({
           className="c-close-compare"
           role="button"
           tabIndex="0"
-          onKeyPress={() => compareClickHandler()}
-          onClick={() => compareClickHandler()}
+          onKeyPress={(event) => {
+            compareClickHandler();
+            event.stopPropagation();
+          }}
+          onClick={(event) => {
+            compareClickHandler();
+            event.stopPropagation();
+          }}
           aria-label="close compare"
         >
           ❌

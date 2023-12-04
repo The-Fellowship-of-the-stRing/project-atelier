@@ -1,15 +1,21 @@
 import axios from 'axios';
+import getLocalStorage from './getLocalStorage.js';
+import postLocalStorage from './postLocalStorage.js';
 
-const getRelatedItems = async (itemId) => {
+const getRelatedItems = async (id) => {
   try {
-    const response = await axios.get(`/products/${itemId}/related`);
-    /* Remove main product from related products array */
+    const current = getLocalStorage(id);
+    if (current.related) {
+      return current.related;
+    }
+    const response = await axios.get(`/products/${id}/related`);
     const result = [];
     for (let i = 0; i < response.data.length; i += 1) {
-      if (response.data[i] !== itemId && result.indexOf(response.data[i]) === -1) {
+      if (response.data[i] !== id && result.indexOf(response.data[i]) === -1) {
         result.push(response.data[i]);
       }
     }
+    postLocalStorage(id, { related: result });
     return result;
   } catch (err) {
     console.error(err);

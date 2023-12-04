@@ -1,13 +1,19 @@
 import axios from 'axios';
+import getLocalStorage from './getLocalStorage.js';
+import postLocalStorage from './postLocalStorage.js';
 
-const getProductDataById = async (itemId) => {
+const getProductDataById = async (id) => {
   try {
-    const response = await axios.get(`/products/${itemId}`);
+    const current = getLocalStorage(id);
+    if (current && current.name) {
+      return current;
+    }
+    const response = await axios.get(`/products/${id}`);
+    postLocalStorage(id, response.data);
     return response.data;
   } catch (err) {
-    console.error(err);
+    return console.error(err);
   }
-  return null;
 };
 
 export default getProductDataById;

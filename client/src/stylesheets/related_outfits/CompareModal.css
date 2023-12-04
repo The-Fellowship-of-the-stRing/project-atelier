@@ -1,6 +1,5 @@
 body.show-modal {
   overflow-y: hidden;
-
 }
 
 .c-overlay, .c-compare-modal {
@@ -12,7 +11,6 @@ body.show-modal {
   left: 0;
   right: 0;
   bottom: 0;
-
 }
 .c-compare-modal{
   z-index: 12;

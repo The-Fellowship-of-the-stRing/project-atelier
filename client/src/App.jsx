@@ -21,10 +21,10 @@ const App = () => {
 
   const updateMainProduct = async (itemId) => {
     try {
-      const item = await getProductDataById(itemId);
-      setCurrentItem(item);
+      const storage = await getProductDataById(itemId);
+      setCurrentItem(storage);
       if (!siteOffer) {
-        setSiteOffer(item);
+        setSiteOffer(storage);
       }
     } catch (error) {
       console.error('Error fetching item:', error);
@@ -32,13 +32,8 @@ const App = () => {
   };
 
   useEffect(() => {
-    /* NOTE: Hardcoding first item */
-    /* TEST CASES
-    40349 - [Related] Getting duplicate keys for cards
-    40345 - Has default style, but no images
-    40352 - No default style
-    */
-    updateMainProduct(40351);
+    const id = 40351;
+    updateMainProduct(id);
   }, []);
 
   return (
@@ -73,9 +68,9 @@ const App = () => {
           <ProductDetails itemId={currentItem.id} reviewRef={reviewRef} />
           <RelatedOutfits
             itemId={currentItem.id}
-            itemName={currentItem.name}
             itemFeatures={currentItem.features}
             updateMainProduct={updateMainProduct}
+            topRef={topRef}
           />
           <QuestionsAnswers itemId={currentItem.id} itemName={currentItem.name} />
           <RatingsReviews

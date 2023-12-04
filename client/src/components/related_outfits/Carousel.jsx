@@ -5,7 +5,7 @@ const Carousel = ({
   action,
   addCard, isAdded, ids,
   deleteProduct, updateMainProduct,
-  itemFeatures, itemName, itemId, maxCardCount,
+  itemFeatures, itemId, maxCardCount, topRef,
 }) => {
   const [mainId, setMainId] = useState(null);
   const [visibleCards, setVisibleCards] = useState(null);
@@ -13,10 +13,6 @@ const Carousel = ({
   const [indexOfFirstVisibleCard, setIndexOfFirstVisibleCard] = useState(null);
   const [isNextShown, setIsNextShown] = useState(null);
   const [isPrevShown, setIsPrevShown] = useState(null);
-
-  // Left and right margins of card list is 20px each
-  // Each card is 200px wide with right-margin of 10px
-  // const getCardCount = (w) => Math.floor((w - 40) / 210);
 
   useEffect(() => {
     let cardCount = maxCardCount;
@@ -88,51 +84,6 @@ const Carousel = ({
       setIsNextShown(true);
     }
   };
-  /* WORK ON IF TIME
-    - WANT TO HANDLE CASE WHERE:
-      - OUTFITS HAS 1+ PRODUCTS
-      - isAdded is false
-      - MaxCardCount = 1
-    */
-  // const [handleOneCard, setHandleOneCard] = useState(false);
-  // const updateVisibleCards = (incrementer) => {
-  //   let updatedIndex = indexOfFirstVisibleCard + incrementer;
-  //   let cardCount = visibleCardCount;
-  //   setIndexOfFirstVisibleCard(updatedIndex);
-  //   if (incrementer === 1) {
-  //     if (!isAdded && visibleCardCount === 0) {
-  //       setHandleOneCard(true);
-  //       cardCount = 1;
-  //       updatedIndex += 1;
-  //       setVisibleCardCount(cardCount);
-  //       setVisibleCards(ids.slice(0, 1));
-  //     } else {
-  //       setVisibleCards([...visibleCards.slice(1),
-  //         ids[indexOfFirstVisibleCard + visibleCards.length]]);
-  //     }
-  //   }
-  //   if (incrementer === -1) {
-  //     if (!isAdded && handleOneCard && visibleCardCount === 1 && indexOfFirstVisibleCard === 1) {
-  //       setHandleOneCard(false);
-  //       cardCount = 0;
-  //       updatedIndex -= 1;
-  //       setVisibleCardCount(cardCount);
-  //       setVisibleCards([]);
-  //     } else {
-  //       setVisibleCards([ids[updatedIndex], ...visibleCards.slice(0, visibleCards.length - 1)]);
-  //     }
-  //   }
-  //   if (updatedIndex === 0) {
-  //     setIsPrevShown(false);
-  //   } else {
-  //     setIsPrevShown(true);
-  //   }
-  //   if (updatedIndex + cardCount === ids.length) {
-  //     setIsNextShown(false);
-  //   } else {
-  //     setIsNextShown(true);
-  //   }
-  // };
 
   return ids && visibleCards ? (
     <div className="c-carousel-container">
@@ -147,12 +98,9 @@ const Carousel = ({
         </button>
       )}
       <div className="c-cards">
-        {/* {(!handleOneCard && !isAdded) && addCard} */}
         {!isAdded && addCard}
         {ids.map((id) => (
           <Card
-            className="c-card"
-            data-testid="card"
             isVisible={visibleCards.includes(id)}
             itemId={id}
             key={id}
@@ -161,7 +109,7 @@ const Carousel = ({
             action={action}
             updateMainProduct={updateMainProduct}
             itemFeatures={itemFeatures}
-            itemName={itemName}
+            topRef={topRef}
           />
         ))}
       </div>
