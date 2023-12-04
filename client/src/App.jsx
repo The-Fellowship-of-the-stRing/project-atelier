@@ -4,6 +4,7 @@ import React, {
 import { GoDash } from 'react-icons/go';
 import ProductDetails from './containers/ProductDetails.jsx';
 import getProductDataById from './utils/getProductDataById.js';
+import postLocalStorage from './utils/postLocalStorage.js';
 
 import './styles.css';
 
@@ -22,6 +23,7 @@ const App = () => {
   const updateMainProduct = async (itemId) => {
     try {
       const item = await getProductDataById(itemId);
+      postLocalStorage(itemId, item);
       setCurrentItem(item);
       if (!siteOffer) {
         setSiteOffer(item);
@@ -38,7 +40,8 @@ const App = () => {
     40345 - Has default style, but no images
     40352 - No default style
     */
-    updateMainProduct(40351);
+    const id = 40351;
+    updateMainProduct(id);
   }, []);
 
   return (

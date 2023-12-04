@@ -167,16 +167,12 @@ const Card = ({
           data-testid="card-text"
           role="button"
           tabIndex="0"
-          // onKeyPress={() => updateMainProduct(itemId)}
-          // onClick={() => updateMainProduct(itemId)}
         >
           <div className="c-card-cat" data-testid="card-cat">{cardData.category.toUpperCase()}</div>
           <div
             className="c-card-name"
             role="button"
             tabIndex="0"
-            // onKeyPress={() => updateMainProduct(itemId)}
-            // onClick={() => updateMainProduct(itemId)}
             aria-label="view card details"
           >
             {cardData.name}
