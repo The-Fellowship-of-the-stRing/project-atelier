@@ -6,6 +6,7 @@ const postLocalStorage = (id, newData) => {
     Object.assign(current, newData);
     localStorage.removeItem(id);
     localStorage.setItem(id, JSON.stringify(current));
+    console.log('Posted to Local Storage', current);
   } else {
     localStorage.setItem(id, JSON.stringify(newData));
   }

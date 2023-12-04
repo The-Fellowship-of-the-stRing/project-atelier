@@ -4,6 +4,7 @@ import React, {
 import { GoDash } from 'react-icons/go';
 import ProductDetails from './containers/ProductDetails.jsx';
 import getProductDataById from './utils/getProductDataById.js';
+import getLocalStorage from './utils/getLocalStorage.js';
 import postLocalStorage from './utils/postLocalStorage.js';
 
 import './styles.css';
@@ -22,11 +23,15 @@ const App = () => {
 
   const updateMainProduct = async (itemId) => {
     try {
-      const item = await getProductDataById(itemId);
-      postLocalStorage(itemId, item);
-      setCurrentItem(item);
+      let storage = getLocalStorage(itemId);
+      console.log(storage);
+      if (!storage) {
+        storage = await getProductDataById(itemId);
+      }
+      postLocalStorage(itemId, storage);
+      setCurrentItem(storage);
       if (!siteOffer) {
-        setSiteOffer(item);
+        setSiteOffer(storage);
       }
     } catch (error) {
       console.error('Error fetching item:', error);
@@ -34,12 +39,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    /* NOTE: Hardcoding first item */
-    /* TEST CASES
-    40349 - [Related] Getting duplicate keys for cards
-    40345 - Has default style, but no images
-    40352 - No default style
-    */
     const id = 40351;
     updateMainProduct(id);
   }, []);
